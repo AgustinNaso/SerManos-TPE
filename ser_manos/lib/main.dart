@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 
 void main() {runApp(const MyApp());}
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+        colorScheme: ColorScheme.fromSeed(seedColor: SermanosColors.primary),
         useMaterial3: true,
       ),
       home: const OnboardingScreen()
@@ -35,7 +36,7 @@ class OnboardingScreen extends StatelessWidget {
                   Image.asset('assets/images/logo.png', height: 150.0), // Replace with your logo
                   const SizedBox(height: 20),
                   const Text(
-                    '"El esfuerzo desitnteresado para llevar alegria a los demas sera el comienzo de una vida mas feliza para nosotros"',
+                    '"El esfuerzo desitnteresado para llevar alegria a los demas sera el comienzo de una vida mas feliz para nosotros"',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.normal,
