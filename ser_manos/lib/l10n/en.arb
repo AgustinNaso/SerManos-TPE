@@ -1,0 +1,9 @@
+{
+  "@@locale": "en",
+  "title_bar": "example",
+  "@titple_bar": {
+    "type": "text",
+    "context": "title_bar",
+    "description": "标题栏"
+  }
+}
