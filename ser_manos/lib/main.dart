@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 
-import 'config/molecules/sermanos_text_field.dart';
+import 'config/molecules/textfields/sermanos_text_field.dart';
 
 void main() {
   runApp(const MyApp());
@@ -64,31 +65,25 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Column(
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {
-                      // TODO: Navigate to login screen
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 150, vertical: 15),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  children: <Widget>[
+                    SermanosCtaButton(
+                        text: 'Login',
+                        onPressed: () {
+                          // TODO: Navigate to login screen
+                        }),
+                    const SizedBox(height: 10),
+                    SermanosCtaButton(
+                      onPressed: () {
+                        // TODO: Navigate to register screen
+                      },
+                      text: 'Register',
                     ),
-                    child: const Text('Login'),
-                  ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      // TODO: Navigate to register screen
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 150, vertical: 15),
-                    ),
-                    child: const Text('Register'),
-                  ),
-                  const SizedBox(height: 30),
-                ],
+                    const SizedBox(height: 30),
+                  ],
+                ),
               ),
             ],
           ),

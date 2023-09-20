@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../tokens/sermanos_colors.dart';
+import '../../tokens/sermanos_colors.dart';
 
 class SermanosTextField extends StatefulWidget {
   final String hintText;
