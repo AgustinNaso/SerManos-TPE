@@ -15,7 +15,147 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: SermanosColors.primary),
         useMaterial3: true,
       ),
-      home: const OnboardingScreen()
+      home: LoginScreen()
+    );
+  }
+}
+
+class LoginScreen extends StatelessWidget {
+  bool hasFocus = false;
+  FocusNode myFocusNode = FocusNode();
+
+  LoginScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Image.asset('assets/images/logo.png', height: 150.0),
+                    const SizedBox(height: 20),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20.0), // Set horizontal margin
+                      child: const TextFieldCustom(
+                        hintText: 'Email',
+                        labelText: 'Email'
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20.0), // Set horizontal margin
+                      child: const TextFieldCustom(
+                        hintText: 'Password',
+                        labelText: 'Password'
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Column(
+                children: <Widget>[
+                  ElevatedButton(
+                    onPressed: () {
+                      // TODO: Navigate to login screen
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 150, vertical: 15),
+                    ),
+                    child: const Text('Login'),
+                  ),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      // TODO: Navigate to register screen
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 150, vertical: 15),
+                    ),
+                    child: const Text('Register'),
+                  ),
+                  const SizedBox(height: 30),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// InputCustom
+class TextFieldCustom extends StatefulWidget {
+  final String hintText;
+  final String labelText;
+
+
+  const TextFieldCustom({super.key, required this.hintText, required this.labelText});
+
+  @override
+  State createState() {
+    return _TextFieldCustom();
+  }
+}
+
+class _TextFieldCustom extends State<TextFieldCustom> {
+  final TextEditingController _textEditingController = TextEditingController();
+  FocusNode myFocusNode = FocusNode();
+  bool _hasFocus = false;
+
+  @override
+  void initState() {
+    super.initState();
+    myFocusNode.addListener(() => setState(() {
+      _hasFocus = myFocusNode.hasFocus;
+    })
+    );
+    _textEditingController.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    myFocusNode.dispose();
+    _textEditingController.dispose();
+    super.dispose();
+  }
+
+  void _clearText() {
+    setState(() {
+      _textEditingController.clear();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      focusNode: myFocusNode,
+      controller: _textEditingController,
+      decoration: InputDecoration(
+        labelText: widget.labelText,
+        hintText: widget.hintText,
+        floatingLabelStyle: TextStyle(color: _hasFocus ? SermanosColors.secondary : SermanosColors.grey),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: SermanosColors.secondary),
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: SermanosColors.grey),
+        ),
+        suffixIcon: _textEditingController.text.isNotEmpty && _hasFocus
+            ? IconButton(
+          icon: const Icon(Icons.clear, color: SermanosColors.grey),
+          onPressed: _clearText,
+        )
+            : null,
+      ),
     );
   }
 }
@@ -54,21 +194,21 @@ class OnboardingScreen extends StatelessWidget {
                     // TODO: Navigate to login screen
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 150, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 150, vertical: 15),
                   ),
-                  child: Text('Login'),
+                  child: const Text('Login'),
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
                     // TODO: Navigate to register screen
                   },
-                  child: Text('Register'),
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 150, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 150, vertical: 15),
                   ),
+                  child: const Text('Register'),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
               ],
             ),
           ],
