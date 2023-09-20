@@ -54,7 +54,7 @@ class _SermanosTextField extends State<SermanosTextField> {
     return TextField(
       focusNode: myFocusNode,
       controller: _textEditingController,
-      obscureText: _passwordVisible ? false : true,
+      obscureText: widget.enableObscure ? _passwordVisible ? false : true : false,
       decoration: InputDecoration(
         labelText: widget.labelText,
         hintText: widget.hintText,
