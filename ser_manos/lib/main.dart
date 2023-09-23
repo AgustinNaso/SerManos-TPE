@@ -4,6 +4,7 @@ import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 
 import 'config/molecules/textfields/sermanos_text_field.dart';
+import 'config/molecules/textfields/validators.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +29,6 @@ class MyApp extends StatelessWidget {
 }
 
 class LoginScreen extends StatelessWidget {
-  bool hasFocus = false;
   final FocusNode myFocusNode = FocusNode();
 
   LoginScreen({super.key});
@@ -50,17 +50,22 @@ class LoginScreen extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 20.0),
                       // Set horizontal margin
-                      child: const SermanosTextField(
-                          hintText: 'Email', labelText: 'Email'),
+                      child: SermanosTextField(
+                          hintText: 'Email', labelText: 'Email', validators: [ Validators.nonEmpty(), Validators.email() ],),
                     ),
                     const SizedBox(height: 20),
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 20.0),
                       // Set horizontal margin
-                      child: const SermanosTextField(
+                      child: SermanosTextField(
                           hintText: 'Password',
                           labelText: 'Password',
-                          enableObscure: true),
+                          enableObscure: true,
+                          validators: [
+                            Validators.nonEmpty(),
+                            Validators.minLength(8)
+                          ]
+                      ),
                     ),
                   ],
                 ),

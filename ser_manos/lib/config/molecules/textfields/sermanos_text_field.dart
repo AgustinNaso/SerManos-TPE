@@ -6,12 +6,13 @@ class SermanosTextField extends StatefulWidget {
   final String hintText;
   final String labelText;
   final bool enableObscure;
+  final List<String? Function(String?)>? validators;
 
-  const SermanosTextField(
-      {super.key,
-      required this.hintText,
-      required this.labelText,
-      this.enableObscure = false});
+  const SermanosTextField({super.key,
+    required this.hintText,
+    required this.labelText,
+    this.enableObscure = false,
+    this.validators = const []});
 
   @override
   State createState() {
@@ -28,7 +29,8 @@ class _SermanosTextField extends State<SermanosTextField> {
   @override
   void initState() {
     super.initState();
-    myFocusNode.addListener(() => setState(() {
+    myFocusNode.addListener(() =>
+        setState(() {
           _hasFocus = myFocusNode.hasFocus;
         }));
     _textEditingController.addListener(() {
@@ -51,13 +53,34 @@ class _SermanosTextField extends State<SermanosTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       focusNode: myFocusNode,
       controller: _textEditingController,
-      obscureText: widget.enableObscure ? _passwordVisible ? false : true : false,
+      validator: (value) {
+        if (myFocusNode.hasFocus) {
+          return null;
+        }
+        if (widget.validators != null) {
+          for (final validator in widget.validators!) {
+            final error = validator(value);
+            if (error != null) {
+              return error;
+            }
+          }
+        }
+        return null;
+      },
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      obscureText: widget.enableObscure
+          ? _passwordVisible ? false : true
+          : false,
       decoration: InputDecoration(
         labelText: widget.labelText,
         hintText: widget.hintText,
+        // error handling
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: SermanosColors.red),
+        ),
         floatingLabelStyle: TextStyle(
             color: _hasFocus ? SermanosColors.secondary : SermanosColors.grey),
         focusedBorder: const OutlineInputBorder(
@@ -68,22 +91,22 @@ class _SermanosTextField extends State<SermanosTextField> {
         ),
         suffixIcon: widget.enableObscure
             ? IconButton(
-                icon: Icon(
-                  _passwordVisible ? Icons.visibility : Icons.visibility_off,
-                  color: SermanosColors.grey,
-                ),
-                onPressed: () {
-                  setState(() {
-                    _passwordVisible = !_passwordVisible;
-                  });
-                },
-              )
+          icon: Icon(
+            _passwordVisible ? Icons.visibility : Icons.visibility_off,
+            color: SermanosColors.grey,
+          ),
+          onPressed: () {
+            setState(() {
+              _passwordVisible = !_passwordVisible;
+            });
+          },
+        )
             : _textEditingController.text.isNotEmpty && _hasFocus
-                ? IconButton(
-                    icon: const Icon(Icons.clear, color: SermanosColors.grey),
-                    onPressed: _clearText,
-                  )
-                : null,
+            ? IconButton(
+          icon: const Icon(Icons.clear, color: SermanosColors.grey),
+          onPressed: _clearText,
+        )
+            : null,
       ),
     );
   }
