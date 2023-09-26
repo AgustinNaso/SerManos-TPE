@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ser_manos/config/router.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/screens/login_screen.dart';
 import 'package:ser_manos/screens/onboarding_screen.dart';
@@ -19,28 +20,12 @@ class MyApp extends StatefulWidget {
 
 }
 
-class _MyAppState extends State<MyApp> {
-  final _router = GoRouter(routes: <RouteBase>[
-    GoRoute(
-      path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return const OnboardingScreen();
-      },
-      routes: <RouteBase>[
-        GoRoute(
-          path: 'login',
-          builder: (BuildContext context, GoRouterState state) {
-            return LoginScreen();
-          },
-        ),
-      ],
-    ),
-  ],);
-
+class _MyAppState extends State<MyApp> with RouterMixin {
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: _router,
+      routerConfig: router,
   
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: SermanosColors.primary),
