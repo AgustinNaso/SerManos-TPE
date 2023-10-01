@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../config/molecules/buttons/sermanos_cta_button.dart';
+import '../config/tokens/sermanos_colors.dart';
+
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
 
@@ -29,32 +32,30 @@ class OnboardingScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Column(
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    GoRouter.of(context).push('/login');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 150, vertical: 15),
-                  ),
-                  child: const Text('Login'),
+            Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  children: <Widget>[
+                    SermanosCtaButton(
+                        text: 'Iniciar Sesion',
+                        onPressed: () {
+                          GoRouter.of(context).push('/login');
+                        }),
+                    const SizedBox(height: 10),
+                    SermanosCtaButton(
+                      onPressed: () {
+                        GoRouter.of(context).push('/register');
+                      },
+                      text: 'Registrarse',
+                      backgroundColor: Colors.white,
+                      textColor: SermanosColors.primary,
+                    ),
+                    const SizedBox(height: 30),
+                  ],
                 ),
-                const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () {
-                    // TODO: Navigate to register screen
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 150, vertical: 15),
-                  ),
-                  child: const Text('Register'),
-                ),
-                const SizedBox(height: 30),
-              ],
-            ),
+              ),
+
+             
           ],
         ),
       ),

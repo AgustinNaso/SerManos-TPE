@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/router.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
-import 'package:ser_manos/screens/login_screen.dart';
-import 'package:ser_manos/screens/onboarding_screen.dart';
 
 
 void main() {
