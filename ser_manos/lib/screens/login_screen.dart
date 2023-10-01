@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/molecules/textfields/sermanos_text_field.dart';
 
 import '../config/molecules/buttons/sermanos_cta_button.dart';
 import '../config/molecules/textfields/validators.dart';
+import '../config/tokens/sermanos_colors.dart';
 
 class LoginScreen extends StatelessWidget {
   final FocusNode myFocusNode = FocusNode();
@@ -59,9 +61,11 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(height: 10),
                     SermanosCtaButton(
                       onPressed: () {
-                        // TODO: Navigate to register screen
+                        GoRouter.of(context).pushNamed('register');
                       },
-                      text: 'Register',
+                      text: 'No tengo cuenta',
+                      backgroundColor: Colors.white,
+                      textColor: SermanosColors.primary,
                     ),
                     const SizedBox(height: 30),
                   ],
