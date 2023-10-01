@@ -44,7 +44,6 @@ class RegisterScreen extends StatelessWidget {
                       child: SermanosTextField(
                           hintText: 'Apellido',
                           labelText: 'Apellido',
-                          enableObscure: true,
                           validators: [
                             Validators.nonEmpty(),
                             // Validators().maxLength(20) //TODO: Fix maxLength
