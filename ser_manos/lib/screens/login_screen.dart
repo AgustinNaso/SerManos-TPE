@@ -17,42 +17,43 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: Column(
+          child: SingleChildScrollView(
+              child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Image.asset('assets/images/logo.png', height: 150.0),
-                    const SizedBox(height: 20),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                      // Set horizontal margin
-                      child: SermanosTextField(
-                          hintText: 'Email', labelText: 'Email', validators: [ Validators.nonEmpty(), Validators.email() ],),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset('assets/images/logo.png', height: 150.0),
+                  const SizedBox(height: 20),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                    // Set horizontal margin
+                    child: SermanosTextField(
+                        hintText: 'Email', labelText: 'Email', validators: [ Validators.nonEmpty(), Validators.email() ],),
+                  ),
+                  const SizedBox(height: 20),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                    // Set horizontal margin
+                    child: SermanosTextField(
+                        hintText: 'Password',
+                        labelText: 'Password',
+                        enableObscure: true,
+                        validators: [
+                          Validators.nonEmpty(),
+                          Validators.minLength(8)
+                        ]
                     ),
-                    const SizedBox(height: 20),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                      // Set horizontal margin
-                      child: SermanosTextField(
-                          hintText: 'Password',
-                          labelText: 'Password',
-                          enableObscure: true,
-                          validators: [
-                            Validators.nonEmpty(),
-                            Validators.minLength(8)
-                          ]
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+            
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
                   children: <Widget>[
+                    const SizedBox(height: 120),
                     SermanosCtaButton(
                         text: 'Login',
                         onPressed: () {
@@ -73,6 +74,8 @@ class LoginScreen extends StatelessWidget {
               ),
             ],
           ),
+          )
+          
         ),
       ),
     );

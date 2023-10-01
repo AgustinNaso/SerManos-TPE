@@ -15,15 +15,20 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Expanded(
-                child: Column(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20.0), 
+          child: SingleChildScrollView( // Wrap with SingleChildScrollView
+            physics: const ClampingScrollPhysics(),
+
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    const SizedBox(height: 120),
                     Image.asset('assets/images/logo.png', height: 150.0),
                     const SizedBox(height: 20),
                     Container(
@@ -76,31 +81,39 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Column(
-                  children: <Widget>[
-                    SermanosCtaButton(
-                        text: 'Registrarse',
-                        onPressed: () {
-                          // TODO: Navigate to login screen
-                        }),
-                    const SizedBox(height: 10),
-                    SermanosCtaButton(
-                      onPressed: () {
-                        GoRouter.of(context).pushNamed('login');
-                      },
-                      text: 'Ya tengo cuenta',
-                      backgroundColor: Colors.white,
-                      textColor: SermanosColors.primary,
+              const SizedBox(height: 120),
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+
+                    margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Column(
+                      children: <Widget>[
+                        SermanosCtaButton(
+                            text: 'Registrarse',
+                            onPressed: () {
+                              // TODO: Navigate to login screen
+                            }),
+                        const SizedBox(height: 10),
+                        SermanosCtaButton(
+                          onPressed: () {
+                            GoRouter.of(context).pushNamed('login');
+                          },
+                          text: 'Ya tengo cuenta',
+                          backgroundColor: Colors.white,
+                          textColor: SermanosColors.primary,
+                        ),
+                        const SizedBox(height: 30),
+                      ],
                     ),
-                    const SizedBox(height: 30),
-                  ],
-                ),
               ),
+                ],
+              )
+              
             ],
           ),
+          )
         ),
       ),
     );
