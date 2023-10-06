@@ -42,7 +42,7 @@ class RegisterScreen extends StatelessWidget {
                     const SizedBox(height: 10),
                     SermanosCtaButton(
                       onPressed: () {
-                        GoRouter.of(context).pushNamed('login');
+                        GoRouter.of(context).pushReplacementNamed('login');
                       },
                       text: 'Ya tengo cuenta',
                       backgroundColor: Colors.white,

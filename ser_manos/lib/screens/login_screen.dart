@@ -41,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(height: 10),
                       SermanosCtaButton(
                         onPressed: () {
-                          GoRouter.of(context).pushNamed('register');
+                          GoRouter.of(context).pushReplacementNamed('register');
                         },
                         text: 'No tengo cuenta',
                         backgroundColor: Colors.white,
