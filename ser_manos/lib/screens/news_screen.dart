@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ser_manos/config/celulles/volunteering_card.dart';
+import 'package:ser_manos/config/cellules/volunteering_card.dart';
 
 // import '../config/celulles/news_card.dart';
 import '../config/tokens/sermanos_colors.dart';
