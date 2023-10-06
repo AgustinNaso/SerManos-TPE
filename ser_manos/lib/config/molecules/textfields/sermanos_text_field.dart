@@ -1,67 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../tokens/sermanos_colors.dart';
 
-class SermanosTextField extends StatefulWidget {
+class SermanosTextField extends HookConsumerWidget {
   final String hintText;
   final String labelText;
   final bool enableObscure;
   final List<String? Function(String?)>? validators;
 
-  const SermanosTextField({super.key,
-    required this.hintText,
-    required this.labelText,
-    this.enableObscure = false,
-    this.validators = const []});
+  const SermanosTextField(
+      {super.key,
+      required this.hintText,
+      required this.labelText,
+      this.enableObscure = false,
+      this.validators});
 
   @override
-  State createState() {
-    return _SermanosTextField();
-  }
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final myFocusNode = useFocusNode();
+    useListenable(myFocusNode);
 
-class _SermanosTextField extends State<SermanosTextField> {
-  final TextEditingController _textEditingController = TextEditingController();
-  FocusNode myFocusNode = FocusNode();
-  bool _hasFocus = false;
-  bool _passwordVisible = false;
+    final controller = useTextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    myFocusNode.addListener(() =>
-        setState(() {
-          _hasFocus = myFocusNode.hasFocus;
-        }));
-    _textEditingController.addListener(() {
-      setState(() {});
-    });
-  }
+    final bool isEmpty =
+        useListenableSelector(controller, () => controller.text.isEmpty);
 
-  @override
-  void dispose() {
-    myFocusNode.dispose();
-    _textEditingController.dispose();
-    super.dispose();
-  }
+    final isObscured = useState(enableObscure);
 
-  void _clearText() {
-    setState(() {
-      _textEditingController.clear();
-    });
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      focusNode: myFocusNode,
-      controller: _textEditingController,
+    return FormBuilderField<String>(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      name: labelText,
+      onReset: () => controller.text = '',
       validator: (value) {
         if (myFocusNode.hasFocus) {
           return null;
         }
-        if (widget.validators != null) {
-          for (final validator in widget.validators!) {
+        if (validators != null) {
+          for (final validator in validators!) {
             final error = validator(value);
             if (error != null) {
               return error;
@@ -70,44 +50,74 @@ class _SermanosTextField extends State<SermanosTextField> {
         }
         return null;
       },
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      obscureText: widget.enableObscure
-          ? _passwordVisible ? false : true
-          : false,
-      decoration: InputDecoration(
-        labelText: widget.labelText,
-        hintText: widget.hintText,
-        // error handling
-        errorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: SermanosColors.red),
-        ),
-        floatingLabelStyle: TextStyle(
-            color: _hasFocus ? SermanosColors.secondary : SermanosColors.grey),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: SermanosColors.secondary),
-        ),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: SermanosColors.grey),
-        ),
-        suffixIcon: widget.enableObscure
-            ? IconButton(
-          icon: Icon(
-            _passwordVisible ? Icons.visibility : Icons.visibility_off,
-            color: SermanosColors.grey,
+      builder: (FormFieldState field) {
+        return TextField(
+          focusNode: myFocusNode,
+          controller: controller,
+          onChanged: (value) => field.didChange(value),
+          obscureText: isObscured.value,
+          decoration: InputDecoration(
+            labelText: labelText,
+            hintText: hintText,
+            // error handling
+            errorBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 2,
+                color: SermanosColors.red,
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+            ),
+            errorStyle: const TextStyle(
+              color: SermanosColors.red,
+            ),
+            errorMaxLines: 3,
+            errorText: field.errorText,
+            floatingLabelStyle: TextStyle(
+                color: myFocusNode.hasFocus
+                    ? SermanosColors.secondary
+                    : SermanosColors.grey),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: SermanosColors.secondary),
+            ),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: SermanosColors.grey),
+            ),
+            suffixIcon: enableObscure
+                ? IconButton(
+                    icon: Icon(
+                      isObscured.value
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: SermanosColors.grey,
+                    ),
+                    onPressed: () {
+                      isObscured.value = !isObscured.value;
+                    },
+                  )
+                : controller.text.isNotEmpty && myFocusNode.hasFocus
+                    ? IconButton(
+                        icon:
+                            const Icon(Icons.clear, color: SermanosColors.grey),
+                        onPressed: () {
+                          if (!isEmpty) {
+                            controller.clear();
+                            field.reset();
+                          }
+                        },
+                      )
+                    : null,
           ),
-          onPressed: () {
-            setState(() {
-              _passwordVisible = !_passwordVisible;
-            });
+          onTapOutside: (event) {
+            myFocusNode.unfocus();
           },
-        )
-            : _textEditingController.text.isNotEmpty && _hasFocus
-            ? IconButton(
-          icon: const Icon(Icons.clear, color: SermanosColors.grey),
-          onPressed: _clearText,
-        )
-            : null,
-      ),
+          onEditingComplete: () {
+            myFocusNode.unfocus();
+          },
+          onSubmitted: (value) {
+            myFocusNode.unfocus();
+          },
+        );
+      },
     );
   }
 }

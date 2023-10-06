@@ -8,7 +8,12 @@ class SermanosCtaButton extends StatelessWidget {
   final Color textColor;
   final VoidCallback onPressed;
 
-  const SermanosCtaButton ({super.key, required this.text, required this.onPressed, this.backgroundColor = SermanosColors.primary, this.textColor = Colors.white});
+  const SermanosCtaButton(
+      {super.key,
+      required this.text,
+      required this.onPressed,
+      this.backgroundColor = SermanosColors.primary,
+      this.textColor = Colors.white});
 
   @override
   Widget build(BuildContext context) {
@@ -34,4 +39,3 @@ class SermanosCtaButton extends StatelessWidget {
     );
   }
 }
-
