@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:ser_manos/config/molecules/textfields/sermanos_text_field.dart';
-import 'package:ser_manos/config/molecules/textfields/validators.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 final LoginFormKey = GlobalKey<FormBuilderState>();
 
@@ -14,9 +14,7 @@ class LoginForm extends ConsumerWidget {
     return FormBuilder(
       key: LoginFormKey,
       enabled: true,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -27,10 +25,13 @@ class LoginForm extends ConsumerWidget {
                 child: SermanosTextField(
                   hintText: 'Email',
                   labelText: 'Email',
-                  validators: [Validators.nonEmpty(), Validators.email()],
+                  validators: [
+                    FormBuilderValidators.required(errorText: 'This field is required'),
+                    FormBuilderValidators.email(errorText: 'Enter a valid email address')
+                  ],
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20.0),
                 // Set horizontal margin
@@ -38,7 +39,10 @@ class LoginForm extends ConsumerWidget {
                     hintText: 'Password',
                     labelText: 'Password',
                     enableObscure: true,
-                    validators: [Validators.nonEmpty(), Validators.minLength(8)]
+                    validators: [
+                      FormBuilderValidators.required(errorText: 'This field is required'),
+                      FormBuilderValidators.minLength(8, errorText: 'This field must be at least 8 characters long'),
+                    ]
                 ),
               ),
             ],

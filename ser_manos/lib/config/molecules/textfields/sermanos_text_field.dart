@@ -17,26 +17,27 @@ class SermanosTextField extends HookConsumerWidget {
       required this.hintText,
       required this.labelText,
       this.enableObscure = false,
-      this.validators = const []});
+      this.validators});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final myFocusNode = useState(FocusNode());
+    final myFocusNode = useFocusNode();
     useListenable(myFocusNode);
 
     final controller = useTextEditingController();
 
     final bool isEmpty =
-      useListenableSelector(controller, () => controller.text.isEmpty);
+        useListenableSelector(controller, () => controller.text.isEmpty);
 
     final isObscured = useState(enableObscure);
+
 
     return FormBuilderField<String>(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       name: labelText,
       onReset: () => controller.text = '',
       validator: (value) {
-        if (myFocusNode.value.hasFocus) {
+        if (myFocusNode.hasFocus) {
           return null;
         }
         if (validators != null) {
@@ -51,18 +52,30 @@ class SermanosTextField extends HookConsumerWidget {
       },
       builder: (FormFieldState field) {
         return TextField(
-          focusNode: myFocusNode.value,
+          focusNode: myFocusNode,
           controller: controller,
+          onChanged: (value) => field.didChange(value),
           obscureText: isObscured.value,
           decoration: InputDecoration(
             labelText: labelText,
             hintText: hintText,
             // error handling
             errorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: SermanosColors.red),
+              borderSide: BorderSide(
+                width: 2,
+                color: SermanosColors.red,
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
+            errorStyle: const TextStyle(
+              color: SermanosColors.red,
+            ),
+            errorMaxLines: 3,
+            errorText: field.errorText,
             floatingLabelStyle: TextStyle(
-                color: myFocusNode.value.hasFocus ? SermanosColors.secondary : SermanosColors.grey),
+                color: myFocusNode.hasFocus
+                    ? SermanosColors.secondary
+                    : SermanosColors.grey),
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: SermanosColors.secondary),
             ),
@@ -71,26 +84,38 @@ class SermanosTextField extends HookConsumerWidget {
             ),
             suffixIcon: enableObscure
                 ? IconButton(
-              icon: Icon(
-                isObscured.value ? Icons.visibility : Icons.visibility_off,
-                color: SermanosColors.grey,
-              ),
-              onPressed: () {
-                isObscured.value = !isObscured.value;
-              },
-            )
-                : controller.text.isNotEmpty && myFocusNode.value.hasFocus
-                ? IconButton(
-              icon: const Icon(Icons.clear, color: SermanosColors.grey),
-              onPressed: () {
-                if (!isEmpty) {
-                  controller.clear();
-                  field.reset();
-                }
-              },
-            )
-                : null,
+                    icon: Icon(
+                      isObscured.value
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: SermanosColors.grey,
+                    ),
+                    onPressed: () {
+                      isObscured.value = !isObscured.value;
+                    },
+                  )
+                : controller.text.isNotEmpty && myFocusNode.hasFocus
+                    ? IconButton(
+                        icon:
+                            const Icon(Icons.clear, color: SermanosColors.grey),
+                        onPressed: () {
+                          if (!isEmpty) {
+                            controller.clear();
+                            field.reset();
+                          }
+                        },
+                      )
+                    : null,
           ),
+          onTapOutside: (event) {
+            myFocusNode.unfocus();
+          },
+          onEditingComplete: () {
+            myFocusNode.unfocus();
+          },
+          onSubmitted: (value) {
+            myFocusNode.unfocus();
+          },
         );
       },
     );

@@ -4,7 +4,6 @@ import 'package:ser_manos/config/cellules/login_form.dart';
 import 'package:ser_manos/config/molecules/textfields/sermanos_text_field.dart';
 
 import '../config/molecules/buttons/sermanos_cta_button.dart';
-import '../config/molecules/textfields/validators.dart';
 import '../config/tokens/sermanos_colors.dart';
 
 class LoginScreen extends StatelessWidget {
