@@ -31,7 +31,6 @@ class SermanosTextField extends HookConsumerWidget {
 
     final isObscured = useState(enableObscure);
 
-
     return FormBuilderField<String>(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       name: labelText,
@@ -63,24 +62,24 @@ class SermanosTextField extends HookConsumerWidget {
             errorBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 width: 2,
-                color: SermanosColors.red,
+                color: SermanosColors.error,
               ),
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
             errorStyle: const TextStyle(
-              color: SermanosColors.red,
+              color: SermanosColors.error,
             ),
             errorMaxLines: 3,
             errorText: field.errorText,
             floatingLabelStyle: TextStyle(
                 color: myFocusNode.hasFocus
                     ? SermanosColors.secondary
-                    : SermanosColors.grey),
+                    : SermanosColors.neutralDefault),
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: SermanosColors.secondary),
             ),
             enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: SermanosColors.grey),
+              borderSide: BorderSide(color: SermanosColors.secondary),
             ),
             suffixIcon: enableObscure
                 ? IconButton(
@@ -88,7 +87,7 @@ class SermanosTextField extends HookConsumerWidget {
                       isObscured.value
                           ? Icons.visibility
                           : Icons.visibility_off,
-                      color: SermanosColors.grey,
+                      color: SermanosColors.neutralDefault,
                     ),
                     onPressed: () {
                       isObscured.value = !isObscured.value;
@@ -96,8 +95,8 @@ class SermanosTextField extends HookConsumerWidget {
                   )
                 : controller.text.isNotEmpty && myFocusNode.hasFocus
                     ? IconButton(
-                        icon:
-                            const Icon(Icons.clear, color: SermanosColors.grey),
+                        icon: const Icon(Icons.clear,
+                            color: SermanosColors.neutralDefault),
                         onPressed: () {
                           if (!isEmpty) {
                             controller.clear();
