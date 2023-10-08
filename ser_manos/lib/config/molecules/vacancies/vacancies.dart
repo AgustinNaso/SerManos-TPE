@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 
 class Vacancies extends StatelessWidget {
-  const Vacancies({super.key});
+  const Vacancies({
+    super.key,
+    required this.vacancy,
+  });
+
+  final int vacancy;
 
   @override
   Widget build(BuildContext context) {
@@ -11,12 +16,12 @@ class Vacancies extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.lightBlue[100],
           borderRadius: const BorderRadius.all(Radius.circular(4))),
-      child: const Row(
+      child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text('Vacantes: '),
-          Icon(Icons.person, color: SermanosColors.secondary),
-          Text('10'),
+          const Text('Vacantes: '),
+          const Icon(Icons.person, color: SermanosColors.secondary),
+          Text(vacancy.toString()),
         ],
       ),
     );

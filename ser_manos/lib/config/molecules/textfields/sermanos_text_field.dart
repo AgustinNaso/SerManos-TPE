@@ -74,7 +74,7 @@ class SermanosTextField extends HookConsumerWidget {
             floatingLabelStyle: TextStyle(
                 color: myFocusNode.hasFocus
                     ? SermanosColors.secondary
-                    : SermanosColors.neutralDefault),
+                    : SermanosColors.neutral[75]),
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: SermanosColors.secondary),
             ),
@@ -87,7 +87,7 @@ class SermanosTextField extends HookConsumerWidget {
                       isObscured.value
                           ? Icons.visibility
                           : Icons.visibility_off,
-                      color: SermanosColors.neutralDefault,
+                      color: SermanosColors.neutral[75],
                     ),
                     onPressed: () {
                       isObscured.value = !isObscured.value;
@@ -95,8 +95,8 @@ class SermanosTextField extends HookConsumerWidget {
                   )
                 : controller.text.isNotEmpty && myFocusNode.hasFocus
                     ? IconButton(
-                        icon: const Icon(Icons.clear,
-                            color: SermanosColors.neutralDefault),
+                        icon: Icon(Icons.clear,
+                            color: SermanosColors.neutral[75]),
                         onPressed: () {
                           if (!isEmpty) {
                             controller.clear();

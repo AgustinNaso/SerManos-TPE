@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ser_manos/config/molecules/vacancies/vacancies.dart';
+import 'package:ser_manos/config/tokens/sermanos_colors.dart';
+import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 
 class VolunteeringCard extends StatelessWidget {
   const VolunteeringCard({super.key});
@@ -7,37 +10,69 @@ class VolunteeringCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        width: 320,
-        decoration: BoxDecoration(
+        width: 328,
+        height: 234,
+        decoration: const BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.white, // Shadow color
-              spreadRadius: 5, // How far the shadow should spread
+              color: Colors.grey, // Shadow color
+              spreadRadius: 1, // How far the shadow should spread
               blurRadius: 7, // How blurry the shadow should be
-              offset: const Offset(0, 3), // Offset in the x and y direction
+              offset: Offset(0, 1), // Offset in the x and y direction
             ),
           ],
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset('assets/images/Imagen.png'),
-            Padding(
-                padding: const EdgeInsets.all(20),
-                child: Container(
-                  color: Colors.amber,
-                  width: 200,
-                  child: const Text('Un Techo para mi País',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black,
-                          letterSpacing: 0.15)),
-                )),
-          ],
-        ),
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset('assets/images/Imagen.png'),
+              Container(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                color: Colors.white,
+                height: 96,
+                child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('ACCION SOCIAL',
+                              style: SermanosTypography.overline(
+                                  color: SermanosColors.neutral[75])),
+                          const Text('Un Techo para mi Pais',
+                              style: SermanosTypography.subtitle01()),
+                          const SizedBox(height: 4),
+                          const Vacancies(vacancy: 10)
+                        ],
+                      ),
+                      Container(
+                          height: double.infinity,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.favorite_border,
+                                  color: SermanosColors.primary,
+                                ),
+                                onPressed: () {},
+                              ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.location_on,
+                                  color: SermanosColors.primary,
+                                ),
+                                onPressed: () {},
+                              ),
+                            ],
+                          )),
+                    ]),
+              ),
+            ]),
       ),
     );
   }

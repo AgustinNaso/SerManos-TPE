@@ -3,19 +3,21 @@ import 'package:flutter/material.dart';
 class SermanosColors {
   SermanosColors._();
 
-  static const int primaryDefaultValue = 0xFF14903F;
-  static const int secondaryDefaultValue = 0xFF0D47A1;
-  static const int errorDefaultValue = 0xFFB3261E;
+  static const int _primaryDefaultValue = 0xFF14903F;
+  static const int _secondaryDefaultValue = 0xFF0D47A1;
+  static const int _errorDefaultValue = 0xFFB3261E;
+  static const int _neutralDefaultValue = 0xFF191919;
   //primary color #14903F
   static const MaterialColor primary = MaterialColor(
-      primaryDefaultValue, <int, Color>{
-    100: Color(primaryDefaultValue),
+      _primaryDefaultValue, <int, Color>{
+    100: Color(_primaryDefaultValue),
     10: Color(0xFFE7F4EC),
     5: Color(0xFFF3F9F5)
   });
   static const MaterialColor secondary = MaterialColor(
-      secondaryDefaultValue, <int, Color>{200: Color(secondaryDefaultValue)});
-  static const neutralDefault = Color(0xFF666666);
+      _secondaryDefaultValue, <int, Color>{200: Color(_secondaryDefaultValue)});
+  static const MaterialColor neutral = MaterialColor(_neutralDefaultValue,
+      <int, Color>{100: Color(_neutralDefaultValue), 75: Color(0xFF666666)});
   static const MaterialColor error = MaterialColor(
-      errorDefaultValue, <int, Color>{100: Color(errorDefaultValue)});
+      _errorDefaultValue, <int, Color>{100: Color(_errorDefaultValue)});
 }
