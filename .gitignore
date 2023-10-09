@@ -30,3 +30,4 @@ ser_manos/ios/Runner.xcodeproj/project.pbxproj
 ser_manos/macos/Flutter/ephemeral/flutter_export_environment.sh
 ser_manos/macos/Flutter/ephemeral/Flutter-Generated.xcconfig
 ser_manos/macos/Flutter/GeneratedPluginRegistrant.swift
+*.lock

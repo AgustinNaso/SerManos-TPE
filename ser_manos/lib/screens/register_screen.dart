@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ser_manos/config/molecules/textfields/sermanos_text_field.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:ser_manos/firebaseConfig.dart';
+import 'package:ser_manos/services/firebaseAuth.dart';
 
 import '../config/cellules/register_form.dart';
 import '../config/molecules/buttons/sermanos_cta_button.dart';
@@ -40,14 +38,16 @@ class RegisterScreen extends StatelessWidget {
                         onPressed: () async {
                           if (!RegisterFormKey.currentState!.validate()) return;
                           final fields = RegisterFormKey.currentState!.fields;
-                          final userCreds = await MyFirebaseAuth().createUserWithEmailAndPassword(email: fields['Email']!.value, password: fields['Password']!.value);
+                          await MyFirebaseAuth()
+                              .createUserWithEmailAndPassword(
+                                email: fields['Email']!.value,
+                                password: fields['Password']!.value,
+                                lastname: fields['Apellido']!.value,
+                                name: fields['Nombre']!.value,
+                          );
 
-                          // TODO: save user data on firestore
-
-                          if (userCreds != null) {
-                            GoRouter.of(context).pushReplacementNamed('login');
-                          }
-                        }),
+                          GoRouter.of(context).pushReplacementNamed('login');
+                                                }),
                     const SizedBox(height: 10),
                     SermanosCtaButton(
                       onPressed: () {
