@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/cellules/login_form.dart';
 import 'package:ser_manos/config/molecules/textfields/sermanos_text_field.dart';
+import 'package:ser_manos/firebaseConfig.dart';
 
 import '../config/molecules/buttons/sermanos_cta_button.dart';
 import '../config/tokens/sermanos_colors.dart';
@@ -36,7 +37,10 @@ class LoginScreen extends StatelessWidget {
                       SermanosCtaButton(
                           text: 'Login',
                           onPressed: () {
-                            // TODO: Navigate to login screen
+                            if (!LoginFormKey.currentState!.validate()) return;
+                            final fields = LoginFormKey.currentState!.fields;
+                            final userCreds = MyFirebaseAuth().signInWithEmailAndPassword(email: fields['Email']!.value, password: fields['Password']!.value);
+                            GoRouter.of(context).pushReplacementNamed('news');
                           }),
                       const SizedBox(height: 10),
                       SermanosCtaButton(
