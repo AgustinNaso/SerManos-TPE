@@ -7,11 +7,13 @@ class SermanosCtaButton extends StatelessWidget {
   final Color backgroundColor;
   final Color textColor;
   final VoidCallback onPressed;
+  final Icon? icon;
 
   const SermanosCtaButton(
       {super.key,
       required this.text,
       required this.onPressed,
+      this.icon,
       this.backgroundColor = SermanosColors.primary,
       this.textColor = Colors.white});
 
@@ -26,15 +28,21 @@ class SermanosCtaButton extends StatelessWidget {
         ),
         backgroundColor: backgroundColor,
       ),
-      child: Center(
-        child: Text(
-          text,
-          style: TextStyle(
-            color: textColor,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: icon != null? MainAxisSize.min: MainAxisSize.max,
+        children: [
+          if (icon != null) icon!,
+          const SizedBox(width: 10),
+          Text(
+            text,
+            style: TextStyle(
+              color: textColor,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
