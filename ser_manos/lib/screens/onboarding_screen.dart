@@ -39,7 +39,7 @@ class OnboardingScreen extends StatelessWidget {
                     SermanosCtaButton(
                         text: 'Iniciar Sesion',
                         onPressed: () {
-                          GoRouter.of(context).push('/login');
+                          GoRouter.of(context).push('/news');
                         }),
                     const SizedBox(height: 10),
                     SermanosCtaButton(

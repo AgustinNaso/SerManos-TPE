@@ -17,7 +17,7 @@ class SermanosColors {
   static const MaterialColor secondary = MaterialColor(
       _secondaryDefaultValue, <int, Color>{200: Color(_secondaryDefaultValue)});
   static const MaterialColor neutral = MaterialColor(_neutralDefaultValue,
-      <int, Color>{100: Color(_neutralDefaultValue), 75: Color(0xFF666666)});
+      <int, Color>{100: Color(_neutralDefaultValue), 75: Color(0xFF666666), 0: Color(0xFFFFFFFF)});
   static const MaterialColor error = MaterialColor(
       _errorDefaultValue, <int, Color>{100: Color(_errorDefaultValue)});
   // static const Color primary = Color(0xFF14903F);
