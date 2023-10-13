@@ -9,12 +9,12 @@ class NewsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
           child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          children: const <Widget>[
+        child: const Column(
+          children: <Widget>[
             Center(
               child: NewsCard(),
             ),
