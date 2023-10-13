@@ -33,7 +33,7 @@ mixin RouterMixin on State<MyApp> {
           name: 'news',
           path: 'news',
           builder: (BuildContext context, GoRouterState state) {
-            return NewsScreen();
+            return const NewsScreen();
           },
         )
       ],
