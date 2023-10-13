@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/cellules/login_form.dart';
+import 'package:ser_manos/services/firebaseAuth.dart';
 
 import '../config/molecules/buttons/sermanos_cta_button.dart';
 import '../config/tokens/sermanos_colors.dart';
@@ -15,42 +16,48 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+            child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset('assets/images/logo.png', height: 150.0),
+                  const SizedBox(height: 20),
+                  const LoginForm(),
+                ],
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
                   children: <Widget>[
-                    Image.asset('assets/images/logo.png', height: 150.0),
-                    const SizedBox(height: 20),
-                    const LoginForm(),
+                    const SizedBox(height: 120),
+                    SermanosCtaButton(
+                        text: 'Login',
+                        onPressed: () {
+                          if (!LoginFormKey.currentState!.validate()) return;
+                          final fields = LoginFormKey.currentState!.fields;
+                          final userCreds = MyFirebaseAuth()
+                              .signInWithEmailAndPassword(
+                                  email: fields['Email']!.value,
+                                  password: fields['Password']!.value);
+                          GoRouter.of(context).pushReplacementNamed('news');
+                        }),
+                    const SizedBox(height: 10),
+                    SermanosCtaButton(
+                      onPressed: () {
+                        GoRouter.of(context).pushReplacementNamed('register');
+                      },
+                      text: 'No tengo cuenta',
+                      backgroundColor: Colors.white,
+                      textColor: SermanosColors.primary,
+                    ),
+                    const SizedBox(height: 30),
                   ],
                 ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Column(
-                    children: <Widget>[
-                      const SizedBox(height: 120),
-                      SermanosCtaButton(
-                          text: 'Login',
-                          onPressed: () {
-                            // TODO: Navigate to login screen
-                          }),
-                      const SizedBox(height: 10),
-                      SermanosCtaButton(
-                        onPressed: () {
-                          GoRouter.of(context).pushReplacementNamed('register');
-                        },
-                        text: 'No tengo cuenta',
-                        backgroundColor: Colors.white,
-                        textColor: SermanosColors.primary,
-                      ),
-                      const SizedBox(height: 30),
-                    ],
-                  ),
-                ),
-              ],
+              ),
+            ],
           ),
         )),
       ),

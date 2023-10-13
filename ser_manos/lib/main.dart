@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ser_manos/config/router.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
+import 'package:ser_manos/firebaseConfig.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,5 +25,13 @@ class _MyAppState extends State<MyApp> with RouterMixin {
         useMaterial3: true,
       ),
     );
+  }
+
+  @override
+  void initState() {
+    FirebaseConfig.init().then((_) => {
+          // MyFirebaseAuth().createUserWithEmailAndPassword(email: "gdeschant@itba.edu.ar", password: "Cabernicolas10!")
+        });
+    super.initState();
   }
 }
