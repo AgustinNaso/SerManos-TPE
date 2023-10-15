@@ -24,7 +24,7 @@ class SermanosCtaButton extends StatelessWidget {
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(4),
         ),
         backgroundColor: backgroundColor,
       ),
