@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ser_manos/firebaseConfig.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ser_manos/models/repositories/UserRepositoryImpl.dart';
 
 import '../models/userModel.dart';
 
@@ -21,9 +22,7 @@ class MyFirebaseAuth {
         password: password,
       );
 
-      final user = (await FirebaseFirestore.instance.collection('users').where('email', isEqualTo: email ).get()).docs.first.data();
-
-      return SermanosUser.fromJson(user);
+      return await UserRepositoryImpl().getUserByEmail(email); // TODO: handle possible errors
     } on Error catch (e) {
       print(e);
       rethrow;
@@ -43,14 +42,15 @@ class MyFirebaseAuth {
       );
 
       final userJson = {
+        'id': userCredential.user!.uid,
         'email': email,
         'name': name,
         'lastname': lastname
       };
 
-      await FirebaseFirestore.instance.collection('users').add(userJson);
+      final user = await UserRepositoryImpl().create(SermanosUser.fromJson(userJson));
 
-      return SermanosUser.fromJson(userJson);
+      return user;
     } on Error catch (e) {
       print(e);
       rethrow;
