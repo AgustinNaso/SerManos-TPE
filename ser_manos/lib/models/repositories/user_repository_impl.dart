@@ -1,7 +1,7 @@
 import 'package:ser_manos/exceptions/not_found_exception.dart';
 import 'package:ser_manos/models/repositories/repository.dart';
 
-import '../userModel.dart';
+import '../user_model.dart';
 
 class UserRepositoryImpl extends Repository<SermanosUser> {
   UserRepositoryImpl() : super(tag: 'users');

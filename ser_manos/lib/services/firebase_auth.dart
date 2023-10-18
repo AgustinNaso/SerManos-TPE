@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ser_manos/firebaseConfig.dart';
+import 'package:ser_manos/firebase_config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ser_manos/models/repositories/UserRepositoryImpl.dart';
+import 'package:ser_manos/models/repositories/user_repository_impl.dart';
 
-import '../models/userModel.dart';
+import '../models/user_model.dart';
 
 class MyFirebaseAuth {
   final _firebaseAuth = FirebaseAuth.instanceFor(app: FirebaseConfig.app);
@@ -33,7 +33,7 @@ class MyFirebaseAuth {
     required String email,
     required String password,
     required String name,
-    required String lastname,
+    required String lastName,
   }) async {
     try {
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
@@ -45,7 +45,7 @@ class MyFirebaseAuth {
         'id': userCredential.user!.uid,
         'email': email,
         'name': name,
-        'lastname': lastname
+        'lastName': lastName
       };
 
       final user = await UserRepositoryImpl().create(SermanosUser.fromJson(userJson));

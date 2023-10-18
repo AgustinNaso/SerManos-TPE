@@ -5,10 +5,10 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
   final String id;
   final String email;
   final String name;
-  final String lastname;
-  final String? phonenumber;
+  final String lastName;
+  final String? phoneNumber;
   final Gender? gender;
-  final DateTime? birthdate;
+  final DateTime? birthDate;
   final String? profileImgUrl;
   final String? contactEmail;
 
@@ -16,10 +16,10 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
       {required this.id,
       required this.email,
       required this.name,
-      required this.lastname,
-      this.phonenumber,
+      required this.lastName,
+      this.phoneNumber,
       this.gender,
-      this.birthdate,
+      this.birthDate,
       this.profileImgUrl,
       this.contactEmail});
 
@@ -29,11 +29,11 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
       id: json['id'] ?? "1 ue",
       email: json['email'],
       name: json['name'],
-      lastname: json['lastname'],
-      phonenumber: json['phonenumber'],
+      lastName: json['lastName'],
+      phoneNumber: json['phoneNumber'],
       gender: json['gender'] != null ? Gender.values[json['gender']] : null,
-      birthdate: json['birthdate'] != null
-          ? DateTime.parse(json['birthdate'])
+      birthDate: json['birthDate'] != null
+          ? DateTime.parse(json['birthDate'])
           : null,
       profileImgUrl: json['profileImgUrl'],
       contactEmail: json['contactEmail'],
@@ -46,10 +46,10 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
       'id': id,
       'email': email,
       'name': name,
-      'lastname': lastname,
-      'phonenumber': phonenumber,
+      'lastName': lastName,
+      'phoneNumber': phoneNumber,
       'gender': gender != null ? gender!.index : null,
-      'birthdate': birthdate != null ? birthdate!.toIso8601String() : null,
+      'birthDate': birthDate != null ? birthDate!.toIso8601String() : null,
       'profileImgUrl': profileImgUrl,
       'contactEmail': contactEmail,
     };
@@ -57,6 +57,6 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
 
   @override
   String toString() {
-    return 'SermanosUser{id: $id, email: $email, name: $name, lastname: $lastname, phonenumber: $phonenumber, gender: $gender, birthdate: $birthdate, profileImgUrl: $profileImgUrl, contactEmail: $contactEmail}';
+    return 'SermanosUser{id: $id, email: $email, name: $name, lastName: $lastName, phoneNumber: $phoneNumber, gender: $gender, birthDate: $birthDate, profileImgUrl: $profileImgUrl, contactEmail: $contactEmail}';
   }
 }
