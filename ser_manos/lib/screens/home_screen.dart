@@ -25,10 +25,16 @@ class _HomeScreenState extends State<HomeScreen> {
           body: Column(children: [
             Container(
                 color: SermanosColors.secondary[1],
-                child: TabBar(
+                child: const TabBar(
                     indicatorColor: Colors.white,
+                    indicatorSize: TabBarIndicatorSize.tab,
                     labelColor: Colors.white,
                     unselectedLabelColor: Colors.white,
+                    indicator: BoxDecoration(
+                        color: SermanosColors.secondary,
+                        border: Border(
+                          bottom: BorderSide(color: Colors.white, width: 3),
+                        )),
                     tabs: <Widget>[
                       Tab(text: 'Postulate'),
                       Tab(text: 'Mi Perfil'),
