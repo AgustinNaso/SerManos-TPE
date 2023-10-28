@@ -33,29 +33,27 @@ class OnboardingScreen extends StatelessWidget {
               ),
             ),
             Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Column(
-                  children: <Widget>[
-                    SermanosCtaButton(
-                        text: 'Iniciar Sesion',
-                        onPressed: () {
-                          GoRouter.of(context).push('/login');
-                        }),
-                    const SizedBox(height: 10),
-                    SermanosCtaButton(
+              margin: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                children: <Widget>[
+                  SermanosCtaButton(
+                      text: 'Iniciar Sesion',
                       onPressed: () {
-                        GoRouter.of(context).push('/register');
-                      },
-                      text: 'Registrarse',
-                      backgroundColor: Colors.white,
-                      textColor: SermanosColors.primary,
-                    ),
-                    const SizedBox(height: 30),
-                  ],
-                ),
+                        GoRouter.of(context).push('/login');
+                      }),
+                  const SizedBox(height: 10),
+                  SermanosCtaButton(
+                    onPressed: () {
+                      GoRouter.of(context).push('/register');
+                    },
+                    text: 'Registrarse',
+                    backgroundColor: Colors.white,
+                    textColor: SermanosColors.primary100,
+                  ),
+                  const SizedBox(height: 30),
+                ],
               ),
-
-             
+            ),
           ],
         ),
       ),

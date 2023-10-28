@@ -53,7 +53,7 @@ class LoginScreen extends StatelessWidget {
                       },
                       text: 'No tengo cuenta',
                       backgroundColor: Colors.white,
-                      textColor: SermanosColors.primary,
+                      textColor: SermanosColors.primary100,
                     ),
                     const SizedBox(height: 30),
                   ],

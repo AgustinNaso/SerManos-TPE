@@ -26,28 +26,28 @@ class SermanosTypography extends TextStyle {
     'xxl': 24.0
   };
 
-  const SermanosTypography.overline({color = SermanosColors.neutral})
+  const SermanosTypography.overline({color = SermanosColors.neutral100})
       : this(
             color: color,
             fontSize: _fontSizeXs,
             fontWeight: FontWeight.w500,
             letterSpacing: 1.5);
 
-  const SermanosTypography.subtitle01({color = SermanosColors.neutral})
+  const SermanosTypography.subtitle01({color = SermanosColors.neutral100})
       : this(
             color: color,
             fontSize: _fontSizeLg,
             fontWeight: FontWeight.w400,
             letterSpacing: 0.5);
-  
-  SermanosTypography.defaultBody({color = SermanosColors.neutral})
+
+  SermanosTypography.defaultBody({color = SermanosColors.neutral100})
       : this(
             color: color,
             fontSize: _fontSize['md']!,
             fontWeight: FontWeight.w400,
             letterSpacing: 0.25);
 
-  SermanosTypography.defaultHeadline({color = SermanosColors.neutral})
+  SermanosTypography.defaultHeadline({color = SermanosColors.neutral100})
       : this(
             color: color,
             fontSize: _fontSize['xl']!,

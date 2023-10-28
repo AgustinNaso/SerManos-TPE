@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Shadows  {
+class Shadows {
   Shadows._();
 
   static List<BoxShadow> primaryShadow = [

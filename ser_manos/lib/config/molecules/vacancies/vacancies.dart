@@ -20,7 +20,7 @@ class Vacancies extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           const Text('Vacantes: '),
-          const Icon(Icons.person, color: SermanosColors.secondary),
+          const Icon(Icons.person, color: SermanosColors.secondary200),
           Text(vacancy.toString()),
         ],
       ),

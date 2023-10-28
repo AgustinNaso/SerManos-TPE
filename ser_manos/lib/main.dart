@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> with RouterMixin {
     return MaterialApp.router(
       routerConfig: router,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: SermanosColors.primary),
+        colorScheme: ColorScheme.fromSeed(seedColor: SermanosColors.primary100),
         useMaterial3: true,
       ),
     );

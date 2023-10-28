@@ -62,24 +62,24 @@ class SermanosTextField extends HookConsumerWidget {
             errorBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 width: 2,
-                color: SermanosColors.error,
+                color: SermanosColors.error100,
               ),
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
             errorStyle: const TextStyle(
-              color: SermanosColors.error,
+              color: SermanosColors.error100,
             ),
             errorMaxLines: 3,
             errorText: field.errorText,
             floatingLabelStyle: TextStyle(
                 color: myFocusNode.hasFocus
-                    ? SermanosColors.secondary
-                    : SermanosColors.neutral[75]),
+                    ? SermanosColors.secondary200
+                    : SermanosColors.neutral75),
             focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: SermanosColors.secondary),
+              borderSide: BorderSide(color: SermanosColors.secondary200),
             ),
             enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: SermanosColors.secondary),
+              borderSide: BorderSide(color: SermanosColors.secondary200),
             ),
             suffixIcon: enableObscure
                 ? IconButton(
@@ -87,7 +87,7 @@ class SermanosTextField extends HookConsumerWidget {
                       isObscured.value
                           ? Icons.visibility
                           : Icons.visibility_off,
-                      color: SermanosColors.neutral[75],
+                      color: SermanosColors.neutral75,
                     ),
                     onPressed: () {
                       isObscured.value = !isObscured.value;
@@ -95,8 +95,8 @@ class SermanosTextField extends HookConsumerWidget {
                   )
                 : controller.text.isNotEmpty && myFocusNode.hasFocus
                     ? IconButton(
-                        icon: Icon(Icons.clear,
-                            color: SermanosColors.neutral[75]),
+                        icon:
+                            Icon(Icons.clear, color: SermanosColors.neutral75),
                         onPressed: () {
                           if (!isEmpty) {
                             controller.clear();

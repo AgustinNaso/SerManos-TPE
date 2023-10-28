@@ -14,7 +14,7 @@ class SermanosCtaButton extends StatelessWidget {
       required this.text,
       required this.onPressed,
       this.icon,
-      this.backgroundColor = SermanosColors.primary,
+      this.backgroundColor = SermanosColors.primary100,
       this.textColor = Colors.white});
 
   @override
@@ -30,7 +30,7 @@ class SermanosCtaButton extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: icon != null? MainAxisSize.min: MainAxisSize.max,
+        mainAxisSize: icon != null ? MainAxisSize.min : MainAxisSize.max,
         children: [
           if (icon != null) icon!,
           const SizedBox(width: 10),

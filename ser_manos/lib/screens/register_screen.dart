@@ -54,7 +54,7 @@ class RegisterScreen extends StatelessWidget {
                       },
                       text: 'Ya tengo cuenta',
                       backgroundColor: Colors.white,
-                      textColor: SermanosColors.primary,
+                      textColor: SermanosColors.primary100,
                     ),
                     const SizedBox(height: 30),
                   ],

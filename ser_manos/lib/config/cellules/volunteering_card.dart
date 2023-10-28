@@ -44,8 +44,8 @@ class VolunteeringCard extends StatelessWidget {
                         children: <Widget>[
                           Text('ACCION SOCIAL',
                               style: SermanosTypography.overline(
-                                  color: SermanosColors.neutral[75])),
-                          const Text('Un Techo para mi Pais',
+                                  color: SermanosColors.neutral75)),
+                          Text('Un Techo para mi Pais',
                               style: SermanosTypography.subtitle01()),
                           const SizedBox(height: 4),
                           const Vacancies(vacancy: 10)
@@ -59,7 +59,7 @@ class VolunteeringCard extends StatelessWidget {
                             constraints: const BoxConstraints(),
                             icon: const Icon(
                               Icons.favorite_border,
-                              color: SermanosColors.primary,
+                              color: SermanosColors.primary100,
                             ),
                             onPressed: () {},
                           ),
@@ -67,7 +67,7 @@ class VolunteeringCard extends StatelessWidget {
                             alignment: Alignment.bottomCenter,
                             icon: const Icon(
                               Icons.location_on,
-                              color: SermanosColors.primary,
+                              color: SermanosColors.primary100,
                             ),
                             onPressed: () {},
                           ),
