@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ser_manos/config/cellules/volunteering_card.dart';
-import 'package:ser_manos/services/firebaseAuth.dart';
+import 'package:ser_manos/data/services/firebase_auth.dart';
 
 import '../config/cellules/register_form.dart';
 import '../config/molecules/buttons/sermanos_cta_button.dart';
@@ -42,7 +41,7 @@ class RegisterScreen extends StatelessWidget {
                           await MyFirebaseAuth().createUserWithEmailAndPassword(
                             email: fields['Email']!.value,
                             password: fields['Password']!.value,
-                            lastname: fields['Apellido']!.value,
+                            lastName: fields['Apellido']!.value,
                             name: fields['Nombre']!.value,
                           );
 

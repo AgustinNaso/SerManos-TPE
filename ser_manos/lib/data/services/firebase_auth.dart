@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ser_manos/firebaseConfig.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ser_manos/data/firebase_config.dart';
+import 'package:ser_manos/data/models/user_model.dart';
+import 'package:ser_manos/data/repositories/user_repository_impl.dart';
 
-import '../models/userModel.dart';
 
 class MyFirebaseAuth {
   final _firebaseAuth = FirebaseAuth.instanceFor(app: FirebaseConfig.app);
@@ -21,9 +21,7 @@ class MyFirebaseAuth {
         password: password,
       );
 
-      final user = (await FirebaseFirestore.instance.collection('users').where('email', isEqualTo: email ).get()).docs.first.data();
-
-      return SermanosUser.fromJson(user);
+      return await UserRepositoryImpl().getUserByEmail(email); // TODO: handle possible errors
     } on Error catch (e) {
       print(e);
       rethrow;
@@ -34,7 +32,7 @@ class MyFirebaseAuth {
     required String email,
     required String password,
     required String name,
-    required String lastname,
+    required String lastName,
   }) async {
     try {
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
@@ -43,14 +41,15 @@ class MyFirebaseAuth {
       );
 
       final userJson = {
+        'id': userCredential.user!.uid,
         'email': email,
         'name': name,
-        'lastname': lastname
+        'lastName': lastName
       };
 
-      await FirebaseFirestore.instance.collection('users').add(userJson);
+      final user = await UserRepositoryImpl().create(SermanosUser.fromJson(userJson));
 
-      return SermanosUser.fromJson(userJson);
+      return user;
     } on Error catch (e) {
       print(e);
       rethrow;
