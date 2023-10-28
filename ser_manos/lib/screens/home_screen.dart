@@ -27,10 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: SermanosColors.secondary100,
                 height: 52,
                 child: const TabBar(
-                    indicatorColor: Colors.white,
+                    indicatorColor: SermanosColors.neutral0,
                     indicatorSize: TabBarIndicatorSize.tab,
-                    labelColor: Colors.white,
-                    unselectedLabelColor: Colors.white,
+                    labelColor: SermanosColors.neutral0,
+                    unselectedLabelColor: SermanosColors.neutral25,
                     indicator: BoxDecoration(
                         color: SermanosColors.secondary200,
                         border: Border(
