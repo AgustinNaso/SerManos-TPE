@@ -20,11 +20,12 @@ class _HomeScreenState extends State<HomeScreen> {
             title: const Image(
               image: AssetImage('assets/images/logo-rec.png'),
             ),
-            backgroundColor: SermanosColors.secondary200,
+            backgroundColor: SermanosColors.secondary90,
           ),
           body: Column(children: [
             Container(
-                color: SermanosColors.secondary200,
+                color: SermanosColors.secondary100,
+                height: 52,
                 child: const TabBar(
                     indicatorColor: Colors.white,
                     indicatorSize: TabBarIndicatorSize.tab,
