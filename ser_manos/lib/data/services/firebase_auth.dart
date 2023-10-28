@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ser_manos/firebase_config.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ser_manos/models/repositories/user_repository_impl.dart';
+import 'package:ser_manos/data/firebase_config.dart';
+import 'package:ser_manos/data/models/user_model.dart';
+import 'package:ser_manos/data/repositories/user_repository_impl.dart';
 
-import '../models/user_model.dart';
 
 class MyFirebaseAuth {
   final _firebaseAuth = FirebaseAuth.instanceFor(app: FirebaseConfig.app);

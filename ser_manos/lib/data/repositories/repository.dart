@@ -1,5 +1,5 @@
-import 'package:ser_manos/models/json_serializable.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ser_manos/data/models/json_serializable.dart';
 
 abstract class Repository<T extends JsonSerializable<T>> {
   final String tag; // this is the name of the collection in firestore

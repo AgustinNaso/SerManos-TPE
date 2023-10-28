@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ser_manos/config/router.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
-import 'package:ser_manos/firebaseConfig.dart';
+import 'package:ser_manos/data/firebase_config.dart';
+import 'package:ser_manos/data/repositories/user_repository_impl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,8 +30,8 @@ class _MyAppState extends State<MyApp> with RouterMixin {
 
   @override
   void initState() {
-    FirebaseConfig.init().then((_) => {
-          // MyFirebaseAuth().createUserWithEmailAndPassword(email: "gdeschant@itba.edu.ar", password: "Cabernicolas10!")
+    FirebaseConfig.init().then((_) async => {
+          // you can add test stuff here, but remove it before committing
         });
     super.initState();
   }
