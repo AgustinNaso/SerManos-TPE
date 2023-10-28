@@ -30,6 +30,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  flutter_riverpod: ^2.4.1
+  riverpod_annotation: ^2.2.0
+
+
 
   flutter_localizations:
     sdk: flutter
@@ -49,13 +54,17 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-  flutter_riverpod: ^2.4.1
+  ##### Riverpod ####
   hooks_riverpod: ^2.4.1
-  flutter_form_builder: ^9.1.1
-  form_builder_validators: ^9.0.0
+  riverpod_generator: ^3.0.0-dev.3
+  riverpod_lint: ^2.3.0
+  ###### Firebase #####
   firebase_core: ^2.17.0
   firebase_auth: ^4.10.1
   cloud_firestore: ^4.9.3
+
+  flutter_form_builder: ^9.1.1
+  form_builder_validators: ^9.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
