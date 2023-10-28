@@ -53,4 +53,12 @@ class SermanosTypography extends TextStyle {
             fontSize: _fontSize['xl']!,
             fontWeight: FontWeight.w500,
             letterSpacing: 0.15);
+
+  SermanosTypography.headline01({
+    Color color = SermanosColors.neutral100,
+  }) : this(
+            color: color,
+            fontSize: _fontSize['xxl']!,
+            fontWeight: FontWeight.w400,
+            letterSpacing: 0.15);
 }
