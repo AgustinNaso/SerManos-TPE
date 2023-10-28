@@ -38,47 +38,41 @@ class VolunteeringCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      Container(
-                          width: 180,
-                          color: Colors.green,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text('ACCION SOCIAL',
-                                  style: SermanosTypography.overline(
-                                      color: SermanosColors.neutral[75])),
-                              const Text('Un Techo para mi Pais',
-                                  style: SermanosTypography.subtitle01()),
-                              const SizedBox(height: 4),
-                              const Vacancies(vacancy: 10)
-                            ],
-                          )),
-                      Container(
-                          color: Colors.red,
-                          width: 100,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
-                              IconButton(
-                                padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(),
-                                icon: const Icon(
-                                  Icons.favorite_border,
-                                  color: SermanosColors.primary,
-                                ),
-                                onPressed: () {},
-                              ),
-                              IconButton(
-                                alignment: Alignment.bottomCenter,
-                                icon: const Icon(
-                                  Icons.location_on,
-                                  color: SermanosColors.primary,
-                                ),
-                                onPressed: () {},
-                              ),
-                            ],
-                          )),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('ACCION SOCIAL',
+                              style: SermanosTypography.overline(
+                                  color: SermanosColors.neutral[75])),
+                          const Text('Un Techo para mi Pais',
+                              style: SermanosTypography.subtitle01()),
+                          const SizedBox(height: 4),
+                          const Vacancies(vacancy: 10)
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
+                            icon: const Icon(
+                              Icons.favorite_border,
+                              color: SermanosColors.primary,
+                            ),
+                            onPressed: () {},
+                          ),
+                          IconButton(
+                            alignment: Alignment.bottomCenter,
+                            icon: const Icon(
+                              Icons.location_on,
+                              color: SermanosColors.primary,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
                     ]),
               ),
             ]),

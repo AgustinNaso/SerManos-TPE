@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ser_manos/config/cellules/volunteering_card.dart';
 import 'package:ser_manos/services/firebaseAuth.dart';
 
 import '../config/cellules/register_form.dart';
@@ -38,16 +39,15 @@ class RegisterScreen extends StatelessWidget {
                         onPressed: () async {
                           if (!RegisterFormKey.currentState!.validate()) return;
                           final fields = RegisterFormKey.currentState!.fields;
-                          await MyFirebaseAuth()
-                              .createUserWithEmailAndPassword(
-                                email: fields['Email']!.value,
-                                password: fields['Password']!.value,
-                                lastname: fields['Apellido']!.value,
-                                name: fields['Nombre']!.value,
+                          await MyFirebaseAuth().createUserWithEmailAndPassword(
+                            email: fields['Email']!.value,
+                            password: fields['Password']!.value,
+                            lastname: fields['Apellido']!.value,
+                            name: fields['Nombre']!.value,
                           );
 
                           GoRouter.of(context).pushReplacementNamed('login');
-                                                }),
+                        }),
                     const SizedBox(height: 10),
                     SermanosCtaButton(
                       onPressed: () {
