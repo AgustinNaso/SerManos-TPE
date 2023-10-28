@@ -42,7 +42,9 @@ class LoginScreen extends StatelessWidget {
                               .signInWithEmailAndPassword(
                                   email: fields['Email']!.value,
                                   password: fields['Password']!.value);
-                          GoRouter.of(context).pushReplacementNamed('news');
+                          GoRouter.of(context).routerDelegate.popRoute().then(
+                              (value) => GoRouter.of(context)
+                                  .pushReplacementNamed('home'));
                         }),
                     const SizedBox(height: 10),
                     SermanosCtaButton(

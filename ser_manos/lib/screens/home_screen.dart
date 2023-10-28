@@ -17,19 +17,24 @@ class _HomeScreenState extends State<HomeScreen> {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Ser Manos'),
+            title: const Image(
+              image: AssetImage('assets/images/logo-rec.png'),
+            ),
             backgroundColor: SermanosColors.secondary[1],
           ),
-          body: const Column(children: [
-            TabBar(
-                indicatorColor: Colors.white,
-                labelColor: Colors.white,
-                tabs: [
-                  Tab(text: 'Postularse'),
-                  Tab(text: 'Mi Perfil'),
-                  Tab(text: 'Novedades'),
-                ]),
-            Expanded(
+          body: Column(children: [
+            Container(
+                color: SermanosColors.secondary[1],
+                child: TabBar(
+                    indicatorColor: Colors.white,
+                    labelColor: Colors.white,
+                    unselectedLabelColor: Colors.white,
+                    tabs: <Widget>[
+                      Tab(text: 'Postulate'),
+                      Tab(text: 'Mi Perfil'),
+                      Tab(text: 'Novedades'),
+                    ])),
+            const Expanded(
                 child: TabBarView(
               children: [PostulateScreen(), Text("hola2"), NewsScreen()],
             ))
