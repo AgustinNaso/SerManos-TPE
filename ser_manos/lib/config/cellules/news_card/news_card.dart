@@ -17,7 +17,7 @@ class NewsCard extends ConsumerWidget {
         decoration: BoxDecoration(
           color: SermanosColors.neutral0,
           borderRadius: BorderRadius.circular(2),
-          boxShadow: Shadows.primaryShadow,
+          boxShadow: Shadows.shadow1,
         ),
         child: IntrinsicHeight(
           child: Row(

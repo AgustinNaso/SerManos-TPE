@@ -7,6 +7,7 @@ import 'package:ser_manos/screens/news_detail_screen.dart';
 import 'package:ser_manos/screens/news_screen.dart';
 import 'package:ser_manos/screens/onboarding_screen.dart';
 import 'package:ser_manos/screens/register_screen.dart';
+import 'package:ser_manos/screens/volunteering_screen.dart';
 
 mixin RouterMixin on State<MyApp> {
   final _router = GoRouter(
@@ -51,6 +52,13 @@ mixin RouterMixin on State<MyApp> {
             path: 'home',
             builder: (BuildContext context, GoRouterState state) {
               return const HomeScreen();
+            },
+          ),
+          GoRoute(
+            name: 'volunteering',
+            path: 'volunteering',
+            builder: (BuildContext context, GoRouterState state) {
+              return const VolunteeringScreen();
             },
           )
         ],

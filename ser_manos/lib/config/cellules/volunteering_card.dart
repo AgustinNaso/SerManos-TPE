@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/molecules/vacancies/vacancies.dart';
 import 'package:ser_manos/config/tokens/sermanos_box_shadows.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
@@ -11,7 +12,7 @@ class VolunteeringCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/volunteering');
+        GoRouter.of(context).push('/volunteering');
       },
       child: Center(
         child: Container(
