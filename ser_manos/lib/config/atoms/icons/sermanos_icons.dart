@@ -33,6 +33,11 @@ class SermanosIcons extends Icon {
           status: status,
         );
 
+  SermanosIcons.person({
+    Key? key,
+    required SermanosIconStatus status,
+  }) : this(key: key, icon: Icons.person, status: status, size: 20);
+
   SermanosIcons.locationFilled({
     Key? key,
     required SermanosIconStatus status,

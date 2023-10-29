@@ -38,7 +38,7 @@ class SermanosTypography extends TextStyle {
             color: color,
             fontSize: _fontSizeLg,
             fontWeight: FontWeight.w400,
-            letterSpacing: 0.5);
+            letterSpacing: 0.15);
 
   SermanosTypography.defaultBody({color = SermanosColors.neutral100})
       : this(
@@ -46,6 +46,13 @@ class SermanosTypography extends TextStyle {
             fontSize: _fontSize['md']!,
             fontWeight: FontWeight.w400,
             letterSpacing: 0.25);
+
+  SermanosTypography.body02({color = SermanosColors.neutral100})
+      : this(
+            color: color,
+            fontSize: _fontSize['sm']!,
+            fontWeight: FontWeight.w400,
+            letterSpacing: 0.4);
 
   SermanosTypography.defaultHeadline({color = SermanosColors.neutral100})
       : this(

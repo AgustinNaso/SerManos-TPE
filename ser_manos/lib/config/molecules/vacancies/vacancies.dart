@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
+import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 
 class Vacancies extends StatelessWidget {
   const Vacancies({
@@ -11,17 +13,31 @@ class Vacancies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool hasVacancy = vacancy > 0;
     return Container(
-      padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-          color: Colors.lightBlue[100],
+          color: hasVacancy
+              ? SermanosColors.secondary25
+              : SermanosColors.neutral25,
           borderRadius: const BorderRadius.all(Radius.circular(4))),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const Text('Vacantes: '),
-          const Icon(Icons.person, color: SermanosColors.secondary200),
-          Text(vacancy.toString()),
+          Text('Vacantes: ',
+              style:
+                  SermanosTypography.body02(color: SermanosColors.neutral100)),
+          SermanosIcons.person(
+              status: hasVacancy
+                  ? SermanosIconStatus.activatedSecondary
+                  : SermanosIconStatus.disabledSecondary),
+          Text(
+            vacancy.toString(),
+            style: SermanosTypography.subtitle01(
+                color: hasVacancy
+                    ? SermanosColors.secondary200
+                    : SermanosColors.secondary80),
+          )
         ],
       ),
     );

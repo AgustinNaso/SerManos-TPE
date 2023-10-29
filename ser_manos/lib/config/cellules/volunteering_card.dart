@@ -48,7 +48,7 @@ class VolunteeringCard extends StatelessWidget {
                             Text('Un Techo para mi Pais',
                                 style: SermanosTypography.subtitle01()),
                             SizedBox(height: 4),
-                            Vacancies(vacancy: 10)
+                            Vacancies(vacancy: 1)
                           ],
                         ),
                         Row(
