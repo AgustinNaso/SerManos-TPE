@@ -10,7 +10,7 @@ class PostulateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
         child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +32,8 @@ class PostulateScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return const VolunteeringCard();
                       },
-                      itemCount: 5))
+                      itemCount: 5)),
+              SizedBox(height: 16)
             ]));
   }
 }
