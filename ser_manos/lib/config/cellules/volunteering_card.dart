@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:ser_manos/config/molecules/vacancies/vacancies.dart';
 import 'package:ser_manos/config/tokens/sermanos_box_shadows.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
@@ -54,20 +55,15 @@ class VolunteeringCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
                             IconButton(
-                              padding: EdgeInsets.zero,
                               constraints: const BoxConstraints(),
-                              icon: const Icon(
-                                Icons.favorite_border,
-                                color: SermanosColors.primary100,
-                              ),
+                              icon: SermanosIcons.favoriteOutlined(
+                                  status: SermanosIconStatus.activated),
                               onPressed: () {},
                             ),
                             IconButton(
                               alignment: Alignment.bottomCenter,
-                              icon: const Icon(
-                                Icons.location_on,
-                                color: SermanosColors.primary100,
-                              ),
+                              icon: SermanosIcons.locationOutlined(
+                                  status: SermanosIconStatus.activated),
                               onPressed: () {},
                             ),
                           ],
