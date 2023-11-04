@@ -7,13 +7,17 @@ import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 
 class VolunteeringCard extends StatelessWidget {
-  const VolunteeringCard({super.key});
+  final Volunteering volunteeringInfo;
+  final bool isFavorite;
+
+  const VolunteeringCard(
+      {super.key, required this.volunteeringInfo, required this.isFavorite});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        GoRouter.of(context).push('/volunteering');
+        GoRouter.of(context).push('/volunteering/${volunteeringInfo.id}');
       },
       child: Center(
         child: Container(
@@ -38,17 +42,17 @@ class VolunteeringCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
-                        const Column(
+                        Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text('ACCION SOCIAL',
+                            Text(volunteeringInfo.category,
                                 style: SermanosTypography.overline(
                                     color: SermanosColors.neutral75)),
-                            Text('Un Techo para mi Pais',
+                            Text(volunteeringInfo.name,
                                 style: SermanosTypography.subtitle01()),
                             SizedBox(height: 4),
-                            Vacancies(vacancy: 1)
+                            Vacancies(vacancy: volunteeringInfo.vacancy)
                           ],
                         ),
                         Row(
