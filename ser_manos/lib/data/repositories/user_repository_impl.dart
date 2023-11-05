@@ -11,7 +11,7 @@ class UserRepositoryImpl extends Repository<SermanosUser> {
     try {
       final querySnapshot = await collection.where('email', isEqualTo: email).get();
       if (querySnapshot.docs.isNotEmpty) {
-        final user = itemFromJson(querySnapshot.docs.first.data());
+        final user = itemFromJson(querySnapshot.docs.first.id, querySnapshot.docs.first.data());
         return user;
       } else {
         throw NotFoundException("User with email $email not found");
@@ -25,7 +25,8 @@ class UserRepositoryImpl extends Repository<SermanosUser> {
 
 
   @override
-  SermanosUser itemFromJson(Map<String, dynamic> json) {
+  SermanosUser itemFromJson(String id, Map<String, dynamic> json) {
+    json["id"] = id;
     return SermanosUser.fromJson(json);
   }
 

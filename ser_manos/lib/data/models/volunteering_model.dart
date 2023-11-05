@@ -19,7 +19,7 @@ class Volunteering extends JsonSerializable<Volunteering> {
   @override
   static Volunteering fromJson(Map<String, dynamic> json) {
     return Volunteering(
-      json['id'] ?? "1 ue",
+      json['id'],
       json['imgUrl'],
       json['name'],
       json['category'],

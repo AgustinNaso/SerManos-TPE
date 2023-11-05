@@ -32,7 +32,7 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
   @override
   static SermanosUser fromJson(Map<String, dynamic> json) {
     return SermanosUser(
-      id: json['id'] ?? "1 ue",
+      id: json['id'],
       email: json['email'],
       name: json['name'],
       lastName: json['lastName'],
@@ -44,7 +44,7 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
       profileImgUrl: json['profileImgUrl'],
       contactEmail: json['contactEmail'],
       favVolunteerings: json['favVolunteerings'] != null
-          ? List<String>.from(json['favVolunteerings'])
+          ? (json['favVolunteerings'] as List).map((item) => item as String).toList()
           : [],
     );
   }

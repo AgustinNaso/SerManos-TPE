@@ -32,9 +32,9 @@ class VolunteeringDetails extends JsonSerializable<VolunteeringDetails> {
     return VolunteeringDetails(
       json['description'],
       json['about'],
-      json['requirements'],
-      json['availability'],
-      json['id'] ?? "1 ue",
+      (json['requirements'] as List).map((item) => item as String).toList(),
+      (json['availability'] as List).map((item) => item as String).toList(),
+      json['id'],
       json['imgUrl'],
       json['name'],
       json['category'],

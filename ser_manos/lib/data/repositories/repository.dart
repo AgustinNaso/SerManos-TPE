@@ -25,7 +25,7 @@ abstract class Repository<T extends JsonSerializable<T>> {
     final doc = await collection.doc(id).get();
     if (doc.exists) {
       final data = doc.data()!;
-      return itemFromJson(data);
+      return itemFromJson(doc.id, data);
     }
     throw NotFoundException("$tag not found with id $id");
   }
@@ -41,5 +41,5 @@ abstract class Repository<T extends JsonSerializable<T>> {
   }
 
   // Factory method to create an instance of T from JSON data
-  T itemFromJson(Map<String, dynamic> json);
+  T itemFromJson(String id, Map<String, dynamic> json);
 }
