@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/screens/news_screen.dart';
 import 'package:ser_manos/screens/postulate_screen.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,20 +27,20 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
                 color: SermanosColors.secondary100,
                 height: 52,
-                child: const TabBar(
+                child: TabBar(
                     indicatorColor: SermanosColors.neutral0,
                     indicatorSize: TabBarIndicatorSize.tab,
                     labelColor: SermanosColors.neutral0,
                     unselectedLabelColor: SermanosColors.neutral25,
-                    indicator: BoxDecoration(
+                    indicator: const BoxDecoration(
                         color: SermanosColors.secondary200,
                         border: Border(
                           bottom: BorderSide(color: Colors.white, width: 3),
                         )),
                     tabs: <Widget>[
-                      Tab(text: 'Postulate'),
-                      Tab(text: 'Mi Perfil'),
-                      Tab(text: 'Novedades'),
+                      Tab(text: AppLocalizations.of(context)!.postulateAppBar),
+                      Tab(text: AppLocalizations.of(context)!.profileAppBar),
+                      Tab(text: AppLocalizations.of(context)!.newsAppBar),
                     ])),
             const Expanded(
                 child: TabBarView(

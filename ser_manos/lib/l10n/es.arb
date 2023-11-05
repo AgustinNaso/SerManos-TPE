@@ -1,9 +1,27 @@
 {
   "@@locale": "es",
-  "title_bar": "example",
-  "@titple_bar": {
-    "type": "text",
-    "context": "title_bar",
-    "description": "标题栏"
-  }
+  "introduction": "\"El esfuerzo desinteresado para llevar alegria a los demas sera el comienzo de una vida mas feliz para nosotros\"",
+  "login": "Iniciar sesión",
+  "signup": "Registrarse",
+  "name": "Nombre",
+  "lastName": "Apellido",
+  "email": "Email",
+  "password": "Contraseña",
+  "noAccount": "No tengo una cuenta",
+  "requiredFieldError": "Este campo es obligatorio",
+  "minLengthError": "Este campo debe tener al menos {minLength} caracteres",
+  "@minLengthError": {
+    "placeholders": {
+      "minLength": {
+        "type": "int"
+      }
+    }
+  },
+  "enterValidEmailError": "Por favor ingrese un email válido",
+  "volunteersTitle": "Voluntariados",
+  "postulateAppBar": "Postularse",
+  "profileAppBar": "Mi perfil",
+  "newsAppBar": "Novedades",
+  "vacancies": "Vacantes: "
+
 }
