@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ser_manos/config/cellules/volunteering_card.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
+import 'package:ser_manos/data/models/volunteering_model.dart';
 
 import '../config/tokens/sermanos_colors.dart';
 
@@ -30,7 +31,15 @@ class PostulateScreen extends StatelessWidget {
                             height: 16,
                           ),
                       itemBuilder: (context, index) {
-                        return const VolunteeringCard();
+                        return VolunteeringCard(
+                            volunteeringInfo: Volunteering(
+                                '1',
+                                'assets/images/Imagen.png',
+                                'Un Techo para mi Pais',
+                                'ACCION SOCIAL',
+                                10,
+                                '?'),
+                            isFavorite: false);
                       },
                       itemCount: 5)),
               SizedBox(height: 16)

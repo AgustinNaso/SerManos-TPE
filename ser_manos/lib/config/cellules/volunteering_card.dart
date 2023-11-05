@@ -5,6 +5,7 @@ import 'package:ser_manos/config/molecules/vacancies/vacancies.dart';
 import 'package:ser_manos/config/tokens/sermanos_box_shadows.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
+import 'package:ser_manos/data/models/volunteering_model.dart';
 
 class VolunteeringCard extends StatelessWidget {
   final Volunteering volunteeringInfo;
@@ -52,7 +53,7 @@ class VolunteeringCard extends StatelessWidget {
                             Text(volunteeringInfo.name,
                                 style: SermanosTypography.subtitle01()),
                             SizedBox(height: 4),
-                            Vacancies(vacancy: volunteeringInfo.vacancy)
+                            Vacancies(vacancy: volunteeringInfo.vacancies)
                           ],
                         ),
                         Row(
