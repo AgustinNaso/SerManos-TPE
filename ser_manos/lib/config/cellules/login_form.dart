@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:ser_manos/config/molecules/textfields/sermanos_text_field.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 final LoginFormKey = GlobalKey<FormBuilderState>();
 
@@ -23,11 +24,12 @@ class LoginForm extends ConsumerWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 20.0),
                 // Set horizontal margin
                 child: SermanosTextField(
-                  hintText: 'Email',
-                  labelText: 'Email',
+                  hintText: AppLocalizations.of(context)!.email,
+                  labelText: AppLocalizations.of(context)!.email,
+                  name: "email",
                   validators: [
-                    FormBuilderValidators.required(errorText: 'This field is required'),
-                    FormBuilderValidators.email(errorText: 'Enter a valid email address')
+                    FormBuilderValidators.required(errorText: AppLocalizations.of(context)!.requiredFieldError),
+                    FormBuilderValidators.email(errorText: AppLocalizations.of(context)!.enterValidEmailError),
                   ],
                 ),
               ),
@@ -36,12 +38,13 @@ class LoginForm extends ConsumerWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 20.0),
                 // Set horizontal margin
                 child: SermanosTextField(
-                    hintText: 'Password',
-                    labelText: 'Password',
+                    hintText: AppLocalizations.of(context)!.password,
+                    labelText: AppLocalizations.of(context)!.password,
+                    name: "password",
                     enableObscure: true,
                     validators: [
-                      FormBuilderValidators.required(errorText: 'This field is required'),
-                      FormBuilderValidators.minLength(8, errorText: 'This field must be at least 8 characters long'),
+                      FormBuilderValidators.required(errorText: AppLocalizations.of(context)!.requiredFieldError),
+                      FormBuilderValidators.minLength(8, errorText: AppLocalizations.of(context)!.minLengthError(8)),
                     ]
                 ),
               ),

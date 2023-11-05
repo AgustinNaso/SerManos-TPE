@@ -39,12 +39,12 @@ class RegisterScreen extends StatelessWidget {
                           if (!RegisterFormKey.currentState!.validate()) return;
                           final fields = RegisterFormKey.currentState!.fields;
                           await MyFirebaseAuth().createUserWithEmailAndPassword(
-                            email: fields['Email']!.value,
-                            password: fields['Password']!.value,
-                            lastName: fields['Apellido']!.value,
-                            name: fields['Nombre']!.value,
+                            email: fields['email']!.value,
+                            password: fields['password']!.value,
+                            lastName: fields['lastName']!.value,
+                            name: fields['name']!.value,
                           );
-
+                          // TODO: after register go to welcome page
                           GoRouter.of(context).pushReplacementNamed('login');
                         }),
                     const SizedBox(height: 10),

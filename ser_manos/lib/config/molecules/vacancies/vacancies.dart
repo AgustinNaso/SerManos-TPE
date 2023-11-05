@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 class Vacancies extends StatelessWidget {
   const Vacancies({
@@ -24,7 +25,7 @@ class Vacancies extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text('Vacantes: ',
+          Text(AppLocalizations.of(context)!.vacancies,
               style:
                   SermanosTypography.body02(color: SermanosColors.neutral100)),
           SermanosIcons.person(

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ser_manos/config/router.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/data/firebase_config.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 void main() {
   runApp(const ProviderScope(
@@ -27,6 +28,8 @@ class _MyAppState extends State<MyApp> with RouterMixin {
         colorScheme: ColorScheme.fromSeed(seedColor: SermanosColors.primary100),
         useMaterial3: true,
       ),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 

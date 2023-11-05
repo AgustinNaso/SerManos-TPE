@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/cellules/login_form.dart';
 import 'package:ser_manos/data/services/firebase_auth.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 import '../config/molecules/buttons/sermanos_cta_button.dart';
 import '../config/tokens/sermanos_colors.dart';
@@ -34,14 +35,14 @@ class LoginScreen extends StatelessWidget {
                   children: <Widget>[
                     const SizedBox(height: 120),
                     SermanosCtaButton(
-                        text: 'Login',
+                        text: AppLocalizations.of(context)!.login,
                         onPressed: () {
                           if (!LoginFormKey.currentState!.validate()) return;
                           final fields = LoginFormKey.currentState!.fields;
                           final userCreds = MyFirebaseAuth()
                               .signInWithEmailAndPassword(
-                                  email: fields['Email']!.value,
-                                  password: fields['Password']!.value);
+                                  email: fields['email']!.value,
+                                  password: fields['password']!.value);
                           GoRouter.of(context).routerDelegate.popRoute().then(
                               (value) => GoRouter.of(context)
                                   .pushReplacementNamed('home'));
@@ -51,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                       onPressed: () {
                         GoRouter.of(context).pushReplacementNamed('register');
                       },
-                      text: 'No tengo cuenta',
+                      text: AppLocalizations.of(context)!.noAccount,
                       backgroundColor: Colors.white,
                       textColor: SermanosColors.primary100,
                     ),

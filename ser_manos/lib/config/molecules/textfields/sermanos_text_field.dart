@@ -9,6 +9,7 @@ import '../../tokens/sermanos_colors.dart';
 class SermanosTextField extends HookConsumerWidget {
   final String hintText;
   final String labelText;
+  final String name;
   final bool enableObscure;
   final List<String? Function(String?)>? validators;
 
@@ -16,6 +17,7 @@ class SermanosTextField extends HookConsumerWidget {
       {super.key,
       required this.hintText,
       required this.labelText,
+      required this.name,
       this.enableObscure = false,
       this.validators});
 
@@ -33,7 +35,7 @@ class SermanosTextField extends HookConsumerWidget {
 
     return FormBuilderField<String>(
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      name: labelText,
+      name: name,
       onReset: () => controller.text = '',
       validator: (value) {
         if (myFocusNode.hasFocus) {

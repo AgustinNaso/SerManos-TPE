@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ser_manos/config/cellules/volunteering_card.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/volunteering_model.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 import '../config/tokens/sermanos_colors.dart';
 import '../providers/volunteering_provider.dart';
@@ -25,7 +26,7 @@ class PostulateScreen extends ConsumerWidget {
                   const SizedBox(
                     height: 16,
                   ),
-                  Text("Voluntariados",
+                  Text(AppLocalizations.of(context)!.volunteersTitle,
                       style: SermanosTypography.headline01(
                           color: SermanosColors.neutral100)),
                   const SizedBox(

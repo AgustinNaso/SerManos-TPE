@@ -1,9 +1,26 @@
 {
   "@@locale": "en",
-  "title_bar": "example",
-  "@titple_bar": {
-    "type": "text",
-    "context": "title_bar",
-    "description": "标题栏"
-  }
+  "introduction": "\"Unselfish effort to bring joy to others will be the beginning of a happier life for us.\"",
+  "login": "Login",
+  "signup": "Sign Up",
+  "name": "Name",
+  "lastName": "Last Name",
+  "email": "Email",
+  "password": "Password",
+  "noAccount": "I don't have an account",
+  "requiredFieldError": "This field is required",
+  "minLengthError": "This field must be at least {minLength} characters long",
+  "@minLengthError": {
+    "placeholders": {
+      "minLength": {
+        "type": "int"
+      }
+    }
+  },
+  "enterValidEmailError": "Please enter a valid email address",
+  "volunteersTitle": "Volunteer Opportunities",
+  "postulateAppBar": "Postulate",
+  "profileAppBar": "My profile",
+  "newsAppBar": "News",
+  "vacancies": "Vacancies: "
 }

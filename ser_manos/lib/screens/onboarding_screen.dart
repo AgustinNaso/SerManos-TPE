@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 import '../config/molecules/buttons/sermanos_cta_button.dart';
 import '../config/tokens/sermanos_colors.dart';
@@ -21,9 +22,9 @@ class OnboardingScreen extends StatelessWidget {
                   Image.asset('assets/images/logo.png', height: 150.0),
                   // Replace with your logo
                   const SizedBox(height: 20),
-                  const Text(
-                    '"El esfuerzo desitnteresado para llevar alegria a los demas sera el comienzo de una vida mas feliz para nosotros"',
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context)!.introduction,
+                    style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.normal,
                         fontStyle: FontStyle.italic),
@@ -37,7 +38,7 @@ class OnboardingScreen extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   SermanosCtaButton(
-                      text: 'Iniciar Sesion',
+                      text: AppLocalizations.of(context)!.login,
                       onPressed: () {
                         GoRouter.of(context).push('/login');
                       }),
