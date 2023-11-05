@@ -32,7 +32,8 @@ class VolunteeringCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image.asset('assets/images/Imagen.png'),
+                Image.network(volunteeringInfo.imgUrl,
+                    width: 328, height: 138, fit: BoxFit.cover),
                 Container(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                   color: Colors.white,
