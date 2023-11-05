@@ -11,6 +11,7 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
   final DateTime? birthDate;
   final String? profileImgUrl;
   final String? contactEmail;
+  final List<String> favVolunteerings;
 
   SermanosUser(
       {required this.id,
@@ -21,7 +22,12 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
       this.gender,
       this.birthDate,
       this.profileImgUrl,
-      this.contactEmail});
+      this.contactEmail,
+      this.favVolunteerings = const []});
+
+  bool isFaved(String volunteeringId) {
+    return favVolunteerings.contains(volunteeringId);
+  }
 
   @override
   static SermanosUser fromJson(Map<String, dynamic> json) {
@@ -37,6 +43,9 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
           : null,
       profileImgUrl: json['profileImgUrl'],
       contactEmail: json['contactEmail'],
+      favVolunteerings: json['favVolunteerings'] != null
+          ? List<String>.from(json['favVolunteerings'])
+          : [],
     );
   }
 
@@ -52,6 +61,7 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
       'birthDate': birthDate != null ? birthDate!.toIso8601String() : null,
       'profileImgUrl': profileImgUrl,
       'contactEmail': contactEmail,
+      'favVolunteerings': favVolunteerings,
     };
   }
 

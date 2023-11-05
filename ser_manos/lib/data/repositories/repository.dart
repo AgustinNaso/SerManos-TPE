@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ser_manos/data/models/json_serializable.dart';
+import 'package:ser_manos/exceptions/not_found_exception.dart';
 
 abstract class Repository<T extends JsonSerializable<T>> {
   final String tag; // this is the name of the collection in firestore
@@ -20,13 +21,13 @@ abstract class Repository<T extends JsonSerializable<T>> {
     return Future.value(item);
   }
 
-  Future<T?> getById(String id) async {
+  Future<T> getById(String id) async {
     final doc = await collection.doc(id).get();
     if (doc.exists) {
-      final data = doc.data();
-      return data != null ? itemFromJson(data) : null;
+      final data = doc.data()!;
+      return itemFromJson(data);
     }
-    return null;
+    throw NotFoundException("$tag not found with id $id");
   }
 
   Future<T> update(String id,T item) async {
