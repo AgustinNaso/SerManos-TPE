@@ -44,7 +44,7 @@ class VolunteeringScreen extends StatelessWidget {
             )
           ]),
           Padding(
-              padding: const EdgeInsets.fromLTRB(16, 24, 16, 32),
+              padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -76,7 +76,8 @@ class VolunteeringScreen extends StatelessWidget {
                   const Text('Participar del voluntariado',
                       style: SermanosTypography.defaultHeadline()),
                   const SizedBox(height: 8),
-                  const Text('Requisitos', style: SermanosTypography.subtitle01()),
+                  const Text('Requisitos',
+                      style: SermanosTypography.subtitle01()),
                   const SizedBox(height: 8),
                   ListView.builder(
                     padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),

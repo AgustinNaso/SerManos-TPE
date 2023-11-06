@@ -20,60 +20,56 @@ class VolunteeringCard extends StatelessWidget {
       onTap: () {
         GoRouter.of(context).push('/volunteering/${volunteeringInfo.id}');
       },
-      child: Center(
-        child: Container(
-          width: 328,
-          height: 234,
-          decoration: BoxDecoration(
-            boxShadow: Shadows.shadow1,
-          ),
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: Shadows.shadow1,
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(2),
           child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image.network(volunteeringInfo.imgUrl,
-                    width: 328, height: 138, fit: BoxFit.cover),
+                    width: double.infinity, height: 138, fit: BoxFit.cover),
                 Container(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                   color: Colors.white,
-                  height: 96,
-                  width: 328,
-                  child: Row(
+                  child: Column(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(volunteeringInfo.category,
-                                style: SermanosTypography.overline(
-                                    color: SermanosColors.neutral75)),
-                            Text(volunteeringInfo.name,
-                                style: SermanosTypography.subtitle01()),
-                            SizedBox(height: 4),
-                            Vacancies(vacancy: volunteeringInfo.vacancies)
-                          ],
-                        ),
+                        Text(volunteeringInfo.category,
+                            style: const SermanosTypography.overline(
+                                color: SermanosColors.neutral75)),
+                        Text(volunteeringInfo.name,
+                            style: const SermanosTypography.subtitle01()),
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            IconButton(
-                              constraints: const BoxConstraints(),
-                              icon: SermanosIcons.favoriteOutlined(
-                                  status: SermanosIconStatus.activated),
-                              onPressed: () {},
-                            ),
-                            IconButton(
-                              alignment: Alignment.bottomCenter,
-                              icon: SermanosIcons.locationOutlined(
-                                  status: SermanosIconStatus.activated),
-                              onPressed: () {},
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Vacancies(vacancy: volunteeringInfo.vacancies),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                IconButton(
+                                  constraints: const BoxConstraints(),
+                                  icon: SermanosIcons.favoriteOutlined(
+                                      status: SermanosIconStatus.activated),
+                                  onPressed: () {},
+                                ),
+                                IconButton(
+                                  alignment: Alignment.bottomCenter,
+                                  icon: SermanosIcons.locationFilled(
+                                      status: SermanosIconStatus.activated),
+                                  onPressed: () {},
+                                ),
+                              ],
                             ),
                           ],
-                        ),
+                        )
                       ]),
                 ),
               ]),
