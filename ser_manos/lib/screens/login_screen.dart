@@ -39,13 +39,27 @@ class LoginScreen extends StatelessWidget {
                         onPressed: () {
                           if (!LoginFormKey.currentState!.validate()) return;
                           final fields = LoginFormKey.currentState!.fields;
-                          final userCreds = MyFirebaseAuth()
-                              .signInWithEmailAndPassword(
-                                  email: fields['email']!.value,
-                                  password: fields['password']!.value);
-                          GoRouter.of(context).routerDelegate.popRoute().then(
-                              (value) => GoRouter.of(context)
-                                  .pushReplacementNamed('home'));
+                          try {
+                            MyFirebaseAuth()
+                                .signInWithEmailAndPassword(
+                                    email: fields['email']!.value,
+                                    password: fields['password']!.value)
+                                .then((value) {
+                              GoRouter.of(context)
+                                  .routerDelegate
+                                  .popRoute()
+                                  .then((value) => GoRouter.of(context)
+                                      .pushReplacementNamed('welcome'));
+                            }).catchError((onError) {
+                              LoginFormKey.currentState?.setState(() {
+                                LoginForm.loginError = true;
+                              });
+                              if (!LoginFormKey.currentState!.validate())
+                                return;
+                            });
+                          } catch (e) {
+                            print(e);
+                          }
                         }),
                     const SizedBox(height: 10),
                     SermanosCtaButton(

@@ -8,10 +8,13 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 final LoginFormKey = GlobalKey<FormBuilderState>();
 
 class LoginForm extends ConsumerWidget {
+  static bool loginError = false;
+
   const LoginForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    LoginForm.loginError = false;
     return FormBuilder(
       key: LoginFormKey,
       enabled: true,
@@ -28,8 +31,12 @@ class LoginForm extends ConsumerWidget {
                   labelText: AppLocalizations.of(context)!.email,
                   name: "email",
                   validators: [
-                    FormBuilderValidators.required(errorText: AppLocalizations.of(context)!.requiredFieldError),
-                    FormBuilderValidators.email(errorText: AppLocalizations.of(context)!.enterValidEmailError),
+                    FormBuilderValidators.required(
+                        errorText:
+                            AppLocalizations.of(context)!.requiredFieldError),
+                    FormBuilderValidators.email(
+                        errorText:
+                            AppLocalizations.of(context)!.enterValidEmailError),
                   ],
                 ),
               ),
@@ -43,10 +50,19 @@ class LoginForm extends ConsumerWidget {
                     name: "password",
                     enableObscure: true,
                     validators: [
-                      FormBuilderValidators.required(errorText: AppLocalizations.of(context)!.requiredFieldError),
-                      FormBuilderValidators.minLength(8, errorText: AppLocalizations.of(context)!.minLengthError(8)),
-                    ]
-                ),
+                      FormBuilderValidators.required(
+                          errorText:
+                              AppLocalizations.of(context)!.requiredFieldError),
+                      FormBuilderValidators.minLength(8,
+                          errorText:
+                              AppLocalizations.of(context)!.minLengthError(8)),
+                      (val) {
+                        if (loginError) {
+                          return "User with email or password is not exists";
+                        }
+                        return null;
+                      },
+                    ]),
               ),
             ],
           ),

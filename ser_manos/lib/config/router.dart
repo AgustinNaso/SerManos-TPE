@@ -8,6 +8,7 @@ import 'package:ser_manos/screens/news_screen.dart';
 import 'package:ser_manos/screens/onboarding_screen.dart';
 import 'package:ser_manos/screens/register_screen.dart';
 import 'package:ser_manos/screens/volunteering_screen.dart';
+import 'package:ser_manos/screens/welcome_screen.dart';
 
 mixin RouterMixin on State<MyApp> {
   final _router = GoRouter(
@@ -19,6 +20,12 @@ mixin RouterMixin on State<MyApp> {
           return const OnboardingScreen();
         },
         routes: <RouteBase>[
+          GoRoute(
+              path: 'welcome',
+              name: 'welcome',
+              builder: (context, state) {
+                return const WelcomeScreen();
+              }),
           GoRoute(
             name: 'login',
             path: 'login',
