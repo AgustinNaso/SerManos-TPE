@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ser_manos/config/cellules/volunteering_card.dart';
+import 'package:ser_manos/config/molecules/userInputs/sermanos_search_bar.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/volunteering_model.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
@@ -17,8 +18,9 @@ class PostulateScreen extends ConsumerWidget {
     return service.when(
       data: (data) {
         final List<Volunteering> volunteerings = data;
-        return Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+        return Container(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+            color: SermanosColors.secondary10,
             child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,8 +28,12 @@ class PostulateScreen extends ConsumerWidget {
                   const SizedBox(
                     height: 16,
                   ),
+                  SermanosSearchBar(onChange: (text) => text),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   Text(AppLocalizations.of(context)!.volunteersTitle,
-                      style: SermanosTypography.headline01(
+                      style: const SermanosTypography.headline01(
                           color: SermanosColors.neutral100)),
                   const SizedBox(
                     height: 24,
@@ -43,7 +49,7 @@ class PostulateScreen extends ConsumerWidget {
                                 isFavorite: false);
                           },
                           itemCount: volunteerings.length)),
-                  SizedBox(height: 16)
+                  const SizedBox(height: 16)
                 ]));
       },
       loading: () => const Center(child: CircularProgressIndicator()),
