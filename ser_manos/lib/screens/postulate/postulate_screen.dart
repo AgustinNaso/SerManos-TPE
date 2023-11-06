@@ -5,9 +5,10 @@ import 'package:ser_manos/config/molecules/userInputs/sermanos_search_bar.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/volunteering_model.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:ser_manos/screens/postulate/volunteerings_not_found.dart';
 
-import '../config/tokens/sermanos_colors.dart';
-import '../providers/volunteering_provider.dart';
+import '../../config/tokens/sermanos_colors.dart';
+import '../../providers/volunteering_provider.dart';
 
 final searchQueryProvider = StateProvider<String>((ref) => '');
 
@@ -63,7 +64,7 @@ class PostulateScreen extends ConsumerWidget {
                                     isFavorite: false);
                               },
                               itemCount: filteredVolunteerings.length))
-                      : Text("HP:A")
+                      : const VolunteeringNotFound()
                 ]));
       },
       loading: () => const Center(child: CircularProgressIndicator()),

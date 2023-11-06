@@ -44,7 +44,7 @@ class VolunteeringScreen extends StatelessWidget {
             )
           ]),
           Padding(
-              padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
+              padding: const EdgeInsets.fromLTRB(16, 24, 16, 32),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

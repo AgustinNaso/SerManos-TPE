@@ -56,7 +56,7 @@ mixin RouterMixin on State<MyApp> {
           ),
           GoRoute(
             name: 'volunteering',
-            path: 'volunteering',
+            path: 'volunteering/:id',
             builder: (BuildContext context, GoRouterState state) {
               return const VolunteeringScreen();
             },
