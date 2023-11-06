@@ -14,34 +14,34 @@ class PostulateScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final service = ref.watch(getVolunteeringsProvider);
-    return service.when(
+    final futureVolunteeringsList = ref.watch(getVolunteeringsProvider);
+    return futureVolunteeringsList.when(
       data: (data) {
         final List<Volunteering> volunteerings = data;
         return Container(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
             color: SermanosColors.secondary10,
             child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(
-                    height: 16,
+                    height: 24,
                   ),
                   SermanosSearchBar(onChange: (text) => text),
                   const SizedBox(
-                    height: 16,
+                    height: 24,
                   ),
                   Text(AppLocalizations.of(context)!.volunteersTitle,
                       style: const SermanosTypography.headline01(
                           color: SermanosColors.neutral100)),
                   const SizedBox(
-                    height: 24,
+                    height: 16,
                   ),
                   Expanded(
                       child: ListView.separated(
                           separatorBuilder: (context, index) => const SizedBox(
-                                height: 16,
+                                height: 24,
                               ),
                           itemBuilder: (context, index) {
                             return VolunteeringCard(
@@ -49,7 +49,6 @@ class PostulateScreen extends ConsumerWidget {
                                 isFavorite: false);
                           },
                           itemCount: volunteerings.length)),
-                  const SizedBox(height: 16)
                 ]));
       },
       loading: () => const Center(child: CircularProgressIndicator()),

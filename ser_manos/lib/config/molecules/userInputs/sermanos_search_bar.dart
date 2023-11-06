@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:ser_manos/config/tokens/sermanos_box_shadows.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
@@ -31,15 +31,19 @@ class SermanosSearchBar extends HookWidget {
         controller: textController,
         onChanged: onChange,
         decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 12,
+          ),
           hintText: 'Buscar',
           hintStyle: const SermanosTypography.subtitle01(
               color: SermanosColors.neutral75),
-          prefixIcon: const Icon(
-            Icons.search,
-            color: SermanosColors.neutral75,
-          ),
-          suffixIcon: isEmpty
+          prefixIcon: !isEmpty
               ? null
+              : SermanosIcons.search(
+                  status: SermanosIconStatus.enabledSecondary),
+          suffixIcon: isEmpty
+              ? SermanosIcons.map(status: SermanosIconStatus.activated)
               : IconButton(
                   icon: const Icon(
                     Icons.close,
@@ -49,8 +53,18 @@ class SermanosSearchBar extends HookWidget {
                     textController.clear();
                   },
                 ),
-          border: InputBorder.none,
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.transparent),
+            borderRadius: BorderRadius.all(Radius.circular(2)),
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.transparent),
+            borderRadius: BorderRadius.all(Radius.circular(2)),
+          ),
         ),
+        onTapOutside: (event) => focusNode.unfocus(),
+        onEditingComplete: () => focusNode.unfocus(),
+        onSubmitted: onChange,
       ),
     );
   }

@@ -64,6 +64,23 @@ class SermanosIcons extends Icon {
           icon: Icons.arrow_back,
           status: status,
         );
+
+  SermanosIcons.search({
+    Key? key,
+    required SermanosIconStatus status,
+  }) : this(
+          key: key,
+          icon: Icons.search,
+          status: status,
+        );
+  SermanosIcons.map({
+    Key? key,
+    required SermanosIconStatus status,
+  }) : this(
+          key: key,
+          icon: Icons.map_outlined,
+          status: status,
+        );
 }
 
 enum SermanosIconStatus {
