@@ -9,15 +9,24 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 import '../config/tokens/sermanos_colors.dart';
 import '../providers/volunteering_provider.dart';
 
+final searchQueryProvider = StateProvider<String>((ref) => '');
+
 class PostulateScreen extends ConsumerWidget {
   const PostulateScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final searchQuery = ref.watch(searchQueryProvider);
     final futureVolunteeringsList = ref.watch(getVolunteeringsProvider);
+
     return futureVolunteeringsList.when(
-      data: (data) {
-        final List<Volunteering> volunteerings = data;
+      data: (volunteeringsList) {
+        final List<Volunteering> filteredVolunteerings = volunteeringsList
+            .where((volunteering) => volunteering.name
+                .toLowerCase()
+                .contains(searchQuery.toLowerCase()))
+            .toList();
+
         return Container(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
             color: SermanosColors.secondary10,
@@ -28,7 +37,9 @@ class PostulateScreen extends ConsumerWidget {
                   const SizedBox(
                     height: 24,
                   ),
-                  SermanosSearchBar(onChange: (text) => text),
+                  SermanosSearchBar(
+                      onChange: (query) =>
+                          ref.read(searchQueryProvider.notifier).state = query),
                   const SizedBox(
                     height: 24,
                   ),
@@ -38,17 +49,21 @@ class PostulateScreen extends ConsumerWidget {
                   const SizedBox(
                     height: 16,
                   ),
-                  Expanded(
-                      child: ListView.separated(
-                          separatorBuilder: (context, index) => const SizedBox(
-                                height: 24,
-                              ),
-                          itemBuilder: (context, index) {
-                            return VolunteeringCard(
-                                volunteeringInfo: volunteerings[index],
-                                isFavorite: false);
-                          },
-                          itemCount: volunteerings.length)),
+                  filteredVolunteerings.isNotEmpty
+                      ? Expanded(
+                          child: ListView.separated(
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
+                                    height: 24,
+                                  ),
+                              itemBuilder: (context, index) {
+                                return VolunteeringCard(
+                                    volunteeringInfo:
+                                        filteredVolunteerings[index],
+                                    isFavorite: false);
+                              },
+                              itemCount: filteredVolunteerings.length))
+                      : Text("HP:A")
                 ]));
       },
       loading: () => const Center(child: CircularProgressIndicator()),
