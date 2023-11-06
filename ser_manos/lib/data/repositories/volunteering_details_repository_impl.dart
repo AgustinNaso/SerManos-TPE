@@ -1,24 +1,25 @@
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/models/volunteering_details_model.dart';
 import 'package:ser_manos/data/repositories/repository.dart';
+import 'package:ser_manos/exceptions/not_found_exception.dart';
 
 class VolunteeringDetailsRepositoryImpl extends Repository<VolunteeringDetails> { // transform into Voluteering Details model
   VolunteeringDetailsRepositoryImpl() : super(tag: 'volunteering_details');
 
+  Future<VolunteeringDetails> getVolunteeringDetailsByVolunteeringId(String id) async {
+      final details = await collection.where('id', isEqualTo: id).get();
 
-  // TODO: Remove this it is done on Repository<T?>
-  Future<VolunteeringDetails> getVolunteeringDetailsById(String id) async {
-    try {
-        return await getById(id);
-    } catch (e) {
-      print(e);
-      // Rethrow the exception or handle it as needed.
-      throw e; // probably not found exception
-    }
+      if (details.docs.isNotEmpty) {
+        final volunteeringDetails = itemFromJson(details.docs.first.id, details.docs.first.data());
+        return volunteeringDetails;
+      } else {
+        throw NotFoundException("Volunteering details with id $id not found");
+      }
   }
 
   @override
-  VolunteeringDetails itemFromJson(Map<String, dynamic> json) {
+  VolunteeringDetails itemFromJson(String id, Map<String, dynamic> json) {
+    json["id"] = id;
     return VolunteeringDetails.fromJson(json);
   }
 

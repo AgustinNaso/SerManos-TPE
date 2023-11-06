@@ -16,24 +16,24 @@ class NewsDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Novedades',
             style:
                 SermanosTypography.subtitle01(color: SermanosColors.primary10),
           ),
           centerTitle: true,
-          leading: BackButton(
+          leading: const BackButton(
             color: SermanosColors.primary10,
           ),
           backgroundColor: SermanosColors.secondary100,
         ),
         body: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 20),
-                Text(
+                const Text(
                   'REPORTE 2820', //TODO: source dynamic value
                   style: SermanosTypography(
                       fontWeight: FontWeight.w500,
@@ -41,9 +41,9 @@ class NewsDetailScreen extends StatelessWidget {
                       color: SermanosColors.neutral75,
                       letterSpacing: 1.5),
                 ),
-                Text(
+                const Text(
                   'Ser donante voluntario', //TODO: title dynamic value ,
-                  style: const SermanosTypography(
+                  style: SermanosTypography(
                       fontWeight: FontWeight.w400,
                       fontSize: 16,
                       color: SermanosColors.neutral100,
@@ -60,18 +60,19 @@ class NewsDetailScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  'Desde el Hospital Centenario recalcan la importancia de la donación voluntaria de Sangre', //TODO: subtitle dynamic value
+                  'Desde el Hospital Centenario recalcan la importancia de la donación voluntaria de Sangre',
+                  //TODO: subtitle dynamic value
                   style: SermanosTypography.subtitle01(
                       color: SermanosColors.secondary200),
                 ),
                 const SizedBox(height: 16),
-                Text(
+                const Text(
                   //TODO: body dynamic value
                   'El Hospital Centenario Gualeguaychú, a través de su Servicio de Hemoterapia, recuerda que la donación de sangre es un acto voluntario, altruista y solidario, que no perjudica la salud del donante y que es fundamental para la atención de los pacientes que lo necesitan.\\n El Hospital Centenario Gualeguaychú, a través de su Servicio de Hemoterapia, recuerda que la donación de sangre es un acto voluntario, altruista y solidario, que no perjudica la salud del donante y que es fundamental para la atención de los pacientes que lo necesitan.El Hospital Centenario Gualeguaychú, a través de su Servicio de Hemoterapia, recuerda que la donación de sangre es un acto voluntario, altruista y solidario, que no perjudica la salud del donante y que es fundamental para la atención de los pacientes que lo necesitan.',
-                  style: SermanosTypography.defaultBody(),
+                  style: SermanosTypography.body01(),
                 ),
                 const SizedBox(height: 16),
-                Text(
+                const Text(
                   'Comparte esta nota',
                   style: SermanosTypography.defaultHeadline(),
                   textAlign: TextAlign.center,

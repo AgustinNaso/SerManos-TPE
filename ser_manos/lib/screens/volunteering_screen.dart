@@ -48,83 +48,83 @@ class VolunteeringScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('ACCION SOCIAL',
+                  const Text('ACCION SOCIAL',
                       style: SermanosTypography.overline(
                           color: SermanosColors.neutral75)),
-                  Text('Un Techo para mi Pais',
+                  const Text('Un Techo para mi Pais',
                       style: SermanosTypography.headline01()),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                       'El propósito principal de "Un techo para mi país" es reducir el déficit habitacional y mejorar las condiciones de vida de las personas que no tienen acceso a una vivienda adecuada.',
-                      style: SermanosTypography.defaultBody(
+                      style: SermanosTypography.body01(
                           color: SermanosColors.secondary200)),
-                  SizedBox(height: 24),
-                  Text('Sobre la actividad',
+                  const SizedBox(height: 24),
+                  const Text('Sobre la actividad',
                       style: SermanosTypography.defaultHeadline()),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
-                  Text(
+                  const Text(
                       'La actividad consiste en la construcción de viviendas de emergencia para familias que viven en asentamientos precarios.',
-                      style: SermanosTypography.defaultBody()),
-                  SizedBox(height: 24),
+                      style: SermanosTypography.body01()),
+                  const SizedBox(height: 24),
                   ColoredBox(
                     color: SermanosColors.secondary50,
                     child: Container(height: 247),
                   ),
-                  SizedBox(height: 24),
-                  Text('Participar del voluntariado',
+                  const SizedBox(height: 24),
+                  const Text('Participar del voluntariado',
                       style: SermanosTypography.defaultHeadline()),
-                  SizedBox(height: 8),
-                  Text('Requisitos', style: SermanosTypography.subtitle01()),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
+                  const Text('Requisitos', style: SermanosTypography.subtitle01()),
+                  const SizedBox(height: 8),
                   ListView.builder(
-                    padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: 3,
                     itemBuilder: (BuildContext context, int index) {
-                      return Row(
+                      return const Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.circle,
                             color: SermanosColors.neutral100,
                             size: 5,
                           ),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           Text('Ser mayor de 18 años',
-                              style: SermanosTypography.defaultBody()),
+                              style: SermanosTypography.body01()),
                         ],
                       );
                     },
                   ),
-                  SizedBox(height: 8),
-                  Text('Disponibilidad',
+                  const SizedBox(height: 8),
+                  const Text('Disponibilidad',
                       style: SermanosTypography.subtitle01()),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   ListView.builder(
-                    padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: 3,
                     itemBuilder: (BuildContext context, int index) {
-                      return Row(
+                      return const Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.circle,
                             color: SermanosColors.neutral100,
                             size: 5,
                           ),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           Text('Ser mayor de 18 años',
-                              style: SermanosTypography.defaultBody()),
+                              style: SermanosTypography.body01()),
                         ],
                       );
                     },
                   ),
-                  SizedBox(height: 8),
-                  Vacancies(vacancy: 10),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 8),
+                  const Vacancies(vacancy: 10),
+                  const SizedBox(height: 24),
                   SermanosCtaButton(text: 'Postularme', onPressed: () {})
                 ],
               ))

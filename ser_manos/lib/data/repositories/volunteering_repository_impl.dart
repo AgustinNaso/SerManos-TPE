@@ -4,24 +4,23 @@ import 'package:ser_manos/data/repositories/repository.dart';
 import '../models/volunteering_model.dart';
 
 class VolunteeringRepositoryImpl extends Repository<Volunteering> {
-  // transform into Voluteering model
   VolunteeringRepositoryImpl() : super(tag: 'volunteering');
 
   Future<List<Volunteering>> getVolunteeringsPaginated(int limit) async {
     final volunteerings = await collection.orderBy("id").limit(limit).get();
-    return volunteerings.docs.map((e) => itemFromJson(e.data())).toList();
+    return volunteerings.docs.map((e) => itemFromJson(e.id, e.data())).toList();
   }
 
   Future<List<Volunteering>> getVolunteeringsPaginatedAfter(
       int limit, Volunteering startAfter) async {
     final volunteerings = await collection
-        .orderBy("some time shit")
+        .orderBy("")
         .startAfter([
-          {'name||id': startAfter.id}
+          {'id': startAfter.id}
         ])
         .limit(limit)
         .get();
-    return volunteerings.docs.map((e) => itemFromJson(e.data())).toList();
+    return volunteerings.docs.map((e) => itemFromJson(e.id, e.data())).toList();
   }
 
   Future<List<Volunteering>> getVolunteeringsPaginatedByName(
@@ -29,18 +28,19 @@ class VolunteeringRepositoryImpl extends Repository<Volunteering> {
     // by name or what?
     final volunteerings = await collection
         .where({name: name})
-        .orderBy("some time shit")
+        .orderBy("")
         .startAfter([
           {'id': startAfter.id}
         ])
         .limit(limit)
         .get();
 
-    return volunteerings.docs.map((e) => itemFromJson(e.data())).toList();
+    return volunteerings.docs.map((e) => itemFromJson(e.id, e.data())).toList();
   }
 
   @override
-  Volunteering itemFromJson(Map<String, dynamic> json) {
+  Volunteering itemFromJson(String id, Map<String, dynamic> json) {
+    json["id"] = id;
     return Volunteering.fromJson(json);
   }
 }
