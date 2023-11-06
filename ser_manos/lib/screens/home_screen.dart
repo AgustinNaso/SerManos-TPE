@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ser_manos/config/cellules/information_card.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/screens/news_screen.dart';
 import 'package:ser_manos/screens/postulate_screen.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:ser_manos/screens/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -44,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ])),
             const Expanded(
                 child: TabBarView(
-              children: [PostulateScreen(), Text("hola2"), NewsScreen()],
+              children: [PostulateScreen(), ProfileScreen(), NewsScreen()],
             ))
           ]),
         ));

@@ -15,16 +15,11 @@ class SermanosTypography extends TextStyle {
             letterSpacing: letterSpacing);
 
   static const double _fontSizeXs = 10;
+  static const double _fontSizeSm = 12;
+  static const double _fontSizeMd = 14;
   static const double _fontSizeLg = 16;
-
-  static const Map<String, double> _fontSize = {
-    'xs': 10.0,
-    'sm': 12.0,
-    'md': 14.0,
-    'lg': 16.0,
-    'xl': 20.0,
-    'xxl': 24.0
-  };
+  static const double _fontSizeXl = 20;
+  static const double _fontSizeXxl = 24;
 
   const SermanosTypography.overline({color = SermanosColors.neutral100})
       : this(
@@ -40,32 +35,32 @@ class SermanosTypography extends TextStyle {
             fontWeight: FontWeight.w400,
             letterSpacing: 0.15);
 
-  SermanosTypography.defaultBody({color = SermanosColors.neutral100})
+  const SermanosTypography.body01({color = SermanosColors.neutral100})
       : this(
             color: color,
-            fontSize: _fontSize['md']!,
+            fontSize: _fontSizeMd,
             fontWeight: FontWeight.w400,
             letterSpacing: 0.25);
 
-  SermanosTypography.body02({color = SermanosColors.neutral100})
+  const SermanosTypography.body02({color = SermanosColors.neutral100})
       : this(
             color: color,
-            fontSize: _fontSize['sm']!,
+            fontSize: _fontSizeSm,
             fontWeight: FontWeight.w400,
             letterSpacing: 0.4);
 
-  SermanosTypography.defaultHeadline({color = SermanosColors.neutral100})
+  const SermanosTypography.defaultHeadline({color = SermanosColors.neutral100})
       : this(
             color: color,
-            fontSize: _fontSize['xl']!,
+            fontSize: _fontSizeXl,
             fontWeight: FontWeight.w500,
             letterSpacing: 0.15);
 
-  SermanosTypography.headline01({
+  const SermanosTypography.headline01({
     Color color = SermanosColors.neutral100,
   }) : this(
             color: color,
-            fontSize: _fontSize['xxl']!,
+            fontSize: _fontSizeXxl,
             fontWeight: FontWeight.w400,
             letterSpacing: 0.15);
 }

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'gender.dart';
 import 'json_serializable.dart';
 
@@ -27,6 +29,18 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
 
   bool isFaved(String volunteeringId) {
     return favVolunteerings.contains(volunteeringId);
+  }
+
+  get birthDateToString => "${birthDate!.day}/${birthDate!.month}/${birthDate!.year}";
+
+  get fullName => "$name $lastName";
+
+  bool isProfileFilled() {
+    return birthDate != null &&
+        phoneNumber != null &&
+        gender != null &&
+        profileImgUrl != null &&
+        contactEmail != null;
   }
 
   @override
