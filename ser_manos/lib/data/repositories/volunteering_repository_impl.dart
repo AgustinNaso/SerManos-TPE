@@ -7,14 +7,13 @@ class VolunteeringRepositoryImpl extends Repository<Volunteering> {
   VolunteeringRepositoryImpl() : super(tag: 'volunteering');
 
   Future<List<Volunteering>> getVolunteeringsPaginated(int limit) async {
-    final volunteerings = await collection.orderBy("id").limit(limit).get();
+    final volunteerings = await collection.limit(limit).get();
     return volunteerings.docs.map((e) => itemFromJson(e.id, e.data())).toList();
   }
 
   Future<List<Volunteering>> getVolunteeringsPaginatedAfter(
       int limit, Volunteering startAfter) async {
     final volunteerings = await collection
-        .orderBy("")
         .startAfter([
           {'id': startAfter.id}
         ])
@@ -28,7 +27,6 @@ class VolunteeringRepositoryImpl extends Repository<Volunteering> {
     // by name or what?
     final volunteerings = await collection
         .where({name: name})
-        .orderBy("")
         .startAfter([
           {'id': startAfter.id}
         ])
