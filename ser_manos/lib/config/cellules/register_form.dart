@@ -8,6 +8,8 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 final RegisterFormKey = GlobalKey<FormBuilderState>();
 
 class RegisterForm extends ConsumerWidget {
+  static bool alreadyInUseError = false;
+
   const RegisterForm({Key? key}) : super(key: key);
 
   @override
@@ -54,6 +56,9 @@ class RegisterForm extends ConsumerWidget {
                   hintText: AppLocalizations.of(context)!.email,
                   labelText: AppLocalizations.of(context)!.email,
                   name: "email",
+                  onChanged: (value) {
+                    RegisterForm.alreadyInUseError = false;
+                  },
                   validators: [
                     FormBuilderValidators.required(
                         errorText:
@@ -61,6 +66,12 @@ class RegisterForm extends ConsumerWidget {
                     FormBuilderValidators.email(
                         errorText:
                             AppLocalizations.of(context)!.enterValidEmailError),
+                        (val) {
+                      if (alreadyInUseError) {
+                        return "Email already in use";
+                      }
+                      return null;
+                    },
                   ]),
             ),
             const SizedBox(height: 20),

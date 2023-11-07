@@ -12,6 +12,7 @@ class SermanosTextField extends HookConsumerWidget {
   final String name;
   final bool enableObscure;
   final List<String? Function(String?)>? validators;
+  final void Function(String?)? onChanged;
 
   const SermanosTextField(
       {super.key,
@@ -19,7 +20,8 @@ class SermanosTextField extends HookConsumerWidget {
       required this.labelText,
       required this.name,
       this.enableObscure = false,
-      this.validators});
+      this.validators,
+        this.onChanged});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,6 +38,7 @@ class SermanosTextField extends HookConsumerWidget {
     return FormBuilderField<String>(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       name: name,
+      onChanged: onChanged,
       onReset: () => controller.text = '',
       validator: (value) {
         if (myFocusNode.hasFocus) {

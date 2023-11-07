@@ -40,12 +40,12 @@ class OnboardingScreen extends StatelessWidget {
                   SermanosCtaButton(
                       text: AppLocalizations.of(context)!.login,
                       onPressed: () {
-                        GoRouter.of(context).push('/login');
+                        GoRouter.of(context).pushReplacementNamed('login');
                       }),
                   const SizedBox(height: 10),
                   SermanosCtaButton(
                     onPressed: () {
-                      GoRouter.of(context).push('/register');
+                      GoRouter.of(context).pushReplacementNamed('register');
                     },
                     text: 'Registrarse',
                     backgroundColor: Colors.white,

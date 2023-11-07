@@ -6,6 +6,17 @@ import 'package:ser_manos/exceptions/not_found_exception.dart';
 class UserRepositoryImpl extends Repository<SermanosUser> {
   UserRepositoryImpl() : super(tag: 'users');
 
+
+  Future<SermanosUser> createUser(SermanosUser user) async {
+    try {
+      await collection.doc(user.id).set(user.toJson());
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+    return Future.value(user);
+  }
+
   // @throws NotFoundException
   Future<SermanosUser> getUserByEmail(String email) async {
     try {

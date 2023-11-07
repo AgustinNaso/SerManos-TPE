@@ -43,7 +43,7 @@ class WelcomeScreen extends StatelessWidget {
                   SermanosCtaButton(
                       text: "Comenzar",
                       onPressed: () {
-                        GoRouter.of(context).pushReplacementNamed('/home');
+                        GoRouter.of(context).pushReplacementNamed('home');
                       }),
                 ],
               ),

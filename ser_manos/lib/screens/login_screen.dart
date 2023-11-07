@@ -36,29 +36,21 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(height: 120),
                     SermanosCtaButton(
                         text: AppLocalizations.of(context)!.login,
-                        onPressed: () {
+                        onPressed: () async {
                           if (!LoginFormKey.currentState!.validate()) return;
                           final fields = LoginFormKey.currentState!.fields;
                           try {
-                            MyFirebaseAuth()
+                            await MyFirebaseAuth()
                                 .signInWithEmailAndPassword(
                                     email: fields['email']!.value,
-                                    password: fields['password']!.value)
-                                .then((value) {
-                              GoRouter.of(context)
-                                  .routerDelegate
-                                  .popRoute()
-                                  .then((value) => GoRouter.of(context)
-                                      .pushReplacementNamed('welcome'));
-                            }).catchError((onError) {
-                              LoginFormKey.currentState?.setState(() {
-                                LoginForm.loginError = true;
-                              });
-                              if (!LoginFormKey.currentState!.validate())
-                                return;
-                            });
+                                    password: fields['password']!.value);
+                              await GoRouter.of(context).pushReplacementNamed('welcome');
                           } catch (e) {
                             print(e);
+                            LoginFormKey.currentState?.setState(() {
+                              LoginForm.loginError = true;
+                            });
+                            if (!LoginFormKey.currentState!.validate()) return;
                           }
                         }),
                     const SizedBox(height: 10),

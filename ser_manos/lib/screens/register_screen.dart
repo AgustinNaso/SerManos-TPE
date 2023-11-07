@@ -38,14 +38,21 @@ class RegisterScreen extends StatelessWidget {
                         onPressed: () async {
                           if (!RegisterFormKey.currentState!.validate()) return;
                           final fields = RegisterFormKey.currentState!.fields;
-                          await MyFirebaseAuth().createUserWithEmailAndPassword(
-                            email: fields['email']!.value,
-                            password: fields['password']!.value,
-                            lastName: fields['lastName']!.value,
-                            name: fields['name']!.value,
-                          );
-                          // TODO: after register go to welcome page
-                          GoRouter.of(context).pushReplacementNamed('login');
+                          try {
+                            await MyFirebaseAuth()
+                                .createUserWithEmailAndPassword(
+                              email: fields['email']!.value,
+                              password: fields['password']!.value,
+                              lastName: fields['lastName']!.value,
+                              name: fields['name']!.value,
+                            );
+                            await GoRouter.of(context).pushReplacementNamed('welcome');
+                          } catch (e) {
+                              if (e.toString().contains('email-already-in-use')) RegisterForm.alreadyInUseError = true;
+                              if (!RegisterFormKey.currentState!.validate()) {
+                                return;
+                              }
+                          }
                         }),
                     const SizedBox(height: 10),
                     SermanosCtaButton(

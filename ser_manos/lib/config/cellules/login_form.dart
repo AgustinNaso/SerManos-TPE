@@ -14,7 +14,6 @@ class LoginForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    LoginForm.loginError = false;
     return FormBuilder(
       key: LoginFormKey,
       enabled: true,
@@ -47,6 +46,9 @@ class LoginForm extends ConsumerWidget {
                 child: SermanosTextField(
                     hintText: AppLocalizations.of(context)!.password,
                     labelText: AppLocalizations.of(context)!.password,
+                    onChanged: (value) {
+                      LoginForm.loginError = false;
+                    },
                     name: "password",
                     enableObscure: true,
                     validators: [
