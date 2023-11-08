@@ -23,7 +23,7 @@ class RegisterScreen extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset('assets/images/logo.png', height: 150.0),
+                  Image.asset('assets/images/logo_big.png', height: 150.0),
                   const SizedBox(height: 20),
                   const RegisterForm(),
                 ],

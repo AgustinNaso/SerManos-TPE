@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/cellules/information_card.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
-import 'package:ser_manos/config/molecules/textfields/sermanos_text_field.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/user_model.dart';

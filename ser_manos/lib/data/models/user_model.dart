@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'gender.dart';
 import 'json_serializable.dart';
 

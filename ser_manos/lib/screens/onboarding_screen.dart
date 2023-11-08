@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 
 import '../config/molecules/buttons/sermanos_cta_button.dart';
 import '../config/tokens/sermanos_colors.dart';
@@ -19,16 +20,16 @@ class OnboardingScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset('assets/images/logo.png', height: 150.0),
+                  Image.asset('assets/images/logo_big.png', height: 150.0),
                   // Replace with your logo
                   const SizedBox(height: 20),
-                  Text(
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Text(
                     AppLocalizations.of(context)!.introduction,
-                    style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.normal,
-                        fontStyle: FontStyle.italic),
+                    style: const SermanosTypography.subtitle01(),
                     textAlign: TextAlign.center,
+                    ),
                   ),
                 ],
               ),
@@ -47,7 +48,7 @@ class OnboardingScreen extends StatelessWidget {
                     onPressed: () {
                       GoRouter.of(context).pushReplacementNamed('register');
                     },
-                    text: 'Registrarse',
+                    text: AppLocalizations.of(context)!.signup,
                     backgroundColor: Colors.white,
                     textColor: SermanosColors.primary100,
                   ),

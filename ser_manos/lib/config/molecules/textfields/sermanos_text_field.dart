@@ -84,14 +84,14 @@ class SermanosTextField extends HookConsumerWidget {
               borderSide: BorderSide(color: SermanosColors.secondary200),
             ),
             enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: SermanosColors.secondary200),
+              borderSide: BorderSide(color: SermanosColors.neutral200),
             ),
             suffixIcon: enableObscure
                 ? IconButton(
                     icon: Icon(
                       isObscured.value
-                          ? Icons.visibility
-                          : Icons.visibility_off,
+                          ? Icons.visibility_off
+                          : Icons.visibility,
                       color: SermanosColors.neutral75,
                     ),
                     onPressed: () {

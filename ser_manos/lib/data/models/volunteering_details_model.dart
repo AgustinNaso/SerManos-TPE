@@ -1,5 +1,3 @@
-import 'package:ser_manos/data/models/volunteering_model.dart';
-
 import 'json_serializable.dart';
 
 class VolunteeringDetails extends JsonSerializable<VolunteeringDetails> {
