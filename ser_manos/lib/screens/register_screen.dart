@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ser_manos/config/molecules/buttons/register_button.dart';
 import 'package:ser_manos/data/services/firebase_auth.dart';
 
 import '../config/cellules/register_form.dart';
@@ -33,27 +34,7 @@ class RegisterScreen extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
                   children: <Widget>[
-                    SermanosCtaButton(
-                        text: 'Registrarse',
-                        onPressed: () async {
-                          if (!RegisterFormKey.currentState!.validate()) return;
-                          final fields = RegisterFormKey.currentState!.fields;
-                          try {
-                            await MyFirebaseAuth()
-                                .createUserWithEmailAndPassword(
-                              email: fields['email']!.value,
-                              password: fields['password']!.value,
-                              lastName: fields['lastName']!.value,
-                              name: fields['name']!.value,
-                            );
-                            await GoRouter.of(context).pushReplacementNamed('welcome');
-                          } catch (e) {
-                              if (e.toString().contains('email-already-in-use')) RegisterForm.alreadyInUseError = true;
-                              if (!RegisterFormKey.currentState!.validate()) {
-                                return;
-                              }
-                          }
-                        }),
+                    const RegisterButton(),
                     const SizedBox(height: 10),
                     SermanosCtaButton(
                       onPressed: () {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/cellules/login_form.dart';
+import 'package:ser_manos/config/molecules/buttons/login_button.dart';
 import 'package:ser_manos/data/services/firebase_auth.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 
@@ -34,25 +35,7 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     const SizedBox(height: 120),
-                    SermanosCtaButton(
-                        text: AppLocalizations.of(context)!.login,
-                        onPressed: () async {
-                          if (!LoginFormKey.currentState!.validate()) return;
-                          final fields = LoginFormKey.currentState!.fields;
-                          try {
-                            await MyFirebaseAuth()
-                                .signInWithEmailAndPassword(
-                                    email: fields['email']!.value,
-                                    password: fields['password']!.value);
-                              await GoRouter.of(context).pushReplacementNamed('welcome');
-                          } catch (e) {
-                            print(e);
-                            LoginFormKey.currentState?.setState(() {
-                              LoginForm.loginError = true;
-                            });
-                            if (!LoginFormKey.currentState!.validate()) return;
-                          }
-                        }),
+                    const LoginButton(),
                     const SizedBox(height: 10),
                     SermanosCtaButton(
                       onPressed: () {

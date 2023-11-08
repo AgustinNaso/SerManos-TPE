@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 
 import '../../tokens/sermanos_colors.dart';
 
@@ -13,6 +14,7 @@ class SermanosTextField extends HookConsumerWidget {
   final bool enableObscure;
   final List<String? Function(String?)>? validators;
   final void Function(String?)? onChanged;
+  final void Function(String, bool)? onChangeFocus;
 
   const SermanosTextField(
       {super.key,
@@ -21,7 +23,8 @@ class SermanosTextField extends HookConsumerWidget {
       required this.name,
       this.enableObscure = false,
       this.validators,
-        this.onChanged});
+        this.onChanged,
+        this.onChangeFocus});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,16 +44,15 @@ class SermanosTextField extends HookConsumerWidget {
       onChanged: onChanged,
       onReset: () => controller.text = '',
       validator: (value) {
-        if (myFocusNode.hasFocus) {
-          return null;
-        }
         if (validators != null) {
           for (final validator in validators!) {
             final error = validator(value);
             if (error != null) {
-              return error;
+              Future(() {onChangeFocus?.call(name, false);});
+              return myFocusNode.hasFocus ? null : error;
             }
           }
+          Future(() {onChangeFocus?.call(name, true);});
         }
         return null;
       },
@@ -76,15 +78,15 @@ class SermanosTextField extends HookConsumerWidget {
             ),
             errorMaxLines: 3,
             errorText: field.errorText,
-            floatingLabelStyle: TextStyle(
+            floatingLabelStyle: SermanosTypography.subtitle01(
                 color: myFocusNode.hasFocus
                     ? SermanosColors.secondary200
                     : SermanosColors.neutral75),
             focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: SermanosColors.secondary200),
+              borderSide: BorderSide(width: 2, color: SermanosColors.secondary200),
             ),
             enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: SermanosColors.neutral200),
+              borderSide: BorderSide(color: SermanosColors.neutral75),
             ),
             suffixIcon: enableObscure
                 ? IconButton(
@@ -101,7 +103,7 @@ class SermanosTextField extends HookConsumerWidget {
                 : controller.text.isNotEmpty && myFocusNode.hasFocus
                     ? IconButton(
                         icon:
-                            Icon(Icons.clear, color: SermanosColors.neutral75),
+                            const Icon(Icons.clear, color: SermanosColors.primary100),
                         onPressed: () {
                           if (!isEmpty) {
                             controller.clear();

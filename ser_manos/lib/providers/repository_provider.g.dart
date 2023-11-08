@@ -7,7 +7,7 @@ part of 'repository_provider.dart';
 // **************************************************************************
 
 String _$volunteeringRepositoryHash() =>
-    r'9f70370ab419ab89e89e948b8673011dabb0d43e';
+    r'c855bc04792df1c2690c9f66050c8e006adb2c13';
 
 /// See also [volunteeringRepository].
 @ProviderFor(volunteeringRepository)
