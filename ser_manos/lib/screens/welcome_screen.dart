@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
+import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 
 import '../config/molecules/buttons/sermanos_cta_button.dart';
 import '../config/tokens/sermanos_colors.dart';
@@ -13,6 +14,8 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -21,35 +24,34 @@ class WelcomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Image.asset('assets/images/logo_big.png', height: 150.0),
-                  const SizedBox(height: 20),
-                  const Text(
-                    "¡Bienvenido!",
-                    style: SermanosTypography.headline01(
+                  const SizedBox(height: 40),
+                  Text(
+                    AppLocalizations.of(context)!.welcome,
+                    style: const SermanosTypography.headline01(
                         color: SermanosColors.neutral100),
                   ),
-                  const Text(
-                    "Nunca subestimes tu habilidad para mejorar la vida de alguien.",
-                    style: SermanosTypography.subtitle01(
+                  const SizedBox(height: 40),
+                  Text(
+                    AppLocalizations.of(context)!.welcomeMotivation,
+                    style: const SermanosTypography.subtitle01(
                         color: SermanosColors.neutral100),
                     textAlign: TextAlign.center,
                   ),
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                children: <Widget>[
-                  SermanosCtaButton(
-                      text: "Comenzar",
-                      onPressed: () {
-                        GoRouter.of(context).pushReplacementNamed('home');
-                      }),
-                ],
-              ),
+            Column(
+              children: <Widget>[
+                SermanosCtaButton(
+                    text: AppLocalizations.of(context)!.start,
+                    onPressed: () {
+                      GoRouter.of(context).pushReplacementNamed('home');
+                    }),
+              ],
             ),
             const SizedBox(height: 30),
           ],
+        ),
         ),
       ),
     );

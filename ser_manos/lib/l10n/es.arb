@@ -22,6 +22,9 @@
   "postulateAppBar": "Postularse",
   "profileAppBar": "Mi perfil",
   "newsAppBar": "Novedades",
-  "vacancies": "Vacantes: "
+  "vacancies": "Vacantes: ",
+  "welcome": "¡Bienvenido!",
+  "welcomeMotivation": "Nunca subestimes tu habilidad para mejorar la vida de alguien.",
+  "start": "Comenzar"
 
 }

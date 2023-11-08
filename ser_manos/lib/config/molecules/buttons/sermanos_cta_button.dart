@@ -39,9 +39,10 @@ class SermanosCtaButton extends StatelessWidget {
           Text(
             text,
             style: TextStyle(
-              color: enabled ? textColor : SermanosColors.neutral50,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
+              fontFamily: 'Roboto', // TODO: check this
+              color: enabled ? textColor : SermanosColors.neutral0,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],
