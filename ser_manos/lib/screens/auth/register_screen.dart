@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/molecules/buttons/register_button.dart';
-import 'package:ser_manos/data/services/firebase_auth.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
-import '../config/cellules/register_form.dart';
-import '../config/molecules/buttons/sermanos_cta_button.dart';
-import '../config/tokens/sermanos_colors.dart';
+import '../../config/cellules/register_form.dart';
+import '../../config/molecules/buttons/sermanos_cta_button.dart';
+import '../../config/tokens/sermanos_colors.dart';
 
 class RegisterScreen extends StatelessWidget {
   final FocusNode myFocusNode = FocusNode();
@@ -40,8 +40,8 @@ class RegisterScreen extends StatelessWidget {
                       onPressed: () {
                         GoRouter.of(context).pushReplacementNamed('login');
                       },
-                      text: 'Ya tengo cuenta',
-                      backgroundColor: Colors.white,
+                      text: AppLocalizations.of(context)!.alreadyHaveAccount,
+                      backgroundColor: Colors.transparent,
                       textColor: SermanosColors.primary100,
                     ),
                     const SizedBox(height: 30),

@@ -4,8 +4,8 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 
-import '../config/molecules/buttons/sermanos_cta_button.dart';
-import '../config/tokens/sermanos_colors.dart';
+import '../../config/molecules/buttons/sermanos_cta_button.dart';
+import '../../config/tokens/sermanos_colors.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

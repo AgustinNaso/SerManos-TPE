@@ -8,6 +8,7 @@
   "email": "Email",
   "password": "Contraseña",
   "noAccount": "No tengo cuenta",
+  "alreadyHaveAccount": "Ya tengo cuenta",
   "requiredFieldError": "Este campo es obligatorio",
   "minLengthError": "Este campo debe tener al menos {minLength} caracteres",
   "@minLengthError": {

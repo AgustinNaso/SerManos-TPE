@@ -22,4 +22,5 @@ class SermanosColors {
   static const secondary200 = Color(0xFF0D47A1);
 
   static const error100 = Color(0xFFB3261E);
+  static const transparent = Color(0x00000000);
 }

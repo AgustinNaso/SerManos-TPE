@@ -1,14 +1,14 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ser_manos/main.dart';
+import 'package:ser_manos/screens/auth/onboarding_screen.dart';
+import 'package:ser_manos/screens/auth/register_screen.dart';
+import 'package:ser_manos/screens/auth/welcome_screen.dart';
 import 'package:ser_manos/screens/home_screen.dart';
-import 'package:ser_manos/screens/login_screen.dart';
+import 'package:ser_manos/screens/auth/login_screen.dart';
 import 'package:ser_manos/screens/news_detail_screen.dart';
 import 'package:ser_manos/screens/news_screen.dart';
-import 'package:ser_manos/screens/onboarding_screen.dart';
-import 'package:ser_manos/screens/register_screen.dart';
 import 'package:ser_manos/screens/volunteering_screen.dart';
-import 'package:ser_manos/screens/welcome_screen.dart';
 
 mixin RouterMixin on State<MyApp> {
   final _router = GoRouter(

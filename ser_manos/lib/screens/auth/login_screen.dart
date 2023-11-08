@@ -5,8 +5,8 @@ import 'package:ser_manos/config/molecules/buttons/login_button.dart';
 import 'package:ser_manos/data/services/firebase_auth.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 
-import '../config/molecules/buttons/sermanos_cta_button.dart';
-import '../config/tokens/sermanos_colors.dart';
+import '../../config/molecules/buttons/sermanos_cta_button.dart';
+import '../../config/tokens/sermanos_colors.dart';
 
 class LoginScreen extends StatelessWidget {
   final FocusNode myFocusNode = FocusNode();
@@ -42,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                         GoRouter.of(context).pushReplacementNamed('register');
                       },
                       text: AppLocalizations.of(context)!.noAccount,
-                      backgroundColor: Colors.white,
+                      backgroundColor: Colors.transparent,
                       textColor: SermanosColors.primary100,
                     ),
                     const SizedBox(height: 30),

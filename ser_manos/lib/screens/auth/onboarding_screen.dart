@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 
-import '../config/molecules/buttons/sermanos_cta_button.dart';
-import '../config/tokens/sermanos_colors.dart';
+import '../../config/molecules/buttons/sermanos_cta_button.dart';
+import '../../config/tokens/sermanos_colors.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -49,7 +49,7 @@ class OnboardingScreen extends StatelessWidget {
                       GoRouter.of(context).pushReplacementNamed('register');
                     },
                     text: AppLocalizations.of(context)!.signup,
-                    backgroundColor: Colors.white,
+                    backgroundColor: Colors.transparent,
                     textColor: SermanosColors.primary100,
                   ),
                   const SizedBox(height: 30),
