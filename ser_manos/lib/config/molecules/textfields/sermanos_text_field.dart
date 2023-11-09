@@ -8,19 +8,21 @@ import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import '../../tokens/sermanos_colors.dart';
 
 class SermanosTextField extends HookConsumerWidget {
-  final String hintText;
+  final String? hintText;
   final String labelText;
   final String name;
   final bool enableObscure;
   final List<String? Function(String?)>? validators;
   final void Function(String?)? onChanged;
   final void Function(String, bool)? onChangeFocus;
+  final FloatingLabelBehavior floatingLabelBehavior;
 
   const SermanosTextField(
       {super.key,
-      required this.hintText,
       required this.labelText,
       required this.name,
+        this.hintText,
+        this.floatingLabelBehavior = FloatingLabelBehavior.auto,
       this.enableObscure = false,
       this.validators,
         this.onChanged,
@@ -65,7 +67,11 @@ class SermanosTextField extends HookConsumerWidget {
           decoration: InputDecoration(
             labelText: labelText,
             hintText: hintText,
-            // error handling
+            floatingLabelBehavior: floatingLabelBehavior,
+            hintStyle: const SermanosTypography.subtitle01(
+              color:
+              SermanosColors.neutral50,
+            ),
             errorBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 width: 2,
