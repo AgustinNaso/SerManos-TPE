@@ -28,80 +28,68 @@ class RegisterForm extends ConsumerWidget {
       child: Column(
         children: <Widget>[
           Column(children: <Widget>[
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: SermanosTextField(
-                  onChangeFocus: onChangeFocus,
-                  hintText: AppLocalizations.of(context)!.name,
-                  labelText: AppLocalizations.of(context)!.name,
-                  name: "name",
-                  validators: [
-                    FormBuilderValidators.required(
-                        errorText:
-                            AppLocalizations.of(context)!.requiredFieldError),
-                  ]),
-            ),
-            const SizedBox(height: 20),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: SermanosTextField(
-                  onChangeFocus: onChangeFocus,
-                  hintText: AppLocalizations.of(context)!.lastName,
-                  labelText: AppLocalizations.of(context)!.lastName,
-                  name: "lastName",
-                  validators: [
-                    FormBuilderValidators.required(
-                        errorText:
-                            AppLocalizations.of(context)!.requiredFieldError),
+            SermanosTextField(
+                onChangeFocus: onChangeFocus,
+                hintText: AppLocalizations.of(context)!.name,
+                labelText: AppLocalizations.of(context)!.name,
+                name: "name",
+                validators: [
+                  FormBuilderValidators.required(
+                      errorText:
+                          AppLocalizations.of(context)!.requiredFieldError),
+                ]),
+            const SizedBox(height: 24),
+            SermanosTextField(
+                onChangeFocus: onChangeFocus,
+                hintText: AppLocalizations.of(context)!.lastName,
+                labelText: AppLocalizations.of(context)!.lastName,
+                name: "lastName",
+                validators: [
+                  FormBuilderValidators.required(
+                      errorText:
+                          AppLocalizations.of(context)!.requiredFieldError),
 // Validators().maxLength(20) //TODO: Fix maxLength
-                  ]),
-            ),
-            const SizedBox(height: 20),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: SermanosTextField(
-                  onChangeFocus: onChangeFocus,
-                  hintText: AppLocalizations.of(context)!.email,
-                  labelText: AppLocalizations.of(context)!.email,
-                  name: "email",
-                  onChanged: (value) {
+                ]),
+            const SizedBox(height: 24),
+            SermanosTextField(
+                onChangeFocus: onChangeFocus,
+                hintText: AppLocalizations.of(context)!.email,
+                labelText: AppLocalizations.of(context)!.email,
+                name: "email",
+                onChanged: (value) {
+                  if (registerProvider.state == RegisterStates.error.name) {
+                    registerProvider.reset();
+                  }
+                },
+                validators: [
+                  FormBuilderValidators.required(
+                      errorText:
+                          AppLocalizations.of(context)!.requiredFieldError),
+                  FormBuilderValidators.email(
+                      errorText:
+                          AppLocalizations.of(context)!.enterValidEmailError),
+                  (val) {
                     if (registerProvider.state == RegisterStates.error.name) {
-                      registerProvider.reset();
+                      return "Email already in use";
                     }
+                    return null;
                   },
-                  validators: [
-                    FormBuilderValidators.required(
-                        errorText:
-                            AppLocalizations.of(context)!.requiredFieldError),
-                    FormBuilderValidators.email(
-                        errorText:
-                            AppLocalizations.of(context)!.enterValidEmailError),
-                    (val) {
-                      if (registerProvider.state == RegisterStates.error.name) {
-                        return "Email already in use";
-                      }
-                      return null;
-                    },
-                  ]),
-            ),
-            const SizedBox(height: 20),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: SermanosTextField(
-                  onChangeFocus: onChangeFocus,
-                  hintText: AppLocalizations.of(context)!.password,
-                  labelText: AppLocalizations.of(context)!.password,
-                  name: "password",
-                  enableObscure: true,
-                  validators: [
-                    FormBuilderValidators.required(
-                        errorText:
-                            AppLocalizations.of(context)!.requiredFieldError),
-                    FormBuilderValidators.minLength(8,
-                        errorText:
-                            AppLocalizations.of(context)!.minLengthError(8)),
-                  ]),
-            ),
+                ]),
+            const SizedBox(height: 24),
+            SermanosTextField(
+                onChangeFocus: onChangeFocus,
+                hintText: AppLocalizations.of(context)!.password,
+                labelText: AppLocalizations.of(context)!.password,
+                name: "password",
+                enableObscure: true,
+                validators: [
+                  FormBuilderValidators.required(
+                      errorText:
+                          AppLocalizations.of(context)!.requiredFieldError),
+                  FormBuilderValidators.minLength(8,
+                      errorText:
+                          AppLocalizations.of(context)!.minLengthError(8)),
+                ]),
           ]),
         ],
       ),

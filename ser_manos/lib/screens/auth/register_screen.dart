@@ -15,42 +15,33 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-            child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Image.asset('assets/images/logo_big.png', height: 150.0),
-                  const SizedBox(height: 20),
-                  const RegisterForm(),
-                ],
+              Image.asset('assets/images/logo_big.png',
+                  height: 150.0, width: 150.0),
+              const SizedBox(height: 31),
+              const RegisterForm(),
+              const SizedBox(height: 104),
+              const RegisterButton(),
+              const SizedBox(height: 16),
+              SermanosCtaButton(
+                onPressed: () {
+                  GoRouter.of(context).pushReplacementNamed('login');
+                },
+                text: AppLocalizations.of(context)!.alreadyHaveAccount,
+                backgroundColor: Colors.transparent,
+                textColor: SermanosColors.primary100,
               ),
-              const SizedBox(height: 30),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Column(
-                  children: <Widget>[
-                    const RegisterButton(),
-                    const SizedBox(height: 10),
-                    SermanosCtaButton(
-                      onPressed: () {
-                        GoRouter.of(context).pushReplacementNamed('login');
-                      },
-                      text: AppLocalizations.of(context)!.alreadyHaveAccount,
-                      backgroundColor: Colors.transparent,
-                      textColor: SermanosColors.primary100,
-                    ),
-                    const SizedBox(height: 30),
-                  ],
-                ),
-              ),
+              const SizedBox(height: 32),
             ],
           ),
-        )),
+        ),
       ),
     );
   }

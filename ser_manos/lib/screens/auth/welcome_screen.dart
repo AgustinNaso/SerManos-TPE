@@ -13,47 +13,38 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20.0),
+        body: SingleChildScrollView(
+      padding: const EdgeInsets.all(16.0),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Image.asset('assets/images/logo_big.png', height: 150.0),
-                  const SizedBox(height: 40),
-                  Text(
-                    AppLocalizations.of(context)!.welcome,
-                    style: const SermanosTypography.headline01(
-                        color: SermanosColors.neutral100),
-                  ),
-                  const SizedBox(height: 40),
-                  Text(
-                    AppLocalizations.of(context)!.welcomeMotivation,
-                    style: const SermanosTypography.subtitle01(
-                        color: SermanosColors.neutral100),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-            Column(
-              children: <Widget>[
-                SermanosCtaButton(
-                    text: AppLocalizations.of(context)!.start,
-                    onPressed: () {
-                      GoRouter.of(context).pushReplacementNamed('home');
-                    }),
-              ],
-            ),
+            Image.asset('assets/images/logo_big.png', height: 150.0),
             const SizedBox(height: 30),
+            Text(
+              AppLocalizations.of(context)!.welcome,
+              style: const SermanosTypography.headline01(
+                  color: SermanosColors.neutral100),
+            ),
+            const SizedBox(height: 48),
+            Text(
+              AppLocalizations.of(context)!.welcomeMotivation,
+              style: const SermanosTypography.subtitle01(
+                  color: SermanosColors.neutral100),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 146),
+            SermanosCtaButton(
+                text: AppLocalizations.of(context)!.start,
+                onPressed: () {
+                  GoRouter.of(context).pushReplacementNamed('home');
+                }),
+            const SizedBox(height: 92),
           ],
         ),
-        ),
       ),
-    );
+    ));
   }
 }

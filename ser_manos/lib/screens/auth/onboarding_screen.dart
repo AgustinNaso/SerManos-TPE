@@ -12,53 +12,41 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+        body: SingleChildScrollView(
+      padding: const EdgeInsets.all(16.0),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Image.asset('assets/images/logo_big.png', height: 150.0),
-                  // Replace with your logo
-                  const SizedBox(height: 20),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Text(
-                    AppLocalizations.of(context)!.introduction,
-                    style: const SermanosTypography.subtitle01(),
-                    textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              ),
+            Image.asset('assets/images/logo_big.png', height: 150.0),
+            // Replace with your logo
+            const SizedBox(height: 32),
+            Text(
+              AppLocalizations.of(context)!.introduction,
+              style: const SermanosTypography.subtitle01(),
+              textAlign: TextAlign.center,
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                children: <Widget>[
-                  SermanosCtaButton(
-                      text: AppLocalizations.of(context)!.login,
-                      onPressed: () {
-                        GoRouter.of(context).pushReplacementNamed('login');
-                      }),
-                  const SizedBox(height: 10),
-                  SermanosCtaButton(
-                    onPressed: () {
-                      GoRouter.of(context).pushReplacementNamed('register');
-                    },
-                    text: AppLocalizations.of(context)!.signup,
-                    backgroundColor: Colors.transparent,
-                    textColor: SermanosColors.primary100,
-                  ),
-                  const SizedBox(height: 30),
-                ],
-              ),
+            const SizedBox(height: 181),
+            SermanosCtaButton(
+                text: AppLocalizations.of(context)!.login,
+                onPressed: () {
+                  GoRouter.of(context).pushReplacementNamed('login');
+                }),
+            const SizedBox(height: 16),
+            SermanosCtaButton(
+              onPressed: () {
+                GoRouter.of(context).pushReplacementNamed('register');
+              },
+              text: AppLocalizations.of(context)!.signup,
+              backgroundColor: Colors.transparent,
+              textColor: SermanosColors.primary100,
             ),
+            const SizedBox(height: 32),
           ],
         ),
       ),
-    );
+    ));
   }
 }

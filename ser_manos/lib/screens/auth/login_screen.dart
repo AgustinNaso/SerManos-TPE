@@ -16,43 +16,31 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-            child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+        body: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Image.asset('assets/images/logo_big.png', height: 150.0),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 32),
                   const LoginForm(),
+                  const SizedBox(height: 147),
+                  const LoginButton(),
+                  const SizedBox(height: 16),
+                  SermanosCtaButton(
+                    onPressed: () {
+                      GoRouter.of(context).pushReplacementNamed('register');
+                    },
+                    text: AppLocalizations.of(context)!.noAccount,
+                    backgroundColor: Colors.transparent,
+                    textColor: SermanosColors.primary100,
+                  ),
+                  const SizedBox(height: 32),
                 ],
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Column(
-                  children: <Widget>[
-                    const SizedBox(height: 120),
-                    const LoginButton(),
-                    const SizedBox(height: 10),
-                    SermanosCtaButton(
-                      onPressed: () {
-                        GoRouter.of(context).pushReplacementNamed('register');
-                      },
-                      text: AppLocalizations.of(context)!.noAccount,
-                      backgroundColor: Colors.transparent,
-                      textColor: SermanosColors.primary100,
-                    ),
-                    const SizedBox(height: 30),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        )),
-      ),
-    );
+            )));
   }
 }

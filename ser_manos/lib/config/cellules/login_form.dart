@@ -26,52 +26,46 @@ class LoginForm extends ConsumerWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: SermanosTextField(
+          SermanosTextField(
+            onChangeFocus: onChangeFocus,
+            hintText: AppLocalizations.of(context)!.email,
+            labelText: AppLocalizations.of(context)!.email,
+            name: "email",
+            validators: [
+              FormBuilderValidators.required(
+                  errorText:
+                      AppLocalizations.of(context)!.requiredFieldError),
+              FormBuilderValidators.email(
+                  errorText:
+                      AppLocalizations.of(context)!.enterValidEmailError),
+            ],
+          ),
+          const SizedBox(height: 24),
+          SermanosTextField(
+              hintText: AppLocalizations.of(context)!.password,
+              labelText: AppLocalizations.of(context)!.password,
+              onChanged: (value) {
+                if (loginProvider.state == LoginStates.error.name) {
+                  loginProvider.reset();
+                }
+              },
               onChangeFocus: onChangeFocus,
-              hintText: AppLocalizations.of(context)!.email,
-              labelText: AppLocalizations.of(context)!.email,
-              name: "email",
+              name: "password",
+              enableObscure: true,
               validators: [
                 FormBuilderValidators.required(
                     errorText:
                         AppLocalizations.of(context)!.requiredFieldError),
-                FormBuilderValidators.email(
+                FormBuilderValidators.minLength(8,
                     errorText:
-                        AppLocalizations.of(context)!.enterValidEmailError),
-              ],
-            ),
-          ),
-          const SizedBox(height: 24),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: SermanosTextField(
-                hintText: AppLocalizations.of(context)!.password,
-                labelText: AppLocalizations.of(context)!.password,
-                onChanged: (value) {
+                        AppLocalizations.of(context)!.minLengthError(8)),
+                (val) {
                   if (loginProvider.state == LoginStates.error.name) {
-                    loginProvider.reset();
+                    return "User with email or password is not exists";
                   }
+                  return null;
                 },
-                onChangeFocus: onChangeFocus,
-                name: "password",
-                enableObscure: true,
-                validators: [
-                  FormBuilderValidators.required(
-                      errorText:
-                          AppLocalizations.of(context)!.requiredFieldError),
-                  FormBuilderValidators.minLength(8,
-                      errorText:
-                          AppLocalizations.of(context)!.minLengthError(8)),
-                  (val) {
-                    if (loginProvider.state == LoginStates.error.name) {
-                      return "User with email or password is not exists";
-                    }
-                    return null;
-                  },
-                ]),
-          ),
+              ]),
         ],
       ),
     );
