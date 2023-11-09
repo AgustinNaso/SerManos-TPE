@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ser_manos/config/cellules/information_card.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/screens/news_screen.dart';
 import 'package:ser_manos/screens/postulate/postulate_screen.dart';

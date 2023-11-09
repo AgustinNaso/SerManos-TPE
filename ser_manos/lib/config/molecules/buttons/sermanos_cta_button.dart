@@ -8,25 +8,27 @@ class SermanosCtaButton extends StatelessWidget {
   final Color textColor;
   final VoidCallback onPressed;
   final Icon? icon;
+  final bool enabled;
 
   const SermanosCtaButton(
       {super.key,
       required this.text,
       required this.onPressed,
       this.icon,
+      this.enabled = true,
       this.backgroundColor = SermanosColors.primary100,
       this.textColor = Colors.white});
 
   @override
   Widget build(BuildContext context) {
     return FilledButton(
-      onPressed: onPressed,
+      onPressed: enabled ? onPressed : null,
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
         ),
-        backgroundColor: backgroundColor,
+        backgroundColor: enabled ? backgroundColor : SermanosColors.neutral25,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -37,9 +39,10 @@ class SermanosCtaButton extends StatelessWidget {
           Text(
             text,
             style: TextStyle(
-              color: textColor,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
+              fontFamily: 'Roboto', // TODO: check this
+              color: enabled ? textColor : SermanosColors.neutral0,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],

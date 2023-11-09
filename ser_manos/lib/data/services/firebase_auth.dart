@@ -21,7 +21,7 @@ class MyFirebaseAuth {
         password: password,
       );
 
-      return await UserRepositoryImpl().getUserByEmail(email); // TODO: handle possible errors
+      return await UserRepositoryImpl().getById(userCredential.user!.uid); // TODO: handle possible errors
     } on Error catch (e) {
       print(e);
       rethrow;
@@ -47,7 +47,7 @@ class MyFirebaseAuth {
         'lastName': lastName
       };
 
-      final user = await UserRepositoryImpl().create(SermanosUser.fromJson(userJson));
+      final user = await UserRepositoryImpl().createUser(SermanosUser.fromJson(userJson));
 
       return user;
     } on Error catch (e) {

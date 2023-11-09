@@ -27,10 +27,10 @@ class NewsCardInfo extends StatelessWidget {
             children: [
               Text(
                 source.toUpperCase(),
-                style: SermanosTypography(
+                style: const SermanosTypography(
                     fontWeight: FontWeight.w500,
                     fontSize: 10,
-                    color: SermanosColors.neutral75!,
+                    color: SermanosColors.neutral75,
                     letterSpacing: 1.5),
               ),
               Text(
@@ -43,10 +43,10 @@ class NewsCardInfo extends StatelessWidget {
               ),
               Text(
                 subtitle,
-                style: SermanosTypography(
+                style: const SermanosTypography(
                     fontWeight: FontWeight.w400,
                     fontSize: 14,
-                    color: SermanosColors.neutral75!,
+                    color: SermanosColors.neutral75,
                     letterSpacing: 0.4),
               ),
             ],

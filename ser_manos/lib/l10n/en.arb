@@ -8,6 +8,7 @@
   "email": "Email",
   "password": "Password",
   "noAccount": "I don't have an account",
+  "alreadyHaveAccount": "Already have an account",
   "requiredFieldError": "This field is required",
   "minLengthError": "This field must be at least {minLength} characters long",
   "@minLengthError": {
@@ -22,5 +23,8 @@
   "postulateAppBar": "Postulate",
   "profileAppBar": "My profile",
   "newsAppBar": "News",
-  "vacancies": "Vacancies: "
+  "vacancies": "Vacancies: ",
+  "welcome": "Welcome!",
+  "welcomeMotivation": "Never underestimate your ability to improve someone's life.",
+  "start": "Start"
 }

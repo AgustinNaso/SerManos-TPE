@@ -11,7 +11,7 @@ class ProfileImage extends StatelessWidget {
     return imageUrl == ""
         ? const SizedBox(
             child: Icon(Icons.account_circle_outlined,
-                size: 100, color: Color(0xFF2C98F0)),
+                size: 100, color: SermanosColors.secondary100),
           )
         : SizedBox(
             height: 100,

@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> with RouterMixin {
   void initState() {
     FirebaseConfig.init().then((_) async => {
           // you can add test stuff here, but remove it before committing
-        });
+    });
     super.initState();
   }
 }

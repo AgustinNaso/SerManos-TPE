@@ -6,7 +6,7 @@ part of 'volunteering_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getVolunteeringsHash() => r'c09915b8aced5ea9537632b705d97395d9714148';
+String _$getVolunteeringsHash() => r'4262553816feff1e295074bf96b756ca17fafe81';
 
 /// See also [getVolunteerings].
 @ProviderFor(getVolunteerings)
