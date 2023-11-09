@@ -28,7 +28,6 @@ class LoginForm extends ConsumerWidget {
         children: <Widget>[
           SermanosTextField(
             onChangeFocus: onChangeFocus,
-            hintText: AppLocalizations.of(context)!.email,
             labelText: AppLocalizations.of(context)!.email,
             name: "email",
             validators: [
@@ -42,7 +41,6 @@ class LoginForm extends ConsumerWidget {
           ),
           const SizedBox(height: 24),
           SermanosTextField(
-              hintText: AppLocalizations.of(context)!.password,
               labelText: AppLocalizations.of(context)!.password,
               onChanged: (value) {
                 if (loginProvider.state == LoginStates.error.name) {

@@ -30,9 +30,10 @@ class RegisterForm extends ConsumerWidget {
           Column(children: <Widget>[
             SermanosTextField(
                 onChangeFocus: onChangeFocus,
-                hintText: AppLocalizations.of(context)!.name,
+                hintText: AppLocalizations.of(context)!.nameHint,
                 labelText: AppLocalizations.of(context)!.name,
                 name: "name",
+                floatingLabelBehavior: FloatingLabelBehavior.always,
                 validators: [
                   FormBuilderValidators.required(
                       errorText:
@@ -41,8 +42,9 @@ class RegisterForm extends ConsumerWidget {
             const SizedBox(height: 24),
             SermanosTextField(
                 onChangeFocus: onChangeFocus,
-                hintText: AppLocalizations.of(context)!.lastName,
+                hintText: AppLocalizations.of(context)!.lastNameHint,
                 labelText: AppLocalizations.of(context)!.lastName,
+                floatingLabelBehavior: FloatingLabelBehavior.always,
                 name: "lastName",
                 validators: [
                   FormBuilderValidators.required(
@@ -53,8 +55,9 @@ class RegisterForm extends ConsumerWidget {
             const SizedBox(height: 24),
             SermanosTextField(
                 onChangeFocus: onChangeFocus,
-                hintText: AppLocalizations.of(context)!.email,
+                hintText: AppLocalizations.of(context)!.emailHint,
                 labelText: AppLocalizations.of(context)!.email,
+                floatingLabelBehavior: FloatingLabelBehavior.always,
                 name: "email",
                 onChanged: (value) {
                   if (registerProvider.state == RegisterStates.error.name) {
@@ -78,8 +81,9 @@ class RegisterForm extends ConsumerWidget {
             const SizedBox(height: 24),
             SermanosTextField(
                 onChangeFocus: onChangeFocus,
-                hintText: AppLocalizations.of(context)!.password,
+                hintText: AppLocalizations.of(context)!.passwordHint,
                 labelText: AppLocalizations.of(context)!.password,
+                floatingLabelBehavior: FloatingLabelBehavior.always,
                 name: "password",
                 enableObscure: true,
                 validators: [
