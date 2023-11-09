@@ -8,7 +8,7 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/screens/postulate/volunteerings_not_found.dart';
 
 import '../../config/tokens/sermanos_colors.dart';
-import '../../providers/volunteering_provider.dart';
+import '../../providers/Future/volunteering_provider.dart';
 
 final searchQueryProvider = StateProvider<String>((ref) => '');
 

@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../data/models/volunteering_model.dart';
-import '../providers/repository_provider.dart';
+import '../../data/models/volunteering_model.dart';
+import '../repository_provider.dart';
 
 part 'volunteering_provider.g.dart';
 

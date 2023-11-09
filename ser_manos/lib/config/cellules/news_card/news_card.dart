@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import '../../../data/models/news_model.dart';
 import '../../tokens/sermanos_box_shadows.dart';
 import 'news_card_info.dart';
 import '../../tokens/sermanos_colors.dart';
 
-class NewsCard extends ConsumerWidget {
-  const NewsCard({
-    Key? key,
-  }) : super(key: key);
+class NewsCard extends StatelessWidget {
+  final News news;
+  const NewsCard({super.key, required this.news});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return InkWell(
       child: Container(
         decoration: BoxDecoration(
@@ -23,15 +21,12 @@ class NewsCard extends ConsumerWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Image.asset(
-                  width: 118, fit: BoxFit.cover, "assets/images/novedades.png"),
+              Image.network(news.imgUrl, width: 118, fit: BoxFit.cover),
               Expanded(
-                child: NewsCardInfo(
-                    source: 'reporte 2820',
-                    title: 'Ser donante voluntario',
-                    subtitle:
-                        'Desde el Hospital Centenario recalcan la importancia de la donación voluntaria de Sangre'),
-              )
+                  child: NewsCardInfo(
+                      source: '$news.source',
+                      title: '$news.title',
+                      subtitle: '$news.subtitle'))
             ],
           ),
         ),
