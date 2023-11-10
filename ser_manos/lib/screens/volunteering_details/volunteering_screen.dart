@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
-import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
+import 'package:ser_manos/config/cellules/information_card.dart';
 import 'package:ser_manos/config/molecules/vacancies/vacancies.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
+import 'package:ser_manos/screens/volunteering_details/postulation_status/accepted_postulation_status.dart';
+import 'package:ser_manos/screens/volunteering_details/postulation_status/already_postulated_postulation_status.dart';
+import 'package:ser_manos/screens/volunteering_details/postulation_status/default_postulation_status.dart';
+import 'package:ser_manos/screens/volunteering_details/postulation_status/pending_postulation_status.dart';
 
 class VolunteeringScreen extends StatelessWidget {
   const VolunteeringScreen({Key? key}) : super(key: key);
@@ -68,10 +72,9 @@ class VolunteeringScreen extends StatelessWidget {
                       'La actividad consiste en la construcción de viviendas de emergencia para familias que viven en asentamientos precarios.',
                       style: SermanosTypography.body01()),
                   const SizedBox(height: 24),
-                  ColoredBox(
-                    color: SermanosColors.secondary50,
-                    child: Container(height: 247),
-                  ),
+                  const InformationCard(title: 'Ubicacion', information: [
+                    ('Direccion', 'Cabildo 1283, Capital Federal.')
+                  ]),
                   const SizedBox(height: 24),
                   const Text('Participar del voluntariado',
                       style: SermanosTypography.defaultHeadline()),
@@ -126,11 +129,27 @@ class VolunteeringScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   const Vacancies(vacancy: 10),
                   const SizedBox(height: 24),
-                  SermanosCtaButton(text: 'Postularme', onPressed: () {})
+                  handleVolunteeringStatus(context, 'not_postulated', false),
                 ],
               ))
         ],
       ),
     ));
+  }
+}
+
+Widget handleVolunteeringStatus(
+    BuildContext context, String status, bool hasVacancy) {
+  switch (status) {
+    case 'postulated':
+      return const PendingPostulationStatus();
+    case 'accepted':
+      return const AcceptedPostulationStatus();
+    case 'has_other_postulation':
+      return const AlreadyPostulatedPostulationStatus();
+    case 'not_postulated':
+      return DefaultPostulationStatus(canPostulate: hasVacancy);
+    default:
+      return DefaultPostulationStatus(canPostulate: hasVacancy);
   }
 }

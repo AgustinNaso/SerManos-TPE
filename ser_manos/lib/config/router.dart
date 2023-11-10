@@ -8,7 +8,7 @@ import 'package:ser_manos/screens/home_screen.dart';
 import 'package:ser_manos/screens/auth/login_screen.dart';
 import 'package:ser_manos/screens/news_detail_screen.dart';
 import 'package:ser_manos/screens/news_screen.dart';
-import 'package:ser_manos/screens/volunteering_screen.dart';
+import 'package:ser_manos/screens/volunteering_details/volunteering_screen.dart';
 
 mixin RouterMixin on State<MyApp> {
   final _router = GoRouter(
