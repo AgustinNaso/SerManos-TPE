@@ -4,6 +4,7 @@ import 'package:ser_manos/main.dart';
 import 'package:ser_manos/screens/auth/onboarding_screen.dart';
 import 'package:ser_manos/screens/auth/register_screen.dart';
 import 'package:ser_manos/screens/auth/welcome_screen.dart';
+import 'package:ser_manos/screens/edit_profile.dart';
 import 'package:ser_manos/screens/home_screen.dart';
 import 'package:ser_manos/screens/auth/login_screen.dart';
 import 'package:ser_manos/screens/news_detail_screen.dart';
@@ -67,7 +68,14 @@ mixin RouterMixin on State<MyApp> {
             builder: (BuildContext context, GoRouterState state) {
               return const VolunteeringScreen();
             },
-          )
+          ),
+          GoRoute(
+            path: 'editProfile',
+            name: 'editProfile',
+            builder: (BuildContext context, GoRouterState state) {
+              return EditProfileScreen();
+            },
+            )
         ],
       ),
     ],

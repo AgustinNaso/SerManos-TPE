@@ -20,7 +20,7 @@ class IncompleteProfile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,9 +72,10 @@ class IncompleteProfile extends ConsumerWidget {
                     SermanosCtaButton(
                         icon: const Icon(Icons.add),
                         text: "Completar",
-                        onPressed: () => GoRouter.of(context)
-                            .pushReplacementNamed(
-                                'profileEdit') // TODO: create and pass user
+                        onPressed: () => {
+                            
+                         GoRouter.of(context).pushNamed('editProfile')// TODO: create and pass user
+                        }
                         ),
                   ],
                 ),

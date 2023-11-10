@@ -39,16 +39,10 @@ class RegisterButton extends ConsumerWidget {
     final password = RegisterFormKey.currentState!.fields['password']?.value;
     final name = RegisterFormKey.currentState!.fields['name']?.value;
     final lastName = RegisterFormKey.currentState!.fields['lastName']?.value;
-    if (
-        email != null &&
-        password != null &&
-        name != null &&
-        lastName != null) {
+    if (email != null && password != null && name != null && lastName != null) {
       ref
           .read(registerControllerProvider.notifier)
           .register(email, password, name, lastName);
     }
-
-
   }
 }

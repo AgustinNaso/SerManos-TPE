@@ -23,7 +23,7 @@ class LoginButton extends ConsumerWidget {
         });
   }
 
-  _attendRegisterProvider( BuildContext context, WidgetRef ref) {
+  _attendRegisterProvider(BuildContext context, WidgetRef ref) {
     final loginStateProvider = ref.watch(loginControllerProvider);
 
     if (loginStateProvider == LoginStates.success.name) {
@@ -40,7 +40,5 @@ class LoginButton extends ConsumerWidget {
     if (email != null && password != null) {
       ref.read(loginControllerProvider.notifier).login(email, password);
     }
-
-
   }
 }
