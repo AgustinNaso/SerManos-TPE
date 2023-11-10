@@ -27,7 +27,6 @@ class PostulateScreen extends ConsumerWidget {
                 .toLowerCase()
                 .contains(searchQuery.toLowerCase()))
             .toList();
-
         return Container(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
             color: SermanosColors.secondary10,
@@ -42,13 +41,13 @@ class PostulateScreen extends ConsumerWidget {
                       onChange: (query) =>
                           ref.read(searchQueryProvider.notifier).state = query),
                   const SizedBox(
-                    height: 24,
+                    height: 32,
                   ),
                   Text(AppLocalizations.of(context)!.volunteersTitle,
                       style: const SermanosTypography.headline01(
                           color: SermanosColors.neutral100)),
                   const SizedBox(
-                    height: 16,
+                    height: 24,
                   ),
                   filteredVolunteerings.isNotEmpty
                       ? Expanded(
