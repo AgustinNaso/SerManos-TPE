@@ -11,6 +11,7 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
   final int vacancies;
   final String location;
   final String volunteeringId;
+  final List<String> volunteers;
 
   VolunteeringDetails({
     required String id,
@@ -24,6 +25,7 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
     required this.vacancies,
     required this.location,
     required this.volunteeringId,
+    required this.volunteers,
   }) : super(id: id);
 
   @override
@@ -42,6 +44,8 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
       vacancies: json['vacancies'],
       location: json['location'],
       volunteeringId: json['volunteeringId'],
+      volunteers:
+          (json['volunteers'] as List).map((item) => item as String).toList(),
     );
   }
 
@@ -58,6 +62,7 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
       'vacancies': vacancies,
       'location': location,
       'volunteeringId': volunteeringId,
+      'volunteers': volunteers,
     };
   }
 
