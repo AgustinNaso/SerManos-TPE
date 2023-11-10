@@ -16,7 +16,6 @@ class NewsScreen extends ConsumerWidget {
           return Container(
               padding: const EdgeInsets.fromLTRB(16, 32, 16, 8),
               color: SermanosColors.secondary10,
-              child: Expanded(
                 child: ListView.separated(
                     itemBuilder: (context, index) {
                       return NewsCard(news: newsList[index]);
@@ -25,7 +24,7 @@ class NewsScreen extends ConsumerWidget {
                           height: 24,
                         )),
                     itemCount: newsList.length),
-              ));
+              );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stack) => Center(child: Text(error.toString())));

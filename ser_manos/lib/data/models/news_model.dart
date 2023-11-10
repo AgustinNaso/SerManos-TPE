@@ -22,7 +22,7 @@ class News extends JsonSerializable<News> {
   @override
   static News fromJson(Map<String, dynamic> json) {
     return News(
-      id: json['id'],
+      id: json['id'] ?? "",
       source: json['source'],
       title: json['title'],
       subtitle: json['subtitle'],
@@ -34,7 +34,6 @@ class News extends JsonSerializable<News> {
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'source': source,
       'title': title,
       'subtitle': subtitle,
