@@ -27,17 +27,18 @@ class ContactForm extends ConsumerWidget {
       ref.read(loginValidatorProvider.notifier).set(field, value);
     }
 
-    return FormBuilder(
-      key: ContactFormKey,
-      enabled: true,
+    return Container(
+      // key: ContactFormKey,
+      // enabled: true,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SermanosTextField(
 
             onChangeFocus: onChangeFocus,
-            labelText: email,
+            labelText: 'email',
             name: "email",
+            initialValue: user.email,
             validators: [
               FormBuilderValidators.required(
                   errorText:
@@ -49,11 +50,9 @@ class ContactForm extends ConsumerWidget {
           ),
           const SizedBox(height: 24),
           SermanosTextField(
-              labelText: phoneNumber,
-              onChanged: (value) {
-               
-              },
+              labelText: 'phoneNumber',
               onChangeFocus: onChangeFocus,
+              initialValue: phoneNumber,
               name: "phoneNumber",
               validators: [
                 FormBuilderValidators.required(
