@@ -3,7 +3,7 @@ import 'package:ser_manos/data/repositories/repository.dart';
 import 'package:ser_manos/exceptions/not_found_exception.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class VolunteeringDetailsRepositoryImpl extends Repository<VolunteeringDetails> { // transform into Voluteering Details model
+class VolunteeringDetailsRepositoryImpl extends Repository<VolunteeringDetails> {
   VolunteeringDetailsRepositoryImpl() : super('volunteering_details');
 
   Future<List<VolunteeringDetails>> getVolunteeringDetailsByUserId(String uid) async {
