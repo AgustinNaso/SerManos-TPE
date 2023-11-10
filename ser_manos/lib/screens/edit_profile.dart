@@ -93,7 +93,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     onPressed: () => {
                       print(EditProfileFormKey.currentState!.fields['profileImgUrl']!.value),
                       print(EditProfileFormKey.currentState!.fields['birthdate']!.value),
-                      print(EditProfileFormKey.currentState!.fields['genre']!.value),
+                      print(EditProfileFormKey.currentState!.fields['gender']!.value),
 
                       },
                 )

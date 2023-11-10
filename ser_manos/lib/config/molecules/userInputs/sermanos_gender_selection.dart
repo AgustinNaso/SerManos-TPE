@@ -10,49 +10,15 @@ class SermanosGenderSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-       
-           
-      FormBuilderRadioGroup(
-        name: 'gender',
-        options: [
-          FormBuilderFieldOption(value: Gender.male.text),
-          FormBuilderFieldOption(value: Gender.female.text),
-          FormBuilderFieldOption(value: Gender.noBinary.text),
-        ]       
-      ),
-
-    ]);
-            // Row(
-            //   children: [
-            //       Radio<Gender>(
-            //         value: Gender.female,
-            //         groupValue: _selectedValue,
-            //         onChanged: (value) {
-            //         setState(() {
-            //           _selectedValue = value!;
-            //         });
-            //         },
-            //       ),
-            //       Text('Female'),
-            // ]),
-            // Row(
-            //   children: [
-            //     Radio<Gender>(
-            //       value: Gender.noBinary,
-            //       groupValue: _selectedValue,
-            //       onChanged: (value) {
-            //         setState(() {
-            //           _selectedValue = value!;
-            //         });
-            //       },
-            // ),
-            // Text('Non-binary'),
-            //   ],)
-            
-
-
+    return FormBuilderRadioGroup(
+      orientation: OptionsOrientation.vertical,
+      initialValue: initialValue.text,
+      name: 'gender',
+      options: [
+        FormBuilderFieldOption(value: Gender.male.text,),
+        FormBuilderFieldOption(value: Gender.female.text),
+        FormBuilderFieldOption(value: Gender.noBinary.text),
+      ]       
+    );
   }
 }
