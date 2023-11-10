@@ -1,43 +1,47 @@
-import 'json_serializable.dart';
+import 'package:ser_manos/data/models/generic_model.dart';
 
-class VolunteeringDetails extends JsonSerializable<VolunteeringDetails> {
-  final description;
-  final about;
+class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
+  final String description;
+  final String about;
   final List<String> requirements;
   final List<String> availability;
-  final String id;
   final String imgUrl;
   final String name;
   final String category;
   final int vacancies;
   final String location;
+  final String volunteeringId;
 
-
-  VolunteeringDetails(
-      this.description,
-      this.about,
-      this.requirements,
-      this.availability,
-      this.id,
-      this.imgUrl,
-      this.name,
-      this.category,
-      this.vacancies,
-      this.location);
+  VolunteeringDetails({
+    required String id,
+    required this.description,
+    required this.about,
+    required this.requirements,
+    required this.availability,
+    required this.imgUrl,
+    required this.name,
+    required this.category,
+    required this.vacancies,
+    required this.location,
+    required this.volunteeringId,
+  }) : super(id: id);
 
   @override
   static VolunteeringDetails fromJson(Map<String, dynamic> json) {
     return VolunteeringDetails(
-      json['description'],
-      json['about'],
-      (json['requirements'] as List).map((item) => item as String).toList(),
-      (json['availability'] as List).map((item) => item as String).toList(),
-      json['id'],
-      json['imgUrl'],
-      json['name'],
-      json['category'],
-      json['vacancies'],
-      json['location'],
+      description: json['description'],
+      about: json['about'],
+      requirements:
+          (json['requirements'] as List).map((item) => item as String).toList(),
+      availability:
+          (json['availability'] as List).map((item) => item as String).toList(),
+      id: json['id'],
+      imgUrl: json['imgUrl'],
+      name: json['name'],
+      category: json['category'],
+      vacancies: json['vacancies'],
+      location: json['location'],
+      volunteeringId: json['volunteeringId'],
     );
   }
 
@@ -48,17 +52,17 @@ class VolunteeringDetails extends JsonSerializable<VolunteeringDetails> {
       'about': about,
       'requirements': requirements,
       'availability': availability,
-      'id': id,
       'imgUrl': imgUrl,
       'name': name,
       'category': category,
       'vacancies': vacancies,
       'location': location,
+      'volunteeringId': volunteeringId,
     };
   }
 
   @override
   String toString() {
-    return 'VolunteeringDetails{description: $description, about: $about, requirements: $requirements, availability: $availability, id: $id, imgUrl: $imgUrl, name: $name, category: $category, vacancies: $vacancies, location: $location}';
+    return 'VolunteeringDetails{volunteeringId: $volunteeringId, description: $description, about: $about, requirements: $requirements, availability: $availability, id: $id, imgUrl: $imgUrl, name: $name, category: $category, vacancies: $vacancies, location: $location}';
   }
 }

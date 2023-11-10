@@ -7,5 +7,5 @@ part 'volunteering_provider.g.dart';
 @Riverpod(keepAlive: true)
 Future<List<Volunteering>> getVolunteerings(GetVolunteeringsRef ref) async {
   final volunteeringRepository = ref.read(volunteeringRepositoryProvider);
-  return await volunteeringRepository.getVolunteeringsPaginated(100);
+  return await volunteeringRepository.getVolunteerings();
 }

@@ -8,5 +8,5 @@ part 'news_provider.g.dart';
 @riverpod
 Future<List<News>> getNews(GetNewsRef ref) async {
   final newsRepository = NewsRepositoryImpl();
-  return await newsRepository.getNewsPaginated(100);
+  return await newsRepository.getNews();
 }

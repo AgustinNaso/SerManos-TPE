@@ -1,7 +1,6 @@
-import 'json_serializable.dart';
+import 'package:ser_manos/data/models/generic_model.dart';
 
-class Volunteering extends JsonSerializable<Volunteering> {
-  final String id;
+class Volunteering extends GenericModel<Volunteering> {
   final String imgUrl;
   final String name;
   final String category;
@@ -9,29 +8,30 @@ class Volunteering extends JsonSerializable<Volunteering> {
   final String location;
 
   Volunteering(
-       this.id,
-       this.imgUrl,
-       this.name,
-       this.category,
-       this.vacancies,
-       this.location);
+  {
+    required String id,
+    required this.imgUrl,
+    required this.name,
+    required this.category,
+    required this.vacancies,
+    required this.location,
+  }) : super(id: id);
 
   @override
   static Volunteering fromJson(Map<String, dynamic> json) {
     return Volunteering(
-      json['id'],
-      json['imgUrl'],
-      json['name'],
-      json['category'],
-      json['vacancies'],
-      json['location'],
+      id: json['id'],
+      imgUrl: json['imgUrl'],
+      name: json['name'],
+      category: json['category'],
+      vacancies: json['vacancies'],
+      location: json['location'],
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'imgUrl': imgUrl,
       'name': name,
       'category': category,

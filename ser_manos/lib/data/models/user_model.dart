@@ -1,8 +1,8 @@
-import 'gender.dart';
-import 'json_serializable.dart';
+import 'package:ser_manos/data/models/generic_model.dart';
 
-class SermanosUser extends JsonSerializable<SermanosUser> {
-  final String id;
+import 'gender.dart';
+
+class SermanosUser extends GenericModel<SermanosUser> {
   final String email;
   final String name;
   final String lastName;
@@ -14,8 +14,7 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
   final List<String> favVolunteerings;
 
   SermanosUser(
-      {required this.id,
-      required this.email,
+      {required this.email,
       required this.name,
       required this.lastName,
       this.phoneNumber,
@@ -23,13 +22,16 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
       this.birthDate,
       this.profileImgUrl,
       this.contactEmail,
-      this.favVolunteerings = const []});
+      this.favVolunteerings = const [],
+      required String id})
+      : super(id: id);
 
   bool isFaved(String volunteeringId) {
     return favVolunteerings.contains(volunteeringId);
   }
 
-  get birthDateToString => "${birthDate!.day}/${birthDate!.month}/${birthDate!.year}";
+  get birthDateToString =>
+      "${birthDate!.day}/${birthDate!.month}/${birthDate!.year}";
 
   get fullName => "$name $lastName";
 
@@ -50,13 +52,14 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
       lastName: json['lastName'],
       phoneNumber: json['phoneNumber'],
       gender: json['gender'] != null ? Gender.values[json['gender']] : null,
-      birthDate: json['birthDate'] != null
-          ? DateTime.parse(json['birthDate'])
-          : null,
+      birthDate:
+          json['birthDate'] != null ? DateTime.parse(json['birthDate']) : null,
       profileImgUrl: json['profileImgUrl'],
       contactEmail: json['contactEmail'],
       favVolunteerings: json['favVolunteerings'] != null
-          ? (json['favVolunteerings'] as List).map((item) => item as String).toList()
+          ? (json['favVolunteerings'] as List)
+              .map((item) => item as String)
+              .toList()
           : [],
     );
   }
@@ -64,7 +67,6 @@ class SermanosUser extends JsonSerializable<SermanosUser> {
   @override
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'email': email,
       'name': name,
       'lastName': lastName,

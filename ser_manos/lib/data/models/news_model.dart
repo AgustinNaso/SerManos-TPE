@@ -1,9 +1,6 @@
-import 'json_serializable.dart';
+import 'package:ser_manos/data/models/generic_model.dart';
 
-
-// TODO: analize if body belongs here on a details model
-class News extends JsonSerializable<News> {
-  final String id;
+class News extends GenericModel<News> {
   final String source;
   final String title;
   final String subtitle;
@@ -11,13 +8,13 @@ class News extends JsonSerializable<News> {
   final String body;
 
   News({
-    required this.id,
     required this.source,
     required this.title,
     required this.subtitle,
     required this.imgUrl,
     required this.body,
-  });
+    required String id,
+  }) : super(id: id);
 
   @override
   static News fromJson(Map<String, dynamic> json) {

@@ -3,7 +3,7 @@ import 'package:ser_manos/data/repositories/repository.dart';
 import 'package:ser_manos/exceptions/not_found_exception.dart';
 
 class VolunteeringDetailsRepositoryImpl extends Repository<VolunteeringDetails> { // transform into Voluteering Details model
-  VolunteeringDetailsRepositoryImpl() : super(tag: 'volunteering_details');
+  VolunteeringDetailsRepositoryImpl() : super('volunteering_details');
 
   Future<VolunteeringDetails> getVolunteeringDetailsByVolunteeringId(String id) async {
       final details = await collection.where('id', isEqualTo: id).get();
