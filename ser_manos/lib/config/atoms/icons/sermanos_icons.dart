@@ -81,6 +81,23 @@ class SermanosIcons extends Icon {
           icon: Icons.map_outlined,
           status: status,
         );
+  SermanosIcons.close({
+    Key? key,
+    required SermanosIconStatus status,
+  }) : this(
+          key: key,
+          icon: Icons.close,
+          status: status,
+        );
+  SermanosIcons.calendar({
+    Key? key,
+    required SermanosIconStatus status,
+  }) : this(
+          key: key,
+          icon: Icons.calendar_month,
+          status: status,
+        );
+  
 }
 
 enum SermanosIconStatus {

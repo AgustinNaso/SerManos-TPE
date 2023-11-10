@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/cellules/information_card.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
 import 'package:ser_manos/config/molecules/profile_image.dart';
@@ -18,7 +19,7 @@ class CompleteProfile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -86,7 +87,12 @@ class CompleteProfile extends ConsumerWidget {
                 children: [
                   SermanosCtaButton(
                     text: "Editar perfil",
-                    onPressed: () => print("Go to Edit Profile"),
+                    onPressed: () => {
+
+                    print("Go to Edit Profile"),
+                         
+                         GoRouter.of(context).pushNamed('editProfile') // TODO: create and pass user
+                                        },
                     backgroundColor: SermanosColors.primary100,
                   ),
                   const SizedBox(width: 8),
