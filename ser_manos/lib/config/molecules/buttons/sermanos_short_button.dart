@@ -110,8 +110,8 @@ class SermanosShortButton extends StatelessWidget {
                             )
                           : Text(
                               text,
-                              style: SermanosTypography.button(
-                                color: textColor,
+                              style: const SermanosTypography.button(
+                                color: SermanosColors.primary100,
                               ),
                             ),
                     ),

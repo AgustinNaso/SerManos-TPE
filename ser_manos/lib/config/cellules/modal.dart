@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_short_button.dart';
 import 'package:ser_manos/config/tokens/sermanos_box_shadows.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
@@ -33,23 +34,33 @@ class Modal extends StatelessWidget {
               boxShadow: SermanosShadows.shadow3),
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 subtitle,
                 style: const SermanosTypography.subtitle01(),
+                textAlign: TextAlign.start,
               ),
               Text(
                 title,
                 style: const SermanosTypography.headline02(),
+                textAlign: TextAlign.start,
               ),
               const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   SermanosShortButton(
-                      text: secondaryButtonText, onPressed: () {}),
+                    text: secondaryButtonText,
+                    onPressed: () {
+                      GoRouter.of(context).pop(true);
+                    },
+                    filled: false,
+                  ),
                   SermanosShortButton(
-                      text: primaryButtonText, onPressed: onAccept)
+                      text: primaryButtonText,
+                      onPressed: onAccept,
+                      filled: false)
                 ],
               )
             ],

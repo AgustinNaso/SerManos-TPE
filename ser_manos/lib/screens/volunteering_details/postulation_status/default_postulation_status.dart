@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ser_manos/config/cellules/modal.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 
@@ -22,7 +23,21 @@ class DefaultPostulationStatus extends StatelessWidget {
           ],
         ),
       SermanosCtaButton(
-          text: 'Postularme', onPressed: () {}, enabled: canPostulate)
+          text: 'Postularme',
+          onPressed: () => showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return Modal(
+                      title: 'Un techo para mi Pais',
+                      subtitle: 'Te estas por postular a',
+                      onAccept: () {
+                        print('aceptado');
+                      },
+                      primaryButtonText: 'Confirmar',
+                      secondaryButtonText: 'Cancelar');
+                },
+              ),
+          enabled: canPostulate)
     ]);
   }
 }

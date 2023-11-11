@@ -33,8 +33,8 @@ class VolunteeringScreen extends ConsumerWidget {
                 Container(
                     width: double.infinity,
                     height: 243,
-                    child: Image.asset(
-                      'assets/images/Imagen2.png',
+                    child: Image.network(
+                      volunteeringDetail.imgUrl,
                       fit: BoxFit.cover,
                     )),
                 Positioned.fill(
@@ -63,13 +63,13 @@ class VolunteeringScreen extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(volunteeringDetail.category,
-                          style: SermanosTypography.overline(
+                          style: const SermanosTypography.overline(
                               color: SermanosColors.neutral75)),
                       Text(volunteeringDetail.name,
-                          style: SermanosTypography.headline01()),
+                          style: const SermanosTypography.headline01()),
                       const SizedBox(height: 16),
                       Text(volunteeringDetail.description,
-                          style: SermanosTypography.body01(
+                          style: const SermanosTypography.body01(
                               color: SermanosColors.secondary200)),
                       const SizedBox(height: 24),
                       const Text('Sobre la actividad',
@@ -78,7 +78,7 @@ class VolunteeringScreen extends ConsumerWidget {
                         height: 8,
                       ),
                       Text(volunteeringDetail.about,
-                          style: SermanosTypography.body01()),
+                          style: const SermanosTypography.body01()),
                       const SizedBox(height: 24),
                       InformationCard(title: 'Ubicacion', information: [
                         ('Direccion', volunteeringDetail.location)
@@ -137,7 +137,7 @@ class VolunteeringScreen extends ConsumerWidget {
                       const SizedBox(height: 8),
                       const Vacancies(vacancy: 10),
                       const SizedBox(height: 24),
-                      handleVolunteeringStatus('not_postulated', false),
+                      handleVolunteeringStatus('not_postulated', true),
                     ],
                   ))
             ],
