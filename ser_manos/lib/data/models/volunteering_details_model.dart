@@ -11,7 +11,7 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
   final int vacancies;
   final String location;
   final String volunteeringId;
-  final List<String> volunteers;
+  final List<(String, bool)> volunteers;
 
   VolunteeringDetails({
     required String id,
@@ -30,6 +30,7 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
 
   @override
   static VolunteeringDetails fromJson(Map<String, dynamic> json) {
+    print(json['volunteers']);
     return VolunteeringDetails(
       description: json['description'],
       about: json['about'],
@@ -44,8 +45,7 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
       vacancies: json['vacancies'],
       location: json['location'],
       volunteeringId: json['volunteeringId'],
-      volunteers:
-          (json['volunteers'] as List).map((item) => item as String).toList(),
+      volunteers: (json['volunteers'] as Map<String, dynamic>).entries.map((e) => (e.key, e.value as bool)).toList(),
     );
   }
 
@@ -62,7 +62,7 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
       'vacancies': vacancies,
       'location': location,
       'volunteeringId': volunteeringId,
-      'volunteers': volunteers,
+      'volunteers': Map<String, bool>.fromEntries(volunteers.map((entry) => MapEntry(entry.$1, entry.$2))),
     };
   }
 
