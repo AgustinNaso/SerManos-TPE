@@ -6,6 +6,7 @@ import 'package:ser_manos/config/cellules/information_card.dart';
 import 'package:ser_manos/config/molecules/vacancies/vacancies.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
+import 'package:ser_manos/data/models/volunteering_details_model.dart';
 import 'package:ser_manos/providers/Future/volunteering_provider.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/accepted_postulation_status.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/already_postulated_postulation_status.dart';
@@ -137,7 +138,8 @@ class VolunteeringScreen extends ConsumerWidget {
                       const SizedBox(height: 8),
                       const Vacancies(vacancy: 10),
                       const SizedBox(height: 24),
-                      handleVolunteeringStatus('not_postulated', true),
+                      handleVolunteeringStatus(
+                          'accepted', true, volunteeringDetail.name),
                     ],
                   ))
             ],
@@ -150,19 +152,26 @@ class VolunteeringScreen extends ConsumerWidget {
   }
 }
 
-Widget handleVolunteeringStatus(String status, bool hasVacancy) {
+Widget handleVolunteeringStatus(
+    String status, VolunteeringDetails volunteeringDetails) {
   //TODO: better way of doing this?
-  if (!hasVacancy) return DefaultPostulationStatus(canPostulate: hasVacancy);
+  if (volunteeringDetails.vacancies == 0)
+    return DefaultPostulationStatus(
+        canPostulate: volunteeringDetails.vacancies > 0);
   switch (status) {
     case 'postulated':
-      return const PendingPostulationStatus();
+      return PendingPostulationStatus(
+          volunteeringName: volunteeringDetails.name);
     case 'accepted':
-      return const AcceptedPostulationStatus();
+      return AcceptedPostulationStatus(
+          volunteeringName: volunteeringDetails.name);
     case 'has_other_postulation':
       return const AlreadyPostulatedPostulationStatus();
     case 'not_postulated':
-      return DefaultPostulationStatus(canPostulate: hasVacancy);
+      return DefaultPostulationStatus(
+          canPostulate: volunteeringDetails.vacancies > 0);
     default:
-      return DefaultPostulationStatus(canPostulate: hasVacancy);
+      return DefaultPostulationStatus(
+          canPostulate: volunteeringDetails.vacancies > 0);
   }
 }

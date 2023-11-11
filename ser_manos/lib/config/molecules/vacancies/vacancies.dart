@@ -26,8 +26,8 @@ class Vacancies extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Text(AppLocalizations.of(context)!.vacancies,
-              style:
-                  const SermanosTypography.body02(color: SermanosColors.neutral100)),
+              style: const SermanosTypography.body02(
+                  color: SermanosColors.neutral100)),
           const SizedBox(width: 8),
           SermanosIcons.person(
               status: hasVacancy

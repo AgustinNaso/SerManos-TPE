@@ -1,8 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:ser_manos/config/cellules/modal.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/postulation_status.dart';
 
 class PendingPostulationStatus extends StatelessWidget {
-  const PendingPostulationStatus({Key? key}) : super(key: key);
+  final String volunteeringName;
+  const PendingPostulationStatus({Key? key, required this.volunteeringName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +14,18 @@ class PendingPostulationStatus extends StatelessWidget {
         description:
             "Pronto la organizacion se pondra en contatcto contigo y te inscribira como participante",
         buttonText: "Retirar postulacion",
-        onButtonPressed: () => {});
+        onButtonPressed: () => {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Modal(
+                        title: volunteeringName,
+                        subtitle:
+                            'Estas seguro que queres retirar tu postulacion?',
+                        onAccept: () {},
+                        primaryButtonText: 'Cancelar',
+                        secondaryButtonText: 'Confirmar');
+                  })
+            });
   }
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:ser_manos/config/cellules/modal.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/postulation_status.dart';
 
 class AcceptedPostulationStatus extends StatelessWidget {
-  const AcceptedPostulationStatus({Key? key}) : super(key: key);
+  final String volunteeringName;
+  const AcceptedPostulationStatus({Key? key, required this.volunteeringName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +14,18 @@ class AcceptedPostulationStatus extends StatelessWidget {
         description:
             'La organización confirmó que ya estas participando de este voluntariado',
         buttonText: 'Abandonar voluntariado',
-        onButtonPressed: () => {});
+        onButtonPressed: () => {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Modal(
+                        title: volunteeringName,
+                        subtitle:
+                            'Estas seguro que queres abandonar tu voluntariado?',
+                        onAccept: () {},
+                        primaryButtonText: 'Confirmar',
+                        secondaryButtonText: 'Cancelar');
+                  })
+            });
   }
 }
