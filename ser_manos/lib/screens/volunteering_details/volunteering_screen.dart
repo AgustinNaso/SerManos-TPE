@@ -138,8 +138,7 @@ class VolunteeringScreen extends ConsumerWidget {
                       const SizedBox(height: 8),
                       const Vacancies(vacancy: 10),
                       const SizedBox(height: 24),
-                      handleVolunteeringStatus(
-                          'accepted', true, volunteeringDetail.name),
+                      handleVolunteeringStatus('accepted', volunteeringDetail),
                     ],
                   ))
             ],
