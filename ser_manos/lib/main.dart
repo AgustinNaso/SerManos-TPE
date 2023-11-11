@@ -10,7 +10,6 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 void main() {
   runZonedGuarded<Future<void>>(() async {
-    WidgetsFlutterBinding.ensureInitialized();
     await FirebaseConfig.init();
 
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
