@@ -93,7 +93,7 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosUploadProfilePhoto>
                             ),
                             SermanosCtaButton(
                               text: "Cambiar foto",
-                              onPressed: () => print("cambiar foto"),
+                              onPressed: () => getImage(),
                                   
                               enabled: widget.enabled,
                             )
@@ -124,5 +124,14 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosUploadProfilePhoto>
     );
   }
 
-  
+  Future getImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        _image = image.path;
+      });
+    }
+  }
 }

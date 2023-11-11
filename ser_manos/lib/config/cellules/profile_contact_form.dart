@@ -7,7 +7,6 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/providers/login_provider.dart';
 
-final ContactFormKey = GlobalKey<FormBuilderState>();
 
 class ContactForm extends ConsumerWidget {
   final SermanosUser user;
@@ -28,8 +27,6 @@ class ContactForm extends ConsumerWidget {
     }
 
     return Container(
-      // key: ContactFormKey,
-      // enabled: true,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
