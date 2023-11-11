@@ -13,7 +13,6 @@ import 'package:ser_manos/data/models/user_model.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-
 class EditProfileDataForm extends ConsumerWidget {
   final SermanosUser user;
   final Gender genderField;
@@ -30,7 +29,6 @@ class EditProfileDataForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     return Container(
       // key: EditProfileDataKey,
       // enabled: true,
@@ -46,7 +44,11 @@ class EditProfileDataForm extends ConsumerWidget {
           const SizedBox(
             height: 16,
           ),
-          SermanosDateField(label:"Fecha de nacimiento", icon: SermanosIcons.calendar(status: SermanosIconStatus.activated)), //TODO: internacionalizacion
+          SermanosDateField(
+              label: "Fecha de nacimiento",
+              icon: SermanosIcons.calendar(
+                  status: SermanosIconStatus
+                      .activated)), //TODO: internacionalizacion
           const SizedBox(
             height: 24,
           ),
@@ -70,19 +72,18 @@ class EditProfileDataForm extends ConsumerWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(4),
-                      bottomLeft: Radius.circular(4)),
-                  color: SermanosColors.neutral10,
-                ),
-                width: double.infinity,
-                child: SermanosGenderSelection(initialValue: genderField)
-              ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(4),
+                        bottomLeft: Radius.circular(4)),
+                    color: SermanosColors.neutral10,
+                  ),
+                  width: double.infinity,
+                  child: SermanosGenderSelection(initialValue: genderField)),
             ],
           ),
           const SizedBox(
@@ -93,7 +94,6 @@ class EditProfileDataForm extends ConsumerWidget {
             initialValue: user.profileImgUrl,
             enabled: true,
           )
-
         ],
       ),
     );
