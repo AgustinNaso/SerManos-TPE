@@ -1,11 +1,12 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ser_manos/data/firebase_config.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/repositories/user_repository_impl.dart';
 
 
 class MyFirebaseAuth {
-  final _firebaseAuth = FirebaseAuth.instanceFor(app: FirebaseConfig.app);
+  final _firebaseAuth = FirebaseAuth.instanceFor(app: Firebase.app());
 
   currentUser() {
     return _firebaseAuth.currentUser;
@@ -20,6 +21,9 @@ class MyFirebaseAuth {
         email: email,
         password: password,
       );
+
+      FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+      await analytics.logLogin(loginMethod: 'email');
 
       return await UserRepositoryImpl().getById(userCredential.user!.uid); // TODO: handle possible errors
     } on Error catch (e) {

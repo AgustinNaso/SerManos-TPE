@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -28,6 +29,7 @@ class LoginButton extends ConsumerWidget {
     final loginStateProvider = ref.watch(loginControllerProvider);
 
     if (loginStateProvider == FormStates.success.name) {
+      FirebaseAnalytics.instance.logLogin(loginMethod: 'email');
       Future(() => {GoRouter.of(context).pushReplacementNamed('welcome')});
     }
     if (loginStateProvider == FormStates.loading.name) {
