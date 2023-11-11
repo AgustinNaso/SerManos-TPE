@@ -66,7 +66,7 @@ mixin RouterMixin on State<MyApp> {
             name: 'volunteering',
             path: 'volunteering/:id',
             builder: (BuildContext context, GoRouterState state) {
-              final volunteeringId = state.pathParameters['id']!;
+              final String volunteeringId = state.pathParameters['id']!;
               return VolunteeringScreen(volunteeringId: volunteeringId);
             },
           ),

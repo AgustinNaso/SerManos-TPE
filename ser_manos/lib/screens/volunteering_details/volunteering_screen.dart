@@ -25,7 +25,7 @@ class VolunteeringScreen extends ConsumerWidget {
     return Scaffold(
         body: futureVolunteeringDetail.when(
       data: (volunteeringDetail) {
-        SingleChildScrollView(
+        return SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
