@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "241699172646",
+    "project_id": "ser-manos-feec3",
+    "storage_bucket": "ser-manos-feec3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241699172646:android:4321544aee6d123c79d1e7",
+        "android_client_info": {
+          "package_name": "com.example.ser_manos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1whLzgRpyOgmMBq3j-qB-r9PORiTBiM0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
