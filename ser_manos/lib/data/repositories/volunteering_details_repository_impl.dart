@@ -19,13 +19,13 @@ class VolunteeringDetailsRepositoryImpl extends Repository<VolunteeringDetails> 
 
   Future<void> addVolunteer(volunteeringDetailsId, uid) async {
     await collection.doc(volunteeringDetailsId).update({
-      'volunteers': FieldValue.arrayUnion([uid])
+      'volunteers.$uid': false
     });
   }
 
   Future<void> removeVolunteer(volunteeringDetailsId, uid) async {
     await collection.doc(volunteeringDetailsId).update({
-      'volunteers': FieldValue.arrayRemove([uid])
+      'volunteers.$uid': FieldValue.delete()
     });
   }
 
