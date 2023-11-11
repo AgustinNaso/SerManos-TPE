@@ -4,14 +4,13 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:ser_manos/config/molecules/textfields/sermanos_text_field.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:ser_manos/data/models/form_states.dart';
 import 'package:ser_manos/providers/register_controller.dart';
 import 'package:ser_manos/providers/register_provider.dart';
 
 final RegisterFormKey = GlobalKey<FormBuilderState>();
 
 class RegisterForm extends ConsumerWidget {
-  static bool alreadyInUseError = false;
-
   const RegisterForm({Key? key}) : super(key: key);
 
   @override
@@ -60,7 +59,7 @@ class RegisterForm extends ConsumerWidget {
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 name: "email",
                 onChanged: (value) {
-                  if (registerProvider.state == RegisterStates.error.name) {
+                  if (registerProvider.state == FormStates.error.name) {
                     registerProvider.reset();
                   }
                 },
@@ -72,7 +71,7 @@ class RegisterForm extends ConsumerWidget {
                       errorText:
                           AppLocalizations.of(context)!.enterValidEmailError),
                   (val) {
-                    if (registerProvider.state == RegisterStates.error.name) {
+                    if (registerProvider.state == FormStates.error.name) {
                       return "Email already in use";
                     }
                     return null;

@@ -1,4 +1,5 @@
 import 'package:ser_manos/data/models/generic_model.dart';
+import 'package:ser_manos/data/models/volunteer_states.dart';
 
 class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
   final String description;
@@ -11,7 +12,7 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
   final int vacancies;
   final String location;
   final String volunteeringId;
-  final List<(String, bool)> volunteers;
+  final Map<String, bool> volunteers;
 
   VolunteeringDetails({
     required String id,
@@ -28,9 +29,18 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
     required this.volunteers,
   }) : super(id: id);
 
+  VolunteerState getVolunteerState(String uid) {
+    if (volunteers[uid] == null) {
+      return VolunteerState.notVolunteered;
+    }
+    if (volunteers[uid] == true) {
+      return VolunteerState.accepted;
+    }
+    return VolunteerState.pending;
+  }
+
   @override
   static VolunteeringDetails fromJson(Map<String, dynamic> json) {
-    print(json['volunteers']);
     return VolunteeringDetails(
       description: json['description'],
       about: json['about'],
@@ -45,7 +55,7 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
       vacancies: json['vacancies'],
       location: json['location'],
       volunteeringId: json['volunteeringId'],
-      volunteers: (json['volunteers'] as Map<String, dynamic>).entries.map((e) => (e.key, e.value as bool)).toList(),
+      volunteers: Map<String, bool>.from(json['volunteers'] as Map<String, dynamic>),
     );
   }
 
@@ -62,7 +72,7 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
       'vacancies': vacancies,
       'location': location,
       'volunteeringId': volunteeringId,
-      'volunteers': Map<String, bool>.fromEntries(volunteers.map((entry) => MapEntry(entry.$1, entry.$2))),
+      'volunteers': volunteers,
     };
   }
 

@@ -32,6 +32,7 @@ class OnboardingScreen extends StatelessWidget {
             SermanosCtaButton(
                 text: AppLocalizations.of(context)!.login,
                 onPressed: () {
+                  throw UnimplementedError();
                   GoRouter.of(context).pushReplacementNamed('login');
                 }),
             const SizedBox(height: 16),

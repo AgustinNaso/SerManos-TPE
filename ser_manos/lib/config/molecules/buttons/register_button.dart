@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/cellules/register_form.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
+import 'package:ser_manos/data/models/form_states.dart';
 import 'package:ser_manos/providers/register_controller.dart';
 import 'package:ser_manos/providers/register_provider.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
@@ -26,10 +27,10 @@ class RegisterButton extends ConsumerWidget {
   _attendRegisterProvider(BuildContext context, WidgetRef ref) {
     final registerStateProvider = ref.watch(registerControllerProvider);
 
-    if (registerStateProvider == RegisterStates.success.name) {
+    if (registerStateProvider == FormStates.success.name) {
       Future(() => {GoRouter.of(context).pushReplacementNamed('welcome')});
     }
-    if (registerStateProvider == RegisterStates.loading.name) {
+    if (registerStateProvider == FormStates.loading.name) {
       Future(() => {ref.read(registerValidatorProvider.notifier).loading()});
     }
   }

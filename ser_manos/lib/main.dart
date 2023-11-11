@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ser_manos/config/router.dart';
@@ -6,9 +9,18 @@ import 'package:ser_manos/data/firebase_config.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 void main() {
-  runApp(const ProviderScope(
-    child: MyApp(),
-  ));
+  runZonedGuarded<Future<void>>(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await FirebaseConfig.init();
+
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+    runApp(const ProviderScope(
+      child: MyApp(),
+    ));
+  },
+      (error, stack) =>
+          FirebaseCrashlytics.instance.recordError(error, stack, fatal: true));
 }
 
 class MyApp extends StatefulWidget {
@@ -31,13 +43,5 @@ class _MyAppState extends State<MyApp> with RouterMixin {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
     );
-  }
-
-  @override
-  void initState() {
-    FirebaseConfig.init().then((_) async => {
-          // you can add test stuff here, but remove it before committing
-    });
-    super.initState();
   }
 }

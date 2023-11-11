@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:ser_manos/config/molecules/textfields/sermanos_text_field.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:ser_manos/data/models/form_states.dart';
 import 'package:ser_manos/providers/login_controller.dart';
 import 'package:ser_manos/providers/login_provider.dart';
 
@@ -43,7 +44,7 @@ class LoginForm extends ConsumerWidget {
           SermanosTextField(
               labelText: AppLocalizations.of(context)!.password,
               onChanged: (value) {
-                if (loginProvider.state == LoginStates.error.name) {
+                if (loginProvider.state == FormStates.error.name) {
                   loginProvider.reset();
                 }
               },
@@ -58,7 +59,7 @@ class LoginForm extends ConsumerWidget {
                     errorText:
                         AppLocalizations.of(context)!.minLengthError(8)),
                 (val) {
-                  if (loginProvider.state == LoginStates.error.name) {
+                  if (loginProvider.state == FormStates.error.name) {
                     return "User with email or password is not exists";
                   }
                   return null;
