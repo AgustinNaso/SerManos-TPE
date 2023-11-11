@@ -1,17 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ser_manos/config/cellules/register_form.dart';
+import 'package:ser_manos/data/models/form_states.dart';
 import 'package:ser_manos/data/services/firebase_auth.dart';
 
 final registerControllerProvider =
     StateNotifierProvider<RegisterController, String>(
-        (ref) => RegisterController(RegisterStates.initial.name));
-
-enum RegisterStates {
-  initial,
-  loading,
-  success,
-  error,
-}
+        (ref) => RegisterController(FormStates.initial.name));
 
 class RegisterController extends StateNotifier<String> {
   RegisterController(super.state);
@@ -20,7 +14,7 @@ class RegisterController extends StateNotifier<String> {
   get state => super.state;
 
   void reset() {
-    state = RegisterStates.initial.name;
+    state = FormStates.initial.name;
   }
 
   Future<void> register(
@@ -29,7 +23,7 @@ class RegisterController extends StateNotifier<String> {
     String name,
     String lastName,
   ) async {
-    state = RegisterStates.loading.name;
+    state = FormStates.loading.name;
     try {
       await MyFirebaseAuth().createUserWithEmailAndPassword(
         email: email,
@@ -38,9 +32,9 @@ class RegisterController extends StateNotifier<String> {
         name: name,
       );
 
-      state = RegisterStates.success.name;
+      state = FormStates.success.name;
     } catch (e) {
-      state = RegisterStates.error.name;
+      state = FormStates.error.name;
       RegisterFormKey.currentState!.validate();
     }
   }
