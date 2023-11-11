@@ -16,7 +16,7 @@ class SermanosTextField extends HookConsumerWidget {
   final void Function(String?)? onChanged;
   final void Function(String, bool)? onChangeFocus;
   final FloatingLabelBehavior floatingLabelBehavior;
-
+  final String initialValue;
   const SermanosTextField(
       {super.key,
       required this.labelText,
@@ -26,15 +26,19 @@ class SermanosTextField extends HookConsumerWidget {
       this.enableObscure = false,
       this.validators,
         this.onChanged,
-        this.onChangeFocus});
+        this.onChangeFocus,
+      this.initialValue = ''
+        });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final myFocusNode = useFocusNode();
     useListenable(myFocusNode);
 
-    final controller = useTextEditingController();
-
+    final controller = useTextEditingController.fromValue(TextEditingValue(
+      text: initialValue,
+      selection: TextSelection.collapsed(offset: initialValue.length),
+    ));
     final bool isEmpty =
         useListenableSelector(controller, () => controller.text.isEmpty);
 

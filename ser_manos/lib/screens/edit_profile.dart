@@ -90,7 +90,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
                 SermanosCtaButton(
                     text: "save",
-                    onPressed: () => {print(EditProfileFormKey)},
+                    onPressed: () => {
+                      print(EditProfileFormKey.currentState!.fields['profileImgUrl']!.value),
+                      print(EditProfileFormKey.currentState!.fields['birthdate']!.value),
+                      print(EditProfileFormKey.currentState!.fields['gender']!.value),
+
+                      },
                 )
               ],
             ),

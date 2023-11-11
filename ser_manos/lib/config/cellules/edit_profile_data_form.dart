@@ -10,6 +10,8 @@ import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/gender.dart';
 import 'package:ser_manos/data/models/user_model.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 
 class EditProfileDataForm extends ConsumerWidget {
@@ -30,6 +32,8 @@ class EditProfileDataForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     return Container(
+      // key: EditProfileDataKey,
+      // enabled: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

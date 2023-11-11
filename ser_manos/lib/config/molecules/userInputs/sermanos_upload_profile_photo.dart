@@ -43,7 +43,7 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosUploadProfilePhoto>
   Widget build(BuildContext context) {
     return FormBuilderField<String>(
       initialValue: widget.initialValue,
-      name: widget.formField,
+      name: 'profileImgUrl',
       validator: FormBuilderValidators.compose(widget.validators ?? []),
       builder: (FormFieldState field) {
         return Column(
