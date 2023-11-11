@@ -6,13 +6,13 @@ import 'package:ser_manos/data/repositories/user_repository_impl.dart';
 
 
 class MyFirebaseAuth {
-  final _firebaseAuth = FirebaseAuth.instanceFor(app: Firebase.app());
+  static final _firebaseAuth = FirebaseAuth.instanceFor(app: Firebase.app());
 
-  currentUser() {
+  static currentUser() {
     return _firebaseAuth.currentUser;
   }
 
-  Future<SermanosUser> signInWithEmailAndPassword({
+  Future<String> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -22,10 +22,7 @@ class MyFirebaseAuth {
         password: password,
       );
 
-      FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-      await analytics.logLogin(loginMethod: 'email');
-
-      return await UserRepositoryImpl().getById(userCredential.user!.uid); // TODO: handle possible errors
+      return userCredential.user!.uid;
     } on Error catch (e) {
       print(e);
       rethrow;
