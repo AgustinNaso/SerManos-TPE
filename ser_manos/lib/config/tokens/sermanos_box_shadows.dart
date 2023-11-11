@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Shadows {
+class SermanosShadows {
   static List<BoxShadow> shadow1 = [
     BoxShadow(
       color: Colors.black.withOpacity(0.3),

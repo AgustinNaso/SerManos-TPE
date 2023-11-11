@@ -21,10 +21,12 @@ class ProfileScreen extends ConsumerWidget {
         birthDate: DateTime.now(),
         phoneNumber: "123456789",
         gender: Gender.noBinary,
-        profileImgUrl: "https://imgv3.fotor.com/images/cover-photo-image/a-beautiful-girl-with-gray-hair-and-lucxy-neckless-generated-by-Fotor-AI.jpg",
-        contactEmail: "nomecontacten@gmail.com"
-    );// ref.watch(currentUserProvider);
+        profileImgUrl:
+            "https://imgv3.fotor.com/images/cover-photo-image/a-beautiful-girl-with-gray-hair-and-lucxy-neckless-generated-by-Fotor-AI.jpg",
+        contactEmail:
+            "nomecontacten@gmail.com"); // ref.watch(currentUserProvider);
 
+    //TODO: user nunca null?
     if (user == null) {
       return const Center(
         child: CircularProgressIndicator(),
@@ -32,7 +34,7 @@ class ProfileScreen extends ConsumerWidget {
     }
 
     return user.isProfileFilled()
-          ? CompleteProfile(user: user)
-          : IncompleteProfile(user: user);
+        ? CompleteProfile(user: user)
+        : IncompleteProfile(user: user);
   }
 }

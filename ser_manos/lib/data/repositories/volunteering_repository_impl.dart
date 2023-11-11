@@ -1,4 +1,3 @@
-import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/repositories/repository.dart';
 
 import '../models/volunteering_model.dart';

@@ -24,7 +24,7 @@ class SermanosSearchBar extends HookWidget {
       decoration: BoxDecoration(
         color: SermanosColors.neutral0,
         borderRadius: BorderRadius.circular(2),
-        boxShadow: Shadows.shadow1,
+        boxShadow: SermanosShadows.shadow1,
       ),
       child: TextField(
         focusNode: focusNode,

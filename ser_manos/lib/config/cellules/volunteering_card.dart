@@ -22,7 +22,7 @@ class VolunteeringCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          boxShadow: Shadows.shadow1,
+          boxShadow: SermanosShadows.shadow1,
           borderRadius: BorderRadius.circular(2),
         ),
         child: Column(
