@@ -1,4 +1,5 @@
 import 'package:ser_manos/data/models/generic_model.dart';
+import 'package:ser_manos/data/models/volunteering_postulation.dart';
 
 import 'gender.dart';
 
@@ -12,6 +13,7 @@ class SermanosUser extends GenericModel<SermanosUser> {
   final String? profileImgUrl;
   final String? contactEmail;
   final List<String> favVolunteerings;
+  VolunteeringPostulation? postulation;
 
   SermanosUser(
       {required this.email,

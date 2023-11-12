@@ -9,6 +9,7 @@ import 'package:ser_manos/config/molecules/vacancies/vacancies.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/volunteering_details_model.dart';
+import 'package:ser_manos/data/models/volunteering_postulation.dart';
 import 'package:ser_manos/providers/Future/volunteering_provider.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/accepted_postulation_status.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/already_postulated_postulation_status.dart';
@@ -25,6 +26,8 @@ class VolunteeringScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final futureVolunteeringDetail =
         ref.watch(getVolunteeringDetailsProvider(volunteeringId));
+    final VolunteeringPostulation? volunteeringPostulation =
+        ref.read(volunteeringPostulationProvider);
 
     return Scaffold(
         body: futureVolunteeringDetail.when(
@@ -35,8 +38,7 @@ class VolunteeringScreen extends ConsumerWidget {
             children: [
               Stack(children: [
                 SermanosCachedNetworkImage(
-                    imageUrl: volunteeringDetail.imgUrl, height: 243
-                ),
+                    imageUrl: volunteeringDetail.imgUrl, height: 243),
                 Positioned.fill(
                     child: Container(
                         decoration: const BoxDecoration(
@@ -153,9 +155,10 @@ class VolunteeringScreen extends ConsumerWidget {
 Widget handleVolunteeringStatus(
     String status, VolunteeringDetails volunteeringDetails) {
   //TODO: better way of doing this?
-  if (volunteeringDetails.vacancies == 0)
+  if (volunteeringDetails.vacancies == 0) {
     return DefaultPostulationStatus(
         canPostulate: volunteeringDetails.vacancies > 0);
+  }
   switch (status) {
     case 'postulated':
       return PendingPostulationStatus(
