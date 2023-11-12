@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
@@ -28,11 +29,13 @@ class SermanosDateField extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final myFocusNode = useFocusNode();
     useListenable(myFocusNode);
+    String locale = Localizations.localeOf(context).languageCode;
 
     return FormBuilderDateTimePicker(
       name: name,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       initialValue: initialValue,
+      format: DateFormat.yMd(locale),
       validator: (value) {
         if (validators != null) {
           for (final validator in validators!) {

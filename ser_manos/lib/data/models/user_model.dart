@@ -30,9 +30,6 @@ class SermanosUser extends GenericModel<SermanosUser> {
     return favVolunteerings.contains(volunteeringId);
   }
 
-  get birthDateToString =>
-      "${birthDate!.day}/${birthDate!.month}/${birthDate!.year}";
-
   get fullName => "$name $lastName";
 
   bool isProfileFilled() {

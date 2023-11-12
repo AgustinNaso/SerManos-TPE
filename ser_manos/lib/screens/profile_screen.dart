@@ -15,26 +15,7 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final futureUserData = ref.read(loggedUserProvider);
-    final SermanosUser user = SermanosUser(
-        id: "1",
-        email: "gdeschant@itba.edu.ar",
-        name: "gaston",
-        lastName: "De Schant",
-        birthDate: DateTime.now(),
-        phoneNumber: "123456789",
-        gender: Gender.noBinary,
-        profileImgUrl:
-            "https://imgv3.fotor.com/images/cover-photo-image/a-beautiful-girl-with-gray-hair-and-lucxy-neckless-generated-by-Fotor-AI.jpg",
-        contactEmail:
-            "nomecontacten@gmail.com"); // ref.watch(currentUserProvider);
-
-    //TODO: user nunca null?
-    if (user == null) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-
+    
     return futureUserData!.isProfileFilled()
         ? CompleteProfile(user: futureUserData)
         : IncompleteProfile(user: futureUserData);
