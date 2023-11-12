@@ -60,7 +60,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   user: user,
                   genderField: user.gender ?? Gender.noBinary,
                   birthdateField: user.birthDate ?? DateTime.now(),
-                  imageField: user.profileImgUrl ?? "", //TODO: DEJAR UNA IMAGEN DEFAULT?
+                  profileImgUrl: user.profileImgUrl
                 ),
                 const SizedBox(
                   height: 32,
@@ -93,7 +93,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     onPressed: () => {
                       // print(EditProfileFormKey.currentState!.fields['profileImgUrl']!.value),
                       // print(EditProfileFormKey.currentState!.fields['birthdate']!.value),
-                      print(EditProfileFormKey.currentState!.fields['profileImgUrl']!.value),
+                      print(EditProfileFormKey.currentState!.fields['birthdate']!.value),
                       // print(ContactFormKey.currentState!.fields),
 
                       },

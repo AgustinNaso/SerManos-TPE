@@ -14,13 +14,11 @@ import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 class SermanosUploadProfilePhoto extends ConsumerStatefulWidget {
   const SermanosUploadProfilePhoto({
     Key? key,
-    required this.formField,
-    required this.initialValue,
+    this.initialValue,
     this.enabled = true,
     this.validators,
   }) : super(key: key);
 
-  final String formField;
   final String? initialValue;
   final bool enabled;
 
@@ -71,7 +69,7 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosUploadProfilePhoto>
                         ),
                         SermanosCtaButton(
                           text: "Subir foto",
-                          onPressed: () => print("subir foto"),
+                          onPressed: () => getImage(),
                              
                           enabled: widget.enabled,
                         )

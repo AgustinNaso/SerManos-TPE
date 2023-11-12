@@ -12,23 +12,27 @@ import 'package:ser_manos/data/models/gender.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 class EditProfileDataForm extends ConsumerWidget {
   final SermanosUser user;
   final Gender genderField;
   final DateTime birthdateField;
-  final String imageField;
+  final String? profileImgUrl;
 
   const EditProfileDataForm({
     Key? key,
     required this.user,
     required this.genderField,
     required this.birthdateField,
-    required this.imageField,
+    this.profileImgUrl,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    onChangeFocus(field, value) {
+      // ref.read(registerValidatorProvider.notifier).set(field, value); //TODO: PROVIDER
+    }
     return Container(
       // key: EditProfileDataKey,
       // enabled: true,
@@ -46,9 +50,30 @@ class EditProfileDataForm extends ConsumerWidget {
           ),
           SermanosDateField(
               label: "Fecha de nacimiento",
+              initialValue: birthdateField,
+              name: "birthdate",
               icon: SermanosIcons.calendar(
                   status: SermanosIconStatus
-                      .activated)), //TODO: internacionalizacion
+                      .activated),
+              onChangeFocus: onChangeFocus,
+              validators: [
+                FormBuilderValidators.required(
+                  errorText:
+                      AppLocalizations.of(context)!.requiredFieldError),
+                FormBuilderValidators.dateString(
+                  errorText: "Please enter a valid date",),
+                
+                (value) {
+                  if (value != null) {
+                    print("value: $value");
+                    final date = DateFormat('yyyy-MM-dd').parse(value);
+                    if (date.isAfter(DateTime.now())) {
+                      return "Please enter a valid date";
+                    }
+                  }
+                }
+              ],
+                      ), //TODO: internacionalizacion
           const SizedBox(
             height: 24,
           ),
@@ -90,8 +115,7 @@ class EditProfileDataForm extends ConsumerWidget {
             height: 24,
           ),
           SermanosUploadProfilePhoto(
-            formField: imageField,
-            initialValue: user.profileImgUrl,
+            initialValue: profileImgUrl,
             enabled: true,
           )
         ],
