@@ -1,23 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:ser_manos/config/molecules/images/sermanos_cached_network_image.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 
 class ProfileImage extends StatelessWidget {
   final String? imageUrl;
+  final double size;
 
-  const ProfileImage({Key? key, this.imageUrl = ""}) : super(key: key);
+  const ProfileImage({Key? key, this.imageUrl = "", this.size = 100})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return imageUrl == ""
-        ? const SizedBox(
-            child: Icon(Icons.account_circle_outlined,
-                size: 100, color: SermanosColors.secondary100),
-          )
+    return imageUrl != ""
+        ? ClipOval(
+            child: imageUrl!.contains("http")
+                ? SermanosCachedNetworkImage(
+                    imageUrl: imageUrl!,
+                    height: size,
+                    width: size,
+                  )
+                : Image.asset(
+                    imageUrl!,
+                    height: size,
+                    width: size,
+                    fit: BoxFit.cover,
+                  ))
         : SizedBox(
-            height: 100,
-            width: 100,
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(imageUrl!),
-            ));
+            child: Icon(Icons.account_circle_outlined,
+                size: size, color: SermanosColors.secondary100),
+          );
   }
 }
