@@ -40,6 +40,7 @@ class SermanosDateField extends HookConsumerWidget {
                 Expanded(
                   child: FormBuilderDateTimePicker(
                     name: name,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     initialValue: initialValue,
                     validator: (value) {
                       if (validators != null) {
