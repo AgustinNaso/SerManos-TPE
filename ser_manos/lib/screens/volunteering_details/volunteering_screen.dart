@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:ser_manos/config/cellules/information_card.dart';
+import 'package:ser_manos/config/molecules/images/sermanos_cached_network_image.dart';
 import 'package:ser_manos/config/molecules/vacancies/vacancies.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
@@ -15,6 +17,7 @@ import 'package:ser_manos/screens/volunteering_details/postulation_status/pendin
 
 class VolunteeringScreen extends ConsumerWidget {
   final String volunteeringId;
+
   const VolunteeringScreen({Key? key, required this.volunteeringId})
       : super(key: key);
 
@@ -31,13 +34,9 @@ class VolunteeringScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Stack(children: [
-                Container(
-                    width: double.infinity,
-                    height: 243,
-                    child: Image.network(
-                      volunteeringDetail.imgUrl,
-                      fit: BoxFit.cover,
-                    )),
+                SermanosCachedNetworkImage(
+                    imageUrl: volunteeringDetail.imgUrl, height: 243
+                ),
                 Positioned.fill(
                     child: Container(
                         decoration: const BoxDecoration(

@@ -7,7 +7,7 @@ import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 
-import '../molecules/profile_image.dart';
+import '../molecules/images/profile_image.dart';
 
 class IncompleteProfile extends ConsumerWidget {
   final SermanosUser user;

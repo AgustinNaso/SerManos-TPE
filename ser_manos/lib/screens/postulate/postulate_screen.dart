@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ser_manos/config/cellules/volunteering_card.dart';
 import 'package:ser_manos/config/molecules/userInputs/sermanos_search_bar.dart';
+import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/volunteering_model.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:ser_manos/providers/Future/volunteering_provider.dart';
 import 'package:ser_manos/screens/postulate/volunteerings_not_found.dart';
 
-import '../../config/tokens/sermanos_colors.dart';
-import '../../providers/Future/volunteering_provider.dart';
+
 
 final searchQueryProvider = StateProvider<String>((ref) => '');
 

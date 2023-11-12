@@ -6,7 +6,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
-import 'package:ser_manos/config/molecules/profile_image.dart';
+import 'package:ser_manos/config/molecules/images/profile_image.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 

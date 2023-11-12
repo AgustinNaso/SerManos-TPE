@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
+import 'package:ser_manos/config/molecules/images/sermanos_cached_network_image.dart';
 import 'package:ser_manos/config/molecules/vacancies/vacancies.dart';
 import 'package:ser_manos/config/tokens/sermanos_box_shadows.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
@@ -31,8 +32,7 @@ class VolunteeringCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.network(volunteeringInfo.imgUrl,
-                  width: double.infinity, height: 138, fit: BoxFit.cover),
+              SermanosCachedNetworkImage(imageUrl: volunteeringInfo.imgUrl, height: 138),
               Container(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
                 color: Colors.white,

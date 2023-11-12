@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../data/models/news_model.dart';
-import '../../tokens/sermanos_box_shadows.dart';
-import 'news_card_info.dart';
-import '../../tokens/sermanos_colors.dart';
+import 'package:ser_manos/config/cellules/news_card/news_card_info.dart';
+import 'package:ser_manos/config/molecules/images/sermanos_cached_network_image.dart';
+import 'package:ser_manos/config/tokens/sermanos_box_shadows.dart';
+import 'package:ser_manos/config/tokens/sermanos_colors.dart';
+import 'package:ser_manos/data/models/news_model.dart';
+
 
 class NewsCard extends StatelessWidget {
   final News news;
@@ -21,7 +23,7 @@ class NewsCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Image.network(news.imgUrl, width: 118, fit: BoxFit.cover),
+              SermanosCachedNetworkImage(imageUrl: news.imgUrl, width: 118),
               Expanded(
                   child: NewsCardInfo(
                       news: news,))
