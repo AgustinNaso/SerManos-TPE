@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 
 enum Gender {
   male("Hombre"),
-  female("Mujer"),
+  female("Mujer"), //TODO: internacionalizacion
   noBinary("No binario");
 
   const Gender(this.text);

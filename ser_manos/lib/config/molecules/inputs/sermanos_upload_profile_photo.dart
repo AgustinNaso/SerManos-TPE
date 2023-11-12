@@ -8,6 +8,7 @@ import 'package:ser_manos/config/molecules/buttons/sermanos_short_button.dart';
 import 'package:ser_manos/config/molecules/images/profile_image.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 
 class SermanosUploadProfilePhoto extends ConsumerStatefulWidget {
@@ -56,10 +57,10 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosUploadProfilePhoto>
               child: (_image == null || _image == "")
                   ? Row(
                       children: [
-                        const Expanded(
+                        Expanded(
                           child: Text(
-                            "Foto de perfil",
-                            style: SermanosTypography.subtitle01(
+                            AppLocalizations.of(context)!.profilePicture,
+                            style: const SermanosTypography.subtitle01(
                                 color: SermanosColors.neutral100),
                           ),
                         ),
@@ -67,7 +68,7 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosUploadProfilePhoto>
                           width: 8,
                         ),
                         SermanosShortButton(
-                          text: "Subir foto",
+                          text: AppLocalizations.of(context)!.uploadPicture,
                           filled: true,
                           onPressed: () => getImage(),
                              
@@ -81,16 +82,16 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosUploadProfilePhoto>
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Foto de perfil",
-                              style: SermanosTypography.subtitle01(
+                            Text(
+                              AppLocalizations.of(context)!.profilePicture,
+                              style: const SermanosTypography.subtitle01(
                                   color: SermanosColors.neutral100),
                             ),
                             const SizedBox(
                               height: 8,
                             ),
                             SermanosCtaButton(
-                              text: "Cambiar foto",
+                              text: AppLocalizations.of(context)!.changePicture,
                               onPressed: () => getImage(),
                                   
                               enabled: widget.enabled,

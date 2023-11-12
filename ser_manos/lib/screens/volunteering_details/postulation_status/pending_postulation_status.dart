@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ser_manos/config/cellules/modal.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/postulation_status.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 class PendingPostulationStatus extends StatelessWidget {
   final String volunteeringName;
@@ -10,10 +11,10 @@ class PendingPostulationStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PostulationStatus(
-        title: "Te has postulado",
+        title: AppLocalizations.of(context)!.applied,
         description:
-            "Pronto la organizacion se pondra en contatcto contigo y te inscribira como participante",
-        buttonText: "Retirar postulacion",
+            AppLocalizations.of(context)!.appliedDescription,
+        buttonText: AppLocalizations.of(context)!.withdrawAppliance,
         onButtonPressed: () => {
               showDialog(
                   context: context,
@@ -21,10 +22,10 @@ class PendingPostulationStatus extends StatelessWidget {
                     return Modal(
                         title: volunteeringName,
                         subtitle:
-                            'Estas seguro que queres retirar tu postulacion?',
+                            AppLocalizations.of(context)!.withdrawApplianceConfirmation,
                         onAccept: () {},
-                        primaryButtonText: 'Cancelar',
-                        secondaryButtonText: 'Confirmar');
+                        primaryButtonText: AppLocalizations.of(context)!.cancel,
+                        secondaryButtonText: AppLocalizations.of(context)!.confirm);
                   })
             });
   }

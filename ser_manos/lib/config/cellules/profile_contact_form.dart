@@ -32,7 +32,7 @@ class ContactForm extends ConsumerWidget {
           SermanosTextField(
 
             onChangeFocus: onChangeFocus,
-            labelText: 'email',
+            labelText: AppLocalizations.of(context)!.mail,
             name: "email",
             initialValue: user.email,
             validators: [
@@ -46,7 +46,7 @@ class ContactForm extends ConsumerWidget {
           ),
           const SizedBox(height: 24),
           SermanosTextField(
-              labelText: 'Phone Number',
+              labelText: AppLocalizations.of(context)!.phonenumber,
               onChangeFocus: onChangeFocus,
               initialValue: phoneNumber,
               name: "phoneNumber",
@@ -56,13 +56,13 @@ class ContactForm extends ConsumerWidget {
                         AppLocalizations.of(context)!.requiredFieldError),
                 FormBuilderValidators.numeric(
                     errorText:
-                        "Please enter a valid phone number"),
+                        AppLocalizations.of(context)!.phonenumberError),
                 FormBuilderValidators.minLength(10, 
                     errorText:
-                        "Please enter a valid phone number"),
+                        AppLocalizations.of(context)!.phonenumberError),
                 FormBuilderValidators.maxLength(15,
                     errorText:
-                        "Please enter a valid phone number"),             
+                        AppLocalizations.of(context)!.phonenumberError),
                 (val) {
                   return null;
                 },

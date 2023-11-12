@@ -32,14 +32,12 @@ class EditProfileDataForm extends ConsumerWidget {
       // ref.read(registerValidatorProvider.notifier).set(field, value); //TODO: PROVIDER
     }
     return Container(
-      // key: EditProfileDataKey,
-      // enabled: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "Datos de perfil",
-            style: SermanosTypography.headline01(
+          Text(
+            AppLocalizations.of(context)!.profileData,
+            style: const SermanosTypography.headline01(
               color: SermanosColors.neutral100,
             ),
           ),
@@ -47,7 +45,7 @@ class EditProfileDataForm extends ConsumerWidget {
             height: 24,
           ),
           SermanosDateField(
-            label: "Fecha de nacimiento",
+            label: AppLocalizations.of(context)!.dateOfBirth,
             initialValue: birthdateField,
             name: "birthdate",
             icon: SermanosIcons.calendar(status: SermanosIconStatus.activated),
@@ -56,19 +54,18 @@ class EditProfileDataForm extends ConsumerWidget {
               FormBuilderValidators.required(
                   errorText: AppLocalizations.of(context)!.requiredFieldError),
               FormBuilderValidators.dateString(
-                errorText: "Please enter a valid date",
+                errorText: AppLocalizations.of(context)!.wrongBirthDate,
               ),
               (value) {
                 if (value != null) {
-                  print("value: $value");
                   final date = DateFormat('yyyy-MM-dd').parse(value);
                   if (date.isAfter(DateTime.now())) {
-                    return "Please enter a valid date";
+                    return AppLocalizations.of(context)!.wrongBirthDate;
                   }
                 }
               }
             ],
-          ), //TODO: internacionalizacion
+          ),
           const SizedBox(
             height: 24,
           ),
@@ -85,9 +82,9 @@ class EditProfileDataForm extends ConsumerWidget {
                   color: SermanosColors.secondary25,
                 ),
                 width: double.infinity,
-                child: const Text(
-                  "Información del perfil", //TODO: internacionalizacion
-                  style: SermanosTypography.subtitle01(
+                child: Text(
+                  AppLocalizations.of(context)!.personalInfo, 
+                  style: const SermanosTypography.subtitle01(
                       color: SermanosColors.neutral100),
                 ),
               ),

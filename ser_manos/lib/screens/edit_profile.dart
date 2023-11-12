@@ -10,6 +10,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/gender.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 
 final EditProfileFormKey = GlobalKey<FormBuilderState>();
@@ -57,16 +58,15 @@ class EditProfileScreen extends ConsumerWidget {
               const SizedBox(
                 height: 32,
               ),
-              const Text(
-                "Datos de perfil", //TODO: internacionalizacion
-                style: SermanosTypography.headline01(
+              Text(
+                AppLocalizations.of(context)!.profileData,
+                style: const SermanosTypography.headline01(
                   color: SermanosColors.neutral100,
                 ),
               ),
-              const Text(
-                "Estos datos serán compartidos con la organización para ponerse en contacto contigo",
-                //TODO: internacionalizacion
-                style: SermanosTypography.subtitle01(
+              Text(
+                AppLocalizations.of(context)!.shareDisclaimer,
+                style: const SermanosTypography.subtitle01(
                   color: SermanosColors.neutral100,
                 ),
               ),
@@ -82,7 +82,7 @@ class EditProfileScreen extends ConsumerWidget {
                 height: 32,
               ),
               SermanosCtaButton(
-                text: "save",
+                text: AppLocalizations.of(context)!.saveData,
                 onPressed: () => {
                   // print(EditProfileFormKey.currentState!.fields['profileImgUrl']!.value),
                   // print(EditProfileFormKey.currentState!.fields['birthdate']!.value),
