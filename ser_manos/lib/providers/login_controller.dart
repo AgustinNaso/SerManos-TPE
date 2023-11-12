@@ -1,13 +1,20 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:ser_manos/config/cellules/login_form.dart';
 import 'package:ser_manos/data/models/form_states.dart';
 import 'package:ser_manos/data/services/firebase_auth.dart';
+import 'package:ser_manos/providers/repository_provider.dart';
+import 'package:ser_manos/providers/user_provider.dart';
 
-final loginControllerProvider = StateNotifierProvider<LoginController, String>(
-    (ref) => LoginController(FormStates.initial.name));
+import '../data/models/user_model.dart';
+import 'auth_provider.dart';
 
-class LoginController extends StateNotifier<String> {
-  LoginController(super.state);
+part 'login_controller.g.dart';
+
+@riverpod
+class LoginController extends _$LoginController {
+  @override
+  build() => {};
 
   @override
   get state => super.state;
@@ -22,11 +29,13 @@ class LoginController extends StateNotifier<String> {
   ) async {
     state = FormStates.loading.name;
     try {
-      await MyFirebaseAuth()
-          .signInWithEmailAndPassword(email: email, password: password);
-
+      final auth = ref.read(firebaseAuthProvider);
+      final user = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
       state = FormStates.success.name;
+      // ref.read(loggedUserProvider.notifier).set(user);
     } catch (e) {
+      print("ERRPR" + e.toString());
       state = FormStates.error.name;
       LoginFormKey.currentState!.validate();
     }

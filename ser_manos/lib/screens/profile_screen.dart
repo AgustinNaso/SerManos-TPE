@@ -4,6 +4,7 @@ import 'package:ser_manos/config/cellules/complete_profile.dart';
 import 'package:ser_manos/config/cellules/incomplete_profile.dart';
 import 'package:ser_manos/data/models/gender.dart';
 import 'package:ser_manos/data/models/user_model.dart';
+import 'package:ser_manos/providers/user_provider.dart';
 
 class ProfileScreen extends ConsumerWidget {
   static const route = "/profile";
@@ -13,6 +14,7 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final futureUserData = ref.read(loggedUserProvider);
     final SermanosUser user = SermanosUser(
         id: "1",
         email: "gdeschant@itba.edu.ar",
@@ -33,8 +35,8 @@ class ProfileScreen extends ConsumerWidget {
       );
     }
 
-    return user.isProfileFilled()
-        ? CompleteProfile(user: user)
-        : IncompleteProfile(user: user);
+    return futureUserData!.isProfileFilled()
+        ? CompleteProfile(user: futureUserData)
+        : IncompleteProfile(user: futureUserData);
   }
 }

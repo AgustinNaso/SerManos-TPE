@@ -1,14 +1,18 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:ser_manos/config/cellules/register_form.dart';
 import 'package:ser_manos/data/models/form_states.dart';
 import 'package:ser_manos/data/services/firebase_auth.dart';
 
-final registerControllerProvider =
-    StateNotifierProvider<RegisterController, String>(
-        (ref) => RegisterController(FormStates.initial.name));
+import 'auth_provider.dart';
 
-class RegisterController extends StateNotifier<String> {
-  RegisterController(super.state);
+part 'register_controller.g.dart';
+
+@riverpod
+class RegisterController extends _$RegisterController {
+  @override
+  build() => {};
 
   @override
   get state => super.state;
@@ -25,7 +29,8 @@ class RegisterController extends StateNotifier<String> {
   ) async {
     state = FormStates.loading.name;
     try {
-      await MyFirebaseAuth().createUserWithEmailAndPassword(
+      final auth = ref.read(firebaseAuthProvider);
+      await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
         lastName: lastName,

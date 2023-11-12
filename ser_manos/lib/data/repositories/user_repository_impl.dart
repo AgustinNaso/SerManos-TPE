@@ -28,6 +28,22 @@ class UserRepositoryImpl extends Repository<SermanosUser> {
     }
   }
 
+  Future<SermanosUser> getUsersById(String id) async {
+    try {
+      final querySnapshot = await collection.doc(id).get();
+      if (querySnapshot.exists) {
+        final user = itemFromJson(id, querySnapshot.data()!);
+        return user;
+      } else {
+        throw NotFoundException("User with id $id not found");
+      }
+    } catch (e) {
+      print(e);
+      // Rethrow the exception or handle it as needed.
+      throw e;
+    }
+  }
+
   @override
   SermanosUser itemFromJson(String id, Map<String, dynamic> json) {
     json["id"] = id;
