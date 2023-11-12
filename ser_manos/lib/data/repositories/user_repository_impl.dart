@@ -1,5 +1,3 @@
-import 'dart:js_interop_unsafe';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
