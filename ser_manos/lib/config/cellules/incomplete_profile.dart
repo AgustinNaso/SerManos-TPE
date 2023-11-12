@@ -20,9 +20,8 @@ class IncompleteProfile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+      body:  Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Column(
@@ -86,7 +85,6 @@ class IncompleteProfile extends ConsumerWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
