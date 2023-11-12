@@ -14,15 +14,15 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 class EditProfileDataForm extends ConsumerWidget {
   final SermanosUser user;
-  final Gender genderField;
+  final Gender? genderField;
   final DateTime birthdateField;
   final String? profileImgUrl;
 
   const EditProfileDataForm({
     Key? key,
     required this.user,
-    required this.genderField,
     required this.birthdateField,
+    this.genderField,
     this.profileImgUrl,
   }) : super(key: key);
 
@@ -31,90 +31,85 @@ class EditProfileDataForm extends ConsumerWidget {
     onChangeFocus(field, value) {
       // ref.read(registerValidatorProvider.notifier).set(field, value); //TODO: PROVIDER
     }
-    return Container(
-      // key: EditProfileDataKey,
-      // enabled: true,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Datos de perfil",
-            style: SermanosTypography.headline01(
-              color: SermanosColors.neutral100,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppLocalizations.of(context)!.profileData,
+          style: const SermanosTypography.headline01(
+            color: SermanosColors.neutral100,
+          ),
+        ),
+        const SizedBox(
+          height: 24,
+        ),
+        SermanosDateField(
+          label: AppLocalizations.of(context)!.dateOfBirth,
+          initialValue: birthdateField,
+          name: "birthdate",
+          icon: SermanosIcons.calendar(status: SermanosIconStatus.activated),
+          onChangeFocus: onChangeFocus,
+          validators: [
+            FormBuilderValidators.required(
+                errorText: AppLocalizations.of(context)!.requiredFieldError),
+            FormBuilderValidators.dateString(
+              errorText: AppLocalizations.of(context)!.wrongBirthDate,
             ),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          SermanosDateField(
-            label: "Fecha de nacimiento",
-            initialValue: birthdateField,
-            name: "birthdate",
-            icon: SermanosIcons.calendar(status: SermanosIconStatus.activated),
-            onChangeFocus: onChangeFocus,
-            validators: [
-              FormBuilderValidators.required(
-                  errorText: AppLocalizations.of(context)!.requiredFieldError),
-              FormBuilderValidators.dateString(
-                errorText: "Please enter a valid date",
-              ),
-              (value) {
-                if (value != null) {
-                  print("value: $value");
-                  final date = DateFormat('yyyy-MM-dd').parse(value);
-                  if (date.isAfter(DateTime.now())) {
-                    return "Please enter a valid date";
-                  }
+            (value) {
+              if (value != null) {
+                final date = DateFormat('yyyy-MM-dd').parse(value);
+                if (date.isAfter(DateTime.now())) {
+                  return AppLocalizations.of(context)!.wrongBirthDate;
                 }
               }
-            ],
-          ), //TODO: internacionalizacion
-          const SizedBox(
-            height: 24,
-          ),
-          Column(
-            children: [
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            }
+          ],
+        ),
+        const SizedBox(
+          height: 24,
+        ),
+        Column(
+          children: [
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(4),
+                  topLeft: Radius.circular(4),
+                ),
+                color: SermanosColors.secondary25,
+              ),
+              width: double.infinity,
+              child: Text(
+                AppLocalizations.of(context)!.personalInfo,
+                style: const SermanosTypography.subtitle01(
+                    color: SermanosColors.neutral100),
+              ),
+            ),
+            Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(4),
-                    topLeft: Radius.circular(4),
-                  ),
-                  color: SermanosColors.secondary25,
+                      bottomRight: Radius.circular(4),
+                      bottomLeft: Radius.circular(4)),
+                  color: SermanosColors.neutral10,
                 ),
                 width: double.infinity,
-                child: const Text(
-                  "Información del perfil", //TODO: internacionalizacion
-                  style: SermanosTypography.subtitle01(
-                      color: SermanosColors.neutral100),
-                ),
-              ),
-              Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(4),
-                        bottomLeft: Radius.circular(4)),
-                    color: SermanosColors.neutral10,
-                  ),
-                  width: double.infinity,
-                  child: SermanosGenderSelection(initialValue: genderField)),
-            ],
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          SermanosUploadProfilePhoto(
-            initialValue: profileImgUrl,
-            enabled: true,
-          )
-        ],
-      ),
+                child: SermanosGenderSelection(initialValue: genderField)),
+          ],
+        ),
+        const SizedBox(
+          height: 24,
+        ),
+        SermanosUploadProfilePhoto(
+          initialValue: profileImgUrl,
+          enabled: true,
+        )
+      ],
     );
   }
 }

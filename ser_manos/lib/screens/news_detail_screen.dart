@@ -7,6 +7,7 @@ import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/providers/Future/news_provider.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 class NewsDetailScreen extends ConsumerWidget {
   final String newsId;
@@ -19,9 +20,9 @@ class NewsDetailScreen extends ConsumerWidget {
         data: (newsData) {
           return Scaffold(
               appBar: AppBar(
-                title: const Text(
-                  'Novedades', //TODO: INTERNACIONALIZAR
-                  style: SermanosTypography.subtitle01(
+                title: Text(
+                  AppLocalizations.of(context)!.newsAppBar,
+                  style: const SermanosTypography.subtitle01(
                       color: SermanosColors.primary10),
                 ),
                 centerTitle: true,
@@ -37,7 +38,7 @@ class NewsDetailScreen extends ConsumerWidget {
                     children: [
                       const SizedBox(height: 20),
                       Text(
-                        newsData.source, //TODO: source dynamic value
+                        newsData.source,
                         style: const SermanosTypography(
                             fontWeight: FontWeight.w500,
                             fontSize: 10,
@@ -45,7 +46,7 @@ class NewsDetailScreen extends ConsumerWidget {
                             letterSpacing: 1.5),
                       ),
                       Text(
-                        newsData.title, //TODO: title dynamic value ,
+                        newsData.title,
                         style: const SermanosTypography(
                             fontWeight: FontWeight.w400,
                             fontSize: 16,
@@ -72,18 +73,18 @@ class NewsDetailScreen extends ConsumerWidget {
                         style: const SermanosTypography.body01(),
                       ),
                       const SizedBox(height: 16),
-                      const Text(
-                        'Comparte esta nota', //TODO: internacionalizar
-                        style: SermanosTypography.defaultHeadline(),
+                      Text(
+                        AppLocalizations.of(context)!.shareNews,
+                        style: const SermanosTypography.defaultHeadline(),
                         textAlign: TextAlign.center,
                       ),
                       Container(
                         margin: const EdgeInsets.symmetric(vertical: 20.0),
-                        child: SermanosCtaButton(text: 'Compartir', onPressed: () async { //TODO: internacionalizar
+                        child: SermanosCtaButton(text:  AppLocalizations.of(context)!.share, onPressed: () async {
                           final result = await Share.shareWithResult('Compartir esta noticia https://example.com'); //TODO: DEEPLINK
 
                           if (result.status == ShareResultStatus.success) {
-                              print('Gracias por compartir la noticia');
+                              print(AppLocalizations.of(context)!.sharementThanks);
                           }
                   }),
                 )

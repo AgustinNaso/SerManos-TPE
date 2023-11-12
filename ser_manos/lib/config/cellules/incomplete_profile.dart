@@ -6,6 +6,7 @@ import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/user_model.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 import '../molecules/images/profile_image.dart';
 
@@ -33,9 +34,9 @@ class IncompleteProfile extends ConsumerWidget {
               SizedBox(
                 child: Column(
                   children: [
-                    const Text(
-                      "Volunteer",
-                      style: SermanosTypography.overline(
+                     Text(
+                      AppLocalizations.of(context)!.volunteer,
+                      style: const SermanosTypography.overline(
                         color: SermanosColors.neutral75,
                       ),
                     ),
@@ -47,12 +48,12 @@ class IncompleteProfile extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Padding(
-                      padding: EdgeInsetsDirectional.symmetric(horizontal: 60),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.symmetric(horizontal: 60),
                       child: Text(
-                        "¡Completá tu perfil para tener acceso a mejores oportunidades!",
+                        AppLocalizations.of(context)!.completeProfile,
                         textAlign: TextAlign.center,
-                        style: SermanosTypography.body01(
+                        style: const SermanosTypography.body01(
                           color: SermanosColors.neutral75,
                         ),
                       ),
@@ -70,7 +71,7 @@ class IncompleteProfile extends ConsumerWidget {
                 children: [
                   SermanosCtaButton(
                       icon: const Icon(Icons.add),
-                      text: "Completar",
+                      text: AppLocalizations.of(context)!.complete,
                       onPressed: () => {
                             GoRouter.of(context).pushNamed('editProfile')
                             // TODO: create and pass user

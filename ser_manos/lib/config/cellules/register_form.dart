@@ -72,7 +72,7 @@ class RegisterForm extends ConsumerWidget {
                           AppLocalizations.of(context)!.enterValidEmailError),
                   (val) {
                     if (registerProvider.state == FormStates.error.name) {
-                      return "Email already in use";
+                      return AppLocalizations.of(context)!.usedMailError;
                     }
                     return null;
                   },

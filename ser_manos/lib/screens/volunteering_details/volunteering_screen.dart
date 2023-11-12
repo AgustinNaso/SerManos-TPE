@@ -17,7 +17,7 @@ import 'package:ser_manos/screens/volunteering_details/postulation_status/accept
 import 'package:ser_manos/screens/volunteering_details/postulation_status/already_postulated_postulation_status.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/default_postulation_status.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/pending_postulation_status.dart';
-import 'package:ser_manos/screens/volunteering_details/postulation_status/postulation_status.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 class VolunteeringScreen extends ConsumerWidget {
   final String volunteeringId;
@@ -76,23 +76,28 @@ class VolunteeringScreen extends ConsumerWidget {
                           style: const SermanosTypography.body01(
                               color: SermanosColors.secondary200)),
                       const SizedBox(height: 24),
-                      const Text('Sobre la actividad',
-                          style: SermanosTypography.defaultHeadline()),
+                      Text(AppLocalizations.of(context)!.aboutActivity,
+                          style: const SermanosTypography.defaultHeadline()),
                       const SizedBox(
                         height: 8,
                       ),
                       Text(volunteeringDetail.about,
                           style: const SermanosTypography.body01()),
                       const SizedBox(height: 24),
-                      InformationCard(title: 'Ubicacion', information: [
-                        ('Direccion', volunteeringDetail.location)
-                      ]),
+                      InformationCard(
+                          title: AppLocalizations.of(context)!.location,
+                          information: [
+                            (
+                              AppLocalizations.of(context)!.direction,
+                              volunteeringDetail.location
+                            )
+                          ]),
                       const SizedBox(height: 24),
-                      const Text('Participar del voluntariado',
-                          style: SermanosTypography.defaultHeadline()),
+                      Text(AppLocalizations.of(context)!.participate,
+                          style: const SermanosTypography.defaultHeadline()),
                       const SizedBox(height: 8),
-                      const Text('Requisitos',
-                          style: SermanosTypography.subtitle01()),
+                      Text(AppLocalizations.of(context)!.requirements,
+                          style: const SermanosTypography.subtitle01()),
                       const SizedBox(height: 8),
                       ListView.builder(
                         padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
@@ -115,8 +120,8 @@ class VolunteeringScreen extends ConsumerWidget {
                         },
                       ),
                       const SizedBox(height: 8),
-                      const Text('Disponibilidad',
-                          style: SermanosTypography.subtitle01()),
+                      Text(AppLocalizations.of(context)!.availability,
+                          style: const SermanosTypography.subtitle01()),
                       const SizedBox(height: 8),
                       ListView.builder(
                         padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),

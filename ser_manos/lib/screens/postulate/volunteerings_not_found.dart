@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 class VolunteeringNotFound extends StatelessWidget {
   const VolunteeringNotFound({Key? key}) : super(key: key);
@@ -18,11 +19,11 @@ class VolunteeringNotFound extends StatelessWidget {
           vertical: 30,
           horizontal: 24,
         ),
-        child: const Center(
+        child: Center(
           child: Text(
-            "No hay voluntariados vigentes para tu busqueda.",
+            AppLocalizations.of(context)!.volunteeringsNotFound,
             textAlign: TextAlign.center,
-            style: SermanosTypography.subtitle01(
+            style: const SermanosTypography.subtitle01(
               color: SermanosColors.neutral100,
             ),
           ),

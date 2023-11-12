@@ -10,6 +10,8 @@ import 'package:ser_manos/config/molecules/images/profile_image.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/user_model.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:ser_manos/l10n/localizations.dart';
 
 class CompleteProfile extends ConsumerWidget {
   final SermanosUser user;
@@ -35,9 +37,9 @@ class CompleteProfile extends ConsumerWidget {
               SizedBox(
                 child: Column(
                   children: [
-                    const Text(
-                      "Volunteer",
-                      style: SermanosTypography.overline(
+                    Text(
+                      AppLocalizations.of(context)!.volunteer,
+                      style: const SermanosTypography.overline(
                         color: SermanosColors.neutral75,
                       ),
                     ),
@@ -65,23 +67,23 @@ class CompleteProfile extends ConsumerWidget {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: InformationCard(
-                    title: 'Información personal',
+                    title:  AppLocalizations.of(context)!.personalInfo,
                     information: [
                       (
-                        'fecha de nacimiento',
+                         AppLocalizations.of(context)!.dateOfBirth,
                         DateFormat.yMd(locale).format(user.birthDate!)
                       ),
-                      ('Género', user.gender!.text)
+                      ( AppLocalizations.of(context)!.gender, genderNameFromEnum(context, user.gender))
                     ]),
               ),
               const SizedBox(height: 16),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: InformationCard(
-                    title: 'Datos de contacto',
+                    title:  AppLocalizations.of(context)!.contactData,
                     information: [
-                      ('teléfono', user.phoneNumber!),
-                      ('e-mail', user.email)
+                      ( AppLocalizations.of(context)!.phonenumber, user.phoneNumber!),
+                      ( AppLocalizations.of(context)!.hyphenEmail, user.email)
                     ]),
               ),
             ],
@@ -93,10 +95,8 @@ class CompleteProfile extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SermanosCtaButton(
-                  text: "Editar perfil",
+                  text:  AppLocalizations.of(context)!.editProfile,
                   onPressed: () => {
-                    print("Go to Edit Profile"),
-
                     GoRouter.of(context).pushNamed('editProfile')
                     // TODO: create and pass user
                   },
@@ -104,7 +104,7 @@ class CompleteProfile extends ConsumerWidget {
                 ),
                 const SizedBox(width: 8),
                 SermanosCtaButton(
-                  text: "Cerrar sesión",
+                  text:  AppLocalizations.of(context)!.logout,
                   onPressed: () => Navigator.of(context).pushNamed('login'),
                   backgroundColor: Colors.transparent,
                   textColor: SermanosColors.error100,

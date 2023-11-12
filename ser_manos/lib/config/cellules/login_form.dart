@@ -60,7 +60,7 @@ class LoginForm extends ConsumerWidget {
                         AppLocalizations.of(context)!.minLengthError(8)),
                 (val) {
                   if (loginProvider.state == FormStates.error.name) {
-                    return "User with email or password is not exists";
+                    return AppLocalizations.of(context)!.wrongUserPassword;
                   }
                   return null;
                 },

@@ -16,6 +16,7 @@ class VolunteeringPostulation implements JsonSerializable<VolunteeringPostulatio
   });
 
   static fromJson(Map<String, dynamic> json) {
+    if (json.isEmpty) return null;
     return VolunteeringPostulation(
       volunteeringId: json['volunteeringId'],
       status: VolunteeringPostulationStatus.values[json['status']],

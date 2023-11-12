@@ -3,9 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ser_manos/config/cellules/modal.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/models/volunteering_details_model.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
+import 'package:ser_manos/data/repositories/repository.dart';
+import 'package:ser_manos/providers/Future/volunteering_provider.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 
@@ -19,16 +22,17 @@ class DefaultPostulationStatus extends StatelessWidget {
     final bool canPostulate = volunteeringDetails.vacancies > 0;
     return Consumer(builder: (context, ref, child) {
       final currentUser = ref.watch(loggedUserProvider);
+
       return Column(children: [
         if (!canPostulate)
-          const Column(
+          Column(
             children: [
               Text(
-                'No hay vacantes disponibles para postularse',
-                style: SermanosTypography.body01(),
+                AppLocalizations.of(context)!.noVacancy,
+                style: const SermanosTypography.body01(),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
             ],
           ),
         SermanosCtaButton(

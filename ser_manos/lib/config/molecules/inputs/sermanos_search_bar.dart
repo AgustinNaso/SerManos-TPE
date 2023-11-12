@@ -4,6 +4,7 @@ import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:ser_manos/config/tokens/sermanos_box_shadows.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 class SermanosSearchBar extends HookWidget {
   const SermanosSearchBar({super.key, required this.onChange});
@@ -35,7 +36,7 @@ class SermanosSearchBar extends HookWidget {
             horizontal: 16,
             vertical: 12,
           ),
-          hintText: 'Buscar',
+          hintText:  AppLocalizations.of(context)!.search,
           hintStyle: const SermanosTypography.subtitle01(
               color: SermanosColors.neutral75),
           prefixIcon: !isEmpty
