@@ -33,9 +33,8 @@ class LoginController extends _$LoginController {
       final user = await auth.signInWithEmailAndPassword(
           email: email, password: password);
       state = FormStates.success.name;
-      // ref.read(loggedUserProvider.notifier).set(user);
+      ref.read(loggedUserProvider.notifier).set(user);
     } catch (e) {
-      print("ERRPR" + e.toString());
       state = FormStates.error.name;
       LoginFormKey.currentState!.validate();
     }

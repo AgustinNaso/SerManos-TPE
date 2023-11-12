@@ -26,7 +26,7 @@ class MyFirebaseAuth {
       );
 
       final user =
-          await UserRepositoryImpl().getUsersById(userCredential.user!.email!);
+          await UserRepositoryImpl().getUsersById(userCredential.user!.uid);
 
       return user;
     } on Error catch (e) {
