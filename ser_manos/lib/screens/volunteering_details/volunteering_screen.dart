@@ -8,13 +8,16 @@ import 'package:ser_manos/config/molecules/images/sermanos_cached_network_image.
 import 'package:ser_manos/config/molecules/vacancies/vacancies.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
+import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/models/volunteering_details_model.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
 import 'package:ser_manos/providers/Future/volunteering_provider.dart';
+import 'package:ser_manos/providers/user_provider.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/accepted_postulation_status.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/already_postulated_postulation_status.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/default_postulation_status.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/pending_postulation_status.dart';
+import 'package:ser_manos/screens/volunteering_details/postulation_status/postulation_status.dart';
 
 class VolunteeringScreen extends ConsumerWidget {
   final String volunteeringId;
@@ -26,8 +29,7 @@ class VolunteeringScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final futureVolunteeringDetail =
         ref.watch(getVolunteeringDetailsProvider(volunteeringId));
-    final VolunteeringPostulation? volunteeringPostulation =
-        ref.read(volunteeringPostulationProvider);
+    final SermanosUser? loggedUser = ref.watch(loggedUserProvider);
 
     return Scaffold(
         body: futureVolunteeringDetail.when(
@@ -139,7 +141,9 @@ class VolunteeringScreen extends ConsumerWidget {
                       const SizedBox(height: 8),
                       const Vacancies(vacancy: 10),
                       const SizedBox(height: 24),
-                      handleVolunteeringStatus('accepted', volunteeringDetail),
+                      handleVolunteeringStatus(
+                          loggedUser!.volunteeringPostulation,
+                          volunteeringDetail),
                     ],
                   ))
             ],
@@ -152,27 +156,19 @@ class VolunteeringScreen extends ConsumerWidget {
   }
 }
 
-Widget handleVolunteeringStatus(
-    String status, VolunteeringDetails volunteeringDetails) {
-  //TODO: better way of doing this?
-  if (volunteeringDetails.vacancies == 0) {
-    return DefaultPostulationStatus(
-        canPostulate: volunteeringDetails.vacancies > 0);
+Widget handleVolunteeringStatus(VolunteeringPostulation? userPostulation,
+    VolunteeringDetails volunteeringDetails) {
+  if (volunteeringDetails.vacancies == 0 ||
+      userPostulation == null ||
+      userPostulation.status == VolunteeringPostulationStatus.notPostulated) {
+    return DefaultPostulationStatus(volunteeringDetails: volunteeringDetails);
   }
-  switch (status) {
-    case 'postulated':
-      return PendingPostulationStatus(
-          volunteeringName: volunteeringDetails.name);
-    case 'accepted':
-      return AcceptedPostulationStatus(
-          volunteeringName: volunteeringDetails.name);
-    case 'has_other_postulation':
-      return const AlreadyPostulatedPostulationStatus();
-    case 'not_postulated':
-      return DefaultPostulationStatus(
-          canPostulate: volunteeringDetails.vacancies > 0);
-    default:
-      return DefaultPostulationStatus(
-          canPostulate: volunteeringDetails.vacancies > 0);
+  if (userPostulation.status == VolunteeringPostulationStatus.pending) {
+    return PendingPostulationStatus(volunteeringName: volunteeringDetails.name);
   }
+  if (userPostulation.status == VolunteeringPostulationStatus.accepted &&
+      userPostulation.volunteeringId == volunteeringDetails.volunteeringId) {
+    return const AlreadyPostulatedPostulationStatus();
+  }
+  return AcceptedPostulationStatus(volunteeringName: volunteeringDetails.name);
 }

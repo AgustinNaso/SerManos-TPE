@@ -1,5 +1,4 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:ser_manos/data/repositories/news_repository_impl.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
 
 import '../../data/models/news_model.dart';
