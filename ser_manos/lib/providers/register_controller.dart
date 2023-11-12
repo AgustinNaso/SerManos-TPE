@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:ser_manos/config/cellules/register_form.dart';
 import 'package:ser_manos/data/models/form_states.dart';
-import 'package:ser_manos/data/services/firebase_auth.dart';
 
 import 'auth_provider.dart';
 
