@@ -35,9 +35,9 @@ abstract class Repository<T extends GenericModel<T>> {
   }
 
   @protected
-  Future<T> update(String id,T item) async {
+  Future<T> update(T item) async {
     try {
-      await collection.doc(id).update(item.toJson());
+      await collection.doc(item.id).update(item.toJson());
     } catch (e) {
       print(e);
       rethrow;

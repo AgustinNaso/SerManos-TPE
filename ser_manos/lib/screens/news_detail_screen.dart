@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
+import 'package:ser_manos/config/molecules/images/sermanos_cached_network_image.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/providers/Future/news_provider.dart';
@@ -54,9 +55,8 @@ class NewsDetailScreen extends ConsumerWidget {
                       const SizedBox(height: 16),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
-                        child: Image.asset(
-                          newsData.imgUrl, //TODO: image dynamic value
-                          fit: BoxFit.cover,
+                        child: SermanosCachedNetworkImage(
+                          imageUrl: newsData.imgUrl,
                           height: 160,
                         ),
                       ),
