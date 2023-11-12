@@ -1,4 +1,8 @@
+import 'dart:js_interop_unsafe';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ser_manos/data/models/user_model.dart';
+import 'package:ser_manos/data/models/volunteering_postulation.dart';
 import 'package:ser_manos/data/repositories/repository.dart';
 import 'package:ser_manos/exceptions/not_found_exception.dart';
 
@@ -7,6 +11,37 @@ class UserRepositoryImpl extends Repository<SermanosUser> {
 
   Future<SermanosUser> createUser(SermanosUser user) async {
     return await create(user);
+  }
+
+  Future<SermanosUser> updateUser(SermanosUser user, Map<String, dynamic> update) async {
+    final Map<String, dynamic> updateUser = {};
+    if (update.containsKey("profileImgUrl")) {
+      updateUser["profileImgUrl"] = update["profileImgUrl"];
+    }
+    if (update.containsKey('phoneNumber')) {
+      updateUser["phoneNumber"] = update["phoneNumber"];
+    }
+    if (update.containsKey('gender')) {
+      updateUser["gender"] = update["gender"]; // TODO: add enum handling
+    }
+    if (update.containsKey("contactEmail")) {
+      updateUser["contactEmail"] = update["contactEmail"];
+    }
+    if (update.containsKey("birthDate")) {
+      updateUser["birthDate"] = update["birthDate"];
+    }
+    if (update.containsKey("volunteeringPostulation")) {
+      updateUser["volunteeringPostulation"] = (update["volunteeringPostulation"] as VolunteeringPostulation).toJson();
+    }
+    return await this.update(user);
+  }
+
+  Future<void> addFavoriteVolunteering(String uid, String vid) async {
+    await collection.doc('uid').update({"favVolunteerings": FieldValue.arrayUnion([vid])});
+  }
+
+  Future<void> removeFavoriteVolunteering(String uid, String vid) async {
+    await collection.doc('uid').update({"favVolunteerings": FieldValue.arrayRemove([vid])});
   }
 
   // @throws NotFoundException
