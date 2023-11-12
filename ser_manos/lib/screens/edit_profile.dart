@@ -23,7 +23,7 @@ class EditProfileScreen extends ConsumerWidget {
       lastName: "De Schant",
       birthDate: DateTime.now(),
       phoneNumber: "123456789",
-      gender: Gender.noBinary,
+      // gender: null,
       profileImgUrl:
           "",
       contactEmail: "nomecontacten@gmail.com");
@@ -52,7 +52,7 @@ class EditProfileScreen extends ConsumerWidget {
             children: [
               EditProfileDataForm(
                   user: user,
-                  genderField: user.gender ?? Gender.noBinary,
+                  genderField: user.gender,
                   birthdateField: user.birthDate ?? DateTime.now(),
                   profileImgUrl: user.profileImgUrl),
               const SizedBox(

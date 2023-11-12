@@ -62,8 +62,8 @@ class SermanosUser extends GenericModel<SermanosUser> {
                 .map((item) => item as String)
                 .toList()
             : [],
-        volunteeringPostulation:
-            VolunteeringPostulation.fromJson(json['volunteeringPostulation']));
+        volunteeringPostulation: json['volunteeringPostulation'] == null ? null :
+            VolunteeringPostulation.fromJson(json['volunteeringPostulation'] ));
   }
 
   @override
