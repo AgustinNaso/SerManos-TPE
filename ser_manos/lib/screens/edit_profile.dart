@@ -23,8 +23,8 @@ class EditProfileScreen extends ConsumerWidget {
       birthDate: DateTime.now(),
       phoneNumber: "123456789",
       gender: Gender.noBinary,
-      profileImgUrl:
-          "https://imgv3.fotor.com/images/cover-photo-image/a-beautiful-girl-with-gray-hair-and-lucxy-neckless-generated-by-Fotor-AI.jpg",
+      profileImgUrl: "",
+          // "https://imgv3.fotor.com/images/cover-photo-image/a-beautiful-girl-with-gray-hair-and-lucxy-neckless-generated-by-Fotor-AI.jpg",
       contactEmail: "nomecontacten@gmail.com");
 
   EditProfileScreen({super.key});

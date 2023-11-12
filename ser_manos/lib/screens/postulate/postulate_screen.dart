@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ser_manos/config/cellules/volunteering_card.dart';
-import 'package:ser_manos/config/molecules/userInputs/sermanos_search_bar.dart';
+import 'package:ser_manos/config/molecules/inputs/sermanos_search_bar.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/volunteering_model.dart';

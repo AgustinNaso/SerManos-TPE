@@ -4,8 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
-
-import '../../tokens/sermanos_colors.dart';
+import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 
 class SermanosTextField extends HookConsumerWidget {
   final String? hintText;

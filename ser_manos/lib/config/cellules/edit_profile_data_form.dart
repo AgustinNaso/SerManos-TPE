@@ -3,15 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
-import 'package:ser_manos/config/molecules/userInputs/sermanos_date_field.dart';
-import 'package:ser_manos/config/molecules/userInputs/sermanos_gender_selection.dart';
-import 'package:ser_manos/config/molecules/userInputs/sermanos_upload_profile_photo.dart';
+import 'package:ser_manos/config/molecules/inputs/sermanos_date_field.dart';
+import 'package:ser_manos/config/molecules/inputs/sermanos_gender_selection.dart';
+import 'package:ser_manos/config/molecules/inputs/sermanos_upload_profile_photo.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/gender.dart';
 import 'package:ser_manos/data/models/user_model.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 class EditProfileDataForm extends ConsumerWidget {
@@ -46,34 +44,31 @@ class EditProfileDataForm extends ConsumerWidget {
             ),
           ),
           const SizedBox(
-            height: 16,
+            height: 24,
           ),
           SermanosDateField(
-              label: "Fecha de nacimiento",
-              initialValue: birthdateField,
-              name: "birthdate",
-              icon: SermanosIcons.calendar(
-                  status: SermanosIconStatus
-                      .activated),
-              onChangeFocus: onChangeFocus,
-              validators: [
-                FormBuilderValidators.required(
-                  errorText:
-                      AppLocalizations.of(context)!.requiredFieldError),
-                FormBuilderValidators.dateString(
-                  errorText: "Please enter a valid date",),
-                
-                (value) {
-                  if (value != null) {
-                    print("value: $value");
-                    final date = DateFormat('yyyy-MM-dd').parse(value);
-                    if (date.isAfter(DateTime.now())) {
-                      return "Please enter a valid date";
-                    }
+            label: "Fecha de nacimiento",
+            initialValue: birthdateField,
+            name: "birthdate",
+            icon: SermanosIcons.calendar(status: SermanosIconStatus.activated),
+            onChangeFocus: onChangeFocus,
+            validators: [
+              FormBuilderValidators.required(
+                  errorText: AppLocalizations.of(context)!.requiredFieldError),
+              FormBuilderValidators.dateString(
+                errorText: "Please enter a valid date",
+              ),
+              (value) {
+                if (value != null) {
+                  print("value: $value");
+                  final date = DateFormat('yyyy-MM-dd').parse(value);
+                  if (date.isAfter(DateTime.now())) {
+                    return "Please enter a valid date";
                   }
                 }
-              ],
-                      ), //TODO: internacionalizacion
+              }
+            ],
+          ), //TODO: internacionalizacion
           const SizedBox(
             height: 24,
           ),

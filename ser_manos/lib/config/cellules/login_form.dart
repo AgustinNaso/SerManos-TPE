@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:ser_manos/config/molecules/textfields/sermanos_text_field.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:ser_manos/config/molecules/inputs/sermanos_text_field.dart';
 import 'package:ser_manos/data/models/form_states.dart';
 import 'package:ser_manos/providers/login_controller.dart';
 import 'package:ser_manos/providers/login_provider.dart';

@@ -8,11 +8,12 @@ class SermanosTypography extends TextStyle {
       required Color color,
       required double letterSpacing})
       : super(
-            fontFamily: 'Roboto',
-            fontWeight: fontWeight,
-            fontSize: fontSize,
-            color: color,
-            letterSpacing: letterSpacing);
+          fontFamily: 'Roboto',
+          fontWeight: fontWeight,
+          fontSize: fontSize,
+          color: color,
+          letterSpacing: letterSpacing,
+        );
 
   static const double _fontSizeXs = 10;
   static const double _fontSizeSm = 12;
