@@ -18,7 +18,8 @@ class VolunteeringCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        GoRouter.of(context).push('/volunteering/${volunteeringInfo.id}');
+        print(volunteeringInfo.id);
+        GoRouter.of(context).pushNamed('volunteering', pathParameters: {'id': volunteeringInfo.id});
       },
       child: Container(
         decoration: BoxDecoration(

@@ -24,9 +24,7 @@ class NewsCard extends StatelessWidget {
               Image.network(news.imgUrl, width: 118, fit: BoxFit.cover),
               Expanded(
                   child: NewsCardInfo(
-                      source: news.source,
-                      title: news.title,
-                      subtitle: news.subtitle))
+                      news: news,))
             ],
           ),
         ),

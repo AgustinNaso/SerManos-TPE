@@ -5,24 +5,21 @@ import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/providers/Future/news_provider.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class NewsDetailScreen extends ConsumerWidget {
-  // static const route = '/news/:id';
-
-  // static String routeFromId(String id) => '/news/$id';
-
-  // static const routeName = 'newsDetail';
-  const NewsDetailScreen({Key? key});
+  final String newsId;
+  const NewsDetailScreen({Key? key, required this.newsId}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final futureNews = ref.watch(getNewsByIdProvider('reemplazar con id'));
+    final futureNews = ref.watch(getNewsByIdProvider(newsId));
     return futureNews.when(
         data: (newsData) {
           return Scaffold(
               appBar: AppBar(
                 title: const Text(
-                  'Novedades',
+                  'Novedades', //TODO: INTERNACIONALIZAR
                   style: SermanosTypography.subtitle01(
                       color: SermanosColors.primary10),
                 ),
@@ -38,17 +35,17 @@ class NewsDetailScreen extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const SizedBox(height: 20),
-                      const Text(
-                        'REPORTE 2820', //TODO: source dynamic value
-                        style: SermanosTypography(
+                      Text(
+                        newsData.source, //TODO: source dynamic value
+                        style: const SermanosTypography(
                             fontWeight: FontWeight.w500,
                             fontSize: 10,
                             color: SermanosColors.neutral75,
                             letterSpacing: 1.5),
                       ),
-                      const Text(
-                        'Ser donante voluntario', //TODO: title dynamic value ,
-                        style: SermanosTypography(
+                      Text(
+                        newsData.title, //TODO: title dynamic value ,
+                        style: const SermanosTypography(
                             fontWeight: FontWeight.w400,
                             fontSize: 16,
                             color: SermanosColors.neutral100,
@@ -58,35 +55,38 @@ class NewsDetailScreen extends ConsumerWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.asset(
-                          "assets/images/novedades.png", //TODO: image dynamic value
+                          newsData.imgUrl, //TODO: image dynamic value
                           fit: BoxFit.cover,
                           height: 160,
                         ),
                       ),
                       const SizedBox(height: 16),
-                      const Text(
-                        'Desde el Hospital Centenario recalcan la importancia de la donación voluntaria de Sangre',
-                        //TODO: subtitle dynamic value
-                        style: SermanosTypography.subtitle01(
+                      Text(
+                        newsData.subtitle,
+                        style: const SermanosTypography.subtitle01(
                             color: SermanosColors.secondary200),
                       ),
                       const SizedBox(height: 16),
-                      const Text(
-                        //TODO: body dynamic value
-                        'El Hospital Centenario Gualeguaychú, a través de su Servicio de Hemoterapia, recuerda que la donación de sangre es un acto voluntario, altruista y solidario, que no perjudica la salud del donante y que es fundamental para la atención de los pacientes que lo necesitan.\\n El Hospital Centenario Gualeguaychú, a través de su Servicio de Hemoterapia, recuerda que la donación de sangre es un acto voluntario, altruista y solidario, que no perjudica la salud del donante y que es fundamental para la atención de los pacientes que lo necesitan.El Hospital Centenario Gualeguaychú, a través de su Servicio de Hemoterapia, recuerda que la donación de sangre es un acto voluntario, altruista y solidario, que no perjudica la salud del donante y que es fundamental para la atención de los pacientes que lo necesitan.',
-                        style: SermanosTypography.body01(),
+                      Text(
+                        newsData.body,
+                        style: const SermanosTypography.body01(),
                       ),
                       const SizedBox(height: 16),
                       const Text(
-                        'Comparte esta nota',
+                        'Comparte esta nota', //TODO: internacionalizar
                         style: SermanosTypography.defaultHeadline(),
                         textAlign: TextAlign.center,
                       ),
                       Container(
                         margin: const EdgeInsets.symmetric(vertical: 20.0),
-                        child: SermanosCtaButton(
-                            text: 'Compartir', onPressed: () {}),
-                      )
+                        child: SermanosCtaButton(text: 'Compartir', onPressed: () async { //TODO: internacionalizar
+                          final result = await Share.shareWithResult('Compartir esta noticia https://example.com'); //TODO: DEEPLINK
+
+                          if (result.status == ShareResultStatus.success) {
+                              print('Gracias por compartir la noticia');
+                          }
+                  }),
+                )
                     ],
                   )));
         },

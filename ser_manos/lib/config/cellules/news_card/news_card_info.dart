@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
+import 'package:ser_manos/data/models/news_model.dart';
 
 import '../../tokens/sermanos_typography.dart';
 
 class NewsCardInfo extends StatelessWidget {
   const NewsCardInfo({
     super.key,
-    required this.source,
-    required this.title,
-    required this.subtitle,
+    required this.news,
   });
-  final String source;
-  final String title;
-  final String subtitle;
+  final News news;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +23,7 @@ class NewsCardInfo extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                source.toUpperCase(),
+                news.source.toUpperCase(),
                 style: const SermanosTypography(
                     fontWeight: FontWeight.w500,
                     fontSize: 10,
@@ -34,7 +31,7 @@ class NewsCardInfo extends StatelessWidget {
                     letterSpacing: 1.5),
               ),
               Text(
-                title,
+                news.title,
                 style: const SermanosTypography(
                     fontWeight: FontWeight.w400,
                     fontSize: 16,
@@ -42,7 +39,7 @@ class NewsCardInfo extends StatelessWidget {
                     letterSpacing: 0.15),
               ),
               Text(
-                subtitle,
+                news.subtitle,
                 style: const SermanosTypography(
                     fontWeight: FontWeight.w400,
                     fontSize: 14,
@@ -56,9 +53,9 @@ class NewsCardInfo extends StatelessWidget {
           ),
           Row(mainAxisAlignment: MainAxisAlignment.end, children: [
             TextButton(
-              onPressed: () => context.pushNamed('newsDetail'),
+              onPressed: () => GoRouter.of(context).pushNamed('newsDetail', pathParameters: {'id': news.id}),
               child: const Text(
-                'Leer más',
+                'Leer más', //TODO: internacionalizacion
                 style: TextStyle(
                     color: SermanosColors.primary100,
                     fontSize: 14,

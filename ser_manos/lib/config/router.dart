@@ -50,9 +50,10 @@ mixin RouterMixin on State<MyApp> {
           ),
           GoRoute(
             name: 'newsDetail',
-            path: 'news/1', //TODO: Change this to a dynamic path
+            path: 'newsDetail/:id', 
             builder: (BuildContext context, GoRouterState state) {
-              return const NewsDetailScreen();
+              final String newsId = state.pathParameters['id']!;
+              return NewsDetailScreen(newsId: newsId);
             },
           ),
           GoRoute(
