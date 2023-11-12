@@ -124,7 +124,12 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosUploadProfilePhoto>
 
   Future getImage() async {
     final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? image = await _picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 100,
+      maxHeight: 1920,
+      maxWidth: 1080,
+      );
 
     if (image != null) {
       setState(() {
