@@ -31,15 +31,6 @@ class NewsCard extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () async {
-        // await ref.read(firebaseAnalyticsProvider).logSelectContent(
-        //   contentType: 'News',
-        //   itemId: news.id,
-        // );
-        // if (context.mounted) {
-        //   context.beamToNamed(NewsDetailsScreen.routeFromId(news.id));
-        // }
-      },
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
+import 'package:ser_manos/config/molecules/buttons/sermanos_short_button.dart';
 import 'package:ser_manos/config/molecules/images/profile_image.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
@@ -52,7 +53,7 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosUploadProfilePhoto>
                 color: SermanosColors.secondary25,
               ),
               width: double.infinity,
-              child: _image == null
+              child: (_image == null || _image == "")
                   ? Row(
                       children: [
                         const Expanded(
@@ -65,8 +66,9 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosUploadProfilePhoto>
                         const SizedBox(
                           width: 8,
                         ),
-                        SermanosCtaButton(
+                        SermanosShortButton(
                           text: "Subir foto",
+                          filled: true,
                           onPressed: () => getImage(),
                              
                           enabled: widget.enabled,
