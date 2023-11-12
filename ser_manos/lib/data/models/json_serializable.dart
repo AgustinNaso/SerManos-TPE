@@ -1,5 +1,5 @@
 
-abstract class JsonSerializable<T> {
+abstract interface class JsonSerializable<T> {
   JsonSerializable();
 
   Map<String, dynamic> toJson();
