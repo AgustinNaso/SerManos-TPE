@@ -19,8 +19,7 @@ class CompleteProfile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
+      body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -110,7 +109,6 @@ class CompleteProfile extends ConsumerWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
