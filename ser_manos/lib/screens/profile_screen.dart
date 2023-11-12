@@ -15,7 +15,7 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final futureUserData = ref.read(loggedUserProvider);
-    
+
     return futureUserData!.isProfileFilled()
         ? CompleteProfile(user: futureUserData)
         : IncompleteProfile(user: futureUserData);
