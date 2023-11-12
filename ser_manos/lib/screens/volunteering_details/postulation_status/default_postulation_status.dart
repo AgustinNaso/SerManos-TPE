@@ -7,8 +7,6 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/models/volunteering_details_model.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
-import 'package:ser_manos/data/repositories/repository.dart';
-import 'package:ser_manos/providers/Future/volunteering_provider.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 
