@@ -57,5 +57,20 @@ final userRepositoryProvider = AutoDisposeProvider<UserRepositoryImpl>.internal(
 );
 
 typedef UserRepositoryRef = AutoDisposeProviderRef<UserRepositoryImpl>;
+String _$newsRepositoryHash() => r'c62984e0ab6f7f39e5c21aa1eb7b65f9e484ca22';
+
+/// See also [newsRepository].
+@ProviderFor(newsRepository)
+final newsRepositoryProvider = AutoDisposeProvider<NewsRepositoryImpl>.internal(
+  newsRepository,
+  name: r'newsRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$newsRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef NewsRepositoryRef = AutoDisposeProviderRef<NewsRepositoryImpl>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
