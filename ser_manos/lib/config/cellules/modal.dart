@@ -59,7 +59,8 @@ class Modal extends StatelessWidget {
                   ),
                   SermanosShortButton(
                       text: primaryButtonText,
-                      onPressed: onAccept,
+                      onPressed: () =>
+                          {onAccept(), GoRouter.of(context).pop(true)},
                       filled: false)
                 ],
               )

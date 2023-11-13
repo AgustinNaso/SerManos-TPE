@@ -6,7 +6,8 @@ enum VolunteeringPostulationStatus {
   notPostulated,
 }
 
-class VolunteeringPostulation implements JsonSerializable<VolunteeringPostulation> {
+class VolunteeringPostulation
+    implements JsonSerializable<VolunteeringPostulation> {
   final String volunteeringId;
   final VolunteeringPostulationStatus status;
 
@@ -29,5 +30,10 @@ class VolunteeringPostulation implements JsonSerializable<VolunteeringPostulatio
       'volunteeringId': volunteeringId,
       'status': status.index,
     };
+  }
+
+  @override
+  String toString() {
+    return 'VolunteeringPostulation{volunteeringId: $volunteeringId, status: $status}';
   }
 }

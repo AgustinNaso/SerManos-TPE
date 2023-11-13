@@ -56,12 +56,10 @@ class DefaultPostulationStatus extends StatelessWidget {
 void handlePostulation(WidgetRef ref, SermanosUser currentUser,
     VolunteeringDetails volunteeringDetails) {
   VolunteeringPostulation postulation = VolunteeringPostulation(
-      volunteeringId: volunteeringDetails.id,
+      volunteeringId: volunteeringDetails.volunteeringId,
       status: VolunteeringPostulationStatus.pending);
+  ref.read(loggedUserProvider.notifier).setVolunteeringPostulation(postulation);
   ref
-      .watch(loggedUserProvider.notifier)
-      .setVolunteeringPostulation(postulation);
-  ref
-      .watch(userRepositoryProvider)
+      .read(userRepositoryProvider)
       .updateUser(currentUser, postulation.toJson());
 }

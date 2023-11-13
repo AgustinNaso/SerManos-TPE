@@ -12,26 +12,16 @@ import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/gender.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/data/models/user_model.dart';
+import 'package:ser_manos/providers/user_provider.dart';
 
 final EditProfileFormKey = GlobalKey<FormBuilderState>();
 
 class EditProfileScreen extends ConsumerWidget {
-  final SermanosUser user = SermanosUser(
-      id: "1",
-      email: "gdeschant@itba.edu.ar",
-      name: "gaston",
-      lastName: "De Schant",
-      birthDate: DateTime.now(),
-      phoneNumber: "123456789",
-      // gender: null,
-      profileImgUrl:
-          "",
-      contactEmail: "nomecontacten@gmail.com");
-
   EditProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(loggedUserProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: SermanosColors.neutral0,
@@ -51,7 +41,7 @@ class EditProfileScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               EditProfileDataForm(
-                  user: user,
+                  user: user!,
                   genderField: user.gender,
                   birthdateField: user.birthDate ?? DateTime.now(),
                   profileImgUrl: user.profileImgUrl),

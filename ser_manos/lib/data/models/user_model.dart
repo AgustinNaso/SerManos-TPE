@@ -13,7 +13,7 @@ class SermanosUser extends GenericModel<SermanosUser> {
   final String? profileImgUrl;
   final String? contactEmail;
   final List<String> favVolunteerings;
-  VolunteeringPostulation? volunteeringPostulation;
+  VolunteeringPostulation volunteeringPostulation;
 
   SermanosUser(
       {required this.email,
@@ -25,7 +25,7 @@ class SermanosUser extends GenericModel<SermanosUser> {
       this.profileImgUrl,
       this.contactEmail,
       this.favVolunteerings = const [],
-      this.volunteeringPostulation,
+      required this.volunteeringPostulation,
       required String id})
       : super(id: id);
 
@@ -62,8 +62,10 @@ class SermanosUser extends GenericModel<SermanosUser> {
                 .map((item) => item as String)
                 .toList()
             : [],
-        volunteeringPostulation: json['volunteeringPostulation'] == null ? null :
-            VolunteeringPostulation.fromJson(json['volunteeringPostulation'] ));
+        volunteeringPostulation: json['volunteeringPostulation'] == null
+            ? null
+            : VolunteeringPostulation.fromJson(
+                json['volunteeringPostulation']));
   }
 
   @override

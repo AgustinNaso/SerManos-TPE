@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ser_manos/data/models/user_model.dart';
+import 'package:ser_manos/data/models/volunteering_postulation.dart';
 import 'package:ser_manos/data/repositories/user_repository_impl.dart';
 
 class MyFirebaseAuth {
@@ -47,11 +48,16 @@ class MyFirebaseAuth {
         password: password,
       );
 
+      const volunteeringPostulation = VolunteeringPostulation(
+          volunteeringId: '',
+          status: VolunteeringPostulationStatus.notPostulated);
+
       final userJson = {
         'id': userCredential.user!.uid,
         'email': email,
         'name': name,
-        'lastName': lastName
+        'lastName': lastName,
+        'volunteeringPostulation': volunteeringPostulation.toJson()
       };
 
       final user = await UserRepositoryImpl()

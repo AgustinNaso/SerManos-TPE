@@ -14,4 +14,10 @@ class LoggedUser extends _$LoggedUser {
   void setVolunteeringPostulation(VolunteeringPostulation postulation) {
     state!.volunteeringPostulation = postulation;
   }
+
+  void removeVolunteeringPostulation() {
+    state!.volunteeringPostulation = const VolunteeringPostulation(
+        volunteeringId: '',
+        status: VolunteeringPostulationStatus.notPostulated);
+  }
 }

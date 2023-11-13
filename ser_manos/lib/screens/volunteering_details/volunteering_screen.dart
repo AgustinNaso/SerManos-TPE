@@ -147,7 +147,7 @@ class VolunteeringScreen extends ConsumerWidget {
                       const Vacancies(vacancy: 10),
                       const SizedBox(height: 24),
                       handleVolunteeringStatus(
-                          loggedUser!.volunteeringPostulation,
+                          loggedUser!.volunteeringPostulation!,
                           volunteeringDetail),
                     ],
                   ))
@@ -161,18 +161,20 @@ class VolunteeringScreen extends ConsumerWidget {
   }
 }
 
-Widget handleVolunteeringStatus(VolunteeringPostulation? userPostulation,
+Widget handleVolunteeringStatus(VolunteeringPostulation userPostulation,
     VolunteeringDetails volunteeringDetails) {
   if (volunteeringDetails.vacancies == 0 ||
-      userPostulation == null ||
       userPostulation.status == VolunteeringPostulationStatus.notPostulated) {
     return DefaultPostulationStatus(volunteeringDetails: volunteeringDetails);
   }
-  if (userPostulation.status == VolunteeringPostulationStatus.pending) {
+  if (userPostulation.status == VolunteeringPostulationStatus.pending &&
+      userPostulation.volunteeringId == volunteeringDetails.volunteeringId) {
     return PendingPostulationStatus(volunteeringName: volunteeringDetails.name);
   }
-  if (userPostulation.status == VolunteeringPostulationStatus.accepted &&
-      userPostulation.volunteeringId == volunteeringDetails.volunteeringId) {
+  if (userPostulation.status == VolunteeringPostulationStatus.accepted ||
+      userPostulation.status == VolunteeringPostulationStatus.pending &&
+          userPostulation.volunteeringId !=
+              volunteeringDetails.volunteeringId) {
     return const AlreadyPostulatedPostulationStatus();
   }
   return AcceptedPostulationStatus(volunteeringName: volunteeringDetails.name);
