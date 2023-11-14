@@ -76,6 +76,7 @@ class EditProfileScreen extends ConsumerWidget {
               SermanosCtaButton(
                 text: AppLocalizations.of(context)!.saveData,
                 onPressed: () => {
+                  EditProfileFormKey.currentState!.saveAndValidate(),
                   userRepository.updateUser(
                       user, EditProfileFormKey.currentState!.value),
                   GoRouter.of(context).pop(true)
