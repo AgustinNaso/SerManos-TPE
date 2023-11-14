@@ -1,4 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:label="ser_manos"
         android:name="${applicationName}"
@@ -19,12 +23,14 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
             <meta-data android:name="flutter_deeplinking_enabled" android:value="true" />
             <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.DEFAULT" />
-                 <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="http" android:host="sermanos.com.ar" />
                 <data android:scheme="https" />
@@ -36,4 +42,5 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 </manifest>
