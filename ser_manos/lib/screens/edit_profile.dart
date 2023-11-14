@@ -12,6 +12,7 @@ import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/gender.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/data/models/user_model.dart';
+import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 
 final EditProfileFormKey = GlobalKey<FormBuilderState>();
@@ -22,6 +23,7 @@ class EditProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(loggedUserProvider);
+    final userRepository = ref.watch(userRepositoryProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: SermanosColors.neutral0,
@@ -74,6 +76,10 @@ class EditProfileScreen extends ConsumerWidget {
               SermanosCtaButton(
                 text: AppLocalizations.of(context)!.saveData,
                 onPressed: () => {
+                  userRepository.updateUser(
+                      user, EditProfileFormKey.currentState!.value),
+                  GoRouter.of(context).pop(true)
+
                   // print(EditProfileFormKey.currentState!.fields['profileImgUrl']!.value),
                   // print(EditProfileFormKey.currentState!.fields['birthdate']!.value),
                   // print(EditProfileFormKey
