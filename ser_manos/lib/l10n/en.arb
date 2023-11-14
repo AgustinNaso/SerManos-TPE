@@ -83,5 +83,7 @@
   "saveData": "Save data",
   "shareNews": "Share this news",
   "share": "Share",
-  "sharementThanks": "Thanks for sharing the news"
+  "sharementThanks": "Thanks for sharing the news",
+  "sharementMessage": "Hey! I found this news at SerManos that I think you might be interested in:",
+  "sharementSubject": "SerManos news"
 }
