@@ -31,7 +31,7 @@ class PendingPostulationStatus extends StatelessWidget {
                           subtitle: AppLocalizations.of(context)!
                               .withdrawApplianceConfirmation,
                           onAccept: () =>
-                              handleWithdrawPostulation(ref, currentUser!),
+                              handleWithdrawPostulation(ref, currentUser!.id, currentUser.volunteeringPostulation),
                           primaryButtonText:
                               AppLocalizations.of(context)!.confirm,
                           secondaryButtonText:
@@ -42,10 +42,9 @@ class PendingPostulationStatus extends StatelessWidget {
   }
 }
 
-void handleWithdrawPostulation(WidgetRef ref, SermanosUser currentUser) {
+void handleWithdrawPostulation(WidgetRef ref, String uid, volunteeringPostulation) {
   ref.read(loggedUserProvider.notifier).removeVolunteeringPostulation();
-  print(currentUser.volunteeringPostulation);
   ref
       .read(userRepositoryProvider)
-      .updateUser(currentUser, currentUser.volunteeringPostulation!.toJson());
+      .updateUser(uid, volunteeringPostulation!.toJson());
 }

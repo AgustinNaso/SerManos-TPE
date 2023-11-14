@@ -10,6 +10,7 @@ import 'package:ser_manos/config/molecules/images/profile_image.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:ser_manos/providers/upload_image_provider.dart';
 import 'package:ser_manos/screens/edit_profile.dart';
 
 class SermanosUploadProfilePhoto extends HookConsumerWidget {
@@ -28,6 +29,7 @@ class SermanosUploadProfilePhoto extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final value = useState(initialValue);
+    final uploadImageNotifier = ref.read(uploadImageProvider.notifier);
 
     final bool isEmpty =
         useListenableSelector(value, () => value.value?.isEmpty ?? false);
@@ -66,7 +68,7 @@ class SermanosUploadProfilePhoto extends HookConsumerWidget {
                         SermanosShortButton(
                           text: AppLocalizations.of(context)!.uploadPicture,
                           filled: true,
-                          onPressed: () async => await getImage(value),
+                          onPressed: () async => await getImage(value, uploadImageNotifier),
                           enabled: enabled,
                         )
                       ],
@@ -85,7 +87,7 @@ class SermanosUploadProfilePhoto extends HookConsumerWidget {
                             const SizedBox(height: 8),
                             SermanosCtaButton(
                               text: AppLocalizations.of(context)!.changePicture,
-                              onPressed: () async => await getImage(value),
+                              onPressed: () async => await getImage(value, uploadImageNotifier),
                               enabled: enabled,
                             )
                           ],
@@ -111,7 +113,8 @@ class SermanosUploadProfilePhoto extends HookConsumerWidget {
     );
   }
 
-  Future getImage(ValueNotifier value) async {
+  Future getImage(ValueNotifier value, UploadImageValidator uploadImageNotifier) async {
+    uploadImageNotifier.loading();
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(
       source: ImageSource.gallery,
@@ -124,5 +127,6 @@ class SermanosUploadProfilePhoto extends HookConsumerWidget {
       print(image.path);
       value.value = image.path;
     }
+    uploadImageNotifier.loadingDone();
   }
 }

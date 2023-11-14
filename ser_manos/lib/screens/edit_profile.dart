@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:ser_manos/config/cellules/edit_profile_data_form.dart';
 import 'package:ser_manos/config/cellules/profile_contact_form.dart';
+import 'package:ser_manos/config/molecules/buttons/edit_profile_button.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -74,33 +75,7 @@ class EditProfileScreen extends ConsumerWidget {
               const SizedBox(
                 height: 32,
               ),
-              SermanosCtaButton(
-                text: AppLocalizations.of(context)!.saveData,
-                onPressed: () async {
-                  EditProfileFormKey.currentState!.validate();
-                  print(EditProfileFormKey
-                      .currentState!.fields.values.map((e) => e.value));
-                  final imgUrl = await StorageService().uploadProfilePicture(
-                      user.id,
-                      EditProfileFormKey
-                          .currentState!.fields['profileImgUrl']!.value);
-
-                  await userRepository.updateUser(user, {
-                    'profileImgUrl': imgUrl,
-                    'contactEmail': EditProfileFormKey.currentState!.fields['contactEmail']?.value,
-                    'birthDate': EditProfileFormKey.currentState!.fields['birthDate']?.value,
-                    'phoneNumber': EditProfileFormKey.currentState!.fields['phoneNumber']?.value,
-                    'gender': genderNameToGender(context, EditProfileFormKey.currentState!.fields['gender']?.value)
-                  });
-                  GoRouter.of(context).pop(true);
-
-                  // print(EditProfileFormKey.currentState!.fields['profileImgUrl']!.value),
-                  // print(EditProfileFormKey.currentState!.fields['birthdate']!.value),
-                  // print(EditProfileFormKey
-                  //     .currentState!.fields['birthdate']!.value),
-                  // print(ContactFormKey.currentState!.fields),
-                },
-              )
+              const EditProfileButton(),
             ],
           ),
         ),
