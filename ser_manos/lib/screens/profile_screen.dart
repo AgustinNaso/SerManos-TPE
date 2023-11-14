@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ser_manos/config/cellules/complete_profile.dart';
 import 'package:ser_manos/config/cellules/incomplete_profile.dart';
-import 'package:ser_manos/data/models/gender.dart';
-import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 
 class ProfileScreen extends ConsumerWidget {

@@ -6,7 +6,6 @@ import 'package:ser_manos/config/molecules/images/sermanos_cached_network_image.
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/providers/Future/news_provider.dart';
-import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:dio/dio.dart';

@@ -5,17 +5,10 @@ import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:ser_manos/config/cellules/edit_profile_data_form.dart';
 import 'package:ser_manos/config/cellules/profile_contact_form.dart';
 import 'package:ser_manos/config/molecules/buttons/edit_profile_button.dart';
-import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
-import 'package:ser_manos/data/models/gender.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
-import 'package:ser_manos/data/models/user_model.dart';
-import 'package:ser_manos/data/services/storage_service.dart';
-import 'package:ser_manos/l10n/localizations.dart';
-import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 
 final EditProfileFormKey = GlobalKey<FormBuilderState>();
@@ -26,7 +19,6 @@ class EditProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(loggedUserProvider);
-    final userRepository = ref.watch(userRepositoryProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: SermanosColors.neutral0,

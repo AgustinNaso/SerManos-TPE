@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ser_manos/config/cellules/modal.dart';
 import 'package:ser_manos/data/models/user_model.dart';
-import 'package:ser_manos/data/models/volunteering_details_model.dart';
-import 'package:ser_manos/data/models/volunteering_postulation.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/postulation_status.dart';
