@@ -37,7 +37,7 @@
   "dateOfBirth": "Date of birth",
   "gender": "Gender",
   "contactData": "Contact data",
-  "phonenumber": "Phonenumber",
+  "phonenumber": "Phone number",
   "phonenumberError": "Please enter a valid phone number",
   "hyphenEmail": "e-mail",
   "editProfile": "Edit profile",

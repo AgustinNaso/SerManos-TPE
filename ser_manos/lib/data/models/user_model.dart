@@ -44,6 +44,21 @@ class SermanosUser extends GenericModel<SermanosUser> {
         contactEmail != null;
   }
 
+  SermanosUser copy() {
+    return SermanosUser(
+        email: email,
+        name: name,
+        lastName: lastName,
+        phoneNumber: phoneNumber,
+        gender: gender,
+        birthDate: birthDate,
+        profileImgUrl: profileImgUrl,
+        contactEmail: contactEmail,
+        favVolunteerings: favVolunteerings,
+        volunteeringPostulation: volunteeringPostulation,
+        id: id);
+  }
+
   @override
   static SermanosUser fromJson(Map<String, dynamic> json) {
     return SermanosUser(

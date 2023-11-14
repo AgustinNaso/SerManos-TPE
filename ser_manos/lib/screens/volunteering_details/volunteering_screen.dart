@@ -147,7 +147,7 @@ class VolunteeringScreen extends ConsumerWidget {
                       const Vacancies(vacancy: 10),
                       const SizedBox(height: 24),
                       handleVolunteeringStatus(
-                          loggedUser!.volunteeringPostulation!,
+                          loggedUser!.volunteeringPostulation,
                           volunteeringDetail),
                     ],
                   ))

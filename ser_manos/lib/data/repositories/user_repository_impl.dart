@@ -25,8 +25,7 @@ class UserRepositoryImpl extends Repository<SermanosUser> {
     }
     if (update.containsKey('gender')) {
       user.gender = update['gender'] as Gender;
-      updateUser["gender"] =
-          (update["gender"] as Gender).index;
+      updateUser["gender"] = (update["gender"] as Gender).index;
     }
     if (update.containsKey("contactEmail")) {
       user.contactEmail = update["contactEmail"];
