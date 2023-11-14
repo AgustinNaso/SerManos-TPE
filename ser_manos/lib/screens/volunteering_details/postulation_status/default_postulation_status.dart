@@ -60,8 +60,10 @@ void handlePostulation(WidgetRef ref, SermanosUser currentUser,
   VolunteeringPostulation postulation = VolunteeringPostulation(
       volunteeringId: volunteeringDetails.volunteeringId,
       status: VolunteeringPostulationStatus.pending);
-  ref.read(loggedUserProvider.notifier).setVolunteeringPostulation(postulation);
   ref
       .read(userRepositoryProvider)
-      .updateUser(currentUser, postulation.toJson());
+      .updateUser(currentUser, postulation.toJson())
+      .then((value) => ref
+          .read(loggedUserProvider.notifier)
+          .setVolunteeringPostulation(postulation));
 }

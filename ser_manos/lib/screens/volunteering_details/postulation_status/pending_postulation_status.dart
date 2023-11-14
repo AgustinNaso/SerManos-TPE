@@ -44,8 +44,7 @@ class PendingPostulationStatus extends StatelessWidget {
 
 void handleWithdrawPostulation(WidgetRef ref, SermanosUser currentUser) {
   ref.read(loggedUserProvider.notifier).removeVolunteeringPostulation();
-  print(currentUser.volunteeringPostulation);
   ref
       .read(userRepositoryProvider)
-      .updateUser(currentUser, currentUser.volunteeringPostulation!.toJson());
+      .updateUser(currentUser, currentUser.volunteeringPostulation.toJson());
 }
