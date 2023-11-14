@@ -6,7 +6,7 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 import '../../config/molecules/buttons/sermanos_cta_button.dart';
 import '../../config/tokens/sermanos_colors.dart';
-
+import '../../data/services/dynamic_link_service.dart';
 class LoginScreen extends StatelessWidget {
   final FocusNode myFocusNode = FocusNode();
 
@@ -31,6 +31,16 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   SermanosCtaButton(
                     onPressed: () {
+                      
+                     createDynamicLink();
+                    },
+                    text: "apretame loco",
+                    backgroundColor: Colors.transparent,
+                    textColor: SermanosColors.primary100,
+                  ),
+                  SermanosCtaButton(
+                    onPressed: () {
+                      
                       GoRouter.of(context).pushReplacementNamed('register');
                     },
                     text: AppLocalizations.of(context)!.noAccount,
@@ -41,5 +51,9 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
             )));
+  }
+
+    void createDynamicLink() async{
+    DynamicLinkService.instance.createDynamicLink();
   }
 }
