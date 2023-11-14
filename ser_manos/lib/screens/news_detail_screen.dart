@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
@@ -8,7 +9,8 @@ import 'package:ser_manos/providers/Future/news_provider.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
-
+import 'package:dio/dio.dart';
+import 'package:path_provider/path_provider.dart';
 class NewsDetailScreen extends ConsumerWidget {
   final String newsId;
   const NewsDetailScreen({Key? key, required this.newsId}) : super(key: key);
@@ -81,11 +83,28 @@ class NewsDetailScreen extends ConsumerWidget {
                       Container(
                         margin: const EdgeInsets.symmetric(vertical: 20.0),
                         child: SermanosCtaButton(text:  AppLocalizations.of(context)!.share, onPressed: () async {
-                          final result = await Share.shareWithResult('Compartir esta noticia https://example.com'); //TODO: DEEPLINK
+                          final response = await Dio().get(
+                              newsData.imgUrl,
+                              options: Options(
+                                responseType: ResponseType.bytes,
+                              ),
+                            );
+                          final List<int> bytes = response.data;
 
-                          if (result.status == ShareResultStatus.success) {
-                              print(AppLocalizations.of(context)!.sharementThanks);
+                          final temp = await getTemporaryDirectory();
+                          final path = '${temp.path}/image.jpg';
+
+                          File(path).writeAsBytesSync(bytes);
+                          final shareResult = await Share.shareXFiles(
+                              subject: '${AppLocalizations.of(context)!.sharementSubject}',
+                              [XFile(path)],
+                              text: '${AppLocalizations.of(context)!.sharementMessage}\n${newsData.subtitle}\nsermanos.com.ar/newsDetail/$newsId',
+                          );
+
+                          if (shareResult.status == ShareResultStatus.success) {
+                            print('${AppLocalizations.of(context)!.sharementThanks}');
                           }
+
                   }),
                 )
                     ],

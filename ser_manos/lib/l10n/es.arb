@@ -83,5 +83,7 @@
   "saveData": "Guardar datos",
   "shareNews": "Comparte esta nota",
   "share": "Compartir",
-  "sharementThanks": "Gracias por compartir la noticia"
+  "sharementThanks": "Gracias por compartir la noticia",
+  "sharementMessage": "Hola, encontre esta noticia de SerManos que puede interesarte:",
+  "sharementSubject": "SerManos news"
 }
