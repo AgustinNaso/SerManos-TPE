@@ -11,7 +11,7 @@ class ProfileImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return imageUrl != ""
+    return imageUrl != null && imageUrl != ""
         ? ClipOval(
             child: imageUrl!.contains("http")
                 ? SermanosCachedNetworkImage(

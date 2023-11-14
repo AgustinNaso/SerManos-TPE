@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ser_manos/data/models/gender.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
 import 'package:ser_manos/data/repositories/repository.dart';
@@ -15,26 +16,37 @@ class UserRepositoryImpl extends Repository<SermanosUser> {
       SermanosUser user, Map<String, dynamic> update) async {
     final Map<String, dynamic> updateUser = {};
     if (update.containsKey("profileImgUrl")) {
+      user.profileImgUrl = update['profileImgUrl'];
       updateUser["profileImgUrl"] = update["profileImgUrl"];
     }
     if (update.containsKey('phoneNumber')) {
+      user.phoneNumber = update['phoneNumber'];
       updateUser["phoneNumber"] = update["phoneNumber"];
     }
     if (update.containsKey('gender')) {
-      updateUser["gender"] = update["gender"]; // TODO: add enum handling
+      user.gender = update['gender'] as Gender;
+      updateUser["gender"] =
+          (update["gender"] as Gender).index;
     }
     if (update.containsKey("contactEmail")) {
+      user.contactEmail = update["contactEmail"];
       updateUser["contactEmail"] = update["contactEmail"];
     }
     if (update.containsKey("birthDate")) {
+      user.birthDate = update["birthDate"];
       updateUser["birthDate"] = update["birthDate"];
     }
     if (update.containsKey("volunteeringPostulation")) {
+      user.volunteeringPostulation =
+          (update["volunteeringPostulation"] as VolunteeringPostulation);
       updateUser["volunteeringPostulation"] =
           (update["volunteeringPostulation"] as VolunteeringPostulation)
               .toJson();
     }
-    return await this.update(user);
+
+    await collection.doc(user.id).update(updateUser);
+
+    return user;
   }
 
   Future<void> addFavoriteVolunteering(String uid, String vid) async {
@@ -62,7 +74,7 @@ class UserRepositoryImpl extends Repository<SermanosUser> {
         throw NotFoundException("User with email $email not found");
       }
     } catch (e) {
-      print(e);
+      print("error $e");
       // Rethrow the exception or handle it as needed.
       throw e;
     }

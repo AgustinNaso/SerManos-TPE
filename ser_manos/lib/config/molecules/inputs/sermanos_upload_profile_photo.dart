@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,9 +10,9 @@ import 'package:ser_manos/config/molecules/images/profile_image.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:ser_manos/screens/edit_profile.dart';
 
-
-class SermanosUploadProfilePhoto extends ConsumerStatefulWidget {
+class SermanosUploadProfilePhoto extends HookConsumerWidget {
   const SermanosUploadProfilePhoto({
     Key? key,
     this.initialValue,
@@ -25,24 +26,19 @@ class SermanosUploadProfilePhoto extends ConsumerStatefulWidget {
   final List<String? Function(String?)>? validators;
 
   @override
-  ConsumerState<SermanosUploadProfilePhoto> createState() => _SermanosPhotoFieldState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final value = useState(initialValue);
 
-class _SermanosPhotoFieldState extends ConsumerState<SermanosUploadProfilePhoto> {
-  String? _image;
+    final bool isEmpty =
+        useListenableSelector(value, () => value.value?.isEmpty ?? false);
 
-  @override
-  void initState() {
-    super.initState();
-    _image = widget.initialValue;
-  }
+    EditProfileFormKey.currentState?.fields['profileImgUrl']
+        ?.setValue(value.value);
 
-  @override
-  Widget build(BuildContext context) {
     return FormBuilderField<String>(
-      initialValue: widget.initialValue,
+      initialValue: value.value,
       name: 'profileImgUrl',
-      validator: FormBuilderValidators.compose(widget.validators ?? []),
+      validator: FormBuilderValidators.compose(validators ?? []),
       builder: (FormFieldState field) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +50,7 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosUploadProfilePhoto>
                 color: SermanosColors.secondary25,
               ),
               width: double.infinity,
-              child: (_image == null || _image == "")
+              child: isEmpty
                   ? Row(
                       children: [
                         Expanded(
@@ -70,9 +66,8 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosUploadProfilePhoto>
                         SermanosShortButton(
                           text: AppLocalizations.of(context)!.uploadPicture,
                           filled: true,
-                          onPressed: () => getImage(),
-                             
-                          enabled: widget.enabled,
+                          onPressed: () async => await getImage(value),
+                          enabled: enabled,
                         )
                       ],
                     )
@@ -87,23 +82,16 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosUploadProfilePhoto>
                               style: const SermanosTypography.subtitle01(
                                   color: SermanosColors.neutral100),
                             ),
-                            const SizedBox(
-                              height: 8,
-                            ),
+                            const SizedBox(height: 8),
                             SermanosCtaButton(
                               text: AppLocalizations.of(context)!.changePicture,
-                              onPressed: () => getImage(),
-                                  
-                              enabled: widget.enabled,
+                              onPressed: () async => await getImage(value),
+                              enabled: enabled,
                             )
                           ],
                         ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        ProfileImage(
-                          imageUrl: _image,
-                        )
+                        const SizedBox(width: 8),
+                        ProfileImage(imageUrl: value.value),
                       ],
                     ),
             ),
@@ -123,19 +111,18 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosUploadProfilePhoto>
     );
   }
 
-  Future getImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(
+  Future getImage(ValueNotifier value) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(
       source: ImageSource.gallery,
       imageQuality: 100,
       maxHeight: 1920,
       maxWidth: 1080,
-      );
+    );
 
     if (image != null) {
-      setState(() {
-        _image = image.path;
-      });
+      print(image.path);
+      value.value = image.path;
     }
   }
 }

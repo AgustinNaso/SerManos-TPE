@@ -15,13 +15,13 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 class EditProfileDataForm extends ConsumerWidget {
   final SermanosUser user;
   final Gender? genderField;
-  final DateTime birthdateField;
+  final DateTime birthDateField;
   final String? profileImgUrl;
 
   const EditProfileDataForm({
     Key? key,
     required this.user,
-    required this.birthdateField,
+    required this.birthDateField,
     this.genderField,
     this.profileImgUrl,
   }) : super(key: key);
@@ -45,8 +45,8 @@ class EditProfileDataForm extends ConsumerWidget {
         ),
         SermanosDateField(
           label: AppLocalizations.of(context)!.dateOfBirth,
-          initialValue: birthdateField,
-          name: "birthdate",
+          initialValue: birthDateField,
+          name: "birthDate",
           icon: SermanosIcons.calendar(status: SermanosIconStatus.activated),
           onChangeFocus: onChangeFocus,
           validators: [

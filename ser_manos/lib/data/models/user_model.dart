@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ser_manos/data/models/generic_model.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
 
@@ -7,11 +8,11 @@ class SermanosUser extends GenericModel<SermanosUser> {
   final String email;
   final String name;
   final String lastName;
-  final String? phoneNumber;
-  final Gender? gender;
-  final DateTime? birthDate;
-  final String? profileImgUrl;
-  final String? contactEmail;
+  String? phoneNumber;
+  Gender? gender;
+  DateTime? birthDate;
+  String? profileImgUrl;
+  String? contactEmail;
   final List<String> favVolunteerings;
   VolunteeringPostulation volunteeringPostulation;
 
@@ -53,7 +54,8 @@ class SermanosUser extends GenericModel<SermanosUser> {
         phoneNumber: json['phoneNumber'],
         gender: json['gender'] != null ? Gender.values[json['gender']] : null,
         birthDate: json['birthDate'] != null
-            ? DateTime.parse(json['birthDate'])
+            ? DateTime.fromMicrosecondsSinceEpoch(
+                (json['birthDate'] as Timestamp).microsecondsSinceEpoch)
             : null,
         profileImgUrl: json['profileImgUrl'],
         contactEmail: json['contactEmail'],

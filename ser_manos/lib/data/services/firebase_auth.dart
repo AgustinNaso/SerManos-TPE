@@ -31,7 +31,7 @@ class MyFirebaseAuth {
 
       return user;
     } on Error catch (e) {
-      print(e);
+      print("signInWithEmailAndPassword $e");
       rethrow;
     }
   }

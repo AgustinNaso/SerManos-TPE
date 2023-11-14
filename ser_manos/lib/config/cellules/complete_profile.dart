@@ -83,7 +83,7 @@ class CompleteProfile extends ConsumerWidget {
                     title:  AppLocalizations.of(context)!.contactData,
                     information: [
                       ( AppLocalizations.of(context)!.phonenumber, user.phoneNumber!),
-                      ( AppLocalizations.of(context)!.hyphenEmail, user.email)
+                      ( AppLocalizations.of(context)!.hyphenEmail, user.contactEmail!)
                     ]),
               ),
             ],

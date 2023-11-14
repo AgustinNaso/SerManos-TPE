@@ -12,6 +12,8 @@ import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/gender.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/data/models/user_model.dart';
+import 'package:ser_manos/data/services/storage_service.dart';
+import 'package:ser_manos/l10n/localizations.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 
@@ -45,7 +47,7 @@ class EditProfileScreen extends ConsumerWidget {
               EditProfileDataForm(
                   user: user!,
                   genderField: user.gender,
-                  birthdateField: user.birthDate ?? DateTime.now(),
+                  birthDateField: user.birthDate ?? DateTime.now(),
                   profileImgUrl: user.profileImgUrl),
               const SizedBox(
                 height: 32,
@@ -66,20 +68,31 @@ class EditProfileScreen extends ConsumerWidget {
                 height: 24,
               ),
               ContactForm(
-                user: user,
-                phoneNumber: user.phoneNumber ?? "",
-                email: user.email,
+                phoneNumber: user.phoneNumber,
+                contactEmail: user.contactEmail,
               ),
               const SizedBox(
                 height: 32,
               ),
               SermanosCtaButton(
                 text: AppLocalizations.of(context)!.saveData,
-                onPressed: () => {
-                  EditProfileFormKey.currentState!.saveAndValidate(),
-                  userRepository.updateUser(
-                      user, EditProfileFormKey.currentState!.value),
-                  GoRouter.of(context).pop(true)
+                onPressed: () async {
+                  EditProfileFormKey.currentState!.validate();
+                  print(EditProfileFormKey
+                      .currentState!.fields.values.map((e) => e.value));
+                  final imgUrl = await StorageService().uploadProfilePicture(
+                      user.id,
+                      EditProfileFormKey
+                          .currentState!.fields['profileImgUrl']!.value);
+
+                  await userRepository.updateUser(user, {
+                    'profileImgUrl': imgUrl,
+                    'contactEmail': EditProfileFormKey.currentState!.fields['contactEmail']?.value,
+                    'birthDate': EditProfileFormKey.currentState!.fields['birthDate']?.value,
+                    'phoneNumber': EditProfileFormKey.currentState!.fields['phoneNumber']?.value,
+                    'gender': genderNameToGender(context, EditProfileFormKey.currentState!.fields['gender']?.value)
+                  });
+                  GoRouter.of(context).pop(true);
 
                   // print(EditProfileFormKey.currentState!.fields['profileImgUrl']!.value),
                   // print(EditProfileFormKey.currentState!.fields['birthdate']!.value),
