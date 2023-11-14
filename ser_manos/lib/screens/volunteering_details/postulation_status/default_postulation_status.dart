@@ -55,13 +55,13 @@ class DefaultPostulationStatus extends StatelessWidget {
   }
 }
 
-void handlePostulation(WidgetRef ref, String uid,
-    VolunteeringDetails volunteeringDetails) {
+void handlePostulation(
+    WidgetRef ref, String uid, VolunteeringDetails volunteeringDetails) {
   VolunteeringPostulation postulation = VolunteeringPostulation(
       volunteeringId: volunteeringDetails.volunteeringId,
       status: VolunteeringPostulationStatus.pending);
-  ref.read(loggedUserProvider.notifier).setVolunteeringPostulation(postulation);
-  ref
-      .read(userRepositoryProvider)
-      .updateUser(uid, postulation.toJson());
+  ref.read(userRepositoryProvider).updateUser(uid, postulation.toJson()).then(
+      (value) => ref
+          .read(loggedUserProvider.notifier)
+          .setVolunteeringPostulation(postulation));
 }
