@@ -12,40 +12,32 @@ class UserRepositoryImpl extends Repository<SermanosUser> {
     return await create(user);
   }
 
-  Future<SermanosUser> updateUser(
-      SermanosUser user, Map<String, dynamic> update) async {
+  Future<void> updateUser(
+      String uid, Map<String, dynamic> update) async {
     final Map<String, dynamic> updateUser = {};
-    if (update.containsKey("profileImgUrl")) {
-      user.profileImgUrl = update['profileImgUrl'];
+    if (update.containsKey("profileImgUrl") && update["profileImgUrl"] != null && update["profileImgUrl"] != "") {
       updateUser["profileImgUrl"] = update["profileImgUrl"];
     }
     if (update.containsKey('phoneNumber')) {
-      user.phoneNumber = update['phoneNumber'];
       updateUser["phoneNumber"] = update["phoneNumber"];
     }
     if (update.containsKey('gender')) {
-      user.gender = update['gender'] as Gender;
-      updateUser["gender"] = (update["gender"] as Gender).index;
+      updateUser["gender"] =
+          (update["gender"] as Gender).index;
     }
     if (update.containsKey("contactEmail")) {
-      user.contactEmail = update["contactEmail"];
       updateUser["contactEmail"] = update["contactEmail"];
     }
     if (update.containsKey("birthDate")) {
-      user.birthDate = update["birthDate"];
       updateUser["birthDate"] = update["birthDate"];
     }
     if (update.containsKey("volunteeringPostulation")) {
-      user.volunteeringPostulation =
-          (update["volunteeringPostulation"] as VolunteeringPostulation);
       updateUser["volunteeringPostulation"] =
           (update["volunteeringPostulation"] as VolunteeringPostulation)
               .toJson();
     }
 
-    await collection.doc(user.id).update(updateUser);
-
-    return user;
+    await collection.doc(uid).update(updateUser);
   }
 
   Future<void> addFavoriteVolunteering(String uid, String vid) async {

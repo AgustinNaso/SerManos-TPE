@@ -42,7 +42,7 @@ class DefaultPostulationStatus extends StatelessWidget {
                         title: volunteeringDetails.name,
                         subtitle: 'Te estas por postular a',
                         onAccept: () => handlePostulation(
-                            ref, currentUser!, volunteeringDetails),
+                            ref, currentUser!.id, volunteeringDetails),
                         primaryButtonText:
                             AppLocalizations.of(context)!.confirm,
                         secondaryButtonText:
@@ -55,15 +55,13 @@ class DefaultPostulationStatus extends StatelessWidget {
   }
 }
 
-void handlePostulation(WidgetRef ref, SermanosUser currentUser,
-    VolunteeringDetails volunteeringDetails) {
+void handlePostulation(
+    WidgetRef ref, String uid, VolunteeringDetails volunteeringDetails) {
   VolunteeringPostulation postulation = VolunteeringPostulation(
       volunteeringId: volunteeringDetails.volunteeringId,
       status: VolunteeringPostulationStatus.pending);
-  ref
-      .read(userRepositoryProvider)
-      .updateUser(currentUser, postulation.toJson())
-      .then((value) => ref
+  ref.read(userRepositoryProvider).updateUser(uid, postulation.toJson()).then(
+      (value) => ref
           .read(loggedUserProvider.notifier)
           .setVolunteeringPostulation(postulation));
 }

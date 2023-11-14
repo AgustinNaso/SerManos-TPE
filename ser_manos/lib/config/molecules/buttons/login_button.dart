@@ -15,7 +15,7 @@ class LoginButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool enabled = ref.watch(loginValidatorProvider);
-    _attendRegisterProvider(context, ref);
+    _attendLoginProvider(context, ref);
 
     return SermanosCtaButton(
         text: AppLocalizations.of(context)!.login,
@@ -25,7 +25,7 @@ class LoginButton extends ConsumerWidget {
         });
   }
 
-  _attendRegisterProvider(BuildContext context, WidgetRef ref) {
+  _attendLoginProvider(BuildContext context, WidgetRef ref) {
     final loginStateProvider = ref.watch(loginControllerProvider);
 
     if (loginStateProvider == FormStates.success.name) {
