@@ -33,9 +33,9 @@ class PendingPostulationStatus extends StatelessWidget {
                           onAccept: () =>
                               handleWithdrawPostulation(ref, currentUser!),
                           primaryButtonText:
-                              AppLocalizations.of(context)!.cancel,
+                              AppLocalizations.of(context)!.confirm,
                           secondaryButtonText:
-                              AppLocalizations.of(context)!.confirm);
+                              AppLocalizations.of(context)!.cancel);
                     })
               });
     });

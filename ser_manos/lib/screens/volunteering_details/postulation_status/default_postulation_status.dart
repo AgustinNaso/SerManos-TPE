@@ -43,8 +43,10 @@ class DefaultPostulationStatus extends StatelessWidget {
                         subtitle: 'Te estas por postular a',
                         onAccept: () => handlePostulation(
                             ref, currentUser!, volunteeringDetails),
-                        primaryButtonText: 'Confirmar',
-                        secondaryButtonText: 'Cancelar');
+                        primaryButtonText:
+                            AppLocalizations.of(context)!.confirm,
+                        secondaryButtonText:
+                            AppLocalizations.of(context)!.cancel);
                   },
                 ),
             enabled: canPostulate)
