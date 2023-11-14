@@ -4,7 +4,6 @@ import 'package:ser_manos/config/cellules/modal.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
-import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/models/volunteering_details_model.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
@@ -60,7 +59,7 @@ void handlePostulation(
   VolunteeringPostulation postulation = VolunteeringPostulation(
       volunteeringId: volunteeringDetails.volunteeringId,
       status: VolunteeringPostulationStatus.pending);
-  ref.read(userRepositoryProvider).updateUser(uid, postulation.toJson()).then(
+  ref.read(userRepositoryProvider).updateUser(uid, {"volunteeringPostulation": postulation}).then(
       (value) => ref
           .read(loggedUserProvider.notifier)
           .setVolunteeringPostulation(postulation));

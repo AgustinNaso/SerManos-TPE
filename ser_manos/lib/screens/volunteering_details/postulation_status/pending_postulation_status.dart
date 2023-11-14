@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/cellules/modal.dart';
 import 'package:ser_manos/data/models/user_model.dart';
-import 'package:ser_manos/data/models/volunteering_postulation.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/postulation_status.dart';
@@ -49,5 +47,5 @@ void handleWithdrawPostulation(
   ref.read(loggedUserProvider.notifier).removeVolunteeringPostulation();
   ref
       .read(userRepositoryProvider)
-      .updateUser(currentUser.id, currentUser.volunteeringPostulation.toJson());
+      .updateUser(currentUser.id, {"volunteeringPostulation": currentUser.volunteeringPostulation});
 }

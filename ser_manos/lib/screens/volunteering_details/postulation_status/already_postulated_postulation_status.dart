@@ -18,8 +18,10 @@ class AlreadyPostulatedPostulationStatus extends StatelessWidget {
             description: AppLocalizations.of(context)!.alreadyParticipating,
             buttonText: AppLocalizations.of(context)!.leaveActualVolunteering,
             onButtonPressed: () => {
-                  GoRouter.of(context).go(
-                      '/volunteering/${currentUser!.volunteeringPostulation.volunteeringId}')
+                  GoRouter.of(context)
+                      .pushNamed('volunteering', pathParameters: {
+                    'id': currentUser!.volunteeringPostulation.volunteeringId
+                  })
                 }),
         SermanosCtaButton(
           text: AppLocalizations.of(context)!.apply,

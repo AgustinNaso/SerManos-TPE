@@ -98,14 +98,13 @@ class CompleteProfile extends ConsumerWidget {
                   text:  AppLocalizations.of(context)!.editProfile,
                   onPressed: () => {
                     GoRouter.of(context).pushNamed('editProfile')
-                    // TODO: create and pass user
                   },
                   backgroundColor: SermanosColors.primary100,
                 ),
                 const SizedBox(width: 8),
                 SermanosCtaButton(
                   text:  AppLocalizations.of(context)!.logout,
-                  onPressed: () => Navigator.of(context).pushNamed('login'),
+                  onPressed: () => GoRouter.of(context).pushNamed('login'),
                   backgroundColor: Colors.transparent,
                   textColor: SermanosColors.error100,
                 ),

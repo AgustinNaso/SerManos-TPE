@@ -50,5 +50,5 @@ void handleQuitPostulation(WidgetRef ref, SermanosUser currentUser) {
   ref.read(loggedUserProvider.notifier).removeVolunteeringPostulation();
   ref
       .read(userRepositoryProvider)
-      .updateUser(currentUser.id, currentUser.volunteeringPostulation.toJson());
+      .updateUser(currentUser.id, {"volunteeringPostulation": currentUser.volunteeringPostulation});
 }
