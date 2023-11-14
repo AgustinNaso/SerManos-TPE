@@ -30,7 +30,7 @@ class EditProfileController extends _$EditProfileController {
     state = FormStates.loading.name;
     try {
       String imgUrl = "";
-      if (filePath!= null) {
+      if (filePath != null && !filePath.contains("http")) {
         imgUrl = await StorageService.uploadProfilePicture(uid, filePath);
       }
 
@@ -44,7 +44,6 @@ class EditProfileController extends _$EditProfileController {
       print("Edit profile success");
       state = FormStates.success.name;
     } catch (e) {
-      print("error pai $e");
       state = FormStates.error.name;
       EditProfileFormKey.currentState!.validate();
     }

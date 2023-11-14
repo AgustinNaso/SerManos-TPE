@@ -47,6 +47,7 @@ class SermanosTextField extends HookConsumerWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       name: name,
       onChanged: onChanged,
+      initialValue: initialValue,
       onReset: () => controller.text = '',
       validator: (value) {
         if (validators != null) {
