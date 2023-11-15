@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
-import 'package:ser_manos/config/molecules/inputs/sermanos_date_field.dart';
 import 'package:ser_manos/config/molecules/inputs/sermanos_gender_selection.dart';
 import 'package:ser_manos/config/molecules/inputs/sermanos_text_field.dart';
 import 'package:ser_manos/config/molecules/inputs/sermanos_upload_profile_photo.dart';
@@ -11,6 +10,7 @@ import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/gender.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class EditProfileDataForm extends ConsumerWidget {
   final Gender? genderField;
@@ -47,26 +47,32 @@ class EditProfileDataForm extends ConsumerWidget {
           labelText: AppLocalizations.of(context)!.dateOfBirth,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           inputFormatters: [
-            // MaskedTextInputFormatter(mask: '00/00/0000'),
+            MaskTextInputFormatter(
+                mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')}),
           ],
           hintText: AppLocalizations.of(context)!.birthDateHint,
-          initialValue: birthDateField != null ? DateFormat.yMd(locale).format(birthDateField!) : '',
+          initialValue: birthDateField != null
+              ? DateFormat.yMd(locale).format(birthDateField!)
+              : '',
           name: "birthDate",
           icon: SermanosIcons.calendar(status: SermanosIconStatus.activated),
           onChangeFocus: onChangeFocus,
           validators: [
             FormBuilderValidators.required(
                 errorText: AppLocalizations.of(context)!.requiredFieldError),
-            FormBuilderValidators.dateString(
-              errorText: AppLocalizations.of(context)!.wrongBirthDate,
-            ),
             (value) {
-              if (value != null) {
-                final date = DateFormat('yyyy-MM-dd').parse(value);
-                if (date.isAfter(DateTime.now())) {
+              if (value != null && value.isNotEmpty) {
+                try {
+                  final date = DateFormat.yMd(locale).parseStrict(value);
+                  if (date.isBefore(DateTime.now())) {
+                    return null;
+                  }
+                  return AppLocalizations.of(context)!.wrongBirthDate;
+                } catch (err) {
                   return AppLocalizations.of(context)!.wrongBirthDate;
                 }
               }
+              return null;
             }
           ],
         ),
@@ -76,8 +82,7 @@ class EditProfileDataForm extends ConsumerWidget {
         Column(
           children: [
             Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(4),

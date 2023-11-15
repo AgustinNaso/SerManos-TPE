@@ -20,11 +20,13 @@ class SermanosTextField extends HookConsumerWidget {
   final String initialValue;
   final Icon? icon;
   final List<TextInputFormatter>? inputFormatters;
+  final TextInputType textInputType;
 
   const SermanosTextField({
     super.key,
     required this.labelText,
     required this.name,
+    this.textInputType = TextInputType.text,
     this.inputFormatters,
     this.icon,
     this.hintText,
@@ -75,6 +77,7 @@ class SermanosTextField extends HookConsumerWidget {
       },
       builder: (FormFieldState field) {
         return TextField(
+          keyboardType: textInputType,
           inputFormatters: inputFormatters,
           focusNode: myFocusNode,
           controller: controller,
@@ -113,20 +116,19 @@ class SermanosTextField extends HookConsumerWidget {
             suffixIcon: icon ??
                 (enableObscure
                     ? IconButton(
-                        icon: Icon(
-                          isObscured.value
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: SermanosColors.neutral75,
-                        ),
+                        icon: isObscured.value
+                            ? SermanosIcons.visibilityOff(
+                                status: SermanosIconStatus.enabledSecondary)
+                            : SermanosIcons.visibility(
+                                status: SermanosIconStatus.enabledSecondary),
                         onPressed: () {
                           isObscured.value = !isObscured.value;
                         },
                       )
                     : controller.text.isNotEmpty && myFocusNode.hasFocus
                         ? IconButton(
-                            icon: const Icon(Icons.clear,
-                                color: SermanosColors.primary100),
+                            icon: SermanosIcons.close(
+                                status: SermanosIconStatus.enabled),
                             onPressed: () {
                               if (!isEmpty) {
                                 controller.clear();
@@ -142,9 +144,9 @@ class SermanosTextField extends HookConsumerWidget {
           onEditingComplete: () {
             myFocusNode.unfocus();
           },
-          onSubmitted: (value) {
-            myFocusNode.unfocus();
-          },
+          // onSubmitted: (value) {
+          //   myFocusNode.unfocus();
+          // },
         );
       },
     );

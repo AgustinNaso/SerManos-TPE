@@ -73,6 +73,7 @@ class SermanosIcons extends Icon {
           icon: Icons.search,
           status: status,
         );
+
   SermanosIcons.map({
     Key? key,
     required SermanosIconStatus status,
@@ -81,6 +82,7 @@ class SermanosIcons extends Icon {
           icon: Icons.map_outlined,
           status: status,
         );
+
   SermanosIcons.close({
     Key? key,
     required SermanosIconStatus status,
@@ -89,6 +91,7 @@ class SermanosIcons extends Icon {
           icon: Icons.close,
           status: status,
         );
+
   SermanosIcons.calendar({
     Key? key,
     required SermanosIconStatus status,
@@ -97,7 +100,32 @@ class SermanosIcons extends Icon {
           icon: Icons.calendar_month,
           status: status,
         );
-  
+
+  SermanosIcons.visibility({
+    Key? key,
+    required SermanosIconStatus status,
+  }) : this(
+          key: key,
+          icon: Icons.visibility,
+          status: status,
+        );
+
+  SermanosIcons.visibilityOff({
+    Key? key,
+    required SermanosIconStatus status,
+  }) : this(
+          key: key,
+          icon: Icons.visibility_off,
+          status: status,
+        );
+  SermanosIcons.add({
+    Key? key,
+    required SermanosIconStatus status,
+  }) : this(
+          key: key,
+          icon: Icons.add,
+          status: status,
+        );
 }
 
 enum SermanosIconStatus {

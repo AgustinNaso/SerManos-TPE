@@ -30,6 +30,7 @@ class LoginForm extends ConsumerWidget {
           SermanosTextField(
             onChangeFocus: onChangeFocus,
             labelText: AppLocalizations.of(context)!.email,
+            textInputType: TextInputType.emailAddress,
             name: "email",
             validators: [
               FormBuilderValidators.required(
