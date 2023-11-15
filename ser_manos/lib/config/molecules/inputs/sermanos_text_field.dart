@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 
@@ -16,18 +18,23 @@ class SermanosTextField extends HookConsumerWidget {
   final void Function(String, bool)? onChangeFocus;
   final FloatingLabelBehavior floatingLabelBehavior;
   final String initialValue;
-  const SermanosTextField(
-      {super.key,
-      required this.labelText,
-      required this.name,
-        this.hintText,
-        this.floatingLabelBehavior = FloatingLabelBehavior.auto,
-      this.enableObscure = false,
-      this.validators,
-        this.onChanged,
-        this.onChangeFocus,
-      this.initialValue = ''
-        });
+  final Icon? icon;
+  final List<TextInputFormatter>? inputFormatters;
+
+  const SermanosTextField({
+    super.key,
+    required this.labelText,
+    required this.name,
+    this.inputFormatters,
+    this.icon,
+    this.hintText,
+    this.floatingLabelBehavior = FloatingLabelBehavior.auto,
+    this.enableObscure = false,
+    this.validators,
+    this.onChanged,
+    this.onChangeFocus,
+    this.initialValue = '',
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,16 +61,21 @@ class SermanosTextField extends HookConsumerWidget {
           for (final validator in validators!) {
             final error = validator(value);
             if (error != null) {
-              Future(() {onChangeFocus?.call(name, false);});
+              Future(() {
+                onChangeFocus?.call(name, false);
+              });
               return myFocusNode.hasFocus ? null : error;
             }
           }
-          Future(() {onChangeFocus?.call(name, true);});
+          Future(() {
+            onChangeFocus?.call(name, true);
+          });
         }
         return null;
       },
       builder: (FormFieldState field) {
         return TextField(
+          inputFormatters: inputFormatters,
           focusNode: myFocusNode,
           controller: controller,
           onChanged: (value) => field.didChange(value),
@@ -73,8 +85,7 @@ class SermanosTextField extends HookConsumerWidget {
             hintText: hintText,
             floatingLabelBehavior: floatingLabelBehavior,
             hintStyle: const SermanosTypography.subtitle01(
-              color:
-              SermanosColors.neutral50,
+              color: SermanosColors.neutral50,
             ),
             errorBorder: const OutlineInputBorder(
               borderSide: BorderSide(
@@ -93,35 +104,37 @@ class SermanosTextField extends HookConsumerWidget {
                     ? SermanosColors.secondary200
                     : SermanosColors.neutral75),
             focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(width: 2, color: SermanosColors.secondary200),
+              borderSide:
+                  BorderSide(width: 2, color: SermanosColors.secondary200),
             ),
             enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: SermanosColors.neutral75),
             ),
-            suffixIcon: enableObscure
-                ? IconButton(
-                    icon: Icon(
-                      isObscured.value
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                      color: SermanosColors.neutral75,
-                    ),
-                    onPressed: () {
-                      isObscured.value = !isObscured.value;
-                    },
-                  )
-                : controller.text.isNotEmpty && myFocusNode.hasFocus
+            suffixIcon: icon ??
+                (enableObscure
                     ? IconButton(
-                        icon:
-                            const Icon(Icons.clear, color: SermanosColors.primary100),
+                        icon: Icon(
+                          isObscured.value
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: SermanosColors.neutral75,
+                        ),
                         onPressed: () {
-                          if (!isEmpty) {
-                            controller.clear();
-                            field.reset();
-                          }
+                          isObscured.value = !isObscured.value;
                         },
                       )
-                    : null,
+                    : controller.text.isNotEmpty && myFocusNode.hasFocus
+                        ? IconButton(
+                            icon: const Icon(Icons.clear,
+                                color: SermanosColors.primary100),
+                            onPressed: () {
+                              if (!isEmpty) {
+                                controller.clear();
+                                field.reset();
+                              }
+                            },
+                          )
+                        : null),
           ),
           onTapOutside: (event) {
             myFocusNode.unfocus();

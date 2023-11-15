@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:ser_manos/config/molecules/inputs/sermanos_date_field.dart';
 import 'package:ser_manos/config/molecules/inputs/sermanos_gender_selection.dart';
+import 'package:ser_manos/config/molecules/inputs/sermanos_text_field.dart';
 import 'package:ser_manos/config/molecules/inputs/sermanos_upload_profile_photo.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
@@ -28,6 +29,8 @@ class EditProfileDataForm extends ConsumerWidget {
     onChangeFocus(field, value) {
       // ref.read(registerValidatorProvider.notifier).set(field, value); //TODO: PROVIDER
     }
+    String locale = Localizations.localeOf(context).languageCode;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -40,9 +43,14 @@ class EditProfileDataForm extends ConsumerWidget {
         const SizedBox(
           height: 24,
         ),
-        SermanosDateField(
-          label: AppLocalizations.of(context)!.dateOfBirth,
-          initialValue: birthDateField,
+        SermanosTextField(
+          labelText: AppLocalizations.of(context)!.dateOfBirth,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          inputFormatters: [
+            // MaskedTextInputFormatter(mask: '00/00/0000'),
+          ],
+          hintText: AppLocalizations.of(context)!.birthDateHint,
+          initialValue: birthDateField != null ? DateFormat.yMd(locale).format(birthDateField!) : '',
           name: "birthDate",
           icon: SermanosIcons.calendar(status: SermanosIconStatus.activated),
           onChangeFocus: onChangeFocus,
