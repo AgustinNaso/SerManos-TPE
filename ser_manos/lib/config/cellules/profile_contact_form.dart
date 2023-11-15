@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/config/molecules/inputs/sermanos_text_field.dart';
-import 'package:ser_manos/providers/login_provider.dart';
+import 'package:ser_manos/providers/edit_profile_provider.dart';
 
 class ContactForm extends ConsumerWidget {
   final String? phoneNumber;
@@ -18,7 +18,7 @@ class ContactForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     onChangeFocus(field, value) {
-      ref.read(loginValidatorProvider.notifier).set(field, value);
+      ref.read(editProfileValidatorProvider.notifier).set(field, value);
     }
 
     return Column(

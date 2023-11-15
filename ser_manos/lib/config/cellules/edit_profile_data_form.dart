@@ -11,6 +11,7 @@ import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/gender.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:ser_manos/providers/edit_profile_provider.dart';
 
 class EditProfileDataForm extends ConsumerWidget {
   final Gender? genderField;
@@ -27,8 +28,9 @@ class EditProfileDataForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     onChangeFocus(field, value) {
-      // ref.read(registerValidatorProvider.notifier).set(field, value); //TODO: PROVIDER
+      ref.read(editProfileValidatorProvider.notifier).set(field, value);
     }
+
     String locale = Localizations.localeOf(context).languageCode;
 
     return Column(
@@ -48,7 +50,7 @@ class EditProfileDataForm extends ConsumerWidget {
           floatingLabelBehavior: FloatingLabelBehavior.always,
           inputFormatters: [
             MaskTextInputFormatter(
-                mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')}),
+                mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.eager),
           ],
           hintText: AppLocalizations.of(context)!.birthDateHint,
           initialValue: birthDateField != null
@@ -109,15 +111,28 @@ class EditProfileDataForm extends ConsumerWidget {
                   color: SermanosColors.neutral10,
                 ),
                 width: double.infinity,
-                child: SermanosGenderSelection(initialValue: genderField)),
+                child: SermanosGenderSelection(
+                    initialValue: genderField,
+                    validators: [
+                      FormBuilderValidators.required(
+                          errorText:
+                              AppLocalizations.of(context)!.requiredFieldError)
+                    ],
+                    onChangeFocus: onChangeFocus)),
           ],
         ),
         const SizedBox(
           height: 24,
         ),
         SermanosUploadProfilePhoto(
+          name: "profileImgUrl",
           initialValue: profileImgUrl,
           enabled: true,
+          validators: [
+            FormBuilderValidators.required(
+                errorText: AppLocalizations.of(context)!.requiredFieldError),
+          ],
+          onChangeFocus: onChangeFocus,
         )
       ],
     );

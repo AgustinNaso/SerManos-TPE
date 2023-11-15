@@ -14,11 +14,12 @@ import 'package:ser_manos/providers/user_provider.dart';
 final EditProfileFormKey = GlobalKey<FormBuilderState>();
 
 class EditProfileScreen extends ConsumerWidget {
-  EditProfileScreen({super.key});
+  const EditProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(loggedUserProvider);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: SermanosColors.neutral0,

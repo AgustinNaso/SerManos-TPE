@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
@@ -128,7 +127,7 @@ class SermanosTextField extends HookConsumerWidget {
                     : controller.text.isNotEmpty && myFocusNode.hasFocus
                         ? IconButton(
                             icon: SermanosIcons.close(
-                                status: SermanosIconStatus.enabled),
+                                status: SermanosIconStatus.activated),
                             onPressed: () {
                               if (!isEmpty) {
                                 controller.clear();
@@ -144,9 +143,9 @@ class SermanosTextField extends HookConsumerWidget {
           onEditingComplete: () {
             myFocusNode.unfocus();
           },
-          // onSubmitted: (value) {
-          //   myFocusNode.unfocus();
-          // },
+          onSubmitted: (value) {
+            myFocusNode.unfocus();
+          },
         );
       },
     );

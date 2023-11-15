@@ -17,7 +17,7 @@ class LoginForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loginProvider = ref.watch(loginControllerProvider.notifier);
 
-    onChangeFocus  (field, value) {
+    onChangeFocus (field, value) {
       ref.read(loginValidatorProvider.notifier).set(field, value);
     }
 
