@@ -38,9 +38,8 @@ class EditProfileScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               EditProfileDataForm(
-                  user: user!,
-                  genderField: user.gender,
-                  birthDateField: user.birthDate ?? DateTime.now(),
+                  genderField: user!.gender,
+                  birthDateField: user.birthDate,
                   profileImgUrl: user.profileImgUrl),
               const SizedBox(
                 height: 32,

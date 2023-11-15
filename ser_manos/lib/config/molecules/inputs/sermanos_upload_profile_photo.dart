@@ -32,7 +32,7 @@ class SermanosUploadProfilePhoto extends HookConsumerWidget {
     final uploadImageNotifier = ref.read(uploadImageProvider.notifier);
 
     final bool isEmpty =
-        useListenableSelector(value, () => value.value?.isEmpty ?? false);
+        useListenableSelector(value, () => value.value?.isEmpty ?? true);
 
     EditProfileFormKey.currentState?.fields['profileImgUrl']
         ?.setValue(value.value);
@@ -68,7 +68,8 @@ class SermanosUploadProfilePhoto extends HookConsumerWidget {
                         SermanosShortButton(
                           text: AppLocalizations.of(context)!.uploadPicture,
                           filled: true,
-                          onPressed: () async => await getImage(value, uploadImageNotifier),
+                          onPressed: () async =>
+                              await getImage(value, uploadImageNotifier),
                           enabled: enabled,
                         )
                       ],
@@ -87,7 +88,8 @@ class SermanosUploadProfilePhoto extends HookConsumerWidget {
                             const SizedBox(height: 8),
                             SermanosCtaButton(
                               text: AppLocalizations.of(context)!.changePicture,
-                              onPressed: () async => await getImage(value, uploadImageNotifier),
+                              onPressed: () async =>
+                                  await getImage(value, uploadImageNotifier),
                               enabled: enabled,
                             )
                           ],
@@ -113,7 +115,8 @@ class SermanosUploadProfilePhoto extends HookConsumerWidget {
     );
   }
 
-  Future getImage(ValueNotifier value, UploadImageValidator uploadImageNotifier) async {
+  Future getImage(
+      ValueNotifier value, UploadImageValidator uploadImageNotifier) async {
     uploadImageNotifier.loading();
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(

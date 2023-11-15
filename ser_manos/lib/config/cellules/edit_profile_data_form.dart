@@ -9,18 +9,15 @@ import 'package:ser_manos/config/molecules/inputs/sermanos_upload_profile_photo.
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/gender.dart';
-import 'package:ser_manos/data/models/user_model.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 class EditProfileDataForm extends ConsumerWidget {
-  final SermanosUser user;
   final Gender? genderField;
-  final DateTime birthDateField;
+  final DateTime? birthDateField;
   final String? profileImgUrl;
 
   const EditProfileDataForm({
     Key? key,
-    required this.user,
     required this.birthDateField,
     this.genderField,
     this.profileImgUrl,

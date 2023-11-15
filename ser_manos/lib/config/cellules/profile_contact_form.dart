@@ -26,6 +26,8 @@ class ContactForm extends ConsumerWidget {
       children: <Widget>[
         SermanosTextField(
             labelText: AppLocalizations.of(context)!.phonenumber,
+            hintText: AppLocalizations.of(context)!.phoneNumberHint,
+            floatingLabelBehavior: FloatingLabelBehavior.always,
             onChangeFocus: onChangeFocus,
             initialValue: phoneNumber ?? "",
             name: "phoneNumber",
@@ -46,6 +48,8 @@ class ContactForm extends ConsumerWidget {
         SermanosTextField(
           onChangeFocus: onChangeFocus,
           labelText: AppLocalizations.of(context)!.mail,
+          hintText: AppLocalizations.of(context)!.contactMailHint,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
           name: "contactEmail",
           initialValue: contactEmail ?? "",
           validators: [

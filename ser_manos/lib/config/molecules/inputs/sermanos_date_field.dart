@@ -6,11 +6,12 @@ import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
+import 'package:flutter_gen/gen_l10n/localizations.dart';
 
 class SermanosDateField extends HookConsumerWidget {
   final String label;
   final SermanosIcons icon;
-  final DateTime initialValue;
+  final DateTime? initialValue;
   final List<String? Function(String?)>? validators;
   final void Function(String, bool)? onChangeFocus;
   final String name;
@@ -19,8 +20,8 @@ class SermanosDateField extends HookConsumerWidget {
       {Key? key,
       required this.label,
       required this.icon,
-      required this.initialValue,
       required this.name,
+      this.initialValue,
       this.onChangeFocus,
       this.validators})
       : super(key: key);
@@ -32,8 +33,8 @@ class SermanosDateField extends HookConsumerWidget {
     String locale = Localizations.localeOf(context).languageCode;
 
     return FormBuilderDateTimePicker(
-      name: name,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      name: name,
       initialValue: initialValue,
       format: DateFormat.yMd(locale),
       validator: (value) {
@@ -73,7 +74,7 @@ class SermanosDateField extends HookConsumerWidget {
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(width: 2, color: SermanosColors.secondary200),
         ),
-        // border: InputBorder.none,
+        hintText: AppLocalizations.of(context)!.birthDateHint,
         contentPadding: const EdgeInsets.all(16),
       ),
     );
