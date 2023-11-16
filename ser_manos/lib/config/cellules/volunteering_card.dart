@@ -8,10 +8,12 @@ import 'package:ser_manos/config/tokens/sermanos_box_shadows.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/volunteering_model.dart';
+import 'package:ser_manos/providers/analytics_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 
 class VolunteeringCard extends ConsumerWidget {
   final Volunteering volunteeringInfo;
+
   const VolunteeringCard({super.key, required this.volunteeringInfo});
 
   @override
@@ -70,19 +72,8 @@ class VolunteeringCard extends ConsumerWidget {
                                         status: SermanosIconStatus.activated)
                                     : SermanosIcons.favoriteOutlined(
                                         status: SermanosIconStatus.activated),
-                                onPressed: () {
-                                  if (isFavorite) {
-                                    ref
-                                        .read(loggedUserProvider.notifier)
-                                        .removeFavVolunteering(
-                                            volunteeringInfo.id);
-                                  } else {
-                                    ref
-                                        .read(loggedUserProvider.notifier)
-                                        .addFavVolunteering(
-                                            volunteeringInfo.id);
-                                  }
-                                },
+                                onPressed: () =>
+                                    handleFavoriteButton(ref, isFavorite),
                               ),
                               const SizedBox(width: 16),
                               IconButton(
@@ -101,5 +92,24 @@ class VolunteeringCard extends ConsumerWidget {
             ]),
       ),
     );
+  }
+
+  handleFavoriteButton(WidgetRef ref, bool isFavorite) async {
+    if (isFavorite) {
+      ref
+          .read(loggedUserProvider.notifier)
+          .removeFavVolunteering(volunteeringInfo.id);
+      getAnalytics().then((value) => value?.logEvent(
+          name: 'remove_favorite_test', parameters: {'volunteering_id': volunteeringInfo.id}));
+    } else {
+      ref
+          .read(loggedUserProvider.notifier)
+          .addFavVolunteering(volunteeringInfo.id);
+      getAnalytics().then((value) async {
+        await value?.logEvent(
+            name: 'add_favorite_test', parameters: {'volunteering_id': volunteeringInfo.id});
+        print('added');
+      });
+    }
   }
 }

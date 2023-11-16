@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/cellules/register_form.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
 import 'package:ser_manos/data/models/form_states.dart';
+import 'package:ser_manos/providers/analytics_provider.dart';
 import 'package:ser_manos/providers/register_controller.dart';
 import 'package:ser_manos/providers/register_provider.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
@@ -29,7 +30,7 @@ class RegisterButton extends ConsumerWidget {
     final registerStateProvider = ref.watch(registerControllerProvider);
 
     if (registerStateProvider == FormStates.success.name) {
-      FirebaseAnalytics.instance.logSignUp(signUpMethod: 'email');
+      getAnalytics().then((value) => value?.logSignUp(signUpMethod: 'email'));
       Future(() => {GoRouter.of(context).pushReplacementNamed('welcome')});
     }
     if (registerStateProvider == FormStates.loading.name) {
