@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
+import 'package:ser_manos/config/molecules/inputs/input_utils.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 
@@ -51,29 +52,15 @@ class SermanosTextField extends HookConsumerWidget {
 
     final isObscured = useState(enableObscure);
 
+    inputValidator(initialValue, validators, name, myFocusNode, onChangeFocus);
+
     return FormBuilderField<String>(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       name: name,
       onChanged: onChanged,
       initialValue: initialValue,
       onReset: () => controller.text = '',
-      validator: (value) {
-        if (validators != null) {
-          for (final validator in validators!) {
-            final error = validator(value);
-            if (error != null) {
-              Future(() {
-                onChangeFocus?.call(name, false);
-              });
-              return myFocusNode.hasFocus ? null : error;
-            }
-          }
-          Future(() {
-            onChangeFocus?.call(name, true);
-          });
-        }
-        return null;
-      },
+      validator: (value) => inputValidator(value, validators, name, myFocusNode, onChangeFocus),
       builder: (FormFieldState field) {
         return TextField(
           keyboardType: textInputType,
