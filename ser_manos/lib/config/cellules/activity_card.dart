@@ -41,10 +41,8 @@ class ActivityCard extends ConsumerWidget {
                           style: const SermanosTypography.subtitle01()),
                     ],
                   ),
-                  IconButton(
-                      onPressed: () {},
-                      icon: SermanosIcons.locationFilled(
-                          status: SermanosIconStatus.activated))
+                  SermanosIcons.locationFilled(
+                      status: SermanosIconStatus.activated)
                 ],
               ));
         },
