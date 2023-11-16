@@ -22,4 +22,14 @@ class LoggedUser extends _$LoggedUser {
         status: VolunteeringPostulationStatus.notPostulated);
     state = state!.copy();
   }
+
+  void addFavVolunteering(String volunteeringId) {
+    state!.favVolunteerings.add(volunteeringId);
+    state = state!.copy();
+  }
+
+  void removeFavVolunteering(String volunteeringId) {
+    state!.favVolunteerings.remove(volunteeringId);
+    state = state!.copy();
+  }
 }

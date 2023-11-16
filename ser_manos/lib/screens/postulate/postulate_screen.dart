@@ -4,12 +4,12 @@ import 'package:ser_manos/config/cellules/volunteering_card.dart';
 import 'package:ser_manos/config/molecules/inputs/sermanos_search_bar.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
+import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/models/volunteering_model.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/providers/Future/volunteering_provider.dart';
+import 'package:ser_manos/providers/user_provider.dart';
 import 'package:ser_manos/screens/postulate/volunteerings_not_found.dart';
-
-
 
 final searchQueryProvider = StateProvider<String>((ref) => '');
 
@@ -60,8 +60,7 @@ class PostulateScreen extends ConsumerWidget {
                               itemBuilder: (context, index) {
                                 return VolunteeringCard(
                                     volunteeringInfo:
-                                        filteredVolunteerings[index],
-                                    isFavorite: false);
+                                        filteredVolunteerings[index]);
                               },
                               itemCount: filteredVolunteerings.length))
                       : const VolunteeringNotFound()

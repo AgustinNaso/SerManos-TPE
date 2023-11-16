@@ -19,7 +19,7 @@ class AlreadyPostulatedPostulationStatus extends StatelessWidget {
             buttonText: AppLocalizations.of(context)!.leaveActualVolunteering,
             onButtonPressed: () => {
                   GoRouter.of(context)
-                      .pushNamed('volunteering', pathParameters: {
+                      .pushReplacementNamed('volunteering', pathParameters: {
                     'id': currentUser!.volunteeringPostulation.volunteeringId
                   })
                 }),

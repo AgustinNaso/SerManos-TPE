@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_short_button.dart';
 import 'package:ser_manos/config/molecules/images/profile_image.dart';
+import 'package:ser_manos/config/molecules/inputs/input_utils.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
@@ -39,27 +40,13 @@ class SermanosUploadProfilePhoto extends HookConsumerWidget {
     final bool isEmpty =
         useListenableSelector(value, () => value.value?.isEmpty ?? true);
 
+    inputValidator(initialValue, validators, name, myFocusNode, onChangeFocus);
+
     return FormBuilderField<String>(
       initialValue: initialValue,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       name: name,
-      validator: (value) {
-        if (validators != null) {
-          for (final validator in validators!) {
-            final error = validator(value);
-            if (error != null) {
-              Future(() {
-                onChangeFocus?.call(name, false);
-              });
-              return myFocusNode.hasFocus ? null : error;
-            }
-          }
-          Future(() {
-            onChangeFocus?.call(name, true);
-          });
-        }
-        return null;
-      },
+      validator: (value) => inputValidator(value, validators, name, myFocusNode, onChangeFocus),
       builder: (FormFieldState field) {
         value.addListener(() {
           EditProfileFormKey.currentState?.fields[name]?.validate();
