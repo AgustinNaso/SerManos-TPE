@@ -32,59 +32,68 @@ class PostulateScreen extends ConsumerWidget {
                 .contains(searchQuery.toLowerCase()))
             .toList();
         return Container(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             color: SermanosColors.secondary10,
-            child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  SermanosSearchBar(
-                      onChange: (query) =>
-                          ref.read(searchQueryProvider.notifier).state = query),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  if (loggedUser!.volunteeringPostulation.status !=
-                      VolunteeringPostulationStatus.notPostulated)
-                    Column(
+            child: CustomScrollView(slivers: [
+              SliverToBoxAdapter(
+                  child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(AppLocalizations.of(context)!.activityTitle,
-                            style: const SermanosTypography.headline01(
-                                color: SermanosColors.neutral100)),
-                        const SizedBox(
-                          height: 24,
-                        ),
-                        ActivityCard(
-                            volunteeringId: loggedUser
-                                .volunteeringPostulation.volunteeringId),
-                        const SizedBox(height: 24)
-                      ],
+                    const SizedBox(
+                      height: 24,
                     ),
-                  Text(AppLocalizations.of(context)!.volunteersTitle,
-                      style: const SermanosTypography.headline01(
-                          color: SermanosColors.neutral100)),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  filteredVolunteerings.isNotEmpty
-                      ? Expanded(
-                          child: ListView.separated(
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(
-                                    height: 24,
-                                  ),
-                              itemBuilder: (context, index) {
-                                return VolunteeringCard(
-                                    volunteeringInfo:
-                                        filteredVolunteerings[index]);
-                              },
-                              itemCount: filteredVolunteerings.length))
-                      : const VolunteeringNotFound()
-                ]));
+                    SermanosSearchBar(
+                        onChange: (query) => ref
+                            .read(searchQueryProvider.notifier)
+                            .state = query),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                  ])),
+              SliverToBoxAdapter(
+                  child: Column(children: [
+                if (loggedUser!.volunteeringPostulation.status !=
+                    VolunteeringPostulationStatus.notPostulated)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(AppLocalizations.of(context)!.activityTitle,
+                          style: const SermanosTypography.headline01(
+                              color: SermanosColors.neutral100)),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      ActivityCard(
+                          volunteeringId: loggedUser
+                              .volunteeringPostulation.volunteeringId),
+                      const SizedBox(height: 24)
+                    ],
+                  )
+              ])),
+              SliverToBoxAdapter(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                    Text(AppLocalizations.of(context)!.volunteersTitle,
+                        style: const SermanosTypography.headline01(
+                            color: SermanosColors.neutral100)),
+                    const SizedBox(
+                      height: 24,
+                    )
+                  ])),
+              filteredVolunteerings.isNotEmpty
+                  ? SliverList.separated(
+                      separatorBuilder: (context, index) => const SizedBox(
+                            height: 24,
+                          ),
+                      itemBuilder: (context, index) {
+                        return VolunteeringCard(
+                            volunteeringInfo: filteredVolunteerings[index]);
+                      },
+                      itemCount: filteredVolunteerings.length)
+                  : const SliverToBoxAdapter(child: VolunteeringNotFound())
+            ]));
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stack) => Text(error.toString()),
