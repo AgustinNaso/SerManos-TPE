@@ -46,7 +46,6 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
 
   @override
   static VolunteeringDetails fromJson(Map<String, dynamic> json) {
-    print(json);
     return VolunteeringDetails(
       description: json['description'],
       about: json['about'],
