@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:ser_manos/config/molecules/inputs/input_utils.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/data/models/gender.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -24,6 +25,8 @@ class SermanosGenderSelection extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final myFocusNode = useFocusNode();
     useListenable(myFocusNode);
+
+    inputValidator(genderNameFromEnum(context, initialValue), validators, name, myFocusNode, onChangeFocus);
 
     return Theme(
       data: Theme.of(context).copyWith(
