@@ -44,7 +44,6 @@
   "hyphenEmail": "e-mail",
   "editProfile": "Editar perfil",
   "logout": "Cerrar sesión",
-  "profileData": "Datos de perfil",
   "wrongBirthDate": "Por favor ingrese una fecha valida",
   "completeProfile": "¡Completá tu perfil para tener acceso a mejores oportunidades!",
   "complete": "Completar",
@@ -81,6 +80,26 @@
   "participate": "Participar del voluntariado",
   "requirements": "Requisitos",
   "availability": "Disponibilidad",
+  "additionalInfo": "Información adicional",
+  "additionalInfoPrice": "Precio: {price}",
+  "@additionalInfoPrice": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "additionalInfoDate": "Fecha: {date} - {time}",
+  "@additionalInfoDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "profileData": "Datos de perfil",
   "shareDisclaimer": "Estos datos serán compartidos con la organización para ponerse en contacto contigo",
   "saveData": "Guardar datos",

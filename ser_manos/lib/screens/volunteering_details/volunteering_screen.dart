@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:ser_manos/config/cellules/information_card.dart';
 import 'package:ser_manos/config/molecules/images/sermanos_cached_network_image.dart';
@@ -29,6 +30,8 @@ class VolunteeringScreen extends ConsumerWidget {
     final futureVolunteeringDetail =
         ref.watch(getVolunteeringDetailsProvider(volunteeringId));
     final SermanosUser? loggedUser = ref.watch(loggedUserProvider);
+
+    final locale = Localizations.localeOf(context).languageCode;
 
     return Scaffold(
         body: futureVolunteeringDetail.when(
@@ -141,6 +144,50 @@ class VolunteeringScreen extends ConsumerWidget {
                             ],
                           );
                         },
+                      ),
+                      const SizedBox(height: 8),
+                      Text(AppLocalizations.of(context)!.additionalInfo,
+                          style: const SermanosTypography.subtitle01()),
+                      const SizedBox(height: 8),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                        child: Column(
+                          children: [
+                            Row(children: [
+                              const Icon(
+                                Icons.circle,
+                                color: SermanosColors.neutral100,
+                                size: 5,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                  AppLocalizations.of(context)!
+                                      .additionalInfoPrice(
+                                          NumberFormat.currency(locale: locale)
+                                              .format(
+                                                  volunteeringDetail.price)),
+                                  style: const SermanosTypography.body01()),
+                            ]),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.circle,
+                                  color: SermanosColors.neutral100,
+                                  size: 5,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                    AppLocalizations.of(context)!
+                                        .additionalInfoDate(
+                                            DateFormat.yMd(locale).format(
+                                                volunteeringDetail.date),
+                                            DateFormat.Hm(locale).format(
+                                                volunteeringDetail.date)),
+                                    style: const SermanosTypography.body01()),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 8),
                       const Vacancies(vacancy: 10),

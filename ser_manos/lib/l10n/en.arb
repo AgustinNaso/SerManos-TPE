@@ -44,7 +44,6 @@
   "hyphenEmail": "e-mail",
   "editProfile": "Edit profile",
   "logout": "Logout",
-  "profileData": "Profile Data",
   "wrongBirthDate": "Please enter a valid date",
   "completeProfile": "Complete your profile to access better opportunities!",
   "complete": "Complete",
@@ -81,7 +80,27 @@
   "participate": "Participate in the volunteering",
   "requirements": "Requirements",
   "availability": "Availability",
+  "additionalInfo": "Additional information",
   "profileData": "Profile data",
+  "additionalInfoPrice": "Price: {price}",
+  "@additionalInfoPrice": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "additionalInfoDate": "Date: {date} - {time}",
+  "@additionalInfoDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "shareDisclaimer": "This data will be shared with the organization to contact you",
   "saveData": "Save data",
   "shareNews": "Share this news",
