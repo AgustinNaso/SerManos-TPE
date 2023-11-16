@@ -9,6 +9,7 @@ import 'package:ser_manos/config/router.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/firebase_options.dart';
+import 'package:ser_manos/l10n/localizations.dart';
 
 void main() {
   runZonedGuarded<Future<void>>(() async {
@@ -20,6 +21,8 @@ void main() {
     FirebaseAnalytics analytics = FirebaseAnalytics.instance;
     FirebaseAnalyticsObserver observer =
         FirebaseAnalyticsObserver(analytics: analytics);
+
+    setupLocalization();
 
     runApp(const ProviderScope(
       child: MyApp(),

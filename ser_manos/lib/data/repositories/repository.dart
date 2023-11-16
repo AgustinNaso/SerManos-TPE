@@ -5,11 +5,14 @@ import 'package:ser_manos/exceptions/not_found_exception.dart';
 
 abstract class Repository<T extends GenericModel<T>> {
   final String _tag; // this is the name of the collection in firestore
+  
   @protected
   late final CollectionReference<Map<String, dynamic>> collection;
 
-  Repository(this._tag) {
-    this.collection = FirebaseFirestore.instance.collection(this._tag);
+  Repository(this._tag, {firestore}) {
+    final firestoreInstance = firestore ?? FirebaseFirestore.instance;
+      this.collection = firestoreInstance.collection(this._tag);
+
   }
   // Add other common repository methods here.
 

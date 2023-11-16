@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ser_manos/data/models/generic_model.dart';
 import 'package:ser_manos/data/models/volunteer_states.dart';
 
@@ -12,6 +13,8 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
   final int vacancies;
   final String location;
   final String volunteeringId;
+  final double price;
+  final DateTime date;
   final Map<String, bool> volunteers;
 
   VolunteeringDetails({
@@ -27,6 +30,8 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
     required this.location,
     required this.volunteeringId,
     required this.volunteers,
+    required this.price,
+    required this.date,
   }) : super(id: id);
 
   VolunteerState getVolunteerState(String uid) {
@@ -48,6 +53,9 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
           (json['requirements'] as List).map((item) => item as String).toList(),
       availability:
           (json['availability'] as List).map((item) => item as String).toList(),
+      price: json['price'],
+      date: DateTime.fromMicrosecondsSinceEpoch(
+          (json['date'] as Timestamp).microsecondsSinceEpoch),
       id: json['id'],
       imgUrl: json['imgUrl'],
       name: json['name'],
@@ -73,6 +81,8 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
       'location': location,
       'volunteeringId': volunteeringId,
       'volunteers': volunteers,
+      'price': price,
+      'date': date,
     };
   }
 

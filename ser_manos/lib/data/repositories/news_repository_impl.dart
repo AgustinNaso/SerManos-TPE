@@ -1,10 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ser_manos/data/models/news_model.dart';
 import 'package:ser_manos/data/repositories/repository.dart';
 
 import '../../exceptions/not_found_exception.dart';
 
 class NewsRepositoryImpl extends Repository<News> {
-  NewsRepositoryImpl() : super('news');
+  
+  NewsRepositoryImpl({firestore}) : super('news', firestore: firestore);
 
   Future<List<News>> getNews() async {
     return getDocuments();
