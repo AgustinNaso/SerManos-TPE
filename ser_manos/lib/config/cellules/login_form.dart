@@ -17,7 +17,7 @@ class LoginForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loginProvider = ref.watch(loginControllerProvider.notifier);
 
-    onChangeFocus  (field, value) {
+    onChangeFocus (field, value) {
       ref.read(loginValidatorProvider.notifier).set(field, value);
     }
 
@@ -30,6 +30,7 @@ class LoginForm extends ConsumerWidget {
           SermanosTextField(
             onChangeFocus: onChangeFocus,
             labelText: AppLocalizations.of(context)!.email,
+            textInputType: TextInputType.emailAddress,
             name: "email",
             validators: [
               FormBuilderValidators.required(

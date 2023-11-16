@@ -41,7 +41,6 @@ class EditProfileController extends _$EditProfileController {
         'phoneNumber': phoneNumber,
         'gender': gender
       });
-      print("Edit profile success");
       state = FormStates.success.name;
     } catch (e) {
       state = FormStates.error.name;

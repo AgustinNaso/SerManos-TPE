@@ -58,6 +58,7 @@ class RegisterForm extends ConsumerWidget {
                 labelText: AppLocalizations.of(context)!.email,
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 name: "email",
+                textInputType: TextInputType.emailAddress,
                 onChanged: (value) {
                   if (registerProvider.state == FormStates.error.name) {
                     registerProvider.reset();

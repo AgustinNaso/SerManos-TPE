@@ -6,6 +6,14 @@ StateNotifierProvider<EditProfileValidator, bool>((ref) => EditProfileValidator(
 class EditProfileValidator extends StateNotifier<bool> {
   EditProfileValidator(super.state);
 
+  final Map<String, bool> _fields = {
+    'profileImgUrl': false,
+    'contactEmail': false,
+    'birthDate': false,
+    'gender': false,
+    'phoneNumber': false
+  };
+
   void loading() {
     state = false;
   }
@@ -14,8 +22,8 @@ class EditProfileValidator extends StateNotifier<bool> {
     state = true;
   }
 
-  void error() {
-    state = true;
-    // TODO: handle posible errors
+  void set(String field, bool value) {
+    _fields[field] = value;
+    state = _fields.values.every((element) => element);
   }
 }

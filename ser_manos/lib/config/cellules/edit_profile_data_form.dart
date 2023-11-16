@@ -3,24 +3,23 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
-import 'package:ser_manos/config/molecules/inputs/sermanos_date_field.dart';
 import 'package:ser_manos/config/molecules/inputs/sermanos_gender_selection.dart';
+import 'package:ser_manos/config/molecules/inputs/sermanos_text_field.dart';
 import 'package:ser_manos/config/molecules/inputs/sermanos_upload_profile_photo.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/gender.dart';
-import 'package:ser_manos/data/models/user_model.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:ser_manos/providers/edit_profile_provider.dart';
 
 class EditProfileDataForm extends ConsumerWidget {
-  final SermanosUser user;
   final Gender? genderField;
-  final DateTime birthDateField;
+  final DateTime? birthDateField;
   final String? profileImgUrl;
 
   const EditProfileDataForm({
     Key? key,
-    required this.user,
     required this.birthDateField,
     this.genderField,
     this.profileImgUrl,
@@ -29,8 +28,11 @@ class EditProfileDataForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     onChangeFocus(field, value) {
-      // ref.read(registerValidatorProvider.notifier).set(field, value); //TODO: PROVIDER
+      ref.read(editProfileValidatorProvider.notifier).set(field, value);
     }
+
+    String locale = Localizations.localeOf(context).languageCode;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -43,25 +45,36 @@ class EditProfileDataForm extends ConsumerWidget {
         const SizedBox(
           height: 24,
         ),
-        SermanosDateField(
-          label: AppLocalizations.of(context)!.dateOfBirth,
-          initialValue: birthDateField,
+        SermanosTextField(
+          labelText: AppLocalizations.of(context)!.dateOfBirth,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          inputFormatters: [
+            MaskTextInputFormatter(
+                mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')}, type: MaskAutoCompletionType.eager),
+          ],
+          hintText: AppLocalizations.of(context)!.birthDateHint,
+          initialValue: birthDateField != null
+              ? DateFormat.yMd(locale).format(birthDateField!)
+              : '',
           name: "birthDate",
           icon: SermanosIcons.calendar(status: SermanosIconStatus.activated),
           onChangeFocus: onChangeFocus,
           validators: [
             FormBuilderValidators.required(
                 errorText: AppLocalizations.of(context)!.requiredFieldError),
-            FormBuilderValidators.dateString(
-              errorText: AppLocalizations.of(context)!.wrongBirthDate,
-            ),
             (value) {
-              if (value != null) {
-                final date = DateFormat('yyyy-MM-dd').parse(value);
-                if (date.isAfter(DateTime.now())) {
+              if (value != null && value.isNotEmpty) {
+                try {
+                  final date = DateFormat.yMd(locale).parseStrict(value);
+                  if (date.isBefore(DateTime.now())) {
+                    return null;
+                  }
+                  return AppLocalizations.of(context)!.wrongBirthDate;
+                } catch (err) {
                   return AppLocalizations.of(context)!.wrongBirthDate;
                 }
               }
+              return null;
             }
           ],
         ),
@@ -71,8 +84,7 @@ class EditProfileDataForm extends ConsumerWidget {
         Column(
           children: [
             Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(4),
@@ -99,15 +111,28 @@ class EditProfileDataForm extends ConsumerWidget {
                   color: SermanosColors.neutral10,
                 ),
                 width: double.infinity,
-                child: SermanosGenderSelection(initialValue: genderField)),
+                child: SermanosGenderSelection(
+                    initialValue: genderField,
+                    validators: [
+                      FormBuilderValidators.required(
+                          errorText:
+                              AppLocalizations.of(context)!.requiredFieldError)
+                    ],
+                    onChangeFocus: onChangeFocus)),
           ],
         ),
         const SizedBox(
           height: 24,
         ),
         SermanosUploadProfilePhoto(
+          name: "profileImgUrl",
           initialValue: profileImgUrl,
           enabled: true,
+          validators: [
+            FormBuilderValidators.required(
+                errorText: AppLocalizations.of(context)!.requiredFieldError),
+          ],
+          onChangeFocus: onChangeFocus,
         )
       ],
     );
