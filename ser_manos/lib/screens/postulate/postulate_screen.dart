@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ser_manos/config/cellules/activity_card.dart';
 import 'package:ser_manos/config/cellules/volunteering_card.dart';
 import 'package:ser_manos/config/molecules/inputs/sermanos_search_bar.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
@@ -7,6 +8,7 @@ import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/models/volunteering_model.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:ser_manos/data/models/volunteering_postulation.dart';
 import 'package:ser_manos/providers/Future/volunteering_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 import 'package:ser_manos/screens/postulate/volunteerings_not_found.dart';
@@ -20,6 +22,7 @@ class PostulateScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchQuery = ref.watch(searchQueryProvider);
     final futureVolunteeringsList = ref.watch(getVolunteeringsProvider);
+    final SermanosUser? loggedUser = ref.watch(loggedUserProvider);
 
     return futureVolunteeringsList.when(
       data: (volunteeringsList) {
@@ -44,6 +47,23 @@ class PostulateScreen extends ConsumerWidget {
                   const SizedBox(
                     height: 32,
                   ),
+                  if (loggedUser!.volunteeringPostulation.status !=
+                      VolunteeringPostulationStatus.notPostulated)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(AppLocalizations.of(context)!.activityTitle,
+                            style: const SermanosTypography.headline01(
+                                color: SermanosColors.neutral100)),
+                        const SizedBox(
+                          height: 24,
+                        ),
+                        ActivityCard(
+                            volunteeringId: loggedUser
+                                .volunteeringPostulation.volunteeringId),
+                        const SizedBox(height: 24)
+                      ],
+                    ),
                   Text(AppLocalizations.of(context)!.volunteersTitle,
                       style: const SermanosTypography.headline01(
                           color: SermanosColors.neutral100)),

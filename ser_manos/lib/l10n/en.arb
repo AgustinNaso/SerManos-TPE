@@ -23,6 +23,7 @@
     }
   },
   "enterValidEmailError": "Please enter a valid email address",
+  "activityTitle": "Your activity",
   "volunteersTitle": "Volunteer Opportunities",
   "postulateAppBar": "Postulate",
   "profileAppBar": "My profile",
