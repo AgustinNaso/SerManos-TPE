@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:ser_manos/config/molecules/images/sermanos_cached_network_image.dart';
@@ -7,19 +8,23 @@ import 'package:ser_manos/config/tokens/sermanos_box_shadows.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/volunteering_model.dart';
+import 'package:ser_manos/providers/user_provider.dart';
 
-class VolunteeringCard extends StatelessWidget {
+class VolunteeringCard extends ConsumerWidget {
   final Volunteering volunteeringInfo;
-  final bool isFavorite;
-
-  const VolunteeringCard(
-      {super.key, required this.volunteeringInfo, required this.isFavorite});
+  const VolunteeringCard({super.key, required this.volunteeringInfo});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isFavorite = ref
+        .read(loggedUserProvider)!
+        .favVolunteerings
+        .contains(volunteeringInfo.id);
+
     return InkWell(
       onTap: () {
-        GoRouter.of(context).pushNamed('volunteering', pathParameters: {'id': volunteeringInfo.id});
+        GoRouter.of(context).pushNamed('volunteering',
+            pathParameters: {'id': volunteeringInfo.id});
       },
       child: Container(
         decoration: BoxDecoration(
@@ -31,7 +36,8 @@ class VolunteeringCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SermanosCachedNetworkImage(imageUrl: volunteeringInfo.imgUrl, height: 138),
+              SermanosCachedNetworkImage(
+                  imageUrl: volunteeringInfo.imgUrl, height: 138),
               Container(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
                 color: Colors.white,
@@ -59,9 +65,24 @@ class VolunteeringCard extends StatelessWidget {
                             children: <Widget>[
                               IconButton(
                                 constraints: const BoxConstraints(),
-                                icon: SermanosIcons.favoriteOutlined(
-                                    status: SermanosIconStatus.activated),
-                                onPressed: () {},
+                                icon: isFavorite
+                                    ? SermanosIcons.favoriteFilled(
+                                        status: SermanosIconStatus.activated)
+                                    : SermanosIcons.favoriteOutlined(
+                                        status: SermanosIconStatus.activated),
+                                onPressed: () {
+                                  if (isFavorite) {
+                                    ref
+                                        .read(loggedUserProvider.notifier)
+                                        .removeFavVolunteering(
+                                            volunteeringInfo.id);
+                                  } else {
+                                    ref
+                                        .read(loggedUserProvider.notifier)
+                                        .addFavVolunteering(
+                                            volunteeringInfo.id);
+                                  }
+                                },
                               ),
                               const SizedBox(width: 16),
                               IconButton(
