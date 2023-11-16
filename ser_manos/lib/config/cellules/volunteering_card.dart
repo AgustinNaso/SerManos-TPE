@@ -108,7 +108,6 @@ class VolunteeringCard extends ConsumerWidget {
       getAnalytics().then((value) async {
         await value?.logEvent(
             name: 'add_favorite_test', parameters: {'volunteering_id': volunteeringInfo.id});
-        print('added');
       });
     }
   }
