@@ -53,7 +53,7 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
           (json['requirements'] as List).map((item) => item as String).toList(),
       availability:
           (json['availability'] as List).map((item) => item as String).toList(),
-      price: json['price'],
+      price: json['price'] + 0.0,
       date: DateTime.fromMicrosecondsSinceEpoch(
           (json['date'] as Timestamp).microsecondsSinceEpoch),
       id: json['id'],

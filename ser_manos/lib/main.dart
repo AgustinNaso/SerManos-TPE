@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -17,11 +18,25 @@ void main() {
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform);
 
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-    FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-    FirebaseAnalyticsObserver observer =
-        FirebaseAnalyticsObserver(analytics: analytics);
+    TrackingStatus status =
+        await AppTrackingTransparency.trackingAuthorizationStatus;
+    if (status == TrackingStatus.notDetermined) {
+      status = await AppTrackingTransparency.requestTrackingAuthorization();
+    }
+    if (status == TrackingStatus.authorized) {
+      FlutterError.onError =
+          FirebaseCrashlytics.instance.recordFlutterFatalError;
+      FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+      // analytics.
 
+      FirebaseAnalyticsObserver observer =
+          FirebaseAnalyticsObserver(analytics: analytics);
+      await analytics.logAppOpen();
+      await analytics.logEvent(name: "my_test", parameters: {"test": "test"});
+      // print(await observer.analytics.isSupported());
+      // print(await observer.analytics.appInstanceId);
+      // print(observer.analytics.);
+    }
     setupLocalization();
 
     runApp(const ProviderScope(
@@ -35,7 +50,7 @@ void main() {
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+// This widget is the root of your application.
   @override
   State<MyApp> createState() => _MyAppState();
 }
