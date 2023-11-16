@@ -3,8 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/providers/Future/news_provider.dart';
-import 'package:ser_manos/screens/news_screen.dart';
-
+import 'package:ser_manos/screens/news_detail_screen.dart';
 import '../mocks/providers/news_provider_mock.dart';
 
 
@@ -18,11 +17,12 @@ void main() {
           delegates: AppLocalizations.localizationsDelegates,
           child: ProviderScope(
             overrides: [
-              getNewsProvider.overrideWith((ref) => getMockedNews(ref))
+              // getNewsProvider.overrideWith((ref) => getMockedNews(ref))
+              getNewsByIdProvider('1').overrideWith((ref) => getMockedNewsById(ref))
             ],
             child: const Directionality(
               textDirection: TextDirection.ltr,
-              child: NewsScreen(),
+              child: NewsDetailScreen(newsId: '1',),
             ),
           ),
         ),
@@ -30,8 +30,8 @@ void main() {
 
       await expectLater(
 
-        find.byType(NewsScreen),
-        matchesGoldenFile('./images/news_screen.png'),
+        find.byType(NewsDetailScreen),
+        matchesGoldenFile('./images/news_detail_screen.png'),
       );
     },
   );
