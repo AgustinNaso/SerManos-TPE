@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:ser_manos/config/molecules/images/sermanos_cached_network_image.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
@@ -19,8 +21,8 @@ class ProfileImage extends StatelessWidget {
                     height: size,
                     width: size,
                   )
-                : Image.asset(
-                    imageUrl!,
+                : Image.file(
+                    File(imageUrl!),
                     height: size,
                     width: size,
                     fit: BoxFit.cover,
