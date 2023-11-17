@@ -17,7 +17,7 @@ class ActivityCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final volunteeringInfo =
-        ref.read(getVolunteeringDetailsProvider(volunteeringId));
+        ref.watch(getVolunteeringDetailsProvider(volunteeringId));
     return volunteeringInfo.when(
         data: (volunteeringInfo) {
           return InkWell(

@@ -22,7 +22,7 @@ class PostulateScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchQuery = ref.watch(searchQueryProvider);
     final futureVolunteeringsList = ref.watch(getVolunteeringsProvider);
-    final SermanosUser? loggedUser = ref.watch(loggedUserProvider);
+    final SermanosUser loggedUser = ref.watch(loggedUserProvider)!;
 
     return futureVolunteeringsList.when(
       data: (volunteeringsList) {
@@ -53,7 +53,7 @@ class PostulateScreen extends ConsumerWidget {
                   ])),
               SliverToBoxAdapter(
                   child: Column(children: [
-                if (loggedUser!.volunteeringPostulation.status !=
+                if (loggedUser.volunteeringPostulation.status !=
                     VolunteeringPostulationStatus.notPostulated)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
