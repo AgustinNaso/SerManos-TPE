@@ -12,18 +12,18 @@ class UserRepositoryImpl extends Repository<SermanosUser> {
     return await create(user);
   }
 
-  Future<void> updateUser(
-      String uid, Map<String, dynamic> update) async {
+  Future<void> updateUser(String uid, Map<String, dynamic> update) async {
     final Map<String, dynamic> updateUser = {};
-    if (update.containsKey("profileImgUrl") && update["profileImgUrl"] != null && update["profileImgUrl"] != "") {
+    if (update.containsKey("profileImgUrl") &&
+        update["profileImgUrl"] != null &&
+        update["profileImgUrl"] != "") {
       updateUser["profileImgUrl"] = update["profileImgUrl"];
     }
     if (update.containsKey('phoneNumber')) {
       updateUser["phoneNumber"] = update["phoneNumber"];
     }
     if (update.containsKey('gender')) {
-      updateUser["gender"] =
-          (update["gender"] as Gender).index;
+      updateUser["gender"] = (update["gender"] as Gender).index;
     }
     if (update.containsKey("contactEmail")) {
       updateUser["contactEmail"] = update["contactEmail"];

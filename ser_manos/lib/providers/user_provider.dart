@@ -32,4 +32,13 @@ class LoggedUser extends _$LoggedUser {
     state!.favVolunteerings.remove(volunteeringId);
     state = state!.copy();
   }
+
+  void updateUser(Map<String, dynamic> newFields) {
+    state!.profileImgUrl = newFields['profileImgUrl'];
+    state!.contactEmail = newFields['contactEmail'];
+    state!.birthDate = newFields['birthDate'];
+    state!.phoneNumber = newFields['phoneNumber'];
+    state!.gender = newFields['gender'];
+    state = state!.copy();
+  }
 }
