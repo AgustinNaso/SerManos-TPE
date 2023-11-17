@@ -9,6 +9,7 @@ import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/volunteering_model.dart';
 import 'package:ser_manos/providers/analytics_provider.dart';
+import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 
 class VolunteeringCard extends ConsumerWidget {
@@ -18,8 +19,9 @@ class VolunteeringCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final userId = ref.watch(loggedUserProvider)!.id;
     final isFavorite = ref
-        .read(loggedUserProvider)!
+        .watch(loggedUserProvider)!
         .favVolunteerings
         .contains(volunteeringInfo.id);
 
@@ -72,8 +74,8 @@ class VolunteeringCard extends ConsumerWidget {
                                         status: SermanosIconStatus.activated)
                                     : SermanosIcons.favoriteOutlined(
                                         status: SermanosIconStatus.activated),
-                                onPressed: () =>
-                                    handleFavoriteButton(ref, isFavorite),
+                                onPressed: () => handleFavoriteButton(
+                                    ref, isFavorite, userId),
                               ),
                               const SizedBox(width: 16),
                               IconButton(
@@ -94,20 +96,29 @@ class VolunteeringCard extends ConsumerWidget {
     );
   }
 
-  handleFavoriteButton(WidgetRef ref, bool isFavorite) async {
+  handleFavoriteButton(WidgetRef ref, bool isFavorite, String userId) async {
     if (isFavorite) {
       ref
           .read(loggedUserProvider.notifier)
           .removeFavVolunteering(volunteeringInfo.id);
+      ref
+          .read(userRepositoryProvider)
+          .removeFavoriteVolunteering(userId, volunteeringInfo.id);
       getAnalytics().then((value) => value?.logEvent(
-          name: 'remove_favorite_test', parameters: {'volunteering_id': volunteeringInfo.id}));
+          name: 'remove_favorite_test',
+          parameters: {'volunteering_id': volunteeringInfo.id}));
     } else {
       ref
           .read(loggedUserProvider.notifier)
           .addFavVolunteering(volunteeringInfo.id);
+      ref
+          .read(userRepositoryProvider)
+          .addFavoriteVolunteering(userId, volunteeringInfo.id);
+
       getAnalytics().then((value) async {
         await value?.logEvent(
-            name: 'add_favorite_test', parameters: {'volunteering_id': volunteeringInfo.id});
+            name: 'add_favorite_test',
+            parameters: {'volunteering_id': volunteeringInfo.id});
       });
     }
   }

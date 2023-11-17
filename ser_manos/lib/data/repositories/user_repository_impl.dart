@@ -41,13 +41,13 @@ class UserRepositoryImpl extends Repository<SermanosUser> {
   }
 
   Future<void> addFavoriteVolunteering(String uid, String vid) async {
-    await collection.doc('uid').update({
+    await collection.doc(uid).update({
       "favVolunteerings": FieldValue.arrayUnion([vid])
     });
   }
 
   Future<void> removeFavoriteVolunteering(String uid, String vid) async {
-    await collection.doc('uid').update({
+    await collection.doc(uid).update({
       "favVolunteerings": FieldValue.arrayRemove([vid])
     });
   }
