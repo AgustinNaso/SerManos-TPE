@@ -9,6 +9,7 @@ Future<FirebaseAnalytics?> getAnalytics() async {
     await setupAppTracking(status);
   }
   if (status == TrackingStatus.authorized || status == TrackingStatus.notSupported) {
+    FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true); // Just in case the user changes outside the app
     return FirebaseAnalytics.instance;
   }
   return null;

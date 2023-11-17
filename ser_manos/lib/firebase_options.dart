@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC1whLzgRpyOgmMBq3j-qB-r9PORiTBiM0',
-    appId: '1:241699172646:android:4321544aee6d123c79d1e7',
-    messagingSenderId: '241699172646',
-    projectId: 'ser-manos-feec3',
-    storageBucket: 'ser-manos-feec3.appspot.com',
+    apiKey: String.fromEnvironment("ANDROID_API_KEY"),
+    appId: String.fromEnvironment("ANDROID_APP_ID"),
+    messagingSenderId: String.fromEnvironment("ANDROID_MESSAGING_SENDER_ID"),
+    projectId: String.fromEnvironment("ANDROID_PROJECT_ID"),
+    storageBucket: String.fromEnvironment("ANDROID_STORAGE_BUCKET"),
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDTyPSV5hr483fvBwgr6wj9zP-aRW_PVhs',
-    appId: '1:241699172646:ios:9df0eab9a20d643b79d1e7',
-    messagingSenderId: '241699172646',
-    projectId: 'ser-manos-feec3',
-    storageBucket: 'ser-manos-feec3.appspot.com',
-    iosBundleId: 'com.example.serManos',
+    apiKey: String.fromEnvironment("IOS_API_KEY"),
+    appId: String.fromEnvironment("IOS_APP_ID"),
+    messagingSenderId: String.fromEnvironment("IOS_MESSAGING_SENDER_ID"),
+    projectId: String.fromEnvironment("IOS_PROJECT_ID"),
+    storageBucket: String.fromEnvironment("IOS_STORAGE_BUCKET"),
+    iosBundleId: String.fromEnvironment("IOS_BUNDLE_ID"),
   );
 }
