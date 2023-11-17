@@ -1,7 +1,6 @@
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
-//TOOD esto no es un providers
 Future<FirebaseAnalytics?> getAnalytics() async {
   TrackingStatus status =
       await AppTrackingTransparency.trackingAuthorizationStatus;

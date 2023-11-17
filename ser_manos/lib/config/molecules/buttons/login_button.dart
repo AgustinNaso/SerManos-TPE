@@ -6,7 +6,7 @@ import 'package:ser_manos/config/cellules/login_form.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/data/models/form_states.dart';
-import 'package:ser_manos/providers/analytics_provider.dart';
+import 'package:ser_manos/data/services/analytics_service.dart';
 import 'package:ser_manos/providers/login_controller.dart';
 import 'package:ser_manos/providers/login_provider.dart';
 

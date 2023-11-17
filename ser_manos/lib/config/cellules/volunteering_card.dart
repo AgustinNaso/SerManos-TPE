@@ -9,7 +9,7 @@ import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/volunteering_model.dart';
 import 'package:ser_manos/data/services/map_services.dart';
-import 'package:ser_manos/providers/analytics_provider.dart';
+import 'package:ser_manos/data/services/analytics_service.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 
