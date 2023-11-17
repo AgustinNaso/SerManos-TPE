@@ -50,7 +50,7 @@ mixin RouterMixin on State<MyApp> {
           ),
           GoRoute(
             name: 'newsDetail',
-            path: 'newsDetail/:id', 
+            path: 'newsDetail/:id',
             builder: (BuildContext context, GoRouterState state) {
               final String newsId = state.pathParameters['id']!;
               return NewsDetailScreen(newsId: newsId);
@@ -75,7 +75,7 @@ mixin RouterMixin on State<MyApp> {
             path: 'editProfile',
             name: 'editProfile',
             builder: (BuildContext context, GoRouterState state) {
-              return EditProfileScreen();
+              return const EditProfileScreen();
             },
           )
         ],

@@ -7,6 +7,7 @@ import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/data/models/volunteering_details_model.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
+import 'package:ser_manos/providers/postulate_to_edit_provider.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 
@@ -42,8 +43,12 @@ class DefaultPostulationStatus extends StatelessWidget {
                       return Modal(
                           subtitle: AppLocalizations.of(context)!
                               .uncompleteProfileModalSubtitle,
-                          onAccept: () =>
-                              GoRouter.of(context).pushNamed('editProfile'),
+                          onAccept: () {
+                            ref
+                                .read(postulatingVolunteeringProvider.notifier)
+                                .set(volunteeringDetails);
+                            GoRouter.of(context).pushNamed('editProfile');
+                          },
                           primaryButtonText:
                               AppLocalizations.of(context)!.confirm,
                           secondaryButtonText:
