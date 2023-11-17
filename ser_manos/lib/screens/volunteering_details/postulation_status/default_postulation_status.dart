@@ -35,7 +35,7 @@ class DefaultPostulationStatus extends StatelessWidget {
             ],
           ),
         SermanosCtaButton(
-            text: 'Postularme',
+            text: AppLocalizations.of(context)!.apply,
             onPressed: () => showDialog(
                   context: context,
                   builder: (BuildContext context) {

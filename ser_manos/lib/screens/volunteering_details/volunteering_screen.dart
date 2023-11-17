@@ -69,7 +69,7 @@ class VolunteeringScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(volunteeringDetail.category,
+                      Text(volunteeringDetail.category.toUpperCase(),
                           style: const SermanosTypography.overline(
                               color: SermanosColors.neutral75)),
                       Text(volunteeringDetail.name,

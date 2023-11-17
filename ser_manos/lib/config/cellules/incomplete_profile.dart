@@ -34,7 +34,7 @@ class IncompleteProfile extends ConsumerWidget {
                 child: Column(
                   children: [
                      Text(
-                      AppLocalizations.of(context)!.volunteer,
+                      AppLocalizations.of(context)!.volunteer.toUpperCase(),
                       style: const SermanosTypography.overline(
                         color: SermanosColors.neutral75,
                       ),

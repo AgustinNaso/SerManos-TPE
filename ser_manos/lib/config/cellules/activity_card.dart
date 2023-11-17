@@ -37,7 +37,7 @@ class ActivityCard extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          volunteeringInfo.category,
+                          volunteeringInfo.category.toUpperCase(),
                           style: const SermanosTypography.overline(
                               color: SermanosColors.neutral75),
                         ),

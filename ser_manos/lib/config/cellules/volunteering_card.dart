@@ -51,7 +51,7 @@ class VolunteeringCard extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(volunteeringInfo.category,
+                      Text(volunteeringInfo.category.toUpperCase(),
                           style: const SermanosTypography.overline(
                               color: SermanosColors.neutral75)),
                       Text(volunteeringInfo.name,
