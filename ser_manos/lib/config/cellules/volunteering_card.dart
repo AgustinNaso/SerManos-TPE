@@ -8,6 +8,7 @@ import 'package:ser_manos/config/tokens/sermanos_box_shadows.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/volunteering_model.dart';
+import 'package:ser_manos/data/services/map_services.dart';
 import 'package:ser_manos/providers/analytics_provider.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
@@ -83,7 +84,11 @@ class VolunteeringCard extends ConsumerWidget {
                                 alignment: Alignment.bottomCenter,
                                 icon: SermanosIcons.locationFilled(
                                     status: SermanosIconStatus.activated),
-                                onPressed: () {},
+                                onPressed: () {
+                                  MapUtils.openMap(
+                                      volunteeringInfo.location.latitude,
+                                      volunteeringInfo.location.longitude);
+                                },
                               ),
                             ],
                           ),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ser_manos/data/models/generic_model.dart';
 
 class Volunteering extends GenericModel<Volunteering> {
@@ -5,10 +6,9 @@ class Volunteering extends GenericModel<Volunteering> {
   final String name;
   final String category;
   final int vacancies;
-  final String location;
+  final GeoPoint location;
 
-  Volunteering(
-  {
+  const Volunteering({
     required String id,
     required this.imgUrl,
     required this.name,
@@ -36,7 +36,7 @@ class Volunteering extends GenericModel<Volunteering> {
       'name': name,
       'category': category,
       'vacancies': vacancies,
-      'location': location,
+      'location': location
     };
   }
 

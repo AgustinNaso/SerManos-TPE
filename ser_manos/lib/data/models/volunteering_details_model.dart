@@ -11,13 +11,14 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
   final String name;
   final String category;
   final int vacancies;
-  final String location;
+  final String address;
+  final GeoPoint location;
   final String volunteeringId;
   final double price;
   final DateTime date;
   final Map<String, bool> volunteers;
 
-  VolunteeringDetails({
+  const VolunteeringDetails({
     required String id,
     required this.description,
     required this.about,
@@ -27,6 +28,7 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
     required this.name,
     required this.category,
     required this.vacancies,
+    required this.address,
     required this.location,
     required this.volunteeringId,
     required this.volunteers,
@@ -61,9 +63,11 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
       name: json['name'],
       category: json['category'],
       vacancies: json['vacancies'],
+      address: json['address'],
       location: json['location'],
       volunteeringId: json['volunteeringId'],
-      volunteers: Map<String, bool>.from(json['volunteers'] as Map<String, dynamic>),
+      volunteers:
+          Map<String, bool>.from(json['volunteers'] as Map<String, dynamic>),
     );
   }
 
@@ -79,6 +83,7 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
       'category': category,
       'vacancies': vacancies,
       'location': location,
+      'address': address,
       'volunteeringId': volunteeringId,
       'volunteers': volunteers,
       'price': price,
@@ -88,6 +93,6 @@ class VolunteeringDetails extends GenericModel<VolunteeringDetails> {
 
   @override
   String toString() {
-    return 'VolunteeringDetails{volunteeringId: $volunteeringId, description: $description, about: $about, requirements: $requirements, availability: $availability, id: $id, imgUrl: $imgUrl, name: $name, category: $category, vacancies: $vacancies, location: $location}';
+    return 'VolunteeringDetails{volunteeringId: $volunteeringId, description: $description, about: $about, requirements: $requirements, availability: $availability, id: $id, imgUrl: $imgUrl, name: $name, category: $category, vacancies: $vacancies, address: $address}';
   }
 }
