@@ -25,27 +25,21 @@ class NewsCardInfo extends StatelessWidget {
             children: [
               Text(
                 news.source.toUpperCase(),
-                style: const SermanosTypography(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 10,
+                style: const SermanosTypography.overline(
                     color: SermanosColors.neutral75,
-                    letterSpacing: 1.5),
+                ),
               ),
               Text(
                 news.title,
-                style: const SermanosTypography(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
+                style: const SermanosTypography.subtitle01(
                     color: SermanosColors.neutral100,
-                    letterSpacing: 0.15),
+                    ),
               ),
               Text(
                 news.subtitle,
-                style: const SermanosTypography(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
+                style: const SermanosTypography.body02(
                     color: SermanosColors.neutral75,
-                    letterSpacing: 0.4),
+                    ),
               ),
             ],
           ),
@@ -56,7 +50,7 @@ class NewsCardInfo extends StatelessWidget {
             TextButton(
               onPressed: () => GoRouter.of(context).pushNamed('newsDetail', pathParameters: {'id': news.id}),
               child: Text(
-                AppLocalizations.of(context)!.knowMore, //TODO: internacionalizacion
+                AppLocalizations.of(context)!.knowMore,
                 style: const TextStyle(
                     color: SermanosColors.primary100,
                     fontSize: 14,

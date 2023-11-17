@@ -40,19 +40,15 @@ class NewsDetailScreen extends ConsumerWidget {
                       const SizedBox(height: 20),
                       Text(
                         newsData.source,
-                        style: const SermanosTypography(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 10,
+                        style: const SermanosTypography.overline(
                             color: SermanosColors.neutral75,
-                            letterSpacing: 1.5),
+                            ),
                       ),
                       Text(
                         newsData.title,
-                        style: const SermanosTypography(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16,
+                        style: const SermanosTypography.subtitle01(
                             color: SermanosColors.neutral100,
-                            letterSpacing: 0.15),
+                            ),
                       ),
                       const SizedBox(height: 16),
                       ClipRRect(
