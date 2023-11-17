@@ -5,6 +5,7 @@ import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:ser_manos/config/tokens/sermanos_box_shadows.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
+import 'package:ser_manos/data/services/map_services.dart';
 import 'package:ser_manos/providers/Future/volunteering_provider.dart';
 
 class ActivityCard extends ConsumerWidget {
@@ -44,8 +45,13 @@ class ActivityCard extends ConsumerWidget {
                             style: const SermanosTypography.subtitle01()),
                       ],
                     ),
-                    SermanosIcons.locationFilled(
-                        status: SermanosIconStatus.activated)
+                    GestureDetector(
+                        onTap: () {
+                          MapUtils.openMap(volunteeringInfo.location.latitude,
+                              volunteeringInfo.location.longitude);
+                        },
+                        child: SermanosIcons.locationFilled(
+                            status: SermanosIconStatus.activated)),
                   ],
                 )),
             onTap: () => GoRouter.of(context).pushNamed('volunteering',

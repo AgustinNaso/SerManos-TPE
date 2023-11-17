@@ -11,6 +11,7 @@ import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/models/volunteering_details_model.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
+import 'package:ser_manos/data/services/map_services.dart';
 import 'package:ser_manos/providers/Future/volunteering_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 import 'package:ser_manos/screens/volunteering_details/postulation_status/accepted_postulation_status.dart';
@@ -86,14 +87,20 @@ class VolunteeringScreen extends ConsumerWidget {
                       Text(volunteeringDetail.about,
                           style: const SermanosTypography.body01()),
                       const SizedBox(height: 24),
-                      InformationCard(
-                          title: AppLocalizations.of(context)!.location,
-                          information: [
-                            (
-                              AppLocalizations.of(context)!.direction,
-                              volunteeringDetail.location
-                            )
-                          ]),
+                      GestureDetector(
+                        onTap: () {
+                          MapUtils.openMap(volunteeringDetail.location.latitude,
+                              volunteeringDetail.location.longitude);
+                        },
+                        child: InformationCard(
+                            title: AppLocalizations.of(context)!.location,
+                            information: [
+                              (
+                                AppLocalizations.of(context)!.direction,
+                                volunteeringDetail.address
+                              )
+                            ]),
+                      ),
                       const SizedBox(height: 24),
                       Text(AppLocalizations.of(context)!.participate,
                           style: const SermanosTypography.defaultHeadline()),
