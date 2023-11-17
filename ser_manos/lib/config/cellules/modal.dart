@@ -6,7 +6,7 @@ import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 
 class Modal extends StatelessWidget {
-  final String title;
+  final String? title;
   final String subtitle;
   final String primaryButtonText;
   final String secondaryButtonText;
@@ -14,7 +14,7 @@ class Modal extends StatelessWidget {
 
   const Modal(
       {Key? key,
-      required this.title,
+      this.title,
       required this.subtitle,
       required this.onAccept,
       required this.primaryButtonText,
@@ -41,12 +41,17 @@ class Modal extends StatelessWidget {
                 style: const SermanosTypography.subtitle01(),
                 textAlign: TextAlign.start,
               ),
-              Text(
-                title,
-                style: const SermanosTypography.headline02(),
-                textAlign: TextAlign.start,
-              ),
-              const SizedBox(height: 8),
+              if (title != null)
+                Column(
+                  children: [
+                    Text(
+                      title!,
+                      style: const SermanosTypography.headline02(),
+                      textAlign: TextAlign.start,
+                    ),
+                    const SizedBox(height: 8),
+                  ],
+                ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

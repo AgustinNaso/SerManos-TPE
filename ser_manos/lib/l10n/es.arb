@@ -25,6 +25,8 @@
   "enterValidEmailError": "Por favor ingrese un email válido",
   "activityTitle": "Tu actividad",
   "volunteersTitle": "Voluntariados",
+  "uncompleteProfileModalSubtitle": "Para postularte debes primero completar tus datos.",
+  "defaultPostulateModalSubtitle" : "Te estas por postular a",
   "postulateAppBar": "Postularse",
   "profileAppBar": "Mi perfil",
   "newsAppBar": "Novedades",
