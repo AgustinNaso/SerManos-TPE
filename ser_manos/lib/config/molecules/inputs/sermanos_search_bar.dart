@@ -9,9 +9,9 @@ import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/providers/search_bar_controller.dart';
 
 class SermanosSearchBar extends HookConsumerWidget {
-  const SermanosSearchBar({super.key, required this.onChange});
+  const SermanosSearchBar({super.key, required this.onSubmit});
 
-  final void Function(String) onChange;
+  final void Function(String) onSubmit;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,7 +32,6 @@ class SermanosSearchBar extends HookConsumerWidget {
       child: TextField(
         focusNode: focusNode,
         controller: textController,
-        onChanged: onChange,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 16,
@@ -70,7 +69,7 @@ class SermanosSearchBar extends HookConsumerWidget {
         ),
         onTapOutside: (event) => focusNode.unfocus(),
         onEditingComplete: () => focusNode.unfocus(),
-        onSubmitted: onChange,
+        onSubmitted: onSubmit,
       ),
     );
   }

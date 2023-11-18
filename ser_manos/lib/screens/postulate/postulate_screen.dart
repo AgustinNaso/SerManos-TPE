@@ -9,7 +9,6 @@ import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/models/volunteering_model.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
-import 'package:ser_manos/providers/Future/volunteering_provider.dart';
 import 'package:ser_manos/providers/search_bar_controller.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 import 'package:ser_manos/screens/postulate/volunteerings_not_found.dart';
@@ -37,7 +36,7 @@ class PostulateScreen extends ConsumerWidget {
                       height: 24,
                     ),
                     SermanosSearchBar(
-                        onChange: (query) => ref
+                        onSubmit: (query) => ref
                             .read(searchBarControllerProvider.notifier)
                             .search(query)),
                     const SizedBox(

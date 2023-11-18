@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:ser_manos/data/models/volunteering_model.dart';
-import 'package:ser_manos/providers/Future/volunteering_provider.dart';
+import 'package:ser_manos/providers/repository_provider.dart';
 
 part 'search_bar_controller.g.dart';
 
@@ -8,25 +8,20 @@ part 'search_bar_controller.g.dart';
 class SearchBarController extends _$SearchBarController {
   @override
   Future<List<Volunteering>> build() async {
-    final volunteeringList = ref.read(getVolunteeringsProvider);
-    return volunteeringList.when(
-        data: (data) => data,
-        error: ((error, stackTrace) => []),
-        loading: () => []);
+    final volunteerings = await getVolunteerings(null);
+    return volunteerings;
   }
 
   Future<void> search(String? query) async {
-    final volunteeringList = ref.read(getVolunteeringsProvider);
+    state = AsyncValue.data(await getVolunteerings(query));
+  }
 
+  Future<List<Volunteering>> getVolunteerings(String? query) async {
     if (query == null || query.isEmpty) {
-      state = volunteeringList;
-    } else {
-      state = volunteeringList.whenData((data) {
-        return data
-            .where((element) =>
-                element.name.toLowerCase().contains(query.toLowerCase()))
-            .toList();
-      });
+      return await ref.read(volunteeringRepositoryProvider).getVolunteerings();
     }
+    return await ref
+        .read(volunteeringRepositoryProvider)
+        .getVolunteeringsByQuery(query);
   }
 }
