@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:ser_manos/config/cellules/modal.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/data/models/form_states.dart';
@@ -11,7 +10,6 @@ import 'package:ser_manos/data/models/volunteering_postulation.dart';
 import 'package:ser_manos/l10n/localizations.dart';
 import 'package:ser_manos/providers/edit_profile_controller.dart';
 import 'package:ser_manos/providers/edit_profile_provider.dart';
-import 'package:ser_manos/providers/postulate_to_edit_provider.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 import 'package:ser_manos/screens/edit_profile.dart';
@@ -22,11 +20,14 @@ class EditProfileButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool enabled = ref.watch(editProfileValidatorProvider);
+    bool loading =
+        ref.watch(editProfileControllerProvider) == FormStates.loading.name;
     _attendEditProfileProvider(context, ref);
 
     return SermanosCtaButton(
         text: AppLocalizations.of(context)!.saveData,
         enabled: enabled,
+        loading: loading,
         onPressed: () {
           _onPressed(context, ref);
         });
@@ -37,28 +38,6 @@ class EditProfileButton extends ConsumerWidget {
 
     if (editProfileStateProvider == FormStates.success.name) {
       Future(() {
-        final uid = ref.read(loggedUserProvider)!.id;
-        final volunteeringDetails = ref.read(postulatingVolunteeringProvider);
-        if (volunteeringDetails != null) {
-          return showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return Modal(
-                  title: volunteeringDetails.name,
-                  subtitle: AppLocalizations.of(context)!
-                      .defaultPostulateModalSubtitle,
-                  onAccept: () {
-                    handlePostulation(ref, uid, volunteeringDetails);
-                    if (GoRouter.of(context).canPop()) {
-                      GoRouter.of(context).pop;
-                      GoRouter.of(context).pop;
-                    }
-                  },
-                  primaryButtonText: AppLocalizations.of(context)!.confirm,
-                  secondaryButtonText: AppLocalizations.of(context)!.cancel);
-            },
-          );
-        }
         if (GoRouter.of(context).canPop()) GoRouter.of(context).pop();
         ref.read(editProfileValidatorProvider.notifier).reset();
       });
