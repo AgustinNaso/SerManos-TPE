@@ -15,54 +15,54 @@ mixin RouterMixin on State<MyApp> {
   final _router = GoRouter(
     routes: <RouteBase>[
       GoRoute(
-        path: '/',
-        name: 'onboarding',
+          path: '/',
+          name: 'onboarding',
+          builder: (BuildContext context, GoRouterState state) {
+            return const OnboardingScreen();
+          }),
+      GoRoute(
+          name: 'welcome',
+          path: '/welcome',
+          builder: (context, state) {
+            return const WelcomeScreen();
+          }),
+      GoRoute(
+        name: 'login',
+        path: '/login',
         builder: (BuildContext context, GoRouterState state) {
-          return const OnboardingScreen();
+          return LoginScreen();
+        },
+      ),
+      GoRoute(
+        name: 'register',
+        path: '/register',
+        builder: (BuildContext context, GoRouterState state) {
+          return RegisterScreen();
+        },
+      ),
+      GoRoute(
+        name: 'home',
+        path: '/home',
+        builder: (BuildContext context, GoRouterState state) {
+          return const HomeScreen();
         },
         routes: <RouteBase>[
           GoRoute(
-              path: 'welcome',
-              name: 'welcome',
-              builder: (context, state) {
-                return const WelcomeScreen();
-              }),
-          GoRoute(
-            name: 'login',
-            path: 'login',
-            builder: (BuildContext context, GoRouterState state) {
-              return LoginScreen();
-            },
-          ),
-          GoRoute(
-            name: 'register',
-            path: 'register',
-            builder: (BuildContext context, GoRouterState state) {
-              return RegisterScreen();
-            },
-          ),
-          GoRoute(
-            name: 'news',
-            path: 'news',
-            builder: (BuildContext context, GoRouterState state) {
-              return const NewsScreen();
-            },
-          ),
-          GoRoute(
-            name: 'newsDetail',
-            path: 'newsDetail/:id',
-            builder: (BuildContext context, GoRouterState state) {
-              final String newsId = state.pathParameters['id']!;
-              return NewsDetailScreen(newsId: newsId);
-            },
-          ),
-          GoRoute(
-            name: 'home',
-            path: 'home',
-            builder: (BuildContext context, GoRouterState state) {
-              return const HomeScreen();
-            },
-          ),
+              name: 'news',
+              path: 'news',
+              builder: (BuildContext context, GoRouterState state) {
+                return const NewsScreen();
+              },
+              routes: <RouteBase>[
+                GoRoute(
+                  name: 'newsDetail',
+                  path: 'newsDetail/:id',
+                  builder: (BuildContext context, GoRouterState state) {
+                    final String newsId = state.pathParameters['id']!;
+                    return NewsDetailScreen(newsId: newsId);
+                  },
+                ),
+              ]),
           GoRoute(
             name: 'volunteering',
             path: 'volunteering/:id',

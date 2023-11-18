@@ -5,5 +5,5 @@ part 'auth_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 MyFirebaseAuth firebaseAuth(FirebaseAuthRef ref) {
-  return MyFirebaseAuth(ref: ref);
+  return MyFirebaseAuth();
 }
