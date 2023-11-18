@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ser_manos/config/atoms/icons/sermanos_icons.dart';
 import 'package:ser_manos/config/tokens/sermanos_box_shadows.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:ser_manos/providers/search_bar_controller.dart';
 
-class SermanosSearchBar extends HookWidget {
+class SermanosSearchBar extends HookConsumerWidget {
   const SermanosSearchBar({super.key, required this.onChange});
 
   final void Function(String) onChange;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const initialValue = '';
     final focusNode = useFocusNode();
     useListenable(focusNode);
@@ -36,7 +38,7 @@ class SermanosSearchBar extends HookWidget {
             horizontal: 16,
             vertical: 12,
           ),
-          hintText:  AppLocalizations.of(context)!.search,
+          hintText: AppLocalizations.of(context)!.search,
           hintStyle: const SermanosTypography.subtitle01(
               color: SermanosColors.neutral75),
           prefixIcon: !isEmpty
@@ -52,6 +54,9 @@ class SermanosSearchBar extends HookWidget {
                   ),
                   onPressed: () {
                     textController.clear();
+                    ref
+                        .watch(searchBarControllerProvider.notifier)
+                        .search(null);
                   },
                 ),
           focusedBorder: const OutlineInputBorder(

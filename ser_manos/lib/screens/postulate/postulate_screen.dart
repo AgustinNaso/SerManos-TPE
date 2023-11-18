@@ -10,27 +10,20 @@ import 'package:ser_manos/data/models/volunteering_model.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
 import 'package:ser_manos/providers/Future/volunteering_provider.dart';
+import 'package:ser_manos/providers/search_bar_controller.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 import 'package:ser_manos/screens/postulate/volunteerings_not_found.dart';
-
-final searchQueryProvider = StateProvider<String>((ref) => '');
 
 class PostulateScreen extends ConsumerWidget {
   const PostulateScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchQuery = ref.watch(searchQueryProvider);
-    final futureVolunteeringsList = ref.watch(getVolunteeringsProvider);
     final SermanosUser loggedUser = ref.watch(loggedUserProvider)!;
+    final futureVolunteeringsList = ref.watch(searchBarControllerProvider);
 
     return futureVolunteeringsList.when(
       data: (volunteeringsList) {
-        final List<Volunteering> filteredVolunteerings = volunteeringsList
-            .where((volunteering) => volunteering.name
-                .toLowerCase()
-                .contains(searchQuery.toLowerCase()))
-            .toList();
         return Container(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             color: SermanosColors.secondary10,
@@ -45,8 +38,8 @@ class PostulateScreen extends ConsumerWidget {
                     ),
                     SermanosSearchBar(
                         onChange: (query) => ref
-                            .read(searchQueryProvider.notifier)
-                            .state = query),
+                            .read(searchBarControllerProvider.notifier)
+                            .search(query)),
                     const SizedBox(
                       height: 32,
                     ),
@@ -82,16 +75,16 @@ class PostulateScreen extends ConsumerWidget {
                       height: 24,
                     )
                   ])),
-              filteredVolunteerings.isNotEmpty
+              volunteeringsList.isNotEmpty
                   ? SliverList.separated(
                       separatorBuilder: (context, index) => const SizedBox(
                             height: 24,
                           ),
                       itemBuilder: (context, index) {
                         return VolunteeringCard(
-                            volunteeringInfo: filteredVolunteerings[index]);
+                            volunteeringInfo: volunteeringsList[index]);
                       },
-                      itemCount: filteredVolunteerings.length)
+                      itemCount: volunteeringsList.length)
                   : const SliverToBoxAdapter(child: VolunteeringNotFound())
             ]));
       },
