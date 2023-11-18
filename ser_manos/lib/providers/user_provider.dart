@@ -1,6 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
+import 'package:ser_manos/providers/auth_provider.dart';
+import 'package:ser_manos/providers/repository_provider.dart';
 
 part 'user_provider.g.dart';
 
@@ -8,6 +10,16 @@ part 'user_provider.g.dart';
 class LoggedUser extends _$LoggedUser {
   @override
   SermanosUser? build() => null;
+
+  Future<void> refresh() async {
+    final user = await ref.read(firebaseAuthProvider).currentUser();
+    if (user != null) {
+      final loggedUser = await ref
+          .read(userRepositoryProvider)
+          .getUsersById(user.uid);
+      state = loggedUser;
+    }
+  }
 
   void set(SermanosUser user) => state = user;
 

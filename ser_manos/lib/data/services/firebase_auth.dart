@@ -8,7 +8,7 @@ class MyFirebaseAuth {
 
   MyFirebaseAuth();
 
-  static currentUser() {
+  currentUser() {
     return _firebaseAuth.currentUser;
   }
 
