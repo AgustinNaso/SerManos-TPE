@@ -19,8 +19,6 @@ class EditProfileButton extends ConsumerWidget {
     bool enabled = ref.watch(editProfileValidatorProvider);
     bool loading =
         ref.watch(editProfileControllerProvider) == FormStates.loading.name;
-    // _attendEditProfileProvider(context, ref);
-
     return SermanosCtaButton(
         text: AppLocalizations.of(context)!.saveData,
         enabled: enabled,
@@ -28,20 +26,6 @@ class EditProfileButton extends ConsumerWidget {
         onPressed: () {
           _onPressed(context, ref);
         });
-  }
-
-  _attendEditProfileProvider(BuildContext context, WidgetRef ref) {
-    final editProfileStateProvider = ref.watch(editProfileControllerProvider);
-
-    if (editProfileStateProvider == FormStates.success.name) {
-      if (GoRouter.of(context).canPop()) {
-        GoRouter.of(context).pop();
-      }
-    }
-
-    if (editProfileStateProvider == FormStates.loading.name) {
-      Future(() => ref.read(editProfileValidatorProvider.notifier).loading());
-    }
   }
 
   _onPressed(BuildContext context, WidgetRef ref) async {
@@ -58,6 +42,8 @@ class EditProfileButton extends ConsumerWidget {
         context, EditProfileFormKey.currentState?.fields['gender']?.value);
 
     final locale = Localizations.localeOf(context).languageCode;
+
+    ref.read(editProfileValidatorProvider.notifier).loading();
 
     await ref.read(editProfileControllerProvider.notifier).editProfile(
         uid,
