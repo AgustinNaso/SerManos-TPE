@@ -5,10 +5,9 @@ import 'package:ser_manos/bootstrap.dart';
 import 'package:ser_manos/config/router.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
-import 'package:ser_manos/providers/analytics_provider.dart';
+import 'package:ser_manos/data/services/analytics_service.dart';
 
 void main() async {
-
   await bootstrap();
 
   runApp(const ProviderScope(

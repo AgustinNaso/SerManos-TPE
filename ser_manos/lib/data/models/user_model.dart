@@ -97,7 +97,7 @@ class SermanosUser extends GenericModel<SermanosUser> {
       'profileImgUrl': profileImgUrl,
       'contactEmail': contactEmail,
       'favVolunteerings': favVolunteerings,
-      'volunteeringPostulation': volunteeringPostulation?.toJson(),
+      'volunteeringPostulation': volunteeringPostulation.toJson(),
     };
   }
 

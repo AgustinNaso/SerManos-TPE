@@ -1,8 +1,6 @@
-
 import 'package:ser_manos/data/models/gender.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
-import 'package:ser_manos/screens/volunteering_details/postulation_status/postulation_status.dart';
 
 SermanosUser mockedCompleteUser = SermanosUser(
   id: '1',
@@ -16,7 +14,5 @@ SermanosUser mockedCompleteUser = SermanosUser(
   contactEmail: 'contactjohn@mail.com',
   favVolunteerings: const ['1', '2', '3'],
   volunteeringPostulation: const VolunteeringPostulation(
-    volunteeringId: '1',
-    status: VolunteeringPostulationStatus.pending
-  ),
+      volunteeringId: '1', status: VolunteeringPostulationStatus.pending),
 );

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ser_manos/data/models/news_model.dart';
 import 'package:ser_manos/data/models/volunteering_model.dart';
 
-final news_mocked_list = [
+final newsMockedList = [
   News(
       source: 'source1',
       title: 'title1',
@@ -19,19 +19,19 @@ final news_mocked_list = [
       id: '2'),
 ];
 
-final mocked_volunteering_list = [
-  Volunteering(
+final mockedVolunteeringList = [
+  const Volunteering(
       imgUrl: 'imgUrl1',
       name: 'name1',
       category: 'category1',
       vacancies: 1,
-      location: const GeoPoint(0, 0),
+      location: GeoPoint(0, 0),
       id: '1'),
-  Volunteering(
+  const Volunteering(
       imgUrl: 'imgUrl2',
       name: 'name2',
       category: 'category2',
       vacancies: 2,
-      location: const GeoPoint(0, 0),
+      location: GeoPoint(0, 0),
       id: '2'),
 ];

@@ -10,6 +10,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
+
 class NewsDetailScreen extends ConsumerWidget {
   final String newsId;
   const NewsDetailScreen({Key? key, required this.newsId}) : super(key: key);
@@ -41,14 +42,14 @@ class NewsDetailScreen extends ConsumerWidget {
                       Text(
                         newsData.source,
                         style: const SermanosTypography.overline(
-                            color: SermanosColors.neutral75,
-                            ),
+                          color: SermanosColors.neutral75,
+                        ),
                       ),
                       Text(
                         newsData.title,
                         style: const SermanosTypography.subtitle01(
-                            color: SermanosColors.neutral100,
-                            ),
+                          color: SermanosColors.neutral100,
+                        ),
                       ),
                       const SizedBox(height: 16),
                       ClipRRect(
@@ -77,31 +78,36 @@ class NewsDetailScreen extends ConsumerWidget {
                       ),
                       Container(
                         margin: const EdgeInsets.symmetric(vertical: 20.0),
-                        child: SermanosCtaButton(text:  AppLocalizations.of(context)!.share, onPressed: () async {
-                          final response = await Dio().get(
-                              newsData.imgUrl,
-                              options: Options(
-                                responseType: ResponseType.bytes,
-                              ),
-                            );
-                          final List<int> bytes = response.data;
+                        child: SermanosCtaButton(
+                            text: AppLocalizations.of(context)!.share,
+                            onPressed: () async {
+                              final response = await Dio().get(
+                                newsData.imgUrl,
+                                options: Options(
+                                  responseType: ResponseType.bytes,
+                                ),
+                              );
+                              final List<int> bytes = response.data;
 
-                          final temp = await getTemporaryDirectory();
-                          final path = '${temp.path}/image.jpg';
+                              final temp = await getTemporaryDirectory();
+                              final path = '${temp.path}/image.jpg';
 
-                          File(path).writeAsBytesSync(bytes);
-                          final shareResult = await Share.shareXFiles(
-                              subject: '${AppLocalizations.of(context)!.sharementSubject}',
-                              [XFile(path)],
-                              text: '${AppLocalizations.of(context)!.sharementMessage}\n${newsData.subtitle}\nsermanos.com.ar/newsDetail/$newsId',
-                          );
+                              File(path).writeAsBytesSync(bytes);
+                              final shareResult = await Share.shareXFiles(
+                                subject: AppLocalizations.of(context)!
+                                    .sharementSubject,
+                                [XFile(path)],
+                                text:
+                                    '${AppLocalizations.of(context)!.sharementMessage}\n${newsData.subtitle}\nsermanos.com.ar/newsDetail/$newsId',
+                              );
 
-                          if (shareResult.status == ShareResultStatus.success) {
-                            print('${AppLocalizations.of(context)!.sharementThanks}');
-                          }
-
-                  }),
-                )
+                              if (shareResult.status ==
+                                  ShareResultStatus.success) {
+                                print(AppLocalizations.of(context)!
+                                    .sharementThanks);
+                              }
+                            }),
+                      )
                     ],
                   )));
         },

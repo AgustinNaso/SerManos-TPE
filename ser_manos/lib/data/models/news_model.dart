@@ -7,7 +7,7 @@ class News extends GenericModel<News> {
   final String imgUrl;
   final String body;
 
-  News({
+  const News({
     required this.source,
     required this.title,
     required this.subtitle,
