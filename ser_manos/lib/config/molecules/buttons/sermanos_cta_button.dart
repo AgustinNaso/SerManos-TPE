@@ -11,6 +11,7 @@ class SermanosCtaButton extends StatelessWidget {
   final Icon? icon;
   final bool enabled;
   final bool filled;
+  final bool loading;
 
   const SermanosCtaButton(
       {super.key,
@@ -18,6 +19,7 @@ class SermanosCtaButton extends StatelessWidget {
       required this.onPressed,
       this.filled = true,
       this.icon,
+      this.loading = false,
       this.enabled = true,
       this.backgroundColor = SermanosColors.primary100,
       this.textColor = Colors.white});
@@ -40,13 +42,20 @@ class SermanosCtaButton extends StatelessWidget {
               mainAxisSize: icon != null ? MainAxisSize.min : MainAxisSize.max,
               children: [
                 if (icon != null) icon!,
-                const SizedBox(width: 10),
-                Text(
-                  text,
-                  style: SermanosTypography.button(
-                    color: enabled ? textColor : SermanosColors.neutral50,
-                  ),
-                ),
+                loading
+                    ? const SizedBox(
+                        height: 20.0,
+                        width: 20.0,
+                        child: CircularProgressIndicator(
+                          color: SermanosColors.neutral0,
+                        ),
+                      )
+                    : Text(
+                        text,
+                        style: SermanosTypography.button(
+                          color: enabled ? textColor : SermanosColors.neutral50,
+                        ),
+                      ),
               ],
             ),
           )
@@ -63,17 +72,25 @@ class SermanosCtaButton extends StatelessWidget {
               ),
             ),
             onPressed: !enabled ? null : onPressed,
-            child: Text(
-              text,
-              style: TextStyle(
-                fontFamily: 'Roboto', // TODO: check this
-                color: enabled
-                    ? SermanosColors.primary100
-                    : SermanosColors.neutral0,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            child: loading
+                ? const SizedBox(
+                    height: 20.0,
+                    width: 20.0,
+                    child: CircularProgressIndicator(
+                      color: SermanosColors.neutral0,
+                    ),
+                  )
+                : Text(
+                    text,
+                    style: TextStyle(
+                      fontFamily: 'Roboto', // TODO: check this
+                      color: enabled
+                          ? SermanosColors.primary100
+                          : SermanosColors.neutral0,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
           );
   }
 }
