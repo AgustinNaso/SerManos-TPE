@@ -7,6 +7,7 @@ import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/data/models/volunteering_details_model.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
+import 'package:ser_manos/data/services/analytics_service.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 
@@ -58,6 +59,12 @@ class DefaultPostulationStatus extends ConsumerWidget {
             onAccept: () async {
               handlePostulation(ref, loggedUser.id, volunteeringDetails);
               if (context.mounted) {
+                getAnalytics().then((value) => value?.logEvent(
+                        name: 'postulated_to_volunteering',
+                        parameters: {
+                          'volunteering_id': volunteeringDetails.volunteeringId,
+                          'user_id': loggedUser.id
+                        }));
                 GoRouter.of(context).pop();
               }
             },
