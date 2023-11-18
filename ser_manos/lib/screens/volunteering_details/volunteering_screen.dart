@@ -41,29 +41,39 @@ class VolunteeringScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Stack(children: [
-                SermanosCachedNetworkImage(
-                    imageUrl: volunteeringDetail.imgUrl, height: 243),
-                Positioned.fill(
-                    child: Container(
-                        decoration: const BoxDecoration(
-                  color: SermanosColors.neutral0,
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [SermanosColors.neutral200, Colors.transparent],
-                    stops: [0.0, 0.3],
-                  ),
-                ))),
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  child: IconButton(
-                      onPressed: () => {GoRouter.of(context).pop()},
-                      icon:
-                          SermanosIcons.back(status: SermanosIconStatus.back)),
-                )
-              ]),
+              ColoredBox(
+                color: SermanosColors.neutral200,
+                child: SafeArea(
+                  top: true,
+                  bottom: false,
+                  left: false,
+                  right: false,
+                  child: Stack(children: [
+                    SizedBox(height: 100),
+                    SermanosCachedNetworkImage(
+                        imageUrl: volunteeringDetail.imgUrl, height: 243),
+                    Positioned.fill(
+                        child: Container(
+                            decoration: const BoxDecoration(
+                      color: SermanosColors.neutral0,
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [SermanosColors.neutral200, Colors.transparent],
+                        stops: [0.0, 0.3],
+                      ),
+                    ))),
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      child: IconButton(
+                          onPressed: () => {GoRouter.of(context).pop()},
+                          icon: SermanosIcons.back(
+                              status: SermanosIconStatus.back)),
+                    )
+                  ]),
+                ),
+              ),
               Padding(
                   padding: const EdgeInsets.fromLTRB(16, 24, 16, 32),
                   child: Column(
