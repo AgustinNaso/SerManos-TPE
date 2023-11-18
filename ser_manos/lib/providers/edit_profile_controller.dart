@@ -27,6 +27,8 @@ class EditProfileController extends _$EditProfileController {
       String imgUrl = "";
       if (filePath != null && !filePath.contains("http")) {
         imgUrl = await StorageService.uploadProfilePicture(uid, filePath);
+      } else {
+        imgUrl = filePath ?? "";
       }
 
       final newFields = {

@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
+import 'package:ser_manos/providers/auth_provider.dart';
+import 'package:ser_manos/providers/user_provider.dart';
 
 import '../../config/molecules/buttons/sermanos_cta_button.dart';
 import '../../config/tokens/sermanos_colors.dart';
 
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends ConsumerWidget {
   const OnboardingScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    if (ref.read(firebaseAuthProvider).currentUser() != null) {
+      ref
+          .read(loggedUserProvider.notifier)
+          .refresh()
+          .then((value) => GoRouter.of(context).pushReplacementNamed('home'));
+    }
+
     return Scaffold(
         body: SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),

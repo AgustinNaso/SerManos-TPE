@@ -1,17 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
 import 'package:ser_manos/data/repositories/user_repository_impl.dart';
 
 class MyFirebaseAuth {
-  static final _firebaseAuth = FirebaseAuth.instanceFor(app: Firebase.app());
-  final Ref ref;
+  static final _firebaseAuth = FirebaseAuth.instance;
 
-  MyFirebaseAuth({required this.ref});
+  MyFirebaseAuth();
 
-  static currentUser() {
+  currentUser() {
     return _firebaseAuth.currentUser;
   }
 
@@ -33,6 +30,10 @@ class MyFirebaseAuth {
       print("signInWithEmailAndPassword $e");
       rethrow;
     }
+  }
+
+  Future<void> logout() {
+    return _firebaseAuth.signOut();
   }
 
   Future<SermanosUser> createUserWithEmailAndPassword({

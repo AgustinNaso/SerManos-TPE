@@ -9,7 +9,9 @@ import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
+import 'package:ser_manos/data/services/firebase_auth.dart';
 import 'package:ser_manos/l10n/localizations.dart';
+import 'package:ser_manos/providers/auth_provider.dart';
 
 class CompleteProfile extends ConsumerWidget {
   final SermanosUser user;
@@ -65,23 +67,32 @@ class CompleteProfile extends ConsumerWidget {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: InformationCard(
-                    title:  AppLocalizations.of(context)!.personalInfo,
+                    title: AppLocalizations.of(context)!.personalInfo,
                     information: [
                       (
-                         AppLocalizations.of(context)!.dateOfBirth,
+                        AppLocalizations.of(context)!.dateOfBirth,
                         DateFormat.yMd(locale).format(user.birthDate!)
                       ),
-                      ( AppLocalizations.of(context)!.gender, genderNameFromEnum(context, user.gender))
+                      (
+                        AppLocalizations.of(context)!.gender,
+                        genderNameFromEnum(context, user.gender)
+                      )
                     ]),
               ),
               const SizedBox(height: 16),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: InformationCard(
-                    title:  AppLocalizations.of(context)!.contactData,
+                    title: AppLocalizations.of(context)!.contactData,
                     information: [
-                      ( AppLocalizations.of(context)!.phonenumber, user.phoneNumber!),
-                      ( AppLocalizations.of(context)!.hyphenEmail, user.contactEmail!)
+                      (
+                        AppLocalizations.of(context)!.phonenumber,
+                        user.phoneNumber!
+                      ),
+                      (
+                        AppLocalizations.of(context)!.hyphenEmail,
+                        user.contactEmail!
+                      )
                     ]),
               ),
             ],
@@ -93,16 +104,18 @@ class CompleteProfile extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SermanosCtaButton(
-                  text:  AppLocalizations.of(context)!.editProfile,
-                  onPressed: () => {
-                    GoRouter.of(context).pushNamed('editProfile')
-                  },
+                  text: AppLocalizations.of(context)!.editProfile,
+                  onPressed: () =>
+                      {GoRouter.of(context).pushNamed('editProfile')},
                   backgroundColor: SermanosColors.primary100,
                 ),
                 const SizedBox(width: 8),
                 SermanosCtaButton(
-                  text:  AppLocalizations.of(context)!.logout,
-                  onPressed: () => GoRouter.of(context).pushNamed('login'),
+                  text: AppLocalizations.of(context)!.logout,
+                  onPressed: () => {
+                    ref.read(firebaseAuthProvider).logout().then(
+                        (value) => GoRouter.of(context).goNamed('login'))
+                  },
                   backgroundColor: Colors.transparent,
                   textColor: SermanosColors.error100,
                 ),

@@ -45,8 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ])),
             const Expanded(
                 child: TabBarView(
-              children: [PostulateScreen(), ProfileScreen(), NewsScreen()],
-            ))
+                  children: [PostulateScreen(), ProfileScreen(), NewsScreen()],
+                ))
           ]),
         ));
   }
