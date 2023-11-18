@@ -5,12 +5,9 @@ import 'package:intl/intl.dart';
 import 'package:ser_manos/config/molecules/buttons/sermanos_cta_button.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/data/models/form_states.dart';
-import 'package:ser_manos/data/models/volunteering_details_model.dart';
-import 'package:ser_manos/data/models/volunteering_postulation.dart';
 import 'package:ser_manos/l10n/localizations.dart';
 import 'package:ser_manos/providers/edit_profile_controller.dart';
 import 'package:ser_manos/providers/edit_profile_provider.dart';
-import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 import 'package:ser_manos/screens/edit_profile.dart';
 
@@ -22,7 +19,7 @@ class EditProfileButton extends ConsumerWidget {
     bool enabled = ref.watch(editProfileValidatorProvider);
     bool loading =
         ref.watch(editProfileControllerProvider) == FormStates.loading.name;
-    _attendEditProfileProvider(context, ref);
+    // _attendEditProfileProvider(context, ref);
 
     return SermanosCtaButton(
         text: AppLocalizations.of(context)!.saveData,
@@ -37,17 +34,17 @@ class EditProfileButton extends ConsumerWidget {
     final editProfileStateProvider = ref.watch(editProfileControllerProvider);
 
     if (editProfileStateProvider == FormStates.success.name) {
-      Future(() {
-        if (GoRouter.of(context).canPop()) GoRouter.of(context).pop();
-        ref.read(editProfileValidatorProvider.notifier).reset();
-      });
+      if (GoRouter.of(context).canPop()) {
+        GoRouter.of(context).pop();
+      }
     }
+
     if (editProfileStateProvider == FormStates.loading.name) {
       Future(() => ref.read(editProfileValidatorProvider.notifier).loading());
     }
   }
 
-  _onPressed(BuildContext context, WidgetRef ref) {
+  _onPressed(BuildContext context, WidgetRef ref) async {
     final uid = ref.read(loggedUserProvider)!.id;
     final filePath =
         EditProfileFormKey.currentState?.fields['profileImgUrl']?.value;
@@ -62,25 +59,15 @@ class EditProfileButton extends ConsumerWidget {
 
     final locale = Localizations.localeOf(context).languageCode;
 
-    ref.read(editProfileControllerProvider.notifier).editProfile(
+    await ref.read(editProfileControllerProvider.notifier).editProfile(
         uid,
         filePath,
         contactEmail,
         DateFormat.yMd(locale).parse(birthDate),
         phoneNumber,
         gender);
+    if (context.mounted) {
+      GoRouter.of(context).pop(true);
+    }
   }
-}
-
-void handlePostulation(
-    WidgetRef ref, String uid, VolunteeringDetails volunteeringDetails) {
-  VolunteeringPostulation postulation = VolunteeringPostulation(
-      volunteeringId: volunteeringDetails.volunteeringId,
-      status: VolunteeringPostulationStatus.pending);
-  ref
-      .read(userRepositoryProvider)
-      .updateUser(uid, {"volunteeringPostulation": postulation}).then((value) =>
-          ref
-              .read(loggedUserProvider.notifier)
-              .setVolunteeringPostulation(postulation));
 }

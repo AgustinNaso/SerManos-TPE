@@ -6,7 +6,6 @@ import 'package:ser_manos/config/molecules/inputs/sermanos_search_bar.dart';
 import 'package:ser_manos/config/tokens/sermanos_colors.dart';
 import 'package:ser_manos/config/tokens/sermanos_typography.dart';
 import 'package:ser_manos/data/models/user_model.dart';
-import 'package:ser_manos/data/models/volunteering_model.dart';
 import 'package:flutter_gen/gen_l10n/localizations.dart';
 import 'package:ser_manos/data/models/volunteering_postulation.dart';
 import 'package:ser_manos/providers/search_bar_controller.dart';
