@@ -15,11 +15,14 @@ class RegisterButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool enabled = ref.watch(registerValidatorProvider);
+    bool loading =
+        ref.watch(registerControllerProvider) == FormStates.loading.name;
     _attendRegisterProvider(context, ref);
 
     return SermanosCtaButton(
         text: AppLocalizations.of(context)!.signup,
         enabled: enabled,
+        loading: loading,
         onPressed: () {
           _onPressed(context, ref);
         });
