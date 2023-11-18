@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/cellules/modal.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
@@ -28,10 +29,13 @@ class PendingPostulationStatus extends StatelessWidget {
                           title: volunteeringName,
                           subtitle: AppLocalizations.of(context)!
                               .withdrawApplianceConfirmation,
-                          onAccept: () => handleWithdrawPostulation(
-                              ref,
-                              currentUser!,
-                              currentUser.volunteeringPostulation),
+                          onAccept: () async {
+                            handleWithdrawPostulation(ref, currentUser!,
+                                currentUser.volunteeringPostulation);
+                            if (context.mounted) {
+                              GoRouter.of(context).pop();
+                            }
+                          },
                           primaryButtonText:
                               AppLocalizations.of(context)!.confirm,
                           secondaryButtonText:
@@ -45,7 +49,6 @@ class PendingPostulationStatus extends StatelessWidget {
 void handleWithdrawPostulation(
     WidgetRef ref, SermanosUser currentUser, volunteeringPostulation) {
   ref.read(loggedUserProvider.notifier).removeVolunteeringPostulation();
-  ref
-      .read(userRepositoryProvider)
-      .updateUser(currentUser.id, {"volunteeringPostulation": currentUser.volunteeringPostulation});
+  ref.read(userRepositoryProvider).updateUser(currentUser.id,
+      {"volunteeringPostulation": currentUser.volunteeringPostulation});
 }

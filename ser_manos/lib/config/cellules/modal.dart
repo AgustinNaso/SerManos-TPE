@@ -10,7 +10,7 @@ class Modal extends StatelessWidget {
   final String subtitle;
   final String primaryButtonText;
   final String secondaryButtonText;
-  final VoidCallback onAccept;
+  final Future<void> Function() onAccept;
 
   const Modal(
       {Key? key,
@@ -58,14 +58,13 @@ class Modal extends StatelessWidget {
                   SermanosShortButton(
                     text: secondaryButtonText,
                     onPressed: () {
-                      GoRouter.of(context).pop(true);
+                      GoRouter.of(context).pop(false);
                     },
                     filled: false,
                   ),
                   SermanosShortButton(
                       text: primaryButtonText,
-                      onPressed: () =>
-                          {onAccept(), GoRouter.of(context).pop(true)},
+                      onPressed: () async => {await onAccept()},
                       filled: false)
                 ],
               )

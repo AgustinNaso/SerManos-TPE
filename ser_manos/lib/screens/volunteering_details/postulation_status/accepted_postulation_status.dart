@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ser_manos/config/cellules/modal.dart';
 import 'package:ser_manos/data/models/user_model.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
@@ -30,8 +31,11 @@ class AcceptedPostulationStatus extends StatelessWidget {
                             title: volunteeringName,
                             subtitle:
                                 AppLocalizations.of(context)!.leaveConfirmation,
-                            onAccept: () {
+                            onAccept: () async {
                               handleQuitPostulation(ref, currentUser!);
+                              if (context.mounted) {
+                                GoRouter.of(context).pop();
+                              }
                             },
                             primaryButtonText:
                                 AppLocalizations.of(context)!.confirm,
@@ -46,7 +50,6 @@ class AcceptedPostulationStatus extends StatelessWidget {
 
 void handleQuitPostulation(WidgetRef ref, SermanosUser currentUser) {
   ref.read(loggedUserProvider.notifier).removeVolunteeringPostulation();
-  ref
-      .read(userRepositoryProvider)
-      .updateUser(currentUser.id, {"volunteeringPostulation": currentUser.volunteeringPostulation});
+  ref.read(userRepositoryProvider).updateUser(currentUser.id,
+      {"volunteeringPostulation": currentUser.volunteeringPostulation});
 }

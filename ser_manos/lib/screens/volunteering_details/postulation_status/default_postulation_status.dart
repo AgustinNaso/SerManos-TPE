@@ -10,44 +10,40 @@ import 'package:ser_manos/data/models/volunteering_postulation.dart';
 import 'package:ser_manos/providers/repository_provider.dart';
 import 'package:ser_manos/providers/user_provider.dart';
 
-class DefaultPostulationStatus extends StatelessWidget {
+class DefaultPostulationStatus extends ConsumerWidget {
   final VolunteeringDetails volunteeringDetails;
   const DefaultPostulationStatus({Key? key, required this.volunteeringDetails})
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final bool canPostulate = volunteeringDetails.vacancies > 0;
-    return Consumer(builder: (context, ref, child) {
-      final loggedUser = ref.watch(loggedUserProvider)!;
-
-      return Column(children: [
-        if (!canPostulate)
-          Column(
-            children: [
-              Text(
-                AppLocalizations.of(context)!.noVacancy,
-                style: const SermanosTypography.body01(),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 24),
-            ],
-          ),
-        SermanosCtaButton(
-            text: AppLocalizations.of(context)!.apply,
-            onPressed: () async {
-              if (loggedUser.isProfileFilled() ||
-                  await showUncompleteProfileDialog(context, ref)) {
-                print("context.mounted: ${context.mounted}");
-                if (context.mounted) {
-                  print('mounted');
-                  showCompleteProfileDialog(context, ref);
-                }
+    final loggedUser = ref.watch(loggedUserProvider)!;
+    return Column(children: [
+      if (!canPostulate)
+        Column(
+          children: [
+            Text(
+              AppLocalizations.of(context)!.noVacancy,
+              style: const SermanosTypography.body01(),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+          ],
+        ),
+      SermanosCtaButton(
+          text: AppLocalizations.of(context)!.apply,
+          onPressed: () async {
+            if (loggedUser.isProfileFilled() ||
+                await showUncompleteProfileDialog(context, ref)) {
+              print("context.mounted: ${context.mounted}");
+              if (context.mounted) {
+                showCompleteProfileDialog(context, ref);
               }
-            },
-            enabled: canPostulate)
-      ]);
-    });
+            }
+          },
+          enabled: canPostulate)
+    ]);
   }
 
   void showCompleteProfileDialog(BuildContext context, WidgetRef ref) async {
@@ -59,8 +55,12 @@ class DefaultPostulationStatus extends StatelessWidget {
             title: volunteeringDetails.name,
             subtitle:
                 AppLocalizations.of(context)!.defaultPostulateModalSubtitle,
-            onAccept: () =>
-                handlePostulation(ref, loggedUser.id, volunteeringDetails),
+            onAccept: () async {
+              handlePostulation(ref, loggedUser.id, volunteeringDetails);
+              if (context.mounted) {
+                GoRouter.of(context).pop();
+              }
+            },
             primaryButtonText: AppLocalizations.of(context)!.confirm,
             secondaryButtonText: AppLocalizations.of(context)!.cancel));
   }
@@ -79,10 +79,11 @@ class DefaultPostulationStatus extends StatelessWidget {
                 bool? success =
                     await GoRouter.of(context).pushNamed('editProfile');
                 if (success != null) {
-                  print("CABERN : $success");
-                  isCompleted = success;
+                  if (context.mounted) {
+                    GoRouter.of(context).pop();
+                    isCompleted = success;
+                  }
                 }
-                print('success: $isCompleted');
               },
               primaryButtonText: AppLocalizations.of(context)!.confirm,
               secondaryButtonText: AppLocalizations.of(context)!.cancel));
@@ -90,8 +91,8 @@ class DefaultPostulationStatus extends StatelessWidget {
     return isCompleted;
   }
 
-  void handlePostulation(
-      WidgetRef ref, String uid, VolunteeringDetails volunteeringDetails) {
+  Future<void> handlePostulation(WidgetRef ref, String uid,
+      VolunteeringDetails volunteeringDetails) async {
     VolunteeringPostulation postulation = VolunteeringPostulation(
         volunteeringId: volunteeringDetails.volunteeringId,
         status: VolunteeringPostulationStatus.pending);
