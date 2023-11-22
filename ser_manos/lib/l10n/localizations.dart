@@ -30,7 +30,7 @@ Gender? genderNameToGender(context, String gender) {
 void setupLocalization() {
 
   // TODO: this is a quick solution, the es_AR doesn't work and exists
-  var argentina = const NumberSymbols(
+  NumberSymbols argentina = const NumberSymbols(
       NAME: "es",
       DECIMAL_SEP: ',',
       GROUP_SEP: '.',
